@@ -1,0 +1,42 @@
+package it.unisalento.se.saw.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import it.unisalento.se.saw.Iservices.IUtenteService;
+import it.unisalento.se.saw.domain.Utente;
+import it.unisalento.se.saw.exceptions.UtenteNotFoundException;
+import it.unisalento.se.saw.repositories.UtenteRepository;
+
+@Service
+public class UtenteService implements IUtenteService {
+	
+	@Autowired
+	UtenteRepository utenteRepository;
+	
+	@Override
+	public List<Utente> getAll() throws UtenteNotFoundException {
+		return utenteRepository.findAll() ;
+	}
+
+	@Transactional
+	public Utente save(Utente user) {
+		// TODO Auto-generated method stub
+		return utenteRepository.save(user);
+	}
+
+	@Override
+	public Utente getById(int id) throws UtenteNotFoundException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void removeUserById(int id) throws UtenteNotFoundException {
+		// TODO Auto-generated method stub
+		
+	}
+}
