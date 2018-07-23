@@ -30,8 +30,7 @@ public class UtenteService implements IUtenteService {
 
 	@Override
 	public Utente getById(int id) throws UtenteNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+		return utenteRepository.getOne(id);
 	}
 
 	@Override
