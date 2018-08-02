@@ -1,5 +1,5 @@
 package it.unisalento.se.saw.domain;
-// Generated 10-lug-2018 15.11.51 by Hibernate Tools 5.2.0.Final
+// Generated 2-ago-2018 11.41.08 by Hibernate Tools 5.2.0.Final
 
 
 import java.util.HashSet;
@@ -39,22 +39,22 @@ public class Studente  implements java.io.Serializable {
      private int corsoDiStudioIdcorsoDiStudio;
      private Set<StudenteHasLezione> studenteHasLeziones = new HashSet<StudenteHasLezione>(0);
      private Set<Evento> eventos = new HashSet<Evento>(0);
+     private Set<Valutazione> valutaziones = new HashSet<Valutazione>(0);
      private Set<StudenteHasMaterialeDidattico> studenteHasMaterialeDidatticos = new HashSet<StudenteHasMaterialeDidattico>(0);
 
     public Studente() {
     }
 
 	
-    public Studente(Utente utente, String indirizzo, String livello, String nazione, String codiceFiscale, String matricola, int corsoDiStudioIdcorsoDiStudio) {
+    public Studente(Utente utente, String indirizzo, String livello, String nazione, String codiceFiscale, int corsoDiStudioIdcorsoDiStudio) {
         this.utente = utente;
         this.indirizzo = indirizzo;
         this.livello = livello;
         this.nazione = nazione;
         this.codiceFiscale = codiceFiscale;
-        this.matricola = matricola;
         this.corsoDiStudioIdcorsoDiStudio = corsoDiStudioIdcorsoDiStudio;
     }
-    public Studente(Utente utente, String indirizzo, String livello, String nazione, String codiceFiscale, String matricola, int corsoDiStudioIdcorsoDiStudio, Set<StudenteHasLezione> studenteHasLeziones, Set<Evento> eventos, Set<StudenteHasMaterialeDidattico> studenteHasMaterialeDidatticos) {
+    public Studente(Utente utente, String indirizzo, String livello, String nazione, String codiceFiscale, String matricola, int corsoDiStudioIdcorsoDiStudio, Set<StudenteHasLezione> studenteHasLeziones, Set<Evento> eventos, Set<Valutazione> valutaziones, Set<StudenteHasMaterialeDidattico> studenteHasMaterialeDidatticos) {
        this.utente = utente;
        this.indirizzo = indirizzo;
        this.livello = livello;
@@ -64,6 +64,7 @@ public class Studente  implements java.io.Serializable {
        this.corsoDiStudioIdcorsoDiStudio = corsoDiStudioIdcorsoDiStudio;
        this.studenteHasLeziones = studenteHasLeziones;
        this.eventos = eventos;
+       this.valutaziones = valutaziones;
        this.studenteHasMaterialeDidatticos = studenteHasMaterialeDidatticos;
     }
    
@@ -130,7 +131,7 @@ public class Studente  implements java.io.Serializable {
     }
 
     
-    @Column(name="matricola", nullable=false, length=45)
+    @Column(name="matricola", length=45)
     public String getMatricola() {
         return this.matricola;
     }
@@ -168,6 +169,15 @@ public class Studente  implements java.io.Serializable {
     
     public void setEventos(Set<Evento> eventos) {
         this.eventos = eventos;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="studente")
+    public Set<Valutazione> getValutaziones() {
+        return this.valutaziones;
+    }
+    
+    public void setValutaziones(Set<Valutazione> valutaziones) {
+        this.valutaziones = valutaziones;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="studente")

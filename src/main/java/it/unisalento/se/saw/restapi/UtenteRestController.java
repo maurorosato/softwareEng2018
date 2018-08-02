@@ -49,6 +49,7 @@ public class UtenteRestController {
 		for(int i=0;i<utenti.size();i++) {
 			UtenteDto utenteDto = new UtenteDto();
 			utente= utenti.get(i);
+			utenteDto.setIdutente(utente.getIdutente());
 			utenteDto.setNome(utente.getNome());
 			utenteDto.setCognome(utente.getCognome());
 			utentiDto.add(i, utenteDto);
@@ -57,12 +58,8 @@ public class UtenteRestController {
 	}	
 	
 	@GetMapping(value="/getById/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
-	//quello che arriva in id sopra mettilo in id sotto
 	public UtenteDto getById(@PathVariable("id") int id) throws UtenteNotFoundException{
 		Utente utente=new Utente();
-		//List<Studente> studente;
-		//studente=studenteService.getAll();
-		//int idutente=studente.get(id-1).getUtenteIdUtente();
 		utente=utenteService.getById(id);
 		UtenteDto utenteDto = new UtenteDto();
 		utenteDto.setNome(utente.getNome());

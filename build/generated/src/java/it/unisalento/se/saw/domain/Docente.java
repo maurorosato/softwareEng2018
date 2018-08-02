@@ -1,5 +1,5 @@
 package it.unisalento.se.saw.domain;
-// Generated 10-lug-2018 15.11.51 by Hibernate Tools 5.2.0.Final
+// Generated 2-ago-2018 11.41.08 by Hibernate Tools 5.2.0.Final
 
 
 import java.util.HashSet;
@@ -28,7 +28,8 @@ public class Docente  implements java.io.Serializable {
      private Integer iddocente;
      private Utente utente;
      private String grado;
-     private Float stipendio;
+     private float stipendio;
+     private Set<Insegnamento> insegnamentos = new HashSet<Insegnamento>(0);
      private Set<Operazione> operaziones = new HashSet<Operazione>(0);
      private Set<MaterialeDidattico> materialeDidatticos = new HashSet<MaterialeDidattico>(0);
 
@@ -36,14 +37,16 @@ public class Docente  implements java.io.Serializable {
     }
 
 	
-    public Docente(Utente utente, String grado) {
+    public Docente(Utente utente, String grado, float stipendio) {
         this.utente = utente;
         this.grado = grado;
+        this.stipendio = stipendio;
     }
-    public Docente(Utente utente, String grado, Float stipendio, Set<Operazione> operaziones, Set<MaterialeDidattico> materialeDidatticos) {
+    public Docente(Utente utente, String grado, float stipendio, Set<Insegnamento> insegnamentos, Set<Operazione> operaziones, Set<MaterialeDidattico> materialeDidatticos) {
        this.utente = utente;
        this.grado = grado;
        this.stipendio = stipendio;
+       this.insegnamentos = insegnamentos;
        this.operaziones = operaziones;
        this.materialeDidatticos = materialeDidatticos;
     }
@@ -81,13 +84,22 @@ public class Docente  implements java.io.Serializable {
     }
 
     
-    @Column(name="stipendio", precision=12, scale=0)
-    public Float getStipendio() {
+    @Column(name="stipendio", nullable=false, precision=12, scale=0)
+    public float getStipendio() {
         return this.stipendio;
     }
     
-    public void setStipendio(Float stipendio) {
+    public void setStipendio(float stipendio) {
         this.stipendio = stipendio;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="docente")
+    public Set<Insegnamento> getInsegnamentos() {
+        return this.insegnamentos;
+    }
+    
+    public void setInsegnamentos(Set<Insegnamento> insegnamentos) {
+        this.insegnamentos = insegnamentos;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="docente")

@@ -1,6 +1,8 @@
 package it.unisalento.se.saw.restapi;
 
+import java.sql.Date;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +30,8 @@ public class DocenteRestController {
 
 	@Autowired
 	IDocenteService docenteService;
+	
+	@Autowired
 	IUtenteService utenteService;
 	
 	public DocenteRestController() {
@@ -37,11 +41,12 @@ public class DocenteRestController {
 	public DocenteRestController(IDocenteService docenteService) {
 		this.docenteService= docenteService;
 	}
-	
+	/*
 	@PostMapping(value="save", consumes=MediaType.APPLICATION_JSON_VALUE)
 	public Docente post(@RequestBody Docente docente) throws ParseException, DocenteNotFoundException {
 		return docenteService.save(docente);
 	}
+	*/
 	
 	@RequestMapping(value="/getAll", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<DocenteDto> getAll() throws DocenteNotFoundException, UtenteNotFoundException {
@@ -52,12 +57,17 @@ public class DocenteRestController {
 		for(int i=0;i<docenti.size();i++) {
 			DocenteDto docenteDto = new DocenteDto();
 			idUtente = docenti.get(i).getUtente().getIdutente();
-			System.out.println("ciao"+idUtente);
 			Utente utente = new Utente();
-			utente = utenteService.getById(i);
-			docenteDto.setStipendio(docenti.get(i).getStipendio());
+			utente = utenteService.getById(idUtente);		
 			docenteDto.setNome(utente.getNome());
-			docentiDto.add(i, docenteDto);
+			docenteDto.setCognome(utente.getCognome());
+			docenteDto.setEmail(utente.getEmail());
+			docenteDto.setGrado(docenti.get(i).getGrado());
+			//SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+			//docenteDto.setDataNascita(formatter.parse(utente.getDataNascita()));
+			docenteDto.setDataNascita(utente.getDataNascita());
+			docenteDto.setStipendio(docenti.get(i).getStipendio());
+			docentiDto.add(i, docenteDto);			
 		}
 		return docentiDto;
 	}	
@@ -75,19 +85,23 @@ public class DocenteRestController {
 		docenteDto.setStipendio(docente.getStipendio());		
 		return docenteDto;
 	}
-	/*
+	
 	@PostMapping(value="save", consumes=MediaType.APPLICATION_JSON_VALUE)
-	public Utente post(@RequestBody Utente utente) throws UtenteNotFoundException, ParseException {
+	public Docente post(@RequestBody DocenteDto docenteDto) throws UtenteNotFoundException, DocenteNotFoundException, ParseException {
+		
 		Utente user = new Utente();
-		user.setNome("inserimento1");
-		user.setCognome("inserimento2");
-		user.setEmail("prova");
+		Docente doc = new Docente();
+		user.setNome(docenteDto.getNome());
+		user.setCognome(docenteDto.getCognome());
+		user.setEmail(docenteDto.getEmail());
 		user.setIdOrigin(0);
-		user.setPassword("pass");
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
-		Date date = (Date) formatter.parse("2012-02-02");
-		user.setDataNascita(date);
-		return utenteService.save(user);
+		user.setPassword(docenteDto.getPassword());
+		user.setDataNascita(docenteDto.getDataNascita());
+		utenteService.save(user);	
+		doc.setGrado(docenteDto.getGrado());
+		doc.setStipendio(docenteDto.getStipendio());
+		doc.setUtente(user);
+		return docenteService.save(doc);
 	}
-	*/
+	
 }

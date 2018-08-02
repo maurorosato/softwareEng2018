@@ -1,5 +1,5 @@
 package it.unisalento.se.saw.domain;
-// Generated 10-lug-2018 15.11.51 by Hibernate Tools 5.2.0.Final
+// Generated 2-ago-2018 11.41.08 by Hibernate Tools 5.2.0.Final
 
 
 import javax.persistence.Column;
@@ -25,16 +25,12 @@ public class SegreteriaDidattica  implements java.io.Serializable {
      private Integer idsegreteriaDidattica;
      private Utente utente;
      private String ruolo;
-     private Float stipendio;
+     private float stipendio;
 
     public SegreteriaDidattica() {
     }
 
-	
-    public SegreteriaDidattica(Utente utente) {
-        this.utente = utente;
-    }
-    public SegreteriaDidattica(Utente utente, String ruolo, Float stipendio) {
+    public SegreteriaDidattica(Utente utente, String ruolo, float stipendio) {
        this.utente = utente;
        this.ruolo = ruolo;
        this.stipendio = stipendio;
@@ -63,7 +59,7 @@ public class SegreteriaDidattica  implements java.io.Serializable {
     }
 
     
-    @Column(name="ruolo", length=45)
+    @Column(name="ruolo", nullable=false, length=45)
     public String getRuolo() {
         return this.ruolo;
     }
@@ -73,12 +69,12 @@ public class SegreteriaDidattica  implements java.io.Serializable {
     }
 
     
-    @Column(name="stipendio", precision=12, scale=0)
-    public Float getStipendio() {
+    @Column(name="stipendio", nullable=false, precision=12, scale=0)
+    public float getStipendio() {
         return this.stipendio;
     }
     
-    public void setStipendio(Float stipendio) {
+    public void setStipendio(float stipendio) {
         this.stipendio = stipendio;
     }
 

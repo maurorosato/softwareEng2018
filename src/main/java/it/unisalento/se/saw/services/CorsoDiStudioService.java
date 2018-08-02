@@ -26,4 +26,10 @@ public class CorsoDiStudioService implements ICorsoDiStudioService {
 		// TODO Auto-generated method stub
 		return corsoDiStudioRepository.save(corso);
 	}
+
+	@Override
+	public CorsoDiStudio getById(int id) throws CorsoDiStudioNotFoundException {
+		// TODO Auto-generated method stub
+		return corsoDiStudioRepository.getOne(id);
+	}
 }

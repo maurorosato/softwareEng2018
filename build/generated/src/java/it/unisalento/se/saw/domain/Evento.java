@@ -1,5 +1,5 @@
 package it.unisalento.se.saw.domain;
-// Generated 10-lug-2018 15.11.51 by Hibernate Tools 5.2.0.Final
+// Generated 2-ago-2018 11.41.08 by Hibernate Tools 5.2.0.Final
 
 
 import java.util.HashSet;
@@ -39,8 +39,9 @@ public class Evento  implements java.io.Serializable {
     }
 
 	
-    public Evento(Insegnamento insegnamento) {
+    public Evento(Insegnamento insegnamento, String dataCreazione) {
         this.insegnamento = insegnamento;
+        this.dataCreazione = dataCreazione;
     }
     public Evento(Insegnamento insegnamento, String dataCreazione, Set<AulaPrenotazioneEvento> aulaPrenotazioneEventos, Set<AppelloEsame> appelloEsames, Set<Lezione> leziones, Set<Studente> studentes) {
        this.insegnamento = insegnamento;
@@ -74,7 +75,7 @@ public class Evento  implements java.io.Serializable {
     }
 
     
-    @Column(name="dataCreazione", length=45)
+    @Column(name="dataCreazione", nullable=false, length=45)
     public String getDataCreazione() {
         return this.dataCreazione;
     }

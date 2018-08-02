@@ -5,10 +5,21 @@ public class DocenteDto {
 
 	private String nome;
 	private String cognome;
+	private String password;
 	private float stipendio;
 	private String email;
-    private Date dataNascita;
-    private String password;
+	private String grado;
+	private Integer idDocente;
+	private Date dataNascita;
+	private Integer idOrigin;
+
+	
+	public String getGrado() {
+		return grado;
+	}
+	public void setGrado(String grado) {
+		this.grado = grado;
+	}
 
 	public String getEmail() {
 		return email;
@@ -16,18 +27,14 @@ public class DocenteDto {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
 	public Date getDataNascita() {
 		return dataNascita;
 	}
 	public void setDataNascita(Date dataNascita) {
 		this.dataNascita = dataNascita;
 	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
+	
 	public float getStipendio() {
 		return stipendio;
 	}
@@ -45,6 +52,24 @@ public class DocenteDto {
 	}
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public Integer getIdDocente() {
+		return idDocente;
+	}
+	public void setIdDocente(Integer idDocente) {
+		this.idDocente = idDocente;
+	}
+	public Integer getIdOrigin() {
+		return idOrigin;
+	}
+	public void setIdOrigin(Integer idOrigin) {
+		this.idOrigin = idOrigin;
 	}
 	
 	

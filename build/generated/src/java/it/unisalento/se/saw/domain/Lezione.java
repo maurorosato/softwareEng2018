@@ -1,5 +1,5 @@
 package it.unisalento.se.saw.domain;
-// Generated 10-lug-2018 15.11.51 by Hibernate Tools 5.2.0.Final
+// Generated 2-ago-2018 11.41.08 by Hibernate Tools 5.2.0.Final
 
 
 import java.util.HashSet;
@@ -29,7 +29,6 @@ public class Lezione  implements java.io.Serializable {
      private Evento evento;
      private String descrizione;
      private float gradimento;
-     private String valutazioneMedia;
      private Set<MaterialeDidattico> materialeDidatticos = new HashSet<MaterialeDidattico>(0);
      private Set<StudenteHasLezione> studenteHasLeziones = new HashSet<StudenteHasLezione>(0);
 
@@ -42,11 +41,10 @@ public class Lezione  implements java.io.Serializable {
         this.descrizione = descrizione;
         this.gradimento = gradimento;
     }
-    public Lezione(Evento evento, String descrizione, float gradimento, String valutazioneMedia, Set<MaterialeDidattico> materialeDidatticos, Set<StudenteHasLezione> studenteHasLeziones) {
+    public Lezione(Evento evento, String descrizione, float gradimento, Set<MaterialeDidattico> materialeDidatticos, Set<StudenteHasLezione> studenteHasLeziones) {
        this.evento = evento;
        this.descrizione = descrizione;
        this.gradimento = gradimento;
-       this.valutazioneMedia = valutazioneMedia;
        this.materialeDidatticos = materialeDidatticos;
        this.studenteHasLeziones = studenteHasLeziones;
     }
@@ -91,16 +89,6 @@ public class Lezione  implements java.io.Serializable {
     
     public void setGradimento(float gradimento) {
         this.gradimento = gradimento;
-    }
-
-    
-    @Column(name="valutazioneMedia", length=45)
-    public String getValutazioneMedia() {
-        return this.valutazioneMedia;
-    }
-    
-    public void setValutazioneMedia(String valutazioneMedia) {
-        this.valutazioneMedia = valutazioneMedia;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="lezione")

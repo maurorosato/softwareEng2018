@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import it.unisalento.se.saw.Iservices.IAulaService;
 import it.unisalento.se.saw.domain.Aula;
@@ -20,4 +21,16 @@ public class AulaService implements IAulaService {
 	public List<Aula> getAll() throws AulaNotFoundException {
 		return aulaRepository.findAll();
 	}
+	
+	@Transactional
+	public Aula save(Aula aula) {
+		// TODO Auto-generated method stub
+		return aulaRepository.save(aula);
+	}
+	
+	@Override
+	public Aula getById(int id) throws AulaNotFoundException {
+		return aulaRepository.getOne(id);
+	}
+	
 }

@@ -1,5 +1,5 @@
 package it.unisalento.se.saw.domain;
-// Generated 10-lug-2018 15.11.51 by Hibernate Tools 5.2.0.Final
+// Generated 2-ago-2018 11.41.08 by Hibernate Tools 5.2.0.Final
 
 
 import java.util.HashSet;
@@ -27,6 +27,7 @@ public class Aula  implements java.io.Serializable {
      private String nome;
      private String edificio;
      private String stato;
+     private int capienza;
      private Set<Segnalazione> segnalaziones = new HashSet<Segnalazione>(0);
      private Set<Strumentazione> strumentaziones = new HashSet<Strumentazione>(0);
      private Set<AulaPrenotazioneEvento> aulaPrenotazioneEventos = new HashSet<AulaPrenotazioneEvento>(0);
@@ -35,15 +36,17 @@ public class Aula  implements java.io.Serializable {
     }
 
 	
-    public Aula(String nome, String edificio, String stato) {
+    public Aula(String nome, String edificio, String stato, int capienza) {
         this.nome = nome;
         this.edificio = edificio;
         this.stato = stato;
+        this.capienza = capienza;
     }
-    public Aula(String nome, String edificio, String stato, Set<Segnalazione> segnalaziones, Set<Strumentazione> strumentaziones, Set<AulaPrenotazioneEvento> aulaPrenotazioneEventos) {
+    public Aula(String nome, String edificio, String stato, int capienza, Set<Segnalazione> segnalaziones, Set<Strumentazione> strumentaziones, Set<AulaPrenotazioneEvento> aulaPrenotazioneEventos) {
        this.nome = nome;
        this.edificio = edificio;
        this.stato = stato;
+       this.capienza = capienza;
        this.segnalaziones = segnalaziones;
        this.strumentaziones = strumentaziones;
        this.aulaPrenotazioneEventos = aulaPrenotazioneEventos;
@@ -89,6 +92,16 @@ public class Aula  implements java.io.Serializable {
     
     public void setStato(String stato) {
         this.stato = stato;
+    }
+
+    
+    @Column(name="capienza", nullable=false)
+    public int getCapienza() {
+        return this.capienza;
+    }
+    
+    public void setCapienza(int capienza) {
+        this.capienza = capienza;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="aula")

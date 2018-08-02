@@ -1,5 +1,5 @@
 package it.unisalento.se.saw.domain;
-// Generated 10-lug-2018 15.11.51 by Hibernate Tools 5.2.0.Final
+// Generated 2-ago-2018 11.41.08 by Hibernate Tools 5.2.0.Final
 
 
 import java.util.HashSet;
@@ -28,17 +28,19 @@ public class Prenotazione  implements java.io.Serializable {
      private Integer idprenotazione;
      private Operazione operazione;
      private String orarioInizio;
-     private Float durata;
+     private float durata;
      private Set<AulaPrenotazioneEvento> aulaPrenotazioneEventos = new HashSet<AulaPrenotazioneEvento>(0);
 
     public Prenotazione() {
     }
 
 	
-    public Prenotazione(Operazione operazione) {
+    public Prenotazione(Operazione operazione, String orarioInizio, float durata) {
         this.operazione = operazione;
+        this.orarioInizio = orarioInizio;
+        this.durata = durata;
     }
-    public Prenotazione(Operazione operazione, String orarioInizio, Float durata, Set<AulaPrenotazioneEvento> aulaPrenotazioneEventos) {
+    public Prenotazione(Operazione operazione, String orarioInizio, float durata, Set<AulaPrenotazioneEvento> aulaPrenotazioneEventos) {
        this.operazione = operazione;
        this.orarioInizio = orarioInizio;
        this.durata = durata;
@@ -68,7 +70,7 @@ public class Prenotazione  implements java.io.Serializable {
     }
 
     
-    @Column(name="orarioInizio", length=5)
+    @Column(name="orarioInizio", nullable=false, length=5)
     public String getOrarioInizio() {
         return this.orarioInizio;
     }
@@ -78,12 +80,12 @@ public class Prenotazione  implements java.io.Serializable {
     }
 
     
-    @Column(name="durata", precision=12, scale=0)
-    public Float getDurata() {
+    @Column(name="durata", nullable=false, precision=12, scale=0)
+    public float getDurata() {
         return this.durata;
     }
     
-    public void setDurata(Float durata) {
+    public void setDurata(float durata) {
         this.durata = durata;
     }
 

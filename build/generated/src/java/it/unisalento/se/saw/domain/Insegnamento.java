@@ -1,5 +1,5 @@
 package it.unisalento.se.saw.domain;
-// Generated 10-lug-2018 15.11.51 by Hibernate Tools 5.2.0.Final
+// Generated 2-ago-2018 11.41.08 by Hibernate Tools 5.2.0.Final
 
 
 import java.util.HashSet;
@@ -10,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -24,6 +26,7 @@ public class Insegnamento  implements java.io.Serializable {
 
 
      private Integer idinsegnamento;
+     private Docente docente;
      private String nome;
      private int cfu;
      private String settoreScientificoDisciplinare;
@@ -34,13 +37,15 @@ public class Insegnamento  implements java.io.Serializable {
     }
 
 	
-    public Insegnamento(String nome, int cfu, String settoreScientificoDisciplinare, int corsoDiStudioIdcorsoDiStudio) {
+    public Insegnamento(Docente docente, String nome, int cfu, String settoreScientificoDisciplinare, int corsoDiStudioIdcorsoDiStudio) {
+        this.docente = docente;
         this.nome = nome;
         this.cfu = cfu;
         this.settoreScientificoDisciplinare = settoreScientificoDisciplinare;
         this.corsoDiStudioIdcorsoDiStudio = corsoDiStudioIdcorsoDiStudio;
     }
-    public Insegnamento(String nome, int cfu, String settoreScientificoDisciplinare, int corsoDiStudioIdcorsoDiStudio, Set<Evento> eventos) {
+    public Insegnamento(Docente docente, String nome, int cfu, String settoreScientificoDisciplinare, int corsoDiStudioIdcorsoDiStudio, Set<Evento> eventos) {
+       this.docente = docente;
        this.nome = nome;
        this.cfu = cfu;
        this.settoreScientificoDisciplinare = settoreScientificoDisciplinare;
@@ -58,6 +63,16 @@ public class Insegnamento  implements java.io.Serializable {
     
     public void setIdinsegnamento(Integer idinsegnamento) {
         this.idinsegnamento = idinsegnamento;
+    }
+
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="docente_iddocente", nullable=false)
+    public Docente getDocente() {
+        return this.docente;
+    }
+    
+    public void setDocente(Docente docente) {
+        this.docente = docente;
     }
 
     
