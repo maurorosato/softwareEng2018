@@ -1,5 +1,5 @@
 package it.unisalento.se.saw.domain;
-// Generated 2-ago-2018 11.41.08 by Hibernate Tools 5.2.0.Final
+// Generated 27-ago-2018 15.50.45 by Hibernate Tools 5.2.0.Final
 
 
 import java.util.HashSet;
@@ -30,7 +30,7 @@ public class Lezione  implements java.io.Serializable {
      private String descrizione;
      private float gradimento;
      private Set<MaterialeDidattico> materialeDidatticos = new HashSet<MaterialeDidattico>(0);
-     private Set<StudenteHasLezione> studenteHasLeziones = new HashSet<StudenteHasLezione>(0);
+     private Set<StudenteValutaLezione> studenteValutaLeziones = new HashSet<StudenteValutaLezione>(0);
 
     public Lezione() {
     }
@@ -41,12 +41,12 @@ public class Lezione  implements java.io.Serializable {
         this.descrizione = descrizione;
         this.gradimento = gradimento;
     }
-    public Lezione(Evento evento, String descrizione, float gradimento, Set<MaterialeDidattico> materialeDidatticos, Set<StudenteHasLezione> studenteHasLeziones) {
+    public Lezione(Evento evento, String descrizione, float gradimento, Set<MaterialeDidattico> materialeDidatticos, Set<StudenteValutaLezione> studenteValutaLeziones) {
        this.evento = evento;
        this.descrizione = descrizione;
        this.gradimento = gradimento;
        this.materialeDidatticos = materialeDidatticos;
-       this.studenteHasLeziones = studenteHasLeziones;
+       this.studenteValutaLeziones = studenteValutaLeziones;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -101,12 +101,12 @@ public class Lezione  implements java.io.Serializable {
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="lezione")
-    public Set<StudenteHasLezione> getStudenteHasLeziones() {
-        return this.studenteHasLeziones;
+    public Set<StudenteValutaLezione> getStudenteValutaLeziones() {
+        return this.studenteValutaLeziones;
     }
     
-    public void setStudenteHasLeziones(Set<StudenteHasLezione> studenteHasLeziones) {
-        this.studenteHasLeziones = studenteHasLeziones;
+    public void setStudenteValutaLeziones(Set<StudenteValutaLezione> studenteValutaLeziones) {
+        this.studenteValutaLeziones = studenteValutaLeziones;
     }
 
 

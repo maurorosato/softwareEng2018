@@ -12,6 +12,7 @@ public class DocenteDto {
 	private Integer idDocente;
 	private Date dataNascita;
 	private Integer idOrigin;
+	private String numeroTelefono;
 
 	
 	public String getGrado() {
@@ -71,6 +72,13 @@ public class DocenteDto {
 	public void setIdOrigin(Integer idOrigin) {
 		this.idOrigin = idOrigin;
 	}
+	public String getNumeroTelefono() {
+		return numeroTelefono;
+	}
+	public void setNumeroTelefono(String numeroTelefono) {
+		this.numeroTelefono = numeroTelefono;
+	}
+	
 	
 	
 	

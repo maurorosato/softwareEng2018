@@ -9,11 +9,11 @@ public class StudenteDto {
 	private String password;
 	private Date dataNascita;
 	private String indirizzo;
-	private String livello;
 	private String nazione;
 	private String codiceFiscale;
 	private String matricola;
-	private Integer	idCorso;
+	private String	corsoDiStudio;
+	private String numeroTelefono;
 	
 	public String getCodiceFiscale() {
 		return codiceFiscale;
@@ -57,12 +57,6 @@ public class StudenteDto {
 	public void setIndirizzo(String indirizzo) {
 		this.indirizzo = indirizzo;
 	}
-	public String getLivello() {
-		return livello;
-	}
-	public void setLivello(String livello) {
-		this.livello = livello;
-	}
 	public String getNazione() {
 		return nazione;
 	}
@@ -76,11 +70,18 @@ public class StudenteDto {
 	public void setMatricola(String matricola) {
 		this.matricola = matricola;
 	}
-	public Integer getIdCorso() {
-		return idCorso;
+	public String getNumeroTelefono() {
+		return numeroTelefono;
 	}
-	public void setIdCorso(Integer idCorso) {
-		this.idCorso = idCorso;
+	public void setNumeroTelefono(String numeroTelefono) {
+		this.numeroTelefono = numeroTelefono;
 	}
+	public String getCorsoDiStudio() {
+		return corsoDiStudio;
+	}
+	public void setCorsoDiStudio(String corsoDiStudio) {
+		this.corsoDiStudio = corsoDiStudio;
+	}
+	
 	
 }

@@ -1,8 +1,6 @@
 package it.unisalento.se.saw.restapi;
 
-import java.sql.Date;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.unisalento.se.saw.Iservices.IDocenteService;
+import it.unisalento.se.saw.Iservices.INumeroTelefonoService;
 import it.unisalento.se.saw.Iservices.IUtenteService;
 import it.unisalento.se.saw.domain.Docente;
+import it.unisalento.se.saw.domain.NumeroTelefono;
 import it.unisalento.se.saw.domain.Utente;
 import it.unisalento.se.saw.dto.DocenteDto;
 import it.unisalento.se.saw.exceptions.DocenteNotFoundException;
@@ -33,6 +33,9 @@ public class DocenteRestController {
 	
 	@Autowired
 	IUtenteService utenteService;
+	
+	@Autowired
+	INumeroTelefonoService numeroService;
 	
 	public DocenteRestController() {
 		super();
@@ -91,13 +94,20 @@ public class DocenteRestController {
 		
 		Utente user = new Utente();
 		Docente doc = new Docente();
+		NumeroTelefono num = new NumeroTelefono();
+
 		user.setNome(docenteDto.getNome());
 		user.setCognome(docenteDto.getCognome());
 		user.setEmail(docenteDto.getEmail());
 		user.setIdOrigin(0);
-		user.setPassword(docenteDto.getPassword());
+		user.setPassword(docenteDto.getNome()+"pass");
 		user.setDataNascita(docenteDto.getDataNascita());
 		utenteService.save(user);	
+		
+		num.setNumeroTelefono(docenteDto.getNumeroTelefono());
+		num.setUtente(user);
+		numeroService.save(num);
+		
 		doc.setGrado(docenteDto.getGrado());
 		doc.setStipendio(docenteDto.getStipendio());
 		doc.setUtente(user);

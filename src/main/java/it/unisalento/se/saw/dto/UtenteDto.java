@@ -3,14 +3,15 @@ package it.unisalento.se.saw.dto;
 public class UtenteDto {
 	
 	private int idutente;
+	private String nome;
+	private String cognome;
+	
 	public int getIdutente() {
 		return idutente;
 	}
 	public void setIdutente(int idutente) {
 		this.idutente = idutente;
 	}
-	private String nome;
-	private String cognome;
 	
 	public String getNome() {
 		return nome;

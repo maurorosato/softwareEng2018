@@ -1,5 +1,5 @@
 package it.unisalento.se.saw.domain;
-// Generated 2-ago-2018 11.41.08 by Hibernate Tools 5.2.0.Final
+// Generated 27-ago-2018 15.50.45 by Hibernate Tools 5.2.0.Final
 
 
 import javax.persistence.Column;
@@ -24,14 +24,12 @@ public class AppelloEsame  implements java.io.Serializable {
 
      private Integer idappelloEsame;
      private Evento evento;
-     private String superato;
 
     public AppelloEsame() {
     }
 
-    public AppelloEsame(Evento evento, String superato) {
+    public AppelloEsame(Evento evento) {
        this.evento = evento;
-       this.superato = superato;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -54,16 +52,6 @@ public class AppelloEsame  implements java.io.Serializable {
     
     public void setEvento(Evento evento) {
         this.evento = evento;
-    }
-
-    
-    @Column(name="superato", nullable=false, length=2)
-    public String getSuperato() {
-        return this.superato;
-    }
-    
-    public void setSuperato(String superato) {
-        this.superato = superato;
     }
 
 

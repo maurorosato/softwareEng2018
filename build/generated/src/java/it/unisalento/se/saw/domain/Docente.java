@@ -1,5 +1,5 @@
 package it.unisalento.se.saw.domain;
-// Generated 2-ago-2018 11.41.08 by Hibernate Tools 5.2.0.Final
+// Generated 27-ago-2018 15.50.45 by Hibernate Tools 5.2.0.Final
 
 
 import java.util.HashSet;
@@ -30,7 +30,8 @@ public class Docente  implements java.io.Serializable {
      private String grado;
      private float stipendio;
      private Set<Insegnamento> insegnamentos = new HashSet<Insegnamento>(0);
-     private Set<Operazione> operaziones = new HashSet<Operazione>(0);
+     private Set<Prenotazione> prenotaziones = new HashSet<Prenotazione>(0);
+     private Set<Segnalazione> segnalaziones = new HashSet<Segnalazione>(0);
      private Set<MaterialeDidattico> materialeDidatticos = new HashSet<MaterialeDidattico>(0);
 
     public Docente() {
@@ -42,12 +43,13 @@ public class Docente  implements java.io.Serializable {
         this.grado = grado;
         this.stipendio = stipendio;
     }
-    public Docente(Utente utente, String grado, float stipendio, Set<Insegnamento> insegnamentos, Set<Operazione> operaziones, Set<MaterialeDidattico> materialeDidatticos) {
+    public Docente(Utente utente, String grado, float stipendio, Set<Insegnamento> insegnamentos, Set<Prenotazione> prenotaziones, Set<Segnalazione> segnalaziones, Set<MaterialeDidattico> materialeDidatticos) {
        this.utente = utente;
        this.grado = grado;
        this.stipendio = stipendio;
        this.insegnamentos = insegnamentos;
-       this.operaziones = operaziones;
+       this.prenotaziones = prenotaziones;
+       this.segnalaziones = segnalaziones;
        this.materialeDidatticos = materialeDidatticos;
     }
    
@@ -103,12 +105,21 @@ public class Docente  implements java.io.Serializable {
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="docente")
-    public Set<Operazione> getOperaziones() {
-        return this.operaziones;
+    public Set<Prenotazione> getPrenotaziones() {
+        return this.prenotaziones;
     }
     
-    public void setOperaziones(Set<Operazione> operaziones) {
-        this.operaziones = operaziones;
+    public void setPrenotaziones(Set<Prenotazione> prenotaziones) {
+        this.prenotaziones = prenotaziones;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="docente")
+    public Set<Segnalazione> getSegnalaziones() {
+        return this.segnalaziones;
+    }
+    
+    public void setSegnalaziones(Set<Segnalazione> segnalaziones) {
+        this.segnalaziones = segnalaziones;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="docente")

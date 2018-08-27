@@ -3,7 +3,6 @@ package it.unisalento.se.saw.dto;
 public class StrumentazioneDto {
 	private String descrizione;
 	private String stato;
-	private String aulaRiferimento;
 	private int idAulaRiferimento;
 	
 	public int getIdAulaRiferimento() {
@@ -23,12 +22,6 @@ public class StrumentazioneDto {
 	}
 	public void setStato(String stato) {
 		this.stato = stato;
-	}
-	public String getAulaRiferimento() {
-		return aulaRiferimento;
-	}
-	public void setAulaRiferimento(String aulaRiferimento) {
-		this.aulaRiferimento = aulaRiferimento;
 	}
 	
 	

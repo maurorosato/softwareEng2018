@@ -1,5 +1,5 @@
 package it.unisalento.se.saw.domain;
-// Generated 2-ago-2018 11.41.08 by Hibernate Tools 5.2.0.Final
+// Generated 27-ago-2018 15.50.45 by Hibernate Tools 5.2.0.Final
 
 
 import java.util.HashSet;
@@ -32,40 +32,35 @@ public class Studente  implements java.io.Serializable {
      private Integer idstudente;
      private Utente utente;
      private String indirizzo;
-     private String livello;
      private String nazione;
      private String codiceFiscale;
      private String matricola;
      private int corsoDiStudioIdcorsoDiStudio;
-     private Set<StudenteHasLezione> studenteHasLeziones = new HashSet<StudenteHasLezione>(0);
+     private Set<StudenteValutaLezione> studenteValutaLeziones = new HashSet<StudenteValutaLezione>(0);
      private Set<Evento> eventos = new HashSet<Evento>(0);
-     private Set<Valutazione> valutaziones = new HashSet<Valutazione>(0);
-     private Set<StudenteHasMaterialeDidattico> studenteHasMaterialeDidatticos = new HashSet<StudenteHasMaterialeDidattico>(0);
+     private Set<StudenteValutaMaterialeDidattico> studenteValutaMaterialeDidatticos = new HashSet<StudenteValutaMaterialeDidattico>(0);
 
     public Studente() {
     }
 
 	
-    public Studente(Utente utente, String indirizzo, String livello, String nazione, String codiceFiscale, int corsoDiStudioIdcorsoDiStudio) {
+    public Studente(Utente utente, String indirizzo, String nazione, String codiceFiscale, int corsoDiStudioIdcorsoDiStudio) {
         this.utente = utente;
         this.indirizzo = indirizzo;
-        this.livello = livello;
         this.nazione = nazione;
         this.codiceFiscale = codiceFiscale;
         this.corsoDiStudioIdcorsoDiStudio = corsoDiStudioIdcorsoDiStudio;
     }
-    public Studente(Utente utente, String indirizzo, String livello, String nazione, String codiceFiscale, String matricola, int corsoDiStudioIdcorsoDiStudio, Set<StudenteHasLezione> studenteHasLeziones, Set<Evento> eventos, Set<Valutazione> valutaziones, Set<StudenteHasMaterialeDidattico> studenteHasMaterialeDidatticos) {
+    public Studente(Utente utente, String indirizzo, String nazione, String codiceFiscale, String matricola, int corsoDiStudioIdcorsoDiStudio, Set<StudenteValutaLezione> studenteValutaLeziones, Set<Evento> eventos, Set<StudenteValutaMaterialeDidattico> studenteValutaMaterialeDidatticos) {
        this.utente = utente;
        this.indirizzo = indirizzo;
-       this.livello = livello;
        this.nazione = nazione;
        this.codiceFiscale = codiceFiscale;
        this.matricola = matricola;
        this.corsoDiStudioIdcorsoDiStudio = corsoDiStudioIdcorsoDiStudio;
-       this.studenteHasLeziones = studenteHasLeziones;
+       this.studenteValutaLeziones = studenteValutaLeziones;
        this.eventos = eventos;
-       this.valutaziones = valutaziones;
-       this.studenteHasMaterialeDidatticos = studenteHasMaterialeDidatticos;
+       this.studenteValutaMaterialeDidatticos = studenteValutaMaterialeDidatticos;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -98,16 +93,6 @@ public class Studente  implements java.io.Serializable {
     
     public void setIndirizzo(String indirizzo) {
         this.indirizzo = indirizzo;
-    }
-
-    
-    @Column(name="livello", nullable=false, length=45)
-    public String getLivello() {
-        return this.livello;
-    }
-    
-    public void setLivello(String livello) {
-        this.livello = livello;
     }
 
     
@@ -151,12 +136,12 @@ public class Studente  implements java.io.Serializable {
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="studente")
-    public Set<StudenteHasLezione> getStudenteHasLeziones() {
-        return this.studenteHasLeziones;
+    public Set<StudenteValutaLezione> getStudenteValutaLeziones() {
+        return this.studenteValutaLeziones;
     }
     
-    public void setStudenteHasLeziones(Set<StudenteHasLezione> studenteHasLeziones) {
-        this.studenteHasLeziones = studenteHasLeziones;
+    public void setStudenteValutaLeziones(Set<StudenteValutaLezione> studenteValutaLeziones) {
+        this.studenteValutaLeziones = studenteValutaLeziones;
     }
 
 @ManyToMany(fetch=FetchType.LAZY)
@@ -172,21 +157,12 @@ public class Studente  implements java.io.Serializable {
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="studente")
-    public Set<Valutazione> getValutaziones() {
-        return this.valutaziones;
+    public Set<StudenteValutaMaterialeDidattico> getStudenteValutaMaterialeDidatticos() {
+        return this.studenteValutaMaterialeDidatticos;
     }
     
-    public void setValutaziones(Set<Valutazione> valutaziones) {
-        this.valutaziones = valutaziones;
-    }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="studente")
-    public Set<StudenteHasMaterialeDidattico> getStudenteHasMaterialeDidatticos() {
-        return this.studenteHasMaterialeDidatticos;
-    }
-    
-    public void setStudenteHasMaterialeDidatticos(Set<StudenteHasMaterialeDidattico> studenteHasMaterialeDidatticos) {
-        this.studenteHasMaterialeDidatticos = studenteHasMaterialeDidatticos;
+    public void setStudenteValutaMaterialeDidatticos(Set<StudenteValutaMaterialeDidattico> studenteValutaMaterialeDidatticos) {
+        this.studenteValutaMaterialeDidatticos = studenteValutaMaterialeDidatticos;
     }
 
 

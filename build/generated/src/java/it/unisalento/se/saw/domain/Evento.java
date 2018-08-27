@@ -1,5 +1,5 @@
 package it.unisalento.se.saw.domain;
-// Generated 2-ago-2018 11.41.08 by Hibernate Tools 5.2.0.Final
+// Generated 27-ago-2018 15.50.45 by Hibernate Tools 5.2.0.Final
 
 
 import java.util.HashSet;
@@ -29,7 +29,7 @@ public class Evento  implements java.io.Serializable {
 
      private Integer idevento;
      private Insegnamento insegnamento;
-     private String dataCreazione;
+     private String data;
      private Set<AulaPrenotazioneEvento> aulaPrenotazioneEventos = new HashSet<AulaPrenotazioneEvento>(0);
      private Set<AppelloEsame> appelloEsames = new HashSet<AppelloEsame>(0);
      private Set<Lezione> leziones = new HashSet<Lezione>(0);
@@ -39,13 +39,13 @@ public class Evento  implements java.io.Serializable {
     }
 
 	
-    public Evento(Insegnamento insegnamento, String dataCreazione) {
+    public Evento(Insegnamento insegnamento, String data) {
         this.insegnamento = insegnamento;
-        this.dataCreazione = dataCreazione;
+        this.data = data;
     }
-    public Evento(Insegnamento insegnamento, String dataCreazione, Set<AulaPrenotazioneEvento> aulaPrenotazioneEventos, Set<AppelloEsame> appelloEsames, Set<Lezione> leziones, Set<Studente> studentes) {
+    public Evento(Insegnamento insegnamento, String data, Set<AulaPrenotazioneEvento> aulaPrenotazioneEventos, Set<AppelloEsame> appelloEsames, Set<Lezione> leziones, Set<Studente> studentes) {
        this.insegnamento = insegnamento;
-       this.dataCreazione = dataCreazione;
+       this.data = data;
        this.aulaPrenotazioneEventos = aulaPrenotazioneEventos;
        this.appelloEsames = appelloEsames;
        this.leziones = leziones;
@@ -75,13 +75,13 @@ public class Evento  implements java.io.Serializable {
     }
 
     
-    @Column(name="dataCreazione", nullable=false, length=45)
-    public String getDataCreazione() {
-        return this.dataCreazione;
+    @Column(name="data", nullable=false, length=45)
+    public String getData() {
+        return this.data;
     }
     
-    public void setDataCreazione(String dataCreazione) {
-        this.dataCreazione = dataCreazione;
+    public void setData(String data) {
+        this.data = data;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="evento")
