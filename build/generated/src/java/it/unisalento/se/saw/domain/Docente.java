@@ -1,5 +1,5 @@
 package it.unisalento.se.saw.domain;
-// Generated 27-ago-2018 15.50.45 by Hibernate Tools 5.2.0.Final
+// Generated 10-set-2018 11.50.24 by Hibernate Tools 5.2.0.Final
 
 
 import java.util.HashSet;
@@ -28,7 +28,7 @@ public class Docente  implements java.io.Serializable {
      private Integer iddocente;
      private Utente utente;
      private String grado;
-     private float stipendio;
+     private Float stipendio;
      private Set<Insegnamento> insegnamentos = new HashSet<Insegnamento>(0);
      private Set<Prenotazione> prenotaziones = new HashSet<Prenotazione>(0);
      private Set<Segnalazione> segnalaziones = new HashSet<Segnalazione>(0);
@@ -38,12 +38,11 @@ public class Docente  implements java.io.Serializable {
     }
 
 	
-    public Docente(Utente utente, String grado, float stipendio) {
+    public Docente(Utente utente, String grado) {
         this.utente = utente;
         this.grado = grado;
-        this.stipendio = stipendio;
     }
-    public Docente(Utente utente, String grado, float stipendio, Set<Insegnamento> insegnamentos, Set<Prenotazione> prenotaziones, Set<Segnalazione> segnalaziones, Set<MaterialeDidattico> materialeDidatticos) {
+    public Docente(Utente utente, String grado, Float stipendio, Set<Insegnamento> insegnamentos, Set<Prenotazione> prenotaziones, Set<Segnalazione> segnalaziones, Set<MaterialeDidattico> materialeDidatticos) {
        this.utente = utente;
        this.grado = grado;
        this.stipendio = stipendio;
@@ -86,12 +85,12 @@ public class Docente  implements java.io.Serializable {
     }
 
     
-    @Column(name="stipendio", nullable=false, precision=12, scale=0)
-    public float getStipendio() {
+    @Column(name="stipendio", precision=12, scale=0)
+    public Float getStipendio() {
         return this.stipendio;
     }
     
-    public void setStipendio(float stipendio) {
+    public void setStipendio(Float stipendio) {
         this.stipendio = stipendio;
     }
 

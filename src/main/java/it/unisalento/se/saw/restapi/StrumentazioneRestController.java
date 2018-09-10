@@ -2,6 +2,7 @@ package it.unisalento.se.saw.restapi;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import it.unisalento.se.saw.Iservices.IAulaService;
 import it.unisalento.se.saw.Iservices.IStrumentazioneService;
+import it.unisalento.se.saw.converter.StrumentazioneAdaptee;
 import it.unisalento.se.saw.domain.Aula;
 import it.unisalento.se.saw.domain.Strumentazione;
-import it.unisalento.se.saw.dto.DocenteDto;
 import it.unisalento.se.saw.dto.StrumentazioneDto;
 import it.unisalento.se.saw.exceptions.AulaNotFoundException;
 import it.unisalento.se.saw.exceptions.StrumentazioneNotFoundException;
@@ -44,15 +45,17 @@ public class StrumentazioneRestController {
 
 	@RequestMapping(value="/getAll", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<StrumentazioneDto> getAll() throws StrumentazioneNotFoundException {
-		List<StrumentazioneDto> strumentazioniDto = new ArrayList<StrumentazioneDto>();;
-		List<Strumentazione> strumenti = null;
-		strumenti = strumentazioneService.getAll();
-		for(int i=0;i<strumenti.size();i++) {
-			StrumentazioneDto strumentazioneDto = new StrumentazioneDto();
-			strumentazioneDto.setDescrizione(strumenti.get(i).getDescrizione());
-			strumentazioneDto.setStato(strumenti.get(i).getStato());
-			strumentazioneDto.setIdAulaRiferimento(strumenti.get(i).getAula().getIdaula());
-			strumentazioniDto.add(i, strumentazioneDto);	
+				
+		List<StrumentazioneDto> strumentazioniDto = new ArrayList<StrumentazioneDto>();
+		List<Strumentazione> strumenti = strumentazioneService.getAll();
+		Iterator<Strumentazione> strumentazioneIterator = strumenti.iterator();
+		
+		while (strumentazioneIterator.hasNext()){
+			StrumentazioneDto strumentazioneDto;
+			Strumentazione strumentazione = strumentazioneIterator.next();
+			
+			strumentazioneDto= StrumentazioneAdaptee.domainToDto(strumentazione);
+			strumentazioniDto.add(strumentazioneDto);	
 		}
 		return strumentazioniDto;
 	}	
@@ -62,11 +65,9 @@ public class StrumentazioneRestController {
 		
 		Strumentazione str = new Strumentazione();
 		Aula aula = new Aula();
-		
 		aula  = aulaService.getById(strumentazioneDto.getIdAulaRiferimento());
-		str.setDescrizione(strumentazioneDto.getDescrizione());
-		str.setStato(strumentazioneDto.getStato());	
-		str.setAula(aula);
+		str = StrumentazioneAdaptee.dtoToDomain(strumentazioneDto, aula);
+		
 		strumentazioneService.save(str);
 	}
 }

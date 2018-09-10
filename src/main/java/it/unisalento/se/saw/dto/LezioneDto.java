@@ -8,6 +8,14 @@ public class LezioneDto {
 	private Float gradimento;
 	private String aula;
 	private Date data;
+	private int idEvento;
+	
+	public int getIdEvento() {
+		return idEvento;
+	}
+	public void setIdEvento(int idEvento) {
+		this.idEvento = idEvento;
+	}
 	public String getDescrizione() {
 		return descrizione;
 	}
