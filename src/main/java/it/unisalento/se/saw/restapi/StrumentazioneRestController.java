@@ -61,7 +61,7 @@ public class StrumentazioneRestController {
 		
 		Strumentazione str = new Strumentazione();
 		Aula aula = new Aula();
-		
+		/****/
 		aula  = aulaService.getById(strumentazioneDto.getIdAulaRiferimento());
 		str.setDescrizione(strumentazioneDto.getDescrizione());
 		str.setStato(strumentazioneDto.getStato());	
