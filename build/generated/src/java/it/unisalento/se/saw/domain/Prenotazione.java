@@ -1,5 +1,5 @@
 package it.unisalento.se.saw.domain;
-// Generated 27-ago-2018 15.50.45 by Hibernate Tools 5.2.0.Final
+// Generated 10-set-2018 11.50.24 by Hibernate Tools 5.2.0.Final
 
 
 import java.util.Date;
@@ -30,27 +30,25 @@ public class Prenotazione  implements java.io.Serializable {
 
      private Integer idprenotazione;
      private Docente docente;
-     private Date data;
      private String orarioInizio;
-     private float durata;
-     private Set<AulaPrenotazioneEvento> aulaPrenotazioneEventos = new HashSet<AulaPrenotazioneEvento>(0);
+     private Float durata;
+     private Date data;
+     private Set<Evento> eventos = new HashSet<Evento>(0);
 
     public Prenotazione() {
     }
 
 	
-    public Prenotazione(Docente docente, Date data, String orarioInizio, float durata) {
+    public Prenotazione(Docente docente, Date data) {
         this.docente = docente;
         this.data = data;
-        this.orarioInizio = orarioInizio;
-        this.durata = durata;
     }
-    public Prenotazione(Docente docente, Date data, String orarioInizio, float durata, Set<AulaPrenotazioneEvento> aulaPrenotazioneEventos) {
+    public Prenotazione(Docente docente, String orarioInizio, Float durata, Date data, Set<Evento> eventos) {
        this.docente = docente;
-       this.data = data;
        this.orarioInizio = orarioInizio;
        this.durata = durata;
-       this.aulaPrenotazioneEventos = aulaPrenotazioneEventos;
+       this.data = data;
+       this.eventos = eventos;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -75,6 +73,26 @@ public class Prenotazione  implements java.io.Serializable {
         this.docente = docente;
     }
 
+    
+    @Column(name="orarioInizio", length=5)
+    public String getOrarioInizio() {
+        return this.orarioInizio;
+    }
+    
+    public void setOrarioInizio(String orarioInizio) {
+        this.orarioInizio = orarioInizio;
+    }
+
+    
+    @Column(name="durata", precision=12, scale=0)
+    public Float getDurata() {
+        return this.durata;
+    }
+    
+    public void setDurata(Float durata) {
+        this.durata = durata;
+    }
+
     @Temporal(TemporalType.DATE)
     @Column(name="data", nullable=false, length=10)
     public Date getData() {
@@ -85,33 +103,13 @@ public class Prenotazione  implements java.io.Serializable {
         this.data = data;
     }
 
-    
-    @Column(name="orarioInizio", nullable=false, length=5)
-    public String getOrarioInizio() {
-        return this.orarioInizio;
-    }
-    
-    public void setOrarioInizio(String orarioInizio) {
-        this.orarioInizio = orarioInizio;
-    }
-
-    
-    @Column(name="durata", nullable=false, precision=12, scale=0)
-    public float getDurata() {
-        return this.durata;
-    }
-    
-    public void setDurata(float durata) {
-        this.durata = durata;
-    }
-
 @OneToMany(fetch=FetchType.LAZY, mappedBy="prenotazione")
-    public Set<AulaPrenotazioneEvento> getAulaPrenotazioneEventos() {
-        return this.aulaPrenotazioneEventos;
+    public Set<Evento> getEventos() {
+        return this.eventos;
     }
     
-    public void setAulaPrenotazioneEventos(Set<AulaPrenotazioneEvento> aulaPrenotazioneEventos) {
-        this.aulaPrenotazioneEventos = aulaPrenotazioneEventos;
+    public void setEventos(Set<Evento> eventos) {
+        this.eventos = eventos;
     }
 
 

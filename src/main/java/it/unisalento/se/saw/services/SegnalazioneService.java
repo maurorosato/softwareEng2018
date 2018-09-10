@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import it.unisalento.se.saw.Iservices.ISegnalazioneService;
 import it.unisalento.se.saw.domain.Segnalazione;
@@ -21,5 +22,10 @@ public class SegnalazioneService implements ISegnalazioneService{
 	public List<Segnalazione> getAll() throws SegnalazioneNotFoundException {
 		return segnalazioneRepository.findAll();
 	}
-
+	@Transactional
+	public Segnalazione save(Segnalazione segnalazione) {
+		// TODO Auto-generated method stub
+		return segnalazioneRepository.save(segnalazione);
+		//return null;
+	}
 }

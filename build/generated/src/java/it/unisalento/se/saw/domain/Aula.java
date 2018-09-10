@@ -1,5 +1,5 @@
 package it.unisalento.se.saw.domain;
-// Generated 27-ago-2018 15.50.45 by Hibernate Tools 5.2.0.Final
+// Generated 10-set-2018 11.50.24 by Hibernate Tools 5.2.0.Final
 
 
 import java.util.HashSet;
@@ -30,7 +30,7 @@ public class Aula  implements java.io.Serializable {
      private int capienza;
      private Set<Segnalazione> segnalaziones = new HashSet<Segnalazione>(0);
      private Set<Strumentazione> strumentaziones = new HashSet<Strumentazione>(0);
-     private Set<AulaPrenotazioneEvento> aulaPrenotazioneEventos = new HashSet<AulaPrenotazioneEvento>(0);
+     private Set<Evento> eventos = new HashSet<Evento>(0);
 
     public Aula() {
     }
@@ -42,14 +42,14 @@ public class Aula  implements java.io.Serializable {
         this.stato = stato;
         this.capienza = capienza;
     }
-    public Aula(String nome, String edificio, String stato, int capienza, Set<Segnalazione> segnalaziones, Set<Strumentazione> strumentaziones, Set<AulaPrenotazioneEvento> aulaPrenotazioneEventos) {
+    public Aula(String nome, String edificio, String stato, int capienza, Set<Segnalazione> segnalaziones, Set<Strumentazione> strumentaziones, Set<Evento> eventos) {
        this.nome = nome;
        this.edificio = edificio;
        this.stato = stato;
        this.capienza = capienza;
        this.segnalaziones = segnalaziones;
        this.strumentaziones = strumentaziones;
-       this.aulaPrenotazioneEventos = aulaPrenotazioneEventos;
+       this.eventos = eventos;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -123,12 +123,12 @@ public class Aula  implements java.io.Serializable {
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="aula")
-    public Set<AulaPrenotazioneEvento> getAulaPrenotazioneEventos() {
-        return this.aulaPrenotazioneEventos;
+    public Set<Evento> getEventos() {
+        return this.eventos;
     }
     
-    public void setAulaPrenotazioneEventos(Set<AulaPrenotazioneEvento> aulaPrenotazioneEventos) {
-        this.aulaPrenotazioneEventos = aulaPrenotazioneEventos;
+    public void setEventos(Set<Evento> eventos) {
+        this.eventos = eventos;
     }
 
 

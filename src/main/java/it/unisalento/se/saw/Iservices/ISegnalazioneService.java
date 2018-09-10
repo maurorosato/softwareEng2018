@@ -7,4 +7,5 @@ import it.unisalento.se.saw.exceptions.SegnalazioneNotFoundException;
 
 public interface ISegnalazioneService {
 	public List<Segnalazione> getAll() throws SegnalazioneNotFoundException;
+	public Segnalazione save(Segnalazione segnalazione);
 }
