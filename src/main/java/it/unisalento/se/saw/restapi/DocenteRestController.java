@@ -60,6 +60,7 @@ public class DocenteRestController {
 		for(int i=0;i<docenti.size();i++) {
 			DocenteDto docenteDto = new DocenteDto();
 			idUtente = docenti.get(i).getUtente().getIdutente();
+			
 			Utente utente = new Utente();
 			utente = utenteService.getById(idUtente);		
 			docenteDto.setNome(utente.getNome());

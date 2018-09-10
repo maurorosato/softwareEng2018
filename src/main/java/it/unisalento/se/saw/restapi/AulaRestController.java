@@ -2,6 +2,7 @@ package it.unisalento.se.saw.restapi;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import it.unisalento.se.saw.Iservices.IAulaService;
+import it.unisalento.se.saw.converter.AulaAdaptee;
 import it.unisalento.se.saw.domain.Aula;
 import it.unisalento.se.saw.dto.AulaDto;
 import it.unisalento.se.saw.exceptions.AulaNotFoundException;
@@ -39,28 +41,30 @@ public class AulaRestController {
 	
 	@RequestMapping(value="/getAll", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<AulaDto> getAll() throws AulaNotFoundException {
+		 	
 		List<AulaDto> auleDto= new ArrayList<AulaDto>();
-		List<Aula> aule = null;
-		aule = (aulaService.getAll());
-		for(int i=0;i<aule.size();i++) {
+		List<Aula> aule = (aulaService.getAll());
+		Iterator<Aula> aulaIterator = aule.iterator();
+		
+		while (aulaIterator.hasNext()){
+
 			AulaDto aulaDto = new AulaDto();
-			aulaDto.setIdAula(aule.get(i).getIdaula());
-			aulaDto.setEdificio(aule.get(i).getEdificio());
-			aulaDto.setNome(aule.get(i).getNome());
-			aulaDto.setStato(aule.get(i).getStato());
-			auleDto.add(i, aulaDto);
+			Aula aula = aulaIterator.next();
+			
+			aulaDto = AulaAdaptee.domainToDto(aula);
+			auleDto.add(aulaDto);
 		}
+
 		return auleDto;
 	}
 	
 	@PostMapping(value="save", consumes=MediaType.APPLICATION_JSON_VALUE)
 	public Aula post(@RequestBody AulaDto aulaDto) throws AulaNotFoundException, ParseException {
 		Aula aulaSave = new Aula();
-		aulaSave.setNome(aulaDto.getNome());
-		aulaSave.setEdificio(aulaDto.getEdificio());
-		aulaSave.setStato(aulaDto.getStato());
-		aulaSave.setCapienza(aulaDto.getCapienza());
+		
+		aulaSave = AulaAdaptee.dtoToDomain(aulaDto);
 		return aulaService.save(aulaSave);	
 	}
+	
 }
 

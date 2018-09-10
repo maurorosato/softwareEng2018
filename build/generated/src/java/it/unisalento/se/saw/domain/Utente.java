@@ -1,5 +1,5 @@
 package it.unisalento.se.saw.domain;
-// Generated 27-ago-2018 15.50.45 by Hibernate Tools 5.2.0.Final
+// Generated 10-set-2018 11.50.24 by Hibernate Tools 5.2.0.Final
 
 
 import java.util.Date;
@@ -12,7 +12,6 @@ import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -34,7 +33,7 @@ public class Utente  implements java.io.Serializable {
      private Date dataNascita;
      private String password;
      private int idOrigin;
-     private NumeroTelefono numeroTelefono;
+     private Set<NumeroTelefono> numeroTelefonos = new HashSet<NumeroTelefono>(0);
      private Set<Studente> studentes = new HashSet<Studente>(0);
      private Set<SegreteriaDidattica> segreteriaDidatticas = new HashSet<SegreteriaDidattica>(0);
      private Set<Docente> docentes = new HashSet<Docente>(0);
@@ -43,22 +42,21 @@ public class Utente  implements java.io.Serializable {
     }
 
 	
-    public Utente(String nome, String cognome, String email, Date dataNascita, String password, int idOrigin) {
+    public Utente(String nome, String cognome, String email, String password, int idOrigin) {
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
-        this.dataNascita = dataNascita;
         this.password = password;
         this.idOrigin = idOrigin;
     }
-    public Utente(String nome, String cognome, String email, Date dataNascita, String password, int idOrigin, NumeroTelefono numeroTelefono, Set<Studente> studentes, Set<SegreteriaDidattica> segreteriaDidatticas, Set<Docente> docentes) {
+    public Utente(String nome, String cognome, String email, Date dataNascita, String password, int idOrigin, Set<NumeroTelefono> numeroTelefonos, Set<Studente> studentes, Set<SegreteriaDidattica> segreteriaDidatticas, Set<Docente> docentes) {
        this.nome = nome;
        this.cognome = cognome;
        this.email = email;
        this.dataNascita = dataNascita;
        this.password = password;
        this.idOrigin = idOrigin;
-       this.numeroTelefono = numeroTelefono;
+       this.numeroTelefonos = numeroTelefonos;
        this.studentes = studentes;
        this.segreteriaDidatticas = segreteriaDidatticas;
        this.docentes = docentes;
@@ -107,7 +105,7 @@ public class Utente  implements java.io.Serializable {
     }
 
     @Temporal(TemporalType.DATE)
-    @Column(name="dataNascita", nullable=false, length=10)
+    @Column(name="dataNascita", length=10)
     public Date getDataNascita() {
         return this.dataNascita;
     }
@@ -136,13 +134,13 @@ public class Utente  implements java.io.Serializable {
         this.idOrigin = idOrigin;
     }
 
-@OneToOne(fetch=FetchType.LAZY, mappedBy="utente")
-    public NumeroTelefono getNumeroTelefono() {
-        return this.numeroTelefono;
+@OneToMany(fetch=FetchType.LAZY, mappedBy="utente")
+    public Set<NumeroTelefono> getNumeroTelefonos() {
+        return this.numeroTelefonos;
     }
     
-    public void setNumeroTelefono(NumeroTelefono numeroTelefono) {
-        this.numeroTelefono = numeroTelefono;
+    public void setNumeroTelefonos(Set<NumeroTelefono> numeroTelefonos) {
+        this.numeroTelefonos = numeroTelefonos;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="utente")

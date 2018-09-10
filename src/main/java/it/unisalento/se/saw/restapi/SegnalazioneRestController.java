@@ -1,25 +1,30 @@
 package it.unisalento.se.saw.restapi;
 
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import it.unisalento.se.saw.Iservices.IAulaService;
 import it.unisalento.se.saw.Iservices.ISegnalazioneService;
+import it.unisalento.se.saw.converter.SegnalazioneAdaptee;
 import it.unisalento.se.saw.domain.Aula;
+import it.unisalento.se.saw.domain.Docente;
 import it.unisalento.se.saw.domain.Segnalazione;
-import it.unisalento.se.saw.domain.Studente;
 import it.unisalento.se.saw.dto.SegnalazioneDto;
 import it.unisalento.se.saw.exceptions.AulaNotFoundException;
 import it.unisalento.se.saw.exceptions.SegnalazioneNotFoundException;
-import it.unisalento.se.saw.exceptions.StudenteNotFoundException;
-import it.unisalento.se.saw.services.AulaService;
+
 
 @RestController()
 @RequestMapping(value="/segnalazione")
@@ -40,32 +45,38 @@ public class SegnalazioneRestController {
 	}
 	
 	
+	@PostMapping(value="save", consumes=MediaType.APPLICATION_JSON_VALUE)
+	public void post(@RequestBody SegnalazioneDto segnalazioneDto) throws ParseException, AulaNotFoundException{
+		
+		Segnalazione segnalazione;
+		List<Aula> aule = aulaService.getAll();
+		
+		/************************************************************************************************/
+		DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+		Date dateobj = new Date(0);
+		/************************************************************************************************/
+		
+		segnalazione = SegnalazioneAdaptee.dtoToDomain(segnalazioneDto, aule, 1, dateobj);
+		
+		segnalazioneService.save(segnalazione);
+	}
+	
+	
 	@RequestMapping(value="/getAll", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<SegnalazioneDto> getAll() throws SegnalazioneNotFoundException, AulaNotFoundException {
 		List<SegnalazioneDto> segnalazioniDto= new ArrayList<SegnalazioneDto>();
-		List<Segnalazione> segnalazioni = null;
-		segnalazioni = (segnalazioneService.getAll());
-		
-		List<Aula> aule = null;
-		aule = (aulaService.getAll());
-		
-		for(int i=0;i<segnalazioni.size();i++) {
+		List<Segnalazione> segnalazioni = (segnalazioneService.getAll());
+		List<Aula> aule = (aulaService.getAll());
+		Iterator<Segnalazione> segnalazioneIterator = segnalazioni.iterator();
+				
+		while(segnalazioneIterator.hasNext()){
 			SegnalazioneDto segnalazioneDto = new SegnalazioneDto();
-			String nomeAula = null;
-			for(int j=0; j < aule.size(); j++){
-				if (segnalazioni.get(i).getAula().getIdaula() == aule.get(j).getIdaula()){
-					nomeAula = aule.get(j).getNome();
-					}
-			}
-			segnalazioneDto.setOggettoInteressato(segnalazioni.get(i).getOggettoInteressato());
-			segnalazioneDto.setMotivazione(segnalazioni.get(i).getMotivazione());
-			segnalazioneDto.setStatoSegnalazione(segnalazioni.get(i).getStatoSegnalazione());
-			segnalazioneDto.setNomeAula(nomeAula);
-			segnalazioneDto.setData((Date) segnalazioni.get(i).getData());
+			Segnalazione segnalazione = segnalazioneIterator.next();
 			
-			segnalazioniDto.add(i, segnalazioneDto);
+			segnalazioneDto = SegnalazioneAdaptee.domainToDto(segnalazione, aule);	
+			segnalazioniDto.add(segnalazioneDto);
 		}
-		
+	
 		return segnalazioniDto;
 	}
 }

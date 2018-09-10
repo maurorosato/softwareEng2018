@@ -1,6 +1,7 @@
 package it.unisalento.se.saw.restapi;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -12,18 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import it.unisalento.se.saw.Iservices.ICorsoDiStudioService;
-import it.unisalento.se.saw.domain.Aula;
+import it.unisalento.se.saw.converter.CorsoDiStudioAdaptee;
 import it.unisalento.se.saw.domain.CorsoDiStudio;
-import it.unisalento.se.saw.domain.Docente;
-import it.unisalento.se.saw.domain.Utente;
-import it.unisalento.se.saw.dto.AulaDto;
+
 import it.unisalento.se.saw.dto.CorsoDiStudioDto;
-import it.unisalento.se.saw.dto.DocenteDto;
-import it.unisalento.se.saw.dto.UtenteDto;
+
 import it.unisalento.se.saw.exceptions.CorsoDiStudioNotFoundException;
-import it.unisalento.se.saw.exceptions.DocenteNotFoundException;
-import it.unisalento.se.saw.exceptions.UtenteNotFoundException;
-import it.unisalento.se.saw.services.CorsoDiStudioService;
+
 
 @RestController()
 @RequestMapping(value="/corso")
@@ -43,15 +39,17 @@ public class CorsoDiStudioRestController {
 	@RequestMapping(value="/getAll", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<CorsoDiStudioDto> getAll() throws CorsoDiStudioNotFoundException {
 		List<CorsoDiStudioDto> corsiDto= new ArrayList<CorsoDiStudioDto>();
-		List<CorsoDiStudio> corsi = null;
-		corsi = (corsoDiStudioService.getAll());
-		for(int i=0 ; i< corsi.size(); i++) {
+		List<CorsoDiStudio> corsi = (corsoDiStudioService.getAll());
+		Iterator<CorsoDiStudio> corsoIterator = corsi.iterator();
+
+		while (corsoIterator.hasNext()){
 			CorsoDiStudioDto corsoDto = new CorsoDiStudioDto();
-			corsoDto.setNomeCorso(corsi.get(i).getNomeCorso());
-			corsoDto.setDipartimento(corsi.get(i).getDipartimento());
-			corsoDto.setIdcorsoDiStudio(corsi.get(i).getIdcorsoDiStudio());
-			corsiDto.add(i,corsoDto);
+			CorsoDiStudio corso = corsoIterator.next();
+
+			corsoDto = CorsoDiStudioAdaptee.domainToDto(corso);
+			corsiDto.add(corsoDto);
 		}
+	
 		return corsiDto;
 	}
 	
@@ -59,8 +57,7 @@ public class CorsoDiStudioRestController {
 	public CorsoDiStudio post(@RequestBody CorsoDiStudioDto corsoDto) throws CorsoDiStudioNotFoundException{	
 	
 		CorsoDiStudio corsoSave = new CorsoDiStudio();
-		corsoSave.setNomeCorso(corsoDto.getNomeCorso());
-		corsoSave.setDipartimento(corsoDto.getDipartimento());
+		corsoSave = CorsoDiStudioAdaptee.dtoToDomain(corsoDto);
 		
 		return corsoDiStudioService.save(corsoSave);
 	}
@@ -70,8 +67,8 @@ public class CorsoDiStudioRestController {
 		CorsoDiStudio corso=new CorsoDiStudio();
 		corso=corsoDiStudioService.getById(id);
 		CorsoDiStudioDto corsoDto = new CorsoDiStudioDto();
-		corsoDto.setDipartimento(corso.getDipartimento());
-		corsoDto.setNomeCorso(corso.getNomeCorso());
+		corsoDto = CorsoDiStudioAdaptee.domainToDto(corso);
+		
 		return corsoDto;
 	}
 	
