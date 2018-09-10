@@ -17,7 +17,6 @@ import it.unisalento.se.saw.Iservices.IAulaService;
 import it.unisalento.se.saw.Iservices.IStrumentazioneService;
 import it.unisalento.se.saw.domain.Aula;
 import it.unisalento.se.saw.domain.Strumentazione;
-import it.unisalento.se.saw.dto.DocenteDto;
 import it.unisalento.se.saw.dto.StrumentazioneDto;
 import it.unisalento.se.saw.exceptions.AulaNotFoundException;
 import it.unisalento.se.saw.exceptions.StrumentazioneNotFoundException;
@@ -62,7 +61,7 @@ public class StrumentazioneRestController {
 		
 		Strumentazione str = new Strumentazione();
 		Aula aula = new Aula();
-		
+		/****/
 		aula  = aulaService.getById(strumentazioneDto.getIdAulaRiferimento());
 		str.setDescrizione(strumentazioneDto.getDescrizione());
 		str.setStato(strumentazioneDto.getStato());	
