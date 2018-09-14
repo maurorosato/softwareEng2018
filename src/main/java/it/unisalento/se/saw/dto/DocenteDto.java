@@ -75,8 +75,8 @@ public class DocenteDto {
 	public String getNumeroTelefono() {
 		return numeroTelefono;
 	}
-	public void setNumeroTelefono(String numeroTelefono) {
-		this.numeroTelefono = numeroTelefono;
+	public void setNumeroTelefono(String numTelefono) {
+		this.numeroTelefono = numTelefono;
 	}
 	
 	

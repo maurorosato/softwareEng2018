@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class SegnalazioneDto {
 	
+	private int idSegnalazione;
 	private String oggettoInteressato;
 	private String statoSegnalazione;
 	private String motivazione;
@@ -11,6 +12,12 @@ public class SegnalazioneDto {
 	private Date data;
 	private String image;
 
+	public int getIdSegnalazione() {
+		return idSegnalazione;
+	}
+	public void setIdSegnalazione(int idSegnalazione) {
+		this.idSegnalazione = idSegnalazione;
+	}
 	public String getImage() {
 		return image;
 	}
