@@ -3,7 +3,7 @@ package it.unisalento.se.saw.converter;
 import it.unisalento.se.saw.domain.CorsoDiStudio;
 import it.unisalento.se.saw.dto.CorsoDiStudioDto;
 
-public class CorsoDiStudioAdaptee {
+public class CorsoDiStudioConverter {
 
 	public static CorsoDiStudioDto domainToDto(CorsoDiStudio corso) {
 		CorsoDiStudioDto corsoDto = new CorsoDiStudioDto();
