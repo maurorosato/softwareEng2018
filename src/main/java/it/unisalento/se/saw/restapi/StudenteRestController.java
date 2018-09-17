@@ -22,6 +22,7 @@ import it.unisalento.se.saw.domain.Studente;
 import it.unisalento.se.saw.domain.Utente;
 import it.unisalento.se.saw.dto.StudenteDto;
 import it.unisalento.se.saw.exceptions.CorsoDiStudioNotFoundException;
+import it.unisalento.se.saw.exceptions.NumeroTelefonoNotFoundException;
 import it.unisalento.se.saw.exceptions.StudenteNotFoundException;
 import it.unisalento.se.saw.exceptions.UtenteNotFoundException;
 
@@ -50,15 +51,16 @@ public class StudenteRestController {
 	}
 	
 	@RequestMapping(value="/getAll", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<StudenteDto> getAll() throws StudenteNotFoundException, UtenteNotFoundException, CorsoDiStudioNotFoundException {
+	public List<StudenteDto> getAll() throws StudenteNotFoundException, UtenteNotFoundException, CorsoDiStudioNotFoundException, NumeroTelefonoNotFoundException {
 		List<StudenteDto> studentiDto= new ArrayList<StudenteDto>();
-		List<Studente> studenti = null;
-		studenti = (studenteService.getAll());
+		List<Studente> studenti = studenteService.getAll();
+		List<CorsoDiStudio> corsi = corsoDiStudioService.getAll();
+		List<NumeroTelefono> numeriTelefono = numeroService.getAll();
+
 		int idUtente;
 		int idCorso;
 		String nomeCorso = null;
-		List<CorsoDiStudio> corsi = null;
-		corsi = corsoDiStudioService.getAll();
+		String numTelefono = "- ";
 		
 		for(int i=0;i<studenti.size();i++) {
 			StudenteDto studenteDto = new StudenteDto();
@@ -71,7 +73,13 @@ public class StudenteRestController {
 			studenteDto.setCognome(utente.getCognome());
 			studenteDto.setDataNascita(utente.getDataNascita());
 			studenteDto.setEmail(utente.getEmail());
-
+			
+			for (int j=0; j<numeriTelefono.size(); j++){
+				if (numeriTelefono.get(j).getUtente().getIdutente() == idUtente){
+					numTelefono = numTelefono + numeriTelefono.get(j).getNumeroTelefono() + " - ";
+				}
+			}
+			
 			idCorso = studenti.get(i).getCorsoDiStudioIdcorsoDiStudio();
 			for(int j=0; j< corsi.size(); j++ ){
 				if(idCorso == corsi.get(j).getIdcorsoDiStudio()){
@@ -82,7 +90,9 @@ public class StudenteRestController {
 			studenteDto.setMatricola(stud.getMatricola());
 			studenteDto.setIndirizzo(stud.getIndirizzo());
 			studenteDto.setNazione(stud.getNazione());
+			studenteDto.setNumeroTelefono(numTelefono);
 			studenteDto.setCorsoDiStudio(nomeCorso);
+			numTelefono = "- ";
 
 			studentiDto.add(i, studenteDto);			
 		}

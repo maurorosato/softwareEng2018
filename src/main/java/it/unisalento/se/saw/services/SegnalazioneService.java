@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import it.unisalento.se.saw.Iservices.ISegnalazioneService;
 import it.unisalento.se.saw.domain.Segnalazione;
+import it.unisalento.se.saw.dto.SegnalazioneDto;
 import it.unisalento.se.saw.exceptions.SegnalazioneNotFoundException;
 import it.unisalento.se.saw.repositories.SegnalazioneRepository;
 
@@ -28,4 +29,16 @@ public class SegnalazioneService implements ISegnalazioneService{
 		return segnalazioneRepository.save(segnalazione);
 		//return null;
 	}
+	
+	@Override
+	public Segnalazione getById(int id) throws SegnalazioneNotFoundException {
+		// TODO Auto-generated method stub
+		return segnalazioneRepository.getOne(id);
+	}
+	
+	@Override
+    public void cambiaStatoSegnalazione(SegnalazioneDto segnalazioneDto) throws SegnalazioneNotFoundException {
+         segnalazioneRepository.cambiaStatoSegnalazione(segnalazioneDto.getIdSegnalazione(), segnalazioneDto.getStatoSegnalazione());  
+	}
+        
 }

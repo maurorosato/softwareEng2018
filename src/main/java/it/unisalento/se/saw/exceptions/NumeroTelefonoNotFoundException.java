@@ -1,5 +1,5 @@
 package it.unisalento.se.saw.exceptions;
 
-public class NumeroTelefonoNotFoundException {
+public class NumeroTelefonoNotFoundException extends Exception {
 
 }
