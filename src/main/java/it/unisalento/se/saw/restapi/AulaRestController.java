@@ -25,7 +25,6 @@ public class AulaRestController {
 
 	@Autowired
 	IAulaService aulaService;
-	
 	public AulaRestController() {
 		super(); 
 	}
