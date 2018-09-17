@@ -36,10 +36,7 @@ public class AulaService implements IAulaService {
 	
 	@Override
 	public void aggiornaAula(AulaDto aulaDto) throws AulaNotFoundException {
-<<<<<<< HEAD
 		aulaRepository.aggiornaAula(aulaDto.getIdaula(),aulaDto.getStato(),aulaDto.getCapienza());
-=======
-		aulaRepository.aggiornaAula(aulaDto.getIdAula(),aulaDto.getStato(),aulaDto.getCapienza());
->>>>>>> d6a6dddd75bd759d8aeb54d078063d0fcc04c7ce
+		aulaRepository.aggiornaAula(aulaDto.getIdaula(),aulaDto.getStato(),aulaDto.getCapienza());
 	}
 }

@@ -30,10 +30,6 @@ public class SegnalazioneService implements ISegnalazioneService{
 	
 	@Override
 	public Segnalazione getById(int id) throws SegnalazioneNotFoundException {
-<<<<<<< HEAD
-=======
-		// TODO Auto-generated method stub
->>>>>>> d6a6dddd75bd759d8aeb54d078063d0fcc04c7ce
 		return segnalazioneRepository.getOne(id);
 	}
 	

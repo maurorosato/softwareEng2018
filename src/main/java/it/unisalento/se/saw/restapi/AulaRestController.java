@@ -62,10 +62,6 @@ public class AulaRestController {
 	public void aggiornaAula(@RequestBody AulaDto aulaDto) throws AulaNotFoundException {
 		aulaService.aggiornaAula(aulaDto);
 	}
-<<<<<<< HEAD
-=======
 
-	
->>>>>>> d6a6dddd75bd759d8aeb54d078063d0fcc04c7ce
 }
 
