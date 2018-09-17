@@ -1,15 +1,23 @@
 package it.unisalento.se.saw.dto;
 
 public class StrumentazioneDto {
+	private int idStrumentazione;
 	private String descrizione;
 	private String stato;
-	private int idAulaRiferimento;
+	private String aulaRiferimento;
 	
-	public int getIdAulaRiferimento() {
-		return idAulaRiferimento;
+	public int getIdStrumentazione() {
+		return idStrumentazione;
 	}
-	public void setIdAulaRiferimento(int idAulaRiferimento) {
-		this.idAulaRiferimento = idAulaRiferimento;
+	public void setIdStrumentazione(int idStrumentazione) {
+		this.idStrumentazione = idStrumentazione;
+	}
+	
+	public String getAulaRiferimento() {
+		return aulaRiferimento;
+	}
+	public void setAulaRiferimento(String aulaRiferimento) {
+		this.aulaRiferimento = aulaRiferimento;
 	}
 	public String getDescrizione() {
 		return descrizione;

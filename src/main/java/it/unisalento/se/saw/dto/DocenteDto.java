@@ -3,13 +3,13 @@ package it.unisalento.se.saw.dto;
 import java.util.Date;
 public class DocenteDto {
 
+	private int idDocente;
 	private String nome;
 	private String cognome;
 	private String password;
 	private float stipendio;
 	private String email;
 	private String grado;
-	private Integer idDocente;
 	private Date dataNascita;
 	private Integer idOrigin;
 	private String numeroTelefono;
@@ -75,8 +75,8 @@ public class DocenteDto {
 	public String getNumeroTelefono() {
 		return numeroTelefono;
 	}
-	public void setNumeroTelefono(String numeroTelefono) {
-		this.numeroTelefono = numeroTelefono;
+	public void setNumeroTelefono(String numTelefono) {
+		this.numeroTelefono = numTelefono;
 	}
 	
 	

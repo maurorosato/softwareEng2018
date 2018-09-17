@@ -1,34 +1,27 @@
 package it.unisalento.se.saw.restapi;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import it.unisalento.se.saw.Iservices.ICorsoDiStudioService;
 import it.unisalento.se.saw.Iservices.IDocenteService;
 import it.unisalento.se.saw.Iservices.IInsegnamentoService;
-import it.unisalento.se.saw.domain.Aula;
 import it.unisalento.se.saw.domain.CorsoDiStudio;
 import it.unisalento.se.saw.domain.Docente;
 import it.unisalento.se.saw.domain.Insegnamento;
-import it.unisalento.se.saw.domain.Segnalazione;
-import it.unisalento.se.saw.domain.Strumentazione;
 import it.unisalento.se.saw.dto.InsegnamentoDto;
-import it.unisalento.se.saw.dto.SegnalazioneDto;
-import it.unisalento.se.saw.dto.StrumentazioneDto;
 import it.unisalento.se.saw.exceptions.AulaNotFoundException;
 import it.unisalento.se.saw.exceptions.CorsoDiStudioNotFoundException;
 import it.unisalento.se.saw.exceptions.DocenteNotFoundException;
 import it.unisalento.se.saw.exceptions.InsegnamentoNotFoundException;
-import it.unisalento.se.saw.exceptions.StrumentazioneNotFoundException;
 
 @RestController()
 @RequestMapping(value="/insegnamento")
@@ -62,6 +55,7 @@ public class InsegnamentoRestController {
 		for(int i=0; i < insegnamenti.size(); i++){
 			InsegnamentoDto insegnamentoDto = new InsegnamentoDto();
 			
+			insegnamentoDto.setIdInsegnamento(insegnamenti.get(i).getIdinsegnamento());
 			insegnamentoDto.setNome(insegnamenti.get(i).getNome());
 			insegnamentoDto.setCfu(insegnamenti.get(i).getCfu());
 			insegnamentoDto.setSettoreScientificoDisciplinare(insegnamenti.get(i).getSettoreScientificoDisciplinare());
@@ -113,5 +107,10 @@ public class InsegnamentoRestController {
 		
 		
 		insegnamentoService.save(insegnamento);
+	}
+	
+	@PatchMapping (value = "/aggiornaInsegnamento",consumes = MediaType.APPLICATION_JSON_VALUE)
+	public void aggiornaInsegnamento(@RequestBody InsegnamentoDto insegnamentoDto) throws AulaNotFoundException, InsegnamentoNotFoundException {
+		insegnamentoService.aggiornaInsegnamento(insegnamentoDto);
 	}
 }

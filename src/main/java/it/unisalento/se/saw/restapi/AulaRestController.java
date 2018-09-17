@@ -7,13 +7,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import it.unisalento.se.saw.Iservices.IAulaService;
-import it.unisalento.se.saw.converter.AulaAdaptee;
+import it.unisalento.se.saw.converter.AulaConverter;
 import it.unisalento.se.saw.domain.Aula;
 import it.unisalento.se.saw.dto.AulaDto;
 import it.unisalento.se.saw.exceptions.AulaNotFoundException;
@@ -32,12 +33,6 @@ public class AulaRestController {
 	public AulaRestController(IAulaService aulaService) {
 		this.aulaService = aulaService;
 	}
-	/*
-	@PostMapping(value="save", consumes=MediaType.APPLICATION_JSON_VALUE)
-	public Corso post(@RequestBody Corso corso) throws ParseException, CorsoNotFoundException {
-		return corsoService.save(corso);
-	}
-	*/
 	
 	@RequestMapping(value="/getAll", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<AulaDto> getAll() throws AulaNotFoundException {
@@ -47,14 +42,12 @@ public class AulaRestController {
 		Iterator<Aula> aulaIterator = aule.iterator();
 		
 		while (aulaIterator.hasNext()){
-
 			AulaDto aulaDto = new AulaDto();
 			Aula aula = aulaIterator.next();
 			
-			aulaDto = AulaAdaptee.domainToDto(aula);
+			aulaDto = AulaConverter.domainToDto(aula);
 			auleDto.add(aulaDto);
 		}
-
 		return auleDto;
 	}
 	
@@ -62,9 +55,13 @@ public class AulaRestController {
 	public Aula post(@RequestBody AulaDto aulaDto) throws AulaNotFoundException, ParseException {
 		Aula aulaSave = new Aula();
 		
-		aulaSave = AulaAdaptee.dtoToDomain(aulaDto);
+		aulaSave = AulaConverter.dtoToDomain(aulaDto);
 		return aulaService.save(aulaSave);	
 	}
 	
+	@PatchMapping (value = "/aggiornaAula",consumes = MediaType.APPLICATION_JSON_VALUE)
+	public void aggiornaAula(@RequestBody AulaDto aulaDto) throws AulaNotFoundException {
+		aulaService.aggiornaAula(aulaDto);
+	}
 }
 

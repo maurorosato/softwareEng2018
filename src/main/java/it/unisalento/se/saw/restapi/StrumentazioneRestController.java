@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import it.unisalento.se.saw.Iservices.IAulaService;
 import it.unisalento.se.saw.Iservices.IStrumentazioneService;
-import it.unisalento.se.saw.converter.StrumentazioneAdaptee;
+import it.unisalento.se.saw.converter.StrumentazioneConverter;
 import it.unisalento.se.saw.domain.Aula;
 import it.unisalento.se.saw.domain.Strumentazione;
 import it.unisalento.se.saw.dto.StrumentazioneDto;
@@ -54,7 +54,7 @@ public class StrumentazioneRestController {
 			StrumentazioneDto strumentazioneDto;
 			Strumentazione strumentazione = strumentazioneIterator.next();
 			
-			strumentazioneDto= StrumentazioneAdaptee.domainToDto(strumentazione);
+			strumentazioneDto= StrumentazioneConverter.domainToDto(strumentazione);
 			strumentazioniDto.add(strumentazioneDto);	
 		}
 		return strumentazioniDto;
@@ -62,12 +62,27 @@ public class StrumentazioneRestController {
 	
 	@PostMapping(value="save", consumes=MediaType.APPLICATION_JSON_VALUE)
 	public void post(@RequestBody StrumentazioneDto strumentazioneDto) throws StrumentazioneNotFoundException, ParseException, AulaNotFoundException {
-		
+		List<Aula> aule = aulaService.getAll();
 		Strumentazione str = new Strumentazione();
 		Aula aula = new Aula();
-		aula  = aulaService.getById(strumentazioneDto.getIdAulaRiferimento());
-		str = StrumentazioneAdaptee.dtoToDomain(strumentazioneDto, aula);
+		Iterator<Aula> aulaIterator = aule.iterator();
+		int idAula = 0;
+
+		while(aulaIterator.hasNext()){
+			Aula aulaIter = aulaIterator.next();
+			if ((aulaIter.getNome()).equals(strumentazioneDto.getAulaRiferimento())){
+				idAula = aulaIter.getIdaula();
+			}
+		}
+		
+		aula  = aulaService.getById(idAula);
+		str = StrumentazioneConverter.dtoToDomain(strumentazioneDto, aula);
 		
 		strumentazioneService.save(str);
+	}
+	
+	@PatchMapping (value = "/aggiornaStrumentazione",consumes = MediaType.APPLICATION_JSON_VALUE)
+	public void aggiornaStrumentazione(@RequestBody StrumentazioneDto strumentazioneDto) throws StrumentazioneNotFoundException {
+		strumentazioneService.aggiornaStrumentazione(strumentazioneDto);
 	}
 }

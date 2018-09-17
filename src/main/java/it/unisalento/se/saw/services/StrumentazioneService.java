@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import it.unisalento.se.saw.Iservices.IStrumentazioneService;
 import it.unisalento.se.saw.domain.Strumentazione;
+import it.unisalento.se.saw.dto.StrumentazioneDto;
 import it.unisalento.se.saw.exceptions.StrumentazioneNotFoundException;
 import it.unisalento.se.saw.repositories.StrumentazioneRepository;
 
@@ -24,8 +25,11 @@ public class StrumentazioneService implements IStrumentazioneService {
 
 	@Transactional
 	public Strumentazione save(Strumentazione strumentazione) {
-		// TODO Auto-generated method stub
 		return strumentazioneRepository.save(strumentazione);
-		//return null;
+	}
+	
+	@Override
+	public void aggiornaStrumentazione(StrumentazioneDto strumentazioneDto) throws StrumentazioneNotFoundException {
+		strumentazioneRepository.aggiornaStrumentazione(strumentazioneDto.getIdStrumentazione(),strumentazioneDto.getStato());
 	}
 }

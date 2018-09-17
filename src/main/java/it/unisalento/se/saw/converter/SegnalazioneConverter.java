@@ -10,7 +10,7 @@ import it.unisalento.se.saw.domain.Segnalazione;
 import it.unisalento.se.saw.domain.Utente;
 import it.unisalento.se.saw.dto.SegnalazioneDto;
 
-public class SegnalazioneAdaptee {
+public class SegnalazioneConverter {
 
 	public static SegnalazioneDto domainToDto(Segnalazione segnalazione, List<Aula> aule ) {
 		SegnalazioneDto segnalazioneDto = new SegnalazioneDto();
@@ -24,7 +24,7 @@ public class SegnalazioneAdaptee {
 				nomeAula = aula.getNome();
 				}
 		}
-		
+		segnalazioneDto.setIdSegnalazione(segnalazione.getIdsegnalazione());
 		segnalazioneDto.setOggettoInteressato(segnalazione.getOggettoInteressato());
 		segnalazioneDto.setMotivazione(segnalazione.getMotivazione());
 		segnalazioneDto.setStatoSegnalazione(segnalazione.getStatoSegnalazione());

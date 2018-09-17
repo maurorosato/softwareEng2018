@@ -3,12 +3,12 @@ package it.unisalento.se.saw.converter;
 import it.unisalento.se.saw.domain.Aula;
 import it.unisalento.se.saw.dto.AulaDto;
 
-public class AulaAdaptee {
+public class AulaConverter {
 	
 	public static AulaDto domainToDto(Aula aula) {
 		AulaDto aulaDto = new AulaDto();
 
-		aulaDto.setIdAula(aula.getIdaula());
+		aulaDto.setIdaula(aula.getIdaula());
 		aulaDto.setEdificio(aula.getEdificio());
 		aulaDto.setNome(aula.getNome());
 		aulaDto.setCapienza(aula.getCapienza());

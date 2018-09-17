@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +23,7 @@ import it.unisalento.se.saw.domain.NumeroTelefono;
 import it.unisalento.se.saw.domain.Utente;
 import it.unisalento.se.saw.dto.DocenteDto;
 import it.unisalento.se.saw.exceptions.DocenteNotFoundException;
+import it.unisalento.se.saw.exceptions.NumeroTelefonoNotFoundException;
 import it.unisalento.se.saw.exceptions.UtenteNotFoundException;
 
 @RestController()
@@ -52,25 +54,34 @@ public class DocenteRestController {
 	*/
 	
 	@RequestMapping(value="/getAll", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<DocenteDto> getAll() throws DocenteNotFoundException, UtenteNotFoundException {
+	public List<DocenteDto> getAll() throws DocenteNotFoundException, UtenteNotFoundException, NumeroTelefonoNotFoundException {
 		List<DocenteDto> docentiDto= new ArrayList<DocenteDto>();
-		List<Docente> docenti = null;
-		docenti = (docenteService.getAll());
+		List<Docente> docenti = docenteService.getAll();
+		List<NumeroTelefono> numeriTelefono = numeroService.getAll();
 		int idUtente;
+		String numTelefono = "- ";
 		for(int i=0;i<docenti.size();i++) {
 			DocenteDto docenteDto = new DocenteDto();
 			idUtente = docenti.get(i).getUtente().getIdutente();
 			
+			for (int j=0; j<numeriTelefono.size(); j++){
+				if (numeriTelefono.get(j).getUtente().getIdutente() == idUtente){
+					numTelefono = numTelefono + numeriTelefono.get(j).getNumeroTelefono() + " - ";
+				}
+			}
+			
 			Utente utente = new Utente();
-			utente = utenteService.getById(idUtente);		
+			utente = utenteService.getById(idUtente);
+			docenteDto.setIdDocente(docenti.get(i).getIddocente());
 			docenteDto.setNome(utente.getNome());
 			docenteDto.setCognome(utente.getCognome());
 			docenteDto.setEmail(utente.getEmail());
 			docenteDto.setGrado(docenti.get(i).getGrado());
-			//SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
-			//docenteDto.setDataNascita(formatter.parse(utente.getDataNascita()));
 			docenteDto.setDataNascita(utente.getDataNascita());
 			docenteDto.setStipendio(docenti.get(i).getStipendio());
+			docenteDto.setNumeroTelefono(numTelefono);
+			numTelefono = "- ";
+			
 			docentiDto.add(i, docenteDto);			
 		}
 		return docentiDto;
@@ -115,4 +126,8 @@ public class DocenteRestController {
 		return docenteService.save(doc);
 	}
 	
+	@PatchMapping (value = "/aggiornaDocente",consumes = MediaType.APPLICATION_JSON_VALUE)
+	public void aggiornaDocente(@RequestBody DocenteDto docenteDto) throws DocenteNotFoundException {
+		docenteService.aggiornaDocente(docenteDto);
+	}
 }
