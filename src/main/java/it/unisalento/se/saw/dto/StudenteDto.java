@@ -3,6 +3,7 @@ package it.unisalento.se.saw.dto;
 import java.util.Date;
 
 public class StudenteDto {
+	private int idStudente;
 	private String nome;
 	private String cognome;
 	private String email;
@@ -12,9 +13,15 @@ public class StudenteDto {
 	private String nazione;
 	private String codiceFiscale;
 	private String matricola;
-	private String	corsoDiStudio;
+	private String corsoDiStudio;
 	private String numeroTelefono;
 	
+	public int getIdStudente() {
+		return idStudente;
+	}
+	public void setIdStudente(int idStudente) {
+		this.idStudente = idStudente;
+	}
 	public String getCodiceFiscale() {
 		return codiceFiscale;
 	}

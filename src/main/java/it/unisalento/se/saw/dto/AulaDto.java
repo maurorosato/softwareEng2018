@@ -3,23 +3,24 @@ package it.unisalento.se.saw.dto;
 public class AulaDto {
 	
 	private Integer idaula;
+	
 	private String edificio;
 	private String nome;
 	private String stato;
 	private Integer capienza;
 	
+	public Integer getIdaula() {
+		return idaula;
+	}
+	public void setIdaula(Integer idaula) {
+		this.idaula = idaula;
+	}
 	
 	public Integer getCapienza() {
 		return capienza;
 	}
 	public void setCapienza(Integer capienza) {
 		this.capienza = capienza;
-	}
-	public Integer getIdAula() {
-		return idaula;
-	}
-	public void setIdAula(Integer idAula) {
-		this.idaula = idAula;
 	}
 	
 	public String getEdificio() {

@@ -25,9 +25,8 @@ public class AulaRestController {
 
 	@Autowired
 	IAulaService aulaService;
-	
 	public AulaRestController() {
-		super();
+		super(); 
 	}
 	
 	public AulaRestController(IAulaService aulaService) {
@@ -64,6 +63,5 @@ public class AulaRestController {
 		aulaService.aggiornaAula(aulaDto);
 	}
 
-	
 }
 

@@ -25,14 +25,11 @@ public class SegnalazioneService implements ISegnalazioneService{
 	}
 	@Transactional
 	public Segnalazione save(Segnalazione segnalazione) {
-		// TODO Auto-generated method stub
 		return segnalazioneRepository.save(segnalazione);
-		//return null;
 	}
 	
 	@Override
 	public Segnalazione getById(int id) throws SegnalazioneNotFoundException {
-		// TODO Auto-generated method stub
 		return segnalazioneRepository.getOne(id);
 	}
 	

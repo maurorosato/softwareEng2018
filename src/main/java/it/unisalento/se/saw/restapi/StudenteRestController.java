@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,9 @@ import it.unisalento.se.saw.domain.CorsoDiStudio;
 import it.unisalento.se.saw.domain.NumeroTelefono;
 import it.unisalento.se.saw.domain.Studente;
 import it.unisalento.se.saw.domain.Utente;
+import it.unisalento.se.saw.dto.AulaDto;
 import it.unisalento.se.saw.dto.StudenteDto;
+import it.unisalento.se.saw.exceptions.AulaNotFoundException;
 import it.unisalento.se.saw.exceptions.CorsoDiStudioNotFoundException;
 import it.unisalento.se.saw.exceptions.NumeroTelefonoNotFoundException;
 import it.unisalento.se.saw.exceptions.StudenteNotFoundException;
@@ -68,6 +71,7 @@ public class StudenteRestController {
 			Utente utente = new Utente();
 			utente = utenteService.getById(idUtente);	
 			Studente stud = studenti.get(i);
+			studenteDto.setIdStudente(stud.getIdstudente());
 			studenteDto.setNome(utente.getNome());
 			studenteDto.setCodiceFiscale(stud.getCodiceFiscale());
 			studenteDto.setCognome(utente.getCognome());
@@ -138,6 +142,11 @@ public class StudenteRestController {
 		stud.setUtente(user);
 		
 		return studenteService.save(stud);
+	}
+	
+	@PatchMapping (value = "/aggiornaStudente",consumes = MediaType.APPLICATION_JSON_VALUE)
+	public void aggiornaStudente(@RequestBody StudenteDto studenteDto) throws StudenteNotFoundException {
+		studenteService.aggiornaStudente(studenteDto);
 	}
 }
 

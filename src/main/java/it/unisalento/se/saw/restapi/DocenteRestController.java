@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -70,7 +71,8 @@ public class DocenteRestController {
 			}
 			
 			Utente utente = new Utente();
-			utente = utenteService.getById(idUtente);		
+			utente = utenteService.getById(idUtente);
+			docenteDto.setIdDocente(docenti.get(i).getIddocente());
 			docenteDto.setNome(utente.getNome());
 			docenteDto.setCognome(utente.getCognome());
 			docenteDto.setEmail(utente.getEmail());
@@ -124,4 +126,8 @@ public class DocenteRestController {
 		return docenteService.save(doc);
 	}
 	
+	@PatchMapping (value = "/aggiornaDocente",consumes = MediaType.APPLICATION_JSON_VALUE)
+	public void aggiornaDocente(@RequestBody DocenteDto docenteDto) throws DocenteNotFoundException {
+		docenteService.aggiornaDocente(docenteDto);
+	}
 }
