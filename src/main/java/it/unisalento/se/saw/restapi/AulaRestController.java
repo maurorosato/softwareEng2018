@@ -27,7 +27,7 @@ public class AulaRestController {
 	IAulaService aulaService;
 	
 	public AulaRestController() {
-		super();
+		super(); 
 	}
 	
 	public AulaRestController(IAulaService aulaService) {
