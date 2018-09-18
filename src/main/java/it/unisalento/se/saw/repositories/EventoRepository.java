@@ -8,4 +8,6 @@ import it.unisalento.se.saw.domain.Evento;
 
 public interface EventoRepository extends JpaRepository<Evento, Integer>{
 
+	
+	
 }
