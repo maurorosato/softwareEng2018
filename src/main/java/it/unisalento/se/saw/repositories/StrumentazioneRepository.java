@@ -14,4 +14,9 @@ public interface StrumentazioneRepository extends JpaRepository<Strumentazione, 
 	@Transactional
 	@Query("UPDATE Strumentazione SET stato = :statoStrumentazione  WHERE idstrumentazione = :idStrumentazione")
 	void aggiornaStrumentazione(@Param("idStrumentazione") Integer id, @Param("statoStrumentazione") String stato );
+	
+	@Modifying
+	@Transactional
+	@Query("DELETE from Strumentazione WHERE idstrumentazione = :idStrumentazione")
+	void rimuoviStrumentazione(@Param("idStrumentazione") Integer id);	
 }

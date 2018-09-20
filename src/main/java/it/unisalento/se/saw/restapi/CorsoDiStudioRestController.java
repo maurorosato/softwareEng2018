@@ -19,6 +19,7 @@ import it.unisalento.se.saw.domain.CorsoDiStudio;
 import it.unisalento.se.saw.dto.CorsoDiStudioDto;
 
 import it.unisalento.se.saw.exceptions.CorsoDiStudioNotFoundException;
+import it.unisalento.se.saw.exceptions.InsegnamentoNotFoundException;
 
 
 @RestController()
@@ -72,4 +73,8 @@ public class CorsoDiStudioRestController {
 		return corsoDto;
 	}
 	
+	@RequestMapping (value = "/rimuoviCorsoDiStudio/{idCorso}", method = RequestMethod.DELETE)
+	public void rimuoviCorso(@PathVariable("idCorso") int idCorso) throws CorsoDiStudioNotFoundException {
+		corsoDiStudioService.rimuoviCorsoDiStudio(idCorso);
+	}
 }

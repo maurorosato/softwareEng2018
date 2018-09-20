@@ -7,7 +7,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +21,6 @@ import it.unisalento.se.saw.Iservices.IStrumentazioneService;
 import it.unisalento.se.saw.converter.StrumentazioneConverter;
 import it.unisalento.se.saw.domain.Aula;
 import it.unisalento.se.saw.domain.Strumentazione;
-import it.unisalento.se.saw.dto.AulaDto;
 import it.unisalento.se.saw.dto.StrumentazioneDto;
 import it.unisalento.se.saw.exceptions.AulaNotFoundException;
 import it.unisalento.se.saw.exceptions.StrumentazioneNotFoundException;
@@ -85,5 +86,10 @@ public class StrumentazioneRestController {
 	@PatchMapping (value = "/aggiornaStrumentazione",consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void aggiornaStrumentazione(@RequestBody StrumentazioneDto strumentazioneDto) throws StrumentazioneNotFoundException {
 		strumentazioneService.aggiornaStrumentazione(strumentazioneDto);
+	}
+	
+	@RequestMapping (value = "/rimuoviStrumentazione/{idStrumentazione}", method = RequestMethod.DELETE)
+	public void rimuoviStrumentazione(@PathVariable("idStrumentazione") int idStrumentazione) throws StrumentazioneNotFoundException {
+		strumentazioneService.rimuoviStrumentazione(idStrumentazione);
 	}
 }

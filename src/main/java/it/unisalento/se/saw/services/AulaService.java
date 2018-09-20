@@ -10,6 +10,7 @@ import it.unisalento.se.saw.Iservices.IAulaService;
 import it.unisalento.se.saw.domain.Aula;
 import it.unisalento.se.saw.dto.AulaDto;
 import it.unisalento.se.saw.exceptions.AulaNotFoundException;
+import it.unisalento.se.saw.exceptions.StrumentazioneNotFoundException;
 import it.unisalento.se.saw.repositories.AulaRepository;
 
 @Service
@@ -37,6 +38,10 @@ public class AulaService implements IAulaService {
 	@Override
 	public void aggiornaAula(AulaDto aulaDto) throws AulaNotFoundException {
 		aulaRepository.aggiornaAula(aulaDto.getIdaula(),aulaDto.getStato(),aulaDto.getCapienza());
-		aulaRepository.aggiornaAula(aulaDto.getIdaula(),aulaDto.getStato(),aulaDto.getCapienza());
+	}
+	
+	@Override
+	public void rimuoviAula(int idAula) throws AulaNotFoundException {
+		aulaRepository.rimuoviAula(idAula);
 	}
 }

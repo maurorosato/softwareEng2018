@@ -11,4 +11,6 @@ public interface IAulaService {
 	public List<Aula> getAll() throws AulaNotFoundException;
 	public Aula getById(int id) throws AulaNotFoundException;
 	public void aggiornaAula(AulaDto aulaDto) throws AulaNotFoundException;
+	public void rimuoviAula(int idAula) throws AulaNotFoundException;
+
 }

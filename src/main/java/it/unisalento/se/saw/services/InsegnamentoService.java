@@ -8,10 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import it.unisalento.se.saw.Iservices.IInsegnamentoService;
 import it.unisalento.se.saw.domain.Insegnamento;
-import it.unisalento.se.saw.domain.Strumentazione;
-import it.unisalento.se.saw.dto.AulaDto;
+
 import it.unisalento.se.saw.dto.InsegnamentoDto;
-import it.unisalento.se.saw.exceptions.AulaNotFoundException;
 import it.unisalento.se.saw.exceptions.InsegnamentoNotFoundException;
 import it.unisalento.se.saw.repositories.InsegnamentoRepository;
 
@@ -32,5 +30,10 @@ public class InsegnamentoService implements IInsegnamentoService {
 	@Override
 	public void aggiornaInsegnamento(InsegnamentoDto insegnamentoDto) throws InsegnamentoNotFoundException {
 		insegnamentoRepository.aggiornaInsegnamento(insegnamentoDto.getCfu(),insegnamentoDto.getIdInsegnamento());
+	}
+	
+	@Override
+	public void rimuoviInsegnamento(int idInsegnamento) throws InsegnamentoNotFoundException {
+		insegnamentoRepository.rimuoviInsegnamento(idInsegnamento);
 	}
 }

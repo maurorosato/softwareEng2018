@@ -15,4 +15,8 @@ public interface InsegnamentoRepository extends JpaRepository<Insegnamento, Inte
 	@Query("UPDATE Insegnamento SET cfu = :cfu WHERE idInsegnamento = :idInsegnamento")
 	void aggiornaInsegnamento(@Param("cfu") Integer cfu, @Param("idInsegnamento") int idInsegnamento );
 
+	@Modifying
+	@Transactional
+	@Query("DELETE from Insegnamento WHERE idInsegnamento = :idInsegnamento")
+	void rimuoviInsegnamento(@Param("idInsegnamento") Integer id);
 }
