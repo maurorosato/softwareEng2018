@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import it.unisalento.se.saw.Iservices.ICorsoDiStudioService;
 import it.unisalento.se.saw.domain.CorsoDiStudio;
+import it.unisalento.se.saw.exceptions.AulaNotFoundException;
 import it.unisalento.se.saw.exceptions.CorsoDiStudioNotFoundException;
 import it.unisalento.se.saw.repositories.CorsoDiStudioRepository;
 
@@ -31,5 +32,10 @@ public class CorsoDiStudioService implements ICorsoDiStudioService {
 	public CorsoDiStudio getById(int id) throws CorsoDiStudioNotFoundException {
 		// TODO Auto-generated method stub
 		return corsoDiStudioRepository.getOne(id);
+	}
+	
+	@Override
+	public void rimuoviCorsoDiStudio(int idCorso) throws CorsoDiStudioNotFoundException {
+		corsoDiStudioRepository.rimuoviCorsoDiStudio(idCorso);
 	}
 }

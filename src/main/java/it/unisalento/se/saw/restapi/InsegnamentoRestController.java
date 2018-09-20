@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -112,5 +113,10 @@ public class InsegnamentoRestController {
 	@PatchMapping (value = "/aggiornaInsegnamento",consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void aggiornaInsegnamento(@RequestBody InsegnamentoDto insegnamentoDto) throws AulaNotFoundException, InsegnamentoNotFoundException {
 		insegnamentoService.aggiornaInsegnamento(insegnamentoDto);
+	}
+	
+	@RequestMapping (value = "/rimuoviInsegnamento/{idInsegnamento}", method = RequestMethod.DELETE)
+	public void rimuoviInsegnamento(@PathVariable("idInsegnamento") int idInsegnamento) throws InsegnamentoNotFoundException {
+		insegnamentoService.rimuoviInsegnamento(idInsegnamento);
 	}
 }

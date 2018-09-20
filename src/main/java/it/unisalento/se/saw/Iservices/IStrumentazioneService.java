@@ -10,6 +10,7 @@ public interface IStrumentazioneService {
 	
 	public List<Strumentazione> getAll() throws StrumentazioneNotFoundException;
 	public void aggiornaStrumentazione(StrumentazioneDto strumentazioneDto) throws StrumentazioneNotFoundException;
+	public void rimuoviStrumentazione(int idStrumentazione) throws StrumentazioneNotFoundException;
 	public Strumentazione save(Strumentazione strumentazione);
 }
 

@@ -32,4 +32,11 @@ public class StrumentazioneService implements IStrumentazioneService {
 	public void aggiornaStrumentazione(StrumentazioneDto strumentazioneDto) throws StrumentazioneNotFoundException {
 		strumentazioneRepository.aggiornaStrumentazione(strumentazioneDto.getIdStrumentazione(),strumentazioneDto.getStato());
 	}
+	
+	@Override
+	public void rimuoviStrumentazione(int idStrumentazione) throws StrumentazioneNotFoundException {
+		strumentazioneRepository.rimuoviStrumentazione(idStrumentazione);
+	}
+	
+	
 }
