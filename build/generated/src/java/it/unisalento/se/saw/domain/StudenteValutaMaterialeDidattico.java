@@ -1,5 +1,5 @@
 package it.unisalento.se.saw.domain;
-// Generated 18-set-2018 10.49.46 by Hibernate Tools 5.2.0.Final
+// Generated 21-set-2018 9.29.48 by Hibernate Tools 5.2.0.Final
 
 
 import javax.persistence.AttributeOverride;

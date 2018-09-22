@@ -85,8 +85,7 @@ public class SegnalazioneRestController {
 		return segnalazioniDto;
 	}
 	
-	@GetMapping (value="/getById/{id}", 
-			     produces=MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping (value="/getById/{id}",produces=MediaType.APPLICATION_JSON_VALUE)
 	public SegnalazioneDto getById(@PathVariable("id") int id) throws SegnalazioneNotFoundException, AulaNotFoundException {
 		
 		List<Aula> aule = (aulaService.getAll());
@@ -96,10 +95,16 @@ public class SegnalazioneRestController {
 		return segnalazioneDto;
 	}
 	
-	@PatchMapping (value = "/cambiaStatoSegnalazione", 
-				  consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PatchMapping (value = "/cambiaStatoSegnalazione",consumes = MediaType.APPLICATION_JSON_VALUE)
     public void cambiaStatoSegnalazione(@RequestBody SegnalazioneDto segnalazioneDto, String stato) throws SegnalazioneNotFoundException {
    		segnalazioneService.cambiaStatoSegnalazione(segnalazioneDto);
     }
+	
+	@PatchMapping (value = "/updateDescrizioneSegnalazione",consumes = MediaType.APPLICATION_JSON_VALUE)
+	public void updateDescrizioneSegnalazione(@RequestBody SegnalazioneDto segnalazioneDto, String stato) throws SegnalazioneNotFoundException {
+		System.out.println(segnalazioneDto.getDescrizione());
+		System.out.println(segnalazioneDto.getIdSegnalazione());
+		segnalazioneService.updateDescrizioneSegnalazione(segnalazioneDto);
+}
     
 }

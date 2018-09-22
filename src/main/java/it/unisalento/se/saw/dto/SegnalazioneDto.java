@@ -10,6 +10,7 @@ public class SegnalazioneDto {
 	private String motivazione;
 	private String nomeAula;
 	private Date data;
+	private String descrizione;
 	private String image;
 
 	public int getIdSegnalazione() {
@@ -36,28 +37,12 @@ public class SegnalazioneDto {
 	public void setNomeAula(String nomeAula) {
 		this.nomeAula = nomeAula;
 	}
-	/*
-	public int getAula_idaula() {
-		return aula_idaula;
+	public String getDescrizione() {
+		return descrizione;
 	}
-	public void setAula_idaula(int aula_idaula) {
-		this.aula_idaula = aula_idaula;
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
 	}
-	
-	public int getOperazione_idoperazione() {
-		return operazione_idoperazione;
-	}
-	public void setOperazione_idoperazione(int operazione_idoperazione) {
-		this.operazione_idoperazione = operazione_idoperazione;
-	}
-	
-	public int getIdSegnalazione() {
-		return idsegnalazione;
-	}
-	public void setIdSegnalazione(Integer integer) {
-		this.idsegnalazione = integer;
-	}
-	*/
 	public String getOggettoInteressato() {
 		return oggettoInteressato;
 	}
