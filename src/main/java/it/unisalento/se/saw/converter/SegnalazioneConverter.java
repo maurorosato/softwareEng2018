@@ -29,6 +29,7 @@ public class SegnalazioneConverter {
 		segnalazioneDto.setMotivazione(segnalazione.getMotivazione());
 		segnalazioneDto.setStatoSegnalazione(segnalazione.getStatoSegnalazione());
 		segnalazioneDto.setNomeAula(nomeAula);
+		segnalazioneDto.setDescrizione(segnalazione.getDescrizione());
 		segnalazioneDto.setData((Date) segnalazione.getData());
 				
 		switch (segnalazioneDto.getOggettoInteressato()) {
@@ -73,6 +74,7 @@ public class SegnalazioneConverter {
 		segnalazione.setAula(aula);
 		segnalazione.setDocente(docente);
 		segnalazione.setStatoSegnalazione("attivo");
+		segnalazione.setDescrizione("La segnalazione è stata presa in carico.");
 		segnalazione.setData(data);
 		
 		return segnalazione;

@@ -10,5 +10,6 @@ public interface ISegnalazioneService {
 	public List<Segnalazione> getAll() throws SegnalazioneNotFoundException;
 	public Segnalazione getById(int id) throws SegnalazioneNotFoundException;
 	public void cambiaStatoSegnalazione(SegnalazioneDto segnalazioneDto) throws SegnalazioneNotFoundException;
+	public void updateDescrizioneSegnalazione(SegnalazioneDto segnalazioneDto) throws SegnalazioneNotFoundException;
 	public Segnalazione save(Segnalazione segnalazione);
 }

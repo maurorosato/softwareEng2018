@@ -15,5 +15,9 @@ public interface SegnalazioneRepository extends JpaRepository<Segnalazione, Inte
 	@Query("UPDATE Segnalazione SET statoSegnalazione = :statoSegnalazione WHERE idSegnalazione = :idSegnalazione")
 	void cambiaStatoSegnalazione(@Param("idSegnalazione") Integer id, @Param("statoSegnalazione") String statoSegnalazione );
 
+	@Modifying
+	@Transactional
+	@Query("UPDATE Segnalazione SET descrizione = :descrizione WHERE idSegnalazione = :idSegnalazione")
+	void updateDescrizioneSegnalazione(@Param("idSegnalazione") Integer id, @Param("descrizione") String descrizione );
 	
 }

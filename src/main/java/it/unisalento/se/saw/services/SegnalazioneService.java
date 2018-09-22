@@ -37,5 +37,10 @@ public class SegnalazioneService implements ISegnalazioneService{
     public void cambiaStatoSegnalazione(SegnalazioneDto segnalazioneDto) throws SegnalazioneNotFoundException {
          segnalazioneRepository.cambiaStatoSegnalazione(segnalazioneDto.getIdSegnalazione(), segnalazioneDto.getStatoSegnalazione());  
 	}
+	
+	@Override
+    public void updateDescrizioneSegnalazione(SegnalazioneDto segnalazioneDto) throws SegnalazioneNotFoundException {
+         segnalazioneRepository.updateDescrizioneSegnalazione(segnalazioneDto.getIdSegnalazione(), segnalazioneDto.getDescrizione());  
+	}
         
 }
