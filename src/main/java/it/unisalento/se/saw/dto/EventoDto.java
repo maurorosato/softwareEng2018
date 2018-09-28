@@ -1,6 +1,6 @@
 package it.unisalento.se.saw.dto;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class EventoDto {
 	

@@ -8,7 +8,14 @@ public class AulaDto {
 	private String nome;
 	private String stato;
 	private Integer capienza;
+	private boolean wifi;
 	
+	public boolean isWifi() {
+		return wifi;
+	}
+	public void setWifi(boolean wifi) {
+		this.wifi = wifi;
+	}
 	public Integer getIdaula() {
 		return idaula;
 	}
