@@ -13,6 +13,7 @@ public class AulaConverter {
 		aulaDto.setNome(aula.getNome());
 		aulaDto.setCapienza(aula.getCapienza());
 		aulaDto.setStato(aula.getStato());
+		aulaDto.setWifi(false);
 		
 		return aulaDto;
 	}
@@ -23,7 +24,7 @@ public class AulaConverter {
 		aula.setEdificio(aulaDto.getEdificio());
 		aula.setStato(aulaDto.getStato());
 		aula.setCapienza(aulaDto.getCapienza());
-		
+		//aula.getWifi(aulaDto.isWifi());
 		return aula;
 	}
 }

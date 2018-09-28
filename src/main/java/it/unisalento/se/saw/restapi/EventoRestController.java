@@ -1,7 +1,8 @@
 package it.unisalento.se.saw.restapi;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,9 +89,13 @@ public class EventoRestController {
 			
 			EventoDto eventoDto = new EventoDto();
 			eventoDto.setIdEvento(eventi.get(i).getIdevento());
-			eventoDto.setDescrizione("-");
+			eventoDto.setDescrizione(eventi.get(i).getDescrizione());
 			eventoDto.setGradimento(numeroFloat);
-			eventoDto.setData((Date) eventi.get(i).getData());
+			eventoDto.setData(eventi.get(i).getData());
+			System.out.println(eventoDto.getData().getDay());
+			System.out.println(eventoDto.getData().getMonth());
+			System.out.println(eventoDto.getData().getYear());
+			//System.out.println(eventi.get(i).getData());
 			
 			for (int j=0; j < aule.size(); j++){
 				if( aule.get(j).getIdaula() == eventi.get(i).getAula().getIdaula()){
@@ -111,7 +116,6 @@ public class EventoRestController {
 			}
 			for (int y=0; y < lezioni.size(); y++){
 				if (lezioni.get(y).getEvento().getIdevento() == eventoDto.getIdEvento()){
-					eventoDto.setDescrizione(lezioni.get(y).getDescrizione());
 					eventoDto.setGradimento(lezioni.get(y).getGradimento());
 				}
 			}

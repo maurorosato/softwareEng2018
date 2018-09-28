@@ -1,5 +1,5 @@
 package it.unisalento.se.saw.domain;
-// Generated 21-set-2018 9.29.48 by Hibernate Tools 5.2.0.Final
+// Generated 26-set-2018 12.33.12 by Hibernate Tools 5.2.0.Final
 
 
 import java.util.HashSet;
@@ -27,7 +27,6 @@ public class Lezione  implements java.io.Serializable {
 
      private Integer idlezione;
      private Evento evento;
-     private String descrizione;
      private float gradimento;
      private Set<MaterialeDidattico> materialeDidatticos = new HashSet<MaterialeDidattico>(0);
      private Set<StudenteValutaLezione> studenteValutaLeziones = new HashSet<StudenteValutaLezione>(0);
@@ -36,14 +35,12 @@ public class Lezione  implements java.io.Serializable {
     }
 
 	
-    public Lezione(Evento evento, String descrizione, float gradimento) {
+    public Lezione(Evento evento, float gradimento) {
         this.evento = evento;
-        this.descrizione = descrizione;
         this.gradimento = gradimento;
     }
-    public Lezione(Evento evento, String descrizione, float gradimento, Set<MaterialeDidattico> materialeDidatticos, Set<StudenteValutaLezione> studenteValutaLeziones) {
+    public Lezione(Evento evento, float gradimento, Set<MaterialeDidattico> materialeDidatticos, Set<StudenteValutaLezione> studenteValutaLeziones) {
        this.evento = evento;
-       this.descrizione = descrizione;
        this.gradimento = gradimento;
        this.materialeDidatticos = materialeDidatticos;
        this.studenteValutaLeziones = studenteValutaLeziones;
@@ -69,16 +66,6 @@ public class Lezione  implements java.io.Serializable {
     
     public void setEvento(Evento evento) {
         this.evento = evento;
-    }
-
-    
-    @Column(name="descrizione", nullable=false, length=45)
-    public String getDescrizione() {
-        return this.descrizione;
-    }
-    
-    public void setDescrizione(String descrizione) {
-        this.descrizione = descrizione;
     }
 
     

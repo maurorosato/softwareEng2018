@@ -53,18 +53,10 @@ public class LezioneRestController {
 		
 		for (int i=0; i < lezioni.size(); i++){
 			LezioneDto lezioneDto = new LezioneDto();
-			lezioneDto.setDescrizione(lezioni.get(i).getDescrizione());
 			lezioneDto.setGradimento(lezioni.get(i).getGradimento());
 			lezioneDto.setIdEvento(lezioni.get(i).getEvento().getIdevento());
 			idEvento = lezioni.get(i).getEvento().getIdevento();
-			
-			/*for (int j=0; j < aulaPrenotazioneEvento.size(); j++){
-				if(aulaPrenotazioneEvento.get(j).getEvento().getIdevento() == idEvento){
-					idAula = aulaPrenotazioneEvento.get(j).getAula().getIdaula();
-					data = (Date) aulaPrenotazioneEvento.get(j).getData();
-				}
-			}*/
-			
+
 			for (int t=0; t < aule.size(); t++){
 				if(aule.get(t).getIdaula() == idAula){
 					nomeAula = aule.get(t).getNome();
