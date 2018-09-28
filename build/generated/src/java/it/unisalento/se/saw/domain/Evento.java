@@ -1,5 +1,5 @@
 package it.unisalento.se.saw.domain;
-// Generated 21-set-2018 9.29.48 by Hibernate Tools 5.2.0.Final
+// Generated 26-set-2018 12.33.12 by Hibernate Tools 5.2.0.Final
 
 
 import java.util.Date;
@@ -34,6 +34,7 @@ public class Evento  implements java.io.Serializable {
      private Aula aula;
      private Insegnamento insegnamento;
      private Prenotazione prenotazione;
+     private String descrizione;
      private Date data;
      private Set<AppelloEsame> appelloEsames = new HashSet<AppelloEsame>(0);
      private Set<Lezione> leziones = new HashSet<Lezione>(0);
@@ -43,15 +44,17 @@ public class Evento  implements java.io.Serializable {
     }
 
 	
-    public Evento(Aula aula, Insegnamento insegnamento, Prenotazione prenotazione) {
+    public Evento(Aula aula, Insegnamento insegnamento, Prenotazione prenotazione, String descrizione) {
         this.aula = aula;
         this.insegnamento = insegnamento;
         this.prenotazione = prenotazione;
+        this.descrizione = descrizione;
     }
-    public Evento(Aula aula, Insegnamento insegnamento, Prenotazione prenotazione, Date data, Set<AppelloEsame> appelloEsames, Set<Lezione> leziones, Set<Studente> studentes) {
+    public Evento(Aula aula, Insegnamento insegnamento, Prenotazione prenotazione, String descrizione, Date data, Set<AppelloEsame> appelloEsames, Set<Lezione> leziones, Set<Studente> studentes) {
        this.aula = aula;
        this.insegnamento = insegnamento;
        this.prenotazione = prenotazione;
+       this.descrizione = descrizione;
        this.data = data;
        this.appelloEsames = appelloEsames;
        this.leziones = leziones;
@@ -100,8 +103,18 @@ public class Evento  implements java.io.Serializable {
         this.prenotazione = prenotazione;
     }
 
-    @Temporal(TemporalType.DATE)
-    @Column(name="data", length=10)
+    
+    @Column(name="descrizione", nullable=false)
+    public String getDescrizione() {
+        return this.descrizione;
+    }
+    
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
+    }
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="data", length=19)
     public Date getData() {
         return this.data;
     }

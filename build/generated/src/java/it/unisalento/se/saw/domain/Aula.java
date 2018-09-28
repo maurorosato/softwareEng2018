@@ -1,5 +1,5 @@
 package it.unisalento.se.saw.domain;
-// Generated 21-set-2018 9.29.48 by Hibernate Tools 5.2.0.Final
+// Generated 26-set-2018 12.33.12 by Hibernate Tools 5.2.0.Final
 
 
 import java.util.HashSet;
@@ -28,6 +28,7 @@ public class Aula  implements java.io.Serializable {
      private String edificio;
      private String stato;
      private int capienza;
+     private byte wifi;
      private Set<Segnalazione> segnalaziones = new HashSet<Segnalazione>(0);
      private Set<Strumentazione> strumentaziones = new HashSet<Strumentazione>(0);
      private Set<Evento> eventos = new HashSet<Evento>(0);
@@ -36,17 +37,19 @@ public class Aula  implements java.io.Serializable {
     }
 
 	
-    public Aula(String nome, String edificio, String stato, int capienza) {
+    public Aula(String nome, String edificio, String stato, int capienza, byte wifi) {
         this.nome = nome;
         this.edificio = edificio;
         this.stato = stato;
         this.capienza = capienza;
+        this.wifi = wifi;
     }
-    public Aula(String nome, String edificio, String stato, int capienza, Set<Segnalazione> segnalaziones, Set<Strumentazione> strumentaziones, Set<Evento> eventos) {
+    public Aula(String nome, String edificio, String stato, int capienza, byte wifi, Set<Segnalazione> segnalaziones, Set<Strumentazione> strumentaziones, Set<Evento> eventos) {
        this.nome = nome;
        this.edificio = edificio;
        this.stato = stato;
        this.capienza = capienza;
+       this.wifi = wifi;
        this.segnalaziones = segnalaziones;
        this.strumentaziones = strumentaziones;
        this.eventos = eventos;
@@ -102,6 +105,16 @@ public class Aula  implements java.io.Serializable {
     
     public void setCapienza(int capienza) {
         this.capienza = capienza;
+    }
+
+    
+    @Column(name="wifi", nullable=false)
+    public byte getWifi() {
+        return this.wifi;
+    }
+    
+    public void setWifi(byte wifi) {
+        this.wifi = wifi;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="aula")
