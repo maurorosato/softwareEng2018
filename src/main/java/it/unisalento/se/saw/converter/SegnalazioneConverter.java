@@ -12,17 +12,25 @@ import it.unisalento.se.saw.dto.SegnalazioneDto;
 
 public class SegnalazioneConverter {
 
-	public static SegnalazioneDto domainToDto(Segnalazione segnalazione, List<Aula> aule ) {
+	public static SegnalazioneDto domainToDto(Segnalazione segnalazione, List<Aula> aule, List<Docente> docenti ) {
 		SegnalazioneDto segnalazioneDto = new SegnalazioneDto();
 		String nomeAula = null;
+		String docenteSegnalante = null;
 		Iterator<Aula> aulaIterator = aule.iterator();
+		Iterator<Docente> docenteIterator = docenti.iterator();
+		
+		while (docenteIterator.hasNext()){
+			Docente docente = docenteIterator.next();
+			if(segnalazione.getDocente().getIddocente() == docente.getIddocente()){
+				docenteSegnalante = docente.getUtente().getNome() + ' ' + docente.getUtente().getCognome();
+			}
+		}
 
 		while (aulaIterator.hasNext()){
 			Aula aula = aulaIterator.next();
-
 			if (segnalazione.getAula().getIdaula() == aula.getIdaula()){
 				nomeAula = aula.getNome();
-				}
+			}
 		}
 		segnalazioneDto.setIdSegnalazione(segnalazione.getIdsegnalazione());
 		segnalazioneDto.setOggettoInteressato(segnalazione.getOggettoInteressato());
@@ -30,6 +38,7 @@ public class SegnalazioneConverter {
 		segnalazioneDto.setStatoSegnalazione(segnalazione.getStatoSegnalazione());
 		segnalazioneDto.setNomeAula(nomeAula);
 		segnalazioneDto.setDescrizione(segnalazione.getDescrizione());
+		segnalazioneDto.setDocenteSegnalante(docenteSegnalante);
 		segnalazioneDto.setData((Date) segnalazione.getData());
 				
 		switch (segnalazioneDto.getOggettoInteressato()) {
