@@ -92,11 +92,7 @@ public class EventoRestController {
 			eventoDto.setDescrizione(eventi.get(i).getDescrizione());
 			eventoDto.setGradimento(numeroFloat);
 			eventoDto.setData(eventi.get(i).getData());
-			System.out.println(eventoDto.getData().getDay());
-			System.out.println(eventoDto.getData().getMonth());
-			System.out.println(eventoDto.getData().getYear());
-			//System.out.println(eventi.get(i).getData());
-			
+
 			for (int j=0; j < aule.size(); j++){
 				if( aule.get(j).getIdaula() == eventi.get(i).getAula().getIdaula()){
 					eventoDto.setAula(aule.get(j).getNome());
@@ -130,11 +126,10 @@ public class EventoRestController {
 				}
 			}
 		
-			if(eventoDto.getDescrizione().equals("-"))
+			if(eventoDto.getGradimento() == 0)
 				eventoDto.setImage("examsIcon.png");
 			else
 				eventoDto.setImage("lessonsIcon.png");
-			
 			eventiDto.add(i, eventoDto);
 		}
 		return eventiDto;

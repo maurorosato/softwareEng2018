@@ -19,14 +19,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import it.unisalento.se.saw.Iservices.IAulaService;
+import it.unisalento.se.saw.Iservices.IDocenteService;
 import it.unisalento.se.saw.Iservices.ISegnalazioneService;
 import it.unisalento.se.saw.converter.SegnalazioneConverter;
 import it.unisalento.se.saw.domain.Aula;
-
+import it.unisalento.se.saw.domain.Docente;
 import it.unisalento.se.saw.domain.Segnalazione;
 import it.unisalento.se.saw.dto.SegnalazioneDto;
 import it.unisalento.se.saw.exceptions.AulaNotFoundException;
+import it.unisalento.se.saw.exceptions.DocenteNotFoundException;
 import it.unisalento.se.saw.exceptions.SegnalazioneNotFoundException;
+import it.unisalento.se.saw.services.DocenteService;
 
 
 @RestController()
@@ -38,6 +41,9 @@ public class SegnalazioneRestController {
 	
 	@Autowired
 	IAulaService aulaService;
+	
+	@Autowired
+	IDocenteService docenteService;
 	
 	public SegnalazioneRestController() {
 		super();
@@ -67,18 +73,19 @@ public class SegnalazioneRestController {
 	
 	@RequestMapping (value="/getAll", method=RequestMethod.GET,
 			         produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<SegnalazioneDto> getAll() throws SegnalazioneNotFoundException, AulaNotFoundException {
+	public List<SegnalazioneDto> getAll() throws SegnalazioneNotFoundException, AulaNotFoundException, DocenteNotFoundException {
 		
 		List<SegnalazioneDto> segnalazioniDto= new ArrayList<SegnalazioneDto>();
 		List<Segnalazione> segnalazioni = (segnalazioneService.getAll());
 		List<Aula> aule = (aulaService.getAll());
+		List<Docente> docenti = docenteService.getAll();
 		Iterator<Segnalazione> segnalazioneIterator = segnalazioni.iterator();
 				
 		while(segnalazioneIterator.hasNext()){
 			SegnalazioneDto segnalazioneDto = new SegnalazioneDto();
 			Segnalazione segnalazione = segnalazioneIterator.next();
 			
-			segnalazioneDto = SegnalazioneConverter.domainToDto(segnalazione, aule);	
+			segnalazioneDto = SegnalazioneConverter.domainToDto(segnalazione, aule, docenti);	
 			segnalazioniDto.add(segnalazioneDto);
 		}
 	
@@ -86,11 +93,12 @@ public class SegnalazioneRestController {
 	}
 	
 	@GetMapping (value="/getById/{id}",produces=MediaType.APPLICATION_JSON_VALUE)
-	public SegnalazioneDto getById(@PathVariable("id") int id) throws SegnalazioneNotFoundException, AulaNotFoundException {
+	public SegnalazioneDto getById(@PathVariable("id") int id) throws SegnalazioneNotFoundException, AulaNotFoundException, DocenteNotFoundException {
 		
 		List<Aula> aule = (aulaService.getAll());
+		List<Docente> docenti = docenteService.getAll();
 		Segnalazione segnalazione = segnalazioneService.getById(id);
-		SegnalazioneDto segnalazioneDto = SegnalazioneConverter.domainToDto(segnalazione, aule);
+		SegnalazioneDto segnalazioneDto = SegnalazioneConverter.domainToDto(segnalazione, aule, docenti);
 		
 		return segnalazioneDto;
 	}

@@ -4,14 +4,22 @@ import java.sql.Date;
 
 public class SegnalazioneDto {
 	
-	private int idSegnalazione;
-	private String oggettoInteressato;
-	private String statoSegnalazione;
-	private String motivazione;
-	private String nomeAula;
 	private Date data;
-	private String descrizione;
 	private String image;
+	private String nomeAula;
+	private String descrizione;
+	private String motivazione;
+	private int idSegnalazione;
+	private String docenteSegnalante;
+	private String statoSegnalazione;
+	private String oggettoInteressato;
+	
+	public String getDocenteSegnalante() {
+		return docenteSegnalante;
+	}
+	public void setDocenteSegnalante(String docenteSegnalante) {
+		this.docenteSegnalante = docenteSegnalante;
+	}
 
 	public int getIdSegnalazione() {
 		return idSegnalazione;
