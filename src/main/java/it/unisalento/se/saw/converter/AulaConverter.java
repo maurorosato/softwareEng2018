@@ -33,5 +33,6 @@ public class AulaConverter {
 			aula.setWifi((byte) 0);
 		
 		return aula;
+		
 	}
 }
