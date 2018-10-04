@@ -39,7 +39,9 @@ public class SegnalazioneConverter {
 		segnalazioneDto.setNomeAula(nomeAula);
 		segnalazioneDto.setDescrizione(segnalazione.getDescrizione());
 		segnalazioneDto.setDocenteSegnalante(docenteSegnalante);
-		segnalazioneDto.setData((Date) segnalazione.getData());
+		
+		java.util.Date sqlDate = segnalazione.getData();
+		segnalazioneDto.setData(sqlDate.toString());
 				
 		switch (segnalazioneDto.getOggettoInteressato()) {
 			case "proiettore":
@@ -67,14 +69,12 @@ public class SegnalazioneConverter {
 		Aula aula = new Aula();
 		Utente utente = new Utente();
 		Docente docente = new Docente();
-		
 		while(aulaIterator.hasNext()){
 			Aula aulaList = aulaIterator.next();
 			if ((aulaList.getNome()).equals(segnalazioneDto.getNomeAula())){
 				aula.setIdaula(aulaList.getIdaula());
 				}
 		}
-		
 		utente.setIdutente(idUtente);
 		docente.setUtente(utente);
 		
@@ -84,7 +84,9 @@ public class SegnalazioneConverter {
 		segnalazione.setDocente(docente);
 		segnalazione.setStatoSegnalazione("attivo");
 		segnalazione.setDescrizione("La segnalazione è stata presa in carico.");
+		
 		segnalazione.setData(data);
+		
 		
 		return segnalazione;
 	}

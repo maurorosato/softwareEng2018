@@ -1,9 +1,6 @@
 package it.unisalento.se.saw.restapi;
 
-import java.sql.Date;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -29,7 +26,6 @@ import it.unisalento.se.saw.dto.SegnalazioneDto;
 import it.unisalento.se.saw.exceptions.AulaNotFoundException;
 import it.unisalento.se.saw.exceptions.DocenteNotFoundException;
 import it.unisalento.se.saw.exceptions.SegnalazioneNotFoundException;
-import it.unisalento.se.saw.services.DocenteService;
 
 
 @RestController()
@@ -60,12 +56,9 @@ public class SegnalazioneRestController {
 		Segnalazione segnalazione;
 		List<Aula> aule = aulaService.getAll();
 		
-		/************************************************************************************************/
-		DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
-		Date dateobj = new Date(0);
-		/************************************************************************************************/
-		
-		segnalazione = SegnalazioneConverter.dtoToDomain(segnalazioneDto, aule, 1, dateobj);
+		java.util.Date date = new java.util.Date();
+		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+		segnalazione = SegnalazioneConverter.dtoToDomain(segnalazioneDto, aule, 14, sqlDate);
 		
 		segnalazioneService.save(segnalazione);
 	}

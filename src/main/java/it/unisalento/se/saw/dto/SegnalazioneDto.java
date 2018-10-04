@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class SegnalazioneDto {
 	
-	private Date data;
+	private String data;
 	private String image;
 	private String nomeAula;
 	private String descrizione;
@@ -33,10 +33,10 @@ public class SegnalazioneDto {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public Date getData() {
+	public String getData() {
 		return data;
 	}
-	public void setData(Date data) {
+	public void setData(String data) {
 		this.data = data;
 	}
 	public String getNomeAula() {
