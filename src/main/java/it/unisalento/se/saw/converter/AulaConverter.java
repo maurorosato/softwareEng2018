@@ -7,7 +7,6 @@ public class AulaConverter {
 	
 	public static AulaDto domainToDto(Aula aula) {
 		AulaDto aulaDto = new AulaDto();
-
 		aulaDto.setIdaula(aula.getIdaula());
 		aulaDto.setEdificio(aula.getEdificio());
 		aulaDto.setNome(aula.getNome());
@@ -32,7 +31,6 @@ public class AulaConverter {
 		else
 			aula.setWifi((byte) 0);
 		
-		return aula;
-		
+		return aula;	
 	}
 }
