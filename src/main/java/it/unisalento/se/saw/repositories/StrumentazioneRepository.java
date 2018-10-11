@@ -1,5 +1,7 @@
 package it.unisalento.se.saw.repositories;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -19,4 +21,8 @@ public interface StrumentazioneRepository extends JpaRepository<Strumentazione, 
 	@Transactional
 	@Query("DELETE from Strumentazione WHERE idstrumentazione = :idStrumentazione")
 	void rimuoviStrumentazione(@Param("idStrumentazione") Integer id);	
+
+	@Query("SELECT stato FROM Strumentazione  WHERE aula_idaula = :idAula AND descrizione = :descrizione")
+	public List<Strumentazione> getValidateStrumentazioneOfSegnalazione(@Param("descrizione") String descrizione,@Param("idAula") Integer idAula);
+
 }

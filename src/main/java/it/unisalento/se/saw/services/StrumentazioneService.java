@@ -38,5 +38,9 @@ public class StrumentazioneService implements IStrumentazioneService {
 		strumentazioneRepository.rimuoviStrumentazione(idStrumentazione);
 	}
 	
-	
+	@Override
+	public List<Strumentazione> getValidateStrumentazioneOfSegnalazione(String descrizione, int idAula) throws StrumentazioneNotFoundException {
+		return strumentazioneRepository.getValidateStrumentazioneOfSegnalazione(descrizione,idAula);
+	}
 }
+	

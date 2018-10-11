@@ -74,7 +74,6 @@ public class StrumentazioneRestController {
 				idAula = aulaIter.getIdaula();
 			}
 		}
-		
 		aula  = aulaService.getById(idAula);
 		str = StrumentazioneConverter.dtoToDomain(strumentazioneDto, aula);
 		
@@ -89,5 +88,37 @@ public class StrumentazioneRestController {
 	@RequestMapping (value = "/rimuoviStrumentazione/{idStrumentazione}", method = RequestMethod.DELETE)
 	public void rimuoviStrumentazione(@PathVariable("idStrumentazione") int idStrumentazione) throws StrumentazioneNotFoundException {
 		strumentazioneService.rimuoviStrumentazione(idStrumentazione);
+	}
+	
+	@RequestMapping(value="/getValidateStrumentazioneOfSegnalazione/{descrizione}/{aulaRiferimento}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<StrumentazioneDto> getValidateStrumentazioneOfSegnalazione(@PathVariable("descrizione") String descrizione,@PathVariable("aulaRiferimento") String aulaRiferimento) throws StrumentazioneNotFoundException, AulaNotFoundException {
+		
+		System.out.println(descrizione);
+		System.out.println(aulaRiferimento);
+		
+		List<StrumentazioneDto> strumentazioniDto = new ArrayList<StrumentazioneDto>();
+		
+		int idAula = 0;
+		List<Aula> aule = aulaService.getAll();
+		Iterator<Aula> aulaIterator = aule.iterator();
+
+		while(aulaIterator.hasNext()){
+			Aula aulaIter = aulaIterator.next();
+			if ((aulaIter.getNome()).equals(aulaRiferimento)){
+				idAula = aulaIter.getIdaula();
+			}
+		}
+		System.out.println(idAula);
+		
+		List<Strumentazione> strumenti = strumentazioneService.getValidateStrumentazioneOfSegnalazione(descrizione,idAula);
+		/*Iterator<Strumentazione> strumentiIterator = strumenti.iterator();
+		while(strumentiIterator.hasNext()){
+			Strumentazione strumentazioneIterator= strumentiIterator.next();
+			StrumentazioneDto strumentazioneValideDto =StrumentazioneConverter.domainToDto(strumentazioneIterator);
+			strumentazioniDto.add(strumentazioneValideDto);
+		}*/
+		
+		System.out.println(strumenti);
+		return strumentazioniDto;
 	}
 }

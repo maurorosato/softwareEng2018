@@ -12,6 +12,8 @@ public interface IStrumentazioneService {
 	public void aggiornaStrumentazione(StrumentazioneDto strumentazioneDto) throws StrumentazioneNotFoundException;
 	public void rimuoviStrumentazione(int idStrumentazione) throws StrumentazioneNotFoundException;
 	public Strumentazione save(Strumentazione strumentazione);
+	public List<Strumentazione> getValidateStrumentazioneOfSegnalazione(String descrizione, int idAula) throws StrumentazioneNotFoundException;
+
 }
 
 
