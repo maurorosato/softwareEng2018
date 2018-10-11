@@ -1,16 +1,15 @@
 package it.unisalento.se.saw.restapi;
 
-import java.util.Date;
+import java.util.Iterator;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.unisalento.se.saw.Iservices.IAppelloEsame;
 import it.unisalento.se.saw.Iservices.IAulaService;
 import it.unisalento.se.saw.Iservices.ICorsoDiStudioService;
 import it.unisalento.se.saw.Iservices.IDocenteService;
@@ -18,6 +17,7 @@ import it.unisalento.se.saw.Iservices.IEventoService;
 import it.unisalento.se.saw.Iservices.IInsegnamentoService;
 import it.unisalento.se.saw.Iservices.ILezioneService;
 import it.unisalento.se.saw.Iservices.IUtenteService;
+import it.unisalento.se.saw.domain.AppelloEsame;
 import it.unisalento.se.saw.domain.Aula;
 import it.unisalento.se.saw.domain.CorsoDiStudio;
 import it.unisalento.se.saw.domain.Docente;
@@ -26,7 +26,7 @@ import it.unisalento.se.saw.domain.Insegnamento;
 import it.unisalento.se.saw.domain.Lezione;
 import it.unisalento.se.saw.domain.Utente;
 import it.unisalento.se.saw.dto.EventoDto;
-import it.unisalento.se.saw.dto.LezioneDto;
+import it.unisalento.se.saw.exceptions.AppelloEsameNotFoundException;
 import it.unisalento.se.saw.exceptions.AulaNotFoundException;
 import it.unisalento.se.saw.exceptions.CorsoDiStudioNotFoundException;
 import it.unisalento.se.saw.exceptions.DocenteNotFoundException;
@@ -60,6 +60,8 @@ public class EventoRestController {
 	@Autowired
 	IUtenteService utenteService;
 	
+	@Autowired
+	IAppelloEsame appelloEsameService;
 	
 	public EventoRestController() {
 		// TODO Auto-generated constructor stub
@@ -71,22 +73,92 @@ public class EventoRestController {
 	}
 	
 	@RequestMapping(value="/getAll", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<EventoDto> getAll() throws EventoNotFoundException, AulaNotFoundException, LezioneNotFoundException, DocenteNotFoundException, CorsoDiStudioNotFoundException, InsegnamentoNotFoundException, UtenteNotFoundException {
+	public List<EventoDto> getAll() throws EventoNotFoundException, AulaNotFoundException, LezioneNotFoundException, DocenteNotFoundException, CorsoDiStudioNotFoundException, InsegnamentoNotFoundException, UtenteNotFoundException, AppelloEsameNotFoundException {
 		
 		List<EventoDto> eventiDto= new ArrayList<EventoDto>();
-		List<Evento> eventi = (eventoService.getAll());	
-		List<Aula> aule = (aulaService.getAll());
+		
+		List<Evento> eventi = eventoService.getAll();
+		Iterator<Evento> eventoIterator = eventi.iterator();
+
+		List<Aula> aule = aulaService.getAll();
 		List<CorsoDiStudio> corsi = (corsoDiStudioService.getAll());
 		List<Insegnamento> insegnamenti = (insegnamentoService.getAll());
 		List<Docente> docenti = (docenteService.getAll());
-		List<Lezione> lezioni = (lezioneService.getAll());
-		List<Utente> utenti = (utenteService.getAll());
+		List<Lezione> lezioni = lezioneService.getAll();
+		List<AppelloEsame> appelli = appelloEsameService.getAll();
+		List<Utente> utenti = utenteService.getAll();
 		
 		float numeroFloat = 0;
 		int idCorso = 0,idDocente = 0, idUtente = 0;
 		
-		for (int i=0; i < eventi.size(); i++){
+		while (eventoIterator.hasNext()){
+			Evento evento = eventoIterator.next();
+			EventoDto eventoDto = new EventoDto();
 			
+			eventoDto.setIdEvento(evento.getIdevento());
+			eventoDto.setDescrizione(evento.getDescrizione());
+			eventoDto.setGradimento(numeroFloat);
+			
+			Iterator<Aula> aulaIterator = aule.iterator();
+			while (aulaIterator.hasNext()){
+				Aula aula = aulaIterator.next();
+				if (aula.getIdaula() == evento.getAula().getIdaula())
+					eventoDto.setAula(aula.getNome());
+			}
+			Iterator<Insegnamento> insegnamentoIterator = insegnamenti.iterator();
+			while (insegnamentoIterator.hasNext()){
+				Insegnamento insegnamento = insegnamentoIterator.next();
+				if (insegnamento.getIdinsegnamento() == evento.getInsegnamento().getIdinsegnamento()){
+					eventoDto.setInsegnamento(insegnamento.getNome());
+					idCorso = insegnamento.getCorsoDiStudioIdcorsoDiStudio();
+					idDocente = insegnamento.getDocente().getIddocente();
+				}
+			}
+			Iterator<CorsoDiStudio> corsoIterator = corsi.iterator();
+			while (corsoIterator.hasNext()){
+				CorsoDiStudio corso = corsoIterator.next();
+				if (corso.getIdcorsoDiStudio() == idCorso)
+					eventoDto.setCorso(corso.getNomeCorso());
+			}
+			Iterator<Lezione> lezioneIterator = lezioni.iterator();
+			while (lezioneIterator.hasNext()){
+				Lezione lezione = lezioneIterator.next();
+				if (lezione.getEvento().getIdevento() == evento.getIdevento())
+					eventoDto.setGradimento(lezione.getGradimento());
+			}
+			
+			Iterator<AppelloEsame> appelloIterator = appelli.iterator();
+			while (appelloIterator.hasNext()){
+				AppelloEsame appello = appelloIterator.next();
+				if (appello.getEvento().getIdevento() == evento.getIdevento())
+					eventoDto.setDescrizione("TIPOLOGIA: "+appello.getTipologia() + " DESCRIZIONE: "+ evento.getDescrizione());
+			}
+			
+			Iterator<Docente> docenteIterator = docenti.iterator();
+			while (docenteIterator.hasNext()){
+				Docente docente = docenteIterator.next();
+				if (docente.getIddocente() == idDocente)
+					idUtente = docente.getUtente().getIdutente();	
+			}
+			Iterator<Utente> utenteIterator = utenti.iterator();
+			while (utenteIterator.hasNext()){
+				Utente utente = utenteIterator.next();
+				if (utente.getIdutente() == idUtente)
+					eventoDto.setDocente(utente.getNome() + " " + utente.getCognome());
+			}
+			
+			if(eventoDto.getGradimento() == 0)
+				eventoDto.setImage("examsIcon.png");
+			else
+				eventoDto.setImage("lessonsIcon.png");
+			
+		 eventiDto.add(eventoDto);
+		}
+	return eventiDto;
+	}
+}
+		/*
+		for (int i=0; i < eventi.size(); i++){
 			EventoDto eventoDto = new EventoDto();
 			eventoDto.setIdEvento(eventi.get(i).getIdevento());
 			eventoDto.setDescrizione(eventi.get(i).getDescrizione());
@@ -132,6 +204,5 @@ public class EventoRestController {
 				eventoDto.setImage("lessonsIcon.png");
 			eventiDto.add(i, eventoDto);
 		}
-		return eventiDto;
-	}
-}
+		*/
+
