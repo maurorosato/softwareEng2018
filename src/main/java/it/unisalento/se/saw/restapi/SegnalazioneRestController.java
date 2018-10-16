@@ -58,12 +58,12 @@ public class SegnalazioneRestController {
 		List<Aula> aule = aulaService.getAll();
 		java.util.Date date = new java.util.Date();
 		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-		Date data=new Date();
-		data.setYear(2000);
-		data.setMonth(05);
-		data.setDate(05);
-	
-		segnalazione = SegnalazioneConverter.dtoToDomain(segnalazioneDto, aule, 1, data);
+		//Date data=new Date();
+		//data.setYear(2000);
+		//data.setMonth(05);
+		//data.setDate(05);
+
+		segnalazione = SegnalazioneConverter.dtoToDomain(segnalazioneDto, aule, sqlDate);
 		
 		
 		System.out.println("data: "+segnalazione.getData());
@@ -71,7 +71,6 @@ public class SegnalazioneRestController {
 		System.out.println("idAULA: "+segnalazione.getAula().getIdaula());
 		System.out.println("statoSegnalazione: "+segnalazione.getStatoSegnalazione());
 		System.out.println("oggettoInteressato:" +segnalazione.getOggettoInteressato());
-		System.out.println("idUTENTE: "+segnalazione.getDocente().getUtente().getIdutente());
 		System.out.println("motivazione: "+segnalazione.getMotivazione());
 		
 		return segnalazioneService.save(segnalazione);

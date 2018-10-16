@@ -90,21 +90,26 @@ public class StrumentazioneRestController {
 		strumentazioneService.rimuoviStrumentazione(idStrumentazione);
 	}
 	
-	@RequestMapping(value="/getValidateStrumentazioneOfSegnalazione/{descrizione}/{aulaRiferimento}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-	public int getValidateStrumentazioneOfSegnalazione(@PathVariable("descrizione") String descrizione,@PathVariable("aulaRiferimento") String aulaRiferimento) throws StrumentazioneNotFoundException, AulaNotFoundException {
+	@RequestMapping(value="/getValidateStrumentazioneOfSegnalazione/{oggettoInteressato}/{nomeAula}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+	public int getValidateStrumentazioneOfSegnalazione(@PathVariable("oggettoInteressato") String oggettoInteressato,@PathVariable("nomeAula") String nomeAula) throws StrumentazioneNotFoundException, AulaNotFoundException {
+		int strumentiValidate = 0;
 		
-		int idAula = 0;
-		List<Aula> aule = aulaService.getAll();
-		Iterator<Aula> aulaIterator = aule.iterator();
-
-		while(aulaIterator.hasNext()){
-			Aula aulaIter = aulaIterator.next();
-			if ((aulaIter.getNome()).equals(aulaRiferimento)){
-				idAula = aulaIter.getIdaula();
-			}
+		if (oggettoInteressato.equals("altro") && nomeAula.equals("altro")){
+			strumentiValidate = 1;
 		}
-		
-		int strumentiValidate = strumentazioneService.getValidateStrumentazioneOfSegnalazione(descrizione,idAula);		
+		else{
+			int idAula = 0;
+			List<Aula> aule = aulaService.getAll();
+			Iterator<Aula> aulaIterator = aule.iterator();
+	
+			while(aulaIterator.hasNext()){
+				Aula aulaIter = aulaIterator.next();
+				if ((aulaIter.getNome()).equals(nomeAula)){
+					idAula = aulaIter.getIdaula();
+				}
+			}
+			strumentiValidate = strumentazioneService.getValidateStrumentazioneOfSegnalazione(oggettoInteressato,idAula);		
+		}
 		return strumentiValidate;
 	}
 }

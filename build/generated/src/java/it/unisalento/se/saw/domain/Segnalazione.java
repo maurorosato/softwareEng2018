@@ -1,5 +1,5 @@
 package it.unisalento.se.saw.domain;
-// Generated 16-ott-2018 0.43.39 by Hibernate Tools 5.2.0.Final
+// Generated 16-ott-2018 20.20.47 by Hibernate Tools 5.2.0.Final
 
 
 import java.util.Date;
@@ -37,6 +37,15 @@ public class Segnalazione  implements java.io.Serializable {
     public Segnalazione() {
     }
 
+	
+    public Segnalazione(Aula aula, Docente docente, String oggettoInteressato, String motivazione, String statoSegnalazione, String descrizione) {
+        this.aula = aula;
+        this.docente = docente;
+        this.oggettoInteressato = oggettoInteressato;
+        this.motivazione = motivazione;
+        this.statoSegnalazione = statoSegnalazione;
+        this.descrizione = descrizione;
+    }
     public Segnalazione(Aula aula, Docente docente, String oggettoInteressato, String motivazione, String statoSegnalazione, String descrizione, Date data) {
        this.aula = aula;
        this.docente = docente;
@@ -120,7 +129,7 @@ public class Segnalazione  implements java.io.Serializable {
     }
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="data", nullable=false, length=19)
+    @Column(name="data", length=19)
     public Date getData() {
         return this.data;
     }

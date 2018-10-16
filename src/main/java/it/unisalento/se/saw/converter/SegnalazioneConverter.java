@@ -64,24 +64,28 @@ public class SegnalazioneConverter {
 		return segnalazioneDto;
 	}
 	
-	public static Segnalazione dtoToDomain(SegnalazioneDto segnalazioneDto, List<Aula> aule, int idUtente, Date data ) {
+	public static Segnalazione dtoToDomain(SegnalazioneDto segnalazioneDto, List<Aula> aule, Date data ) {
 		Segnalazione segnalazione = new Segnalazione();
-		Iterator<Aula> aulaIterator = aule.iterator();
 		Aula aula = new Aula();
-		Utente utente = new Utente();
-		Docente docente = new Docente();
 		
-		while(aulaIterator.hasNext()){
-			Aula aulaList = aulaIterator.next();
-			if ((aulaList.getNome()).equals(segnalazioneDto.getNomeAula())){
-				aula.setIdaula(aulaList.getIdaula());
-				}
+		if(segnalazioneDto.getOggettoInteressato().equals("altro") && segnalazioneDto.getNomeAula().equals("altro")){
+			aula.setIdaula(1);
+			segnalazione.setAula(aula);
 		}
-		utente.setIdutente(idUtente);
-		docente.setUtente(utente);
+		else{
+			Iterator<Aula> aulaIterator = aule.iterator();		
+			while(aulaIterator.hasNext()){
+				Aula aulaList = aulaIterator.next();
+				if ((aulaList.getNome()).equals(segnalazioneDto.getNomeAula())){
+					aula.setIdaula(aulaList.getIdaula());
+					segnalazione.setAula(aula);
+				}
+			}
+		}
+		Docente docente = new Docente();
+		docente.setIddocente(1);
 		
 		segnalazione.setData(data);
-		segnalazione.setAula(aula);
 		segnalazione.setDocente(docente);
 		segnalazione.setStatoSegnalazione("attivo");
 		segnalazione.setMotivazione(segnalazioneDto.getMotivazione());
