@@ -1,6 +1,6 @@
 package it.unisalento.se.saw.converter;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -18,6 +18,7 @@ public class SegnalazioneConverter {
 		String docenteSegnalante = null;
 		Iterator<Aula> aulaIterator = aule.iterator();
 		Iterator<Docente> docenteIterator = docenti.iterator();
+		
 		
 		while (docenteIterator.hasNext()){
 			Docente docente = docenteIterator.next();
@@ -69,6 +70,7 @@ public class SegnalazioneConverter {
 		Aula aula = new Aula();
 		Utente utente = new Utente();
 		Docente docente = new Docente();
+		
 		while(aulaIterator.hasNext()){
 			Aula aulaList = aulaIterator.next();
 			if ((aulaList.getNome()).equals(segnalazioneDto.getNomeAula())){
@@ -78,16 +80,14 @@ public class SegnalazioneConverter {
 		utente.setIdutente(idUtente);
 		docente.setUtente(utente);
 		
-		segnalazione.setOggettoInteressato(segnalazioneDto.getOggettoInteressato());
-		segnalazione.setMotivazione(segnalazioneDto.getMotivazione());
+		segnalazione.setData(data);
 		segnalazione.setAula(aula);
 		segnalazione.setDocente(docente);
 		segnalazione.setStatoSegnalazione("attivo");
+		segnalazione.setMotivazione(segnalazioneDto.getMotivazione());
 		segnalazione.setDescrizione("La segnalazione è stata presa in carico.");
-		
-		segnalazione.setData(data);
-		
-		
+		segnalazione.setOggettoInteressato(segnalazioneDto.getOggettoInteressato());
+
 		return segnalazione;
 	}
 }

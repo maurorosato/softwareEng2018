@@ -22,7 +22,7 @@ public interface StrumentazioneRepository extends JpaRepository<Strumentazione, 
 	@Query("DELETE from Strumentazione WHERE idstrumentazione = :idStrumentazione")
 	void rimuoviStrumentazione(@Param("idStrumentazione") Integer id);	
 
-	@Query("SELECT stato FROM Strumentazione  WHERE aula_idaula = :idAula AND descrizione = :descrizione")
-	public List<Strumentazione> getValidateStrumentazioneOfSegnalazione(@Param("descrizione") String descrizione,@Param("idAula") Integer idAula);
+	@Query("SELECT COUNT(idstrumentazione) FROM Strumentazione WHERE aula_idaula = :idAula AND descrizione = :descrizione")
+	public int getValidateStrumentazioneOfSegnalazione(@Param("descrizione") String descrizione,@Param("idAula") Integer idAula);
 
 }

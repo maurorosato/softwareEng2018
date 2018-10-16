@@ -16,6 +16,7 @@ import it.unisalento.se.saw.Iservices.IDocenteService;
 import it.unisalento.se.saw.Iservices.IEventoService;
 import it.unisalento.se.saw.Iservices.IInsegnamentoService;
 import it.unisalento.se.saw.Iservices.ILezioneService;
+import it.unisalento.se.saw.Iservices.IPrenotazioneService;
 import it.unisalento.se.saw.Iservices.IUtenteService;
 import it.unisalento.se.saw.domain.AppelloEsame;
 import it.unisalento.se.saw.domain.Aula;
@@ -24,6 +25,7 @@ import it.unisalento.se.saw.domain.Docente;
 import it.unisalento.se.saw.domain.Evento;
 import it.unisalento.se.saw.domain.Insegnamento;
 import it.unisalento.se.saw.domain.Lezione;
+import it.unisalento.se.saw.domain.Prenotazione;
 import it.unisalento.se.saw.domain.Utente;
 import it.unisalento.se.saw.dto.EventoDto;
 import it.unisalento.se.saw.exceptions.AppelloEsameNotFoundException;
@@ -33,6 +35,7 @@ import it.unisalento.se.saw.exceptions.DocenteNotFoundException;
 import it.unisalento.se.saw.exceptions.EventoNotFoundException;
 import it.unisalento.se.saw.exceptions.InsegnamentoNotFoundException;
 import it.unisalento.se.saw.exceptions.LezioneNotFoundException;
+import it.unisalento.se.saw.exceptions.PrenotazioneNotFoundException;
 import it.unisalento.se.saw.exceptions.UtenteNotFoundException;
 
 @RestController()
@@ -63,6 +66,9 @@ public class EventoRestController {
 	@Autowired
 	IAppelloEsame appelloEsameService;
 	
+	@Autowired
+	IPrenotazioneService prenotazioneService;
+	
 	public EventoRestController() {
 		// TODO Auto-generated constructor stub
 		super();
@@ -73,7 +79,7 @@ public class EventoRestController {
 	}
 	
 	@RequestMapping(value="/getAll", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<EventoDto> getAll() throws EventoNotFoundException, AulaNotFoundException, LezioneNotFoundException, DocenteNotFoundException, CorsoDiStudioNotFoundException, InsegnamentoNotFoundException, UtenteNotFoundException, AppelloEsameNotFoundException {
+	public List<EventoDto> getAll() throws EventoNotFoundException, AulaNotFoundException, LezioneNotFoundException, DocenteNotFoundException, CorsoDiStudioNotFoundException, InsegnamentoNotFoundException, UtenteNotFoundException, AppelloEsameNotFoundException, PrenotazioneNotFoundException {
 		
 		List<EventoDto> eventiDto= new ArrayList<EventoDto>();
 		
@@ -81,13 +87,15 @@ public class EventoRestController {
 		Iterator<Evento> eventoIterator = eventi.iterator();
 
 		List<Aula> aule = aulaService.getAll();
-		List<CorsoDiStudio> corsi = (corsoDiStudioService.getAll());
-		List<Insegnamento> insegnamenti = (insegnamentoService.getAll());
-		List<Docente> docenti = (docenteService.getAll());
-		List<Lezione> lezioni = lezioneService.getAll();
-		List<AppelloEsame> appelli = appelloEsameService.getAll();
 		List<Utente> utenti = utenteService.getAll();
+		List<Lezione> lezioni = lezioneService.getAll();
+		List<Docente> docenti = (docenteService.getAll());
+		List<AppelloEsame> appelli = appelloEsameService.getAll();
+		List<CorsoDiStudio> corsi = (corsoDiStudioService.getAll());
+		List<Prenotazione> prenotazioni =prenotazioneService.getAll();
+		List<Insegnamento> insegnamenti = (insegnamentoService.getAll());
 		
+		java.util.Date sqlDate = null;
 		float numeroFloat = 0;
 		int idCorso = 0,idDocente = 0, idUtente = 0;
 		
@@ -125,6 +133,14 @@ public class EventoRestController {
 				Lezione lezione = lezioneIterator.next();
 				if (lezione.getEvento().getIdevento() == evento.getIdevento())
 					eventoDto.setGradimento(lezione.getGradimento());
+			}
+			
+			Iterator<Prenotazione> prenotazioneIterator = prenotazioni.iterator();
+			while (prenotazioneIterator.hasNext()){
+				Prenotazione prenotazione = prenotazioneIterator.next();
+				if (prenotazione.getIdprenotazione() == evento.getPrenotazione().getIdprenotazione())
+					sqlDate = prenotazione.getDataEvento();
+					eventoDto.setData(sqlDate.toString());
 			}
 			
 			Iterator<AppelloEsame> appelloIterator = appelli.iterator();

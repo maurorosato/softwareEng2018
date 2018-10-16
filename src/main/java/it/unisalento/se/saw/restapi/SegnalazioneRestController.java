@@ -2,6 +2,7 @@ package it.unisalento.se.saw.restapi;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -51,21 +52,33 @@ public class SegnalazioneRestController {
 	
 	
 	@PostMapping(value="save", consumes=MediaType.APPLICATION_JSON_VALUE)
-	public void post(@RequestBody SegnalazioneDto segnalazioneDto) throws ParseException, AulaNotFoundException{
+	public Segnalazione post(@RequestBody SegnalazioneDto segnalazioneDto) throws ParseException, AulaNotFoundException, DocenteNotFoundException{
 		
 		Segnalazione segnalazione;
 		List<Aula> aule = aulaService.getAll();
-		
 		java.util.Date date = new java.util.Date();
 		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-		segnalazione = SegnalazioneConverter.dtoToDomain(segnalazioneDto, aule, 14, sqlDate);
+		Date data=new Date();
+		data.setYear(2000);
+		data.setMonth(05);
+		data.setDate(05);
+	
+		segnalazione = SegnalazioneConverter.dtoToDomain(segnalazioneDto, aule, 1, data);
 		
-		segnalazioneService.save(segnalazione);
+		
+		System.out.println("data: "+segnalazione.getData());
+		System.out.println("descrizione "+segnalazione.getDescrizione());
+		System.out.println("idAULA: "+segnalazione.getAula().getIdaula());
+		System.out.println("statoSegnalazione: "+segnalazione.getStatoSegnalazione());
+		System.out.println("oggettoInteressato:" +segnalazione.getOggettoInteressato());
+		System.out.println("idUTENTE: "+segnalazione.getDocente().getUtente().getIdutente());
+		System.out.println("motivazione: "+segnalazione.getMotivazione());
+		
+		return segnalazioneService.save(segnalazione);
+
 	}
 	
-	
-	@RequestMapping (value="/getAll", method=RequestMethod.GET,
-			         produces=MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping (value="/getAll", method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<SegnalazioneDto> getAll() throws SegnalazioneNotFoundException, AulaNotFoundException, DocenteNotFoundException {
 		
 		List<SegnalazioneDto> segnalazioniDto= new ArrayList<SegnalazioneDto>();

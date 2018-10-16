@@ -23,6 +23,7 @@ public class SegnalazioneService implements ISegnalazioneService{
 	public List<Segnalazione> getAll() throws SegnalazioneNotFoundException {
 		return segnalazioneRepository.findAll();
 	}
+	
 	@Transactional
 	public Segnalazione save(Segnalazione segnalazione) {
 		return segnalazioneRepository.save(segnalazione);

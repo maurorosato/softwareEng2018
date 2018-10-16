@@ -1,5 +1,5 @@
 package it.unisalento.se.saw.domain;
-// Generated 26-set-2018 12.33.12 by Hibernate Tools 5.2.0.Final
+// Generated 16-ott-2018 0.43.39 by Hibernate Tools 5.2.0.Final
 
 
 import java.util.Date;
@@ -30,24 +30,21 @@ public class Prenotazione  implements java.io.Serializable {
 
      private Integer idprenotazione;
      private Docente docente;
-     private String orarioInizio;
      private Float durata;
-     private Date data;
+     private Date dataEvento;
      private Set<Evento> eventos = new HashSet<Evento>(0);
 
     public Prenotazione() {
     }
 
 	
-    public Prenotazione(Docente docente, Date data) {
+    public Prenotazione(Docente docente) {
         this.docente = docente;
-        this.data = data;
     }
-    public Prenotazione(Docente docente, String orarioInizio, Float durata, Date data, Set<Evento> eventos) {
+    public Prenotazione(Docente docente, Float durata, Date dataEvento, Set<Evento> eventos) {
        this.docente = docente;
-       this.orarioInizio = orarioInizio;
        this.durata = durata;
-       this.data = data;
+       this.dataEvento = dataEvento;
        this.eventos = eventos;
     }
    
@@ -74,16 +71,6 @@ public class Prenotazione  implements java.io.Serializable {
     }
 
     
-    @Column(name="orarioInizio", length=5)
-    public String getOrarioInizio() {
-        return this.orarioInizio;
-    }
-    
-    public void setOrarioInizio(String orarioInizio) {
-        this.orarioInizio = orarioInizio;
-    }
-
-    
     @Column(name="durata", precision=12, scale=0)
     public Float getDurata() {
         return this.durata;
@@ -93,14 +80,14 @@ public class Prenotazione  implements java.io.Serializable {
         this.durata = durata;
     }
 
-    @Temporal(TemporalType.DATE)
-    @Column(name="data", nullable=false, length=10)
-    public Date getData() {
-        return this.data;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="dataEvento", length=19)
+    public Date getDataEvento() {
+        return this.dataEvento;
     }
     
-    public void setData(Date data) {
-        this.data = data;
+    public void setDataEvento(Date dataEvento) {
+        this.dataEvento = dataEvento;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="prenotazione")

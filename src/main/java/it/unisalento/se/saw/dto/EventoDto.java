@@ -8,7 +8,7 @@ public class EventoDto {
 	private String descrizione;
 	private Float gradimento;
 	private String aula;
-	private Date data;
+	private String data;
 	private String insegnamento;
 	private String corso;
 	private String docente;
@@ -44,10 +44,10 @@ public class EventoDto {
 	public void setAula(String aula) {
 		this.aula = aula;
 	}
-	public Date getData() {
+	public String getData() {
 		return data;
 	}
-	public void setData(Date data) {
+	public void setData(String data) {
 		this.data = data;
 	}
 	public String getInsegnamento() {

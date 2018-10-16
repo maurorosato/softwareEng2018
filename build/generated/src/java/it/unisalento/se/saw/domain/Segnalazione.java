@@ -1,5 +1,5 @@
 package it.unisalento.se.saw.domain;
-// Generated 26-set-2018 12.33.12 by Hibernate Tools 5.2.0.Final
+// Generated 16-ott-2018 0.43.39 by Hibernate Tools 5.2.0.Final
 
 
 import java.util.Date;
@@ -31,20 +31,20 @@ public class Segnalazione  implements java.io.Serializable {
      private String oggettoInteressato;
      private String motivazione;
      private String statoSegnalazione;
-     private Date data;
      private String descrizione;
+     private Date data;
 
     public Segnalazione() {
     }
 
-    public Segnalazione(Aula aula, Docente docente, String oggettoInteressato, String motivazione, String statoSegnalazione, Date data, String descrizione) {
+    public Segnalazione(Aula aula, Docente docente, String oggettoInteressato, String motivazione, String statoSegnalazione, String descrizione, Date data) {
        this.aula = aula;
        this.docente = docente;
        this.oggettoInteressato = oggettoInteressato;
        this.motivazione = motivazione;
        this.statoSegnalazione = statoSegnalazione;
-       this.data = data;
        this.descrizione = descrizione;
+       this.data = data;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -109,16 +109,6 @@ public class Segnalazione  implements java.io.Serializable {
         this.statoSegnalazione = statoSegnalazione;
     }
 
-    @Temporal(TemporalType.DATE)
-    @Column(name="data", nullable=false, length=10)
-    public Date getData() {
-        return this.data;
-    }
-    
-    public void setData(Date data) {
-        this.data = data;
-    }
-
     
     @Column(name="descrizione", nullable=false)
     public String getDescrizione() {
@@ -127,6 +117,16 @@ public class Segnalazione  implements java.io.Serializable {
     
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
+    }
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="data", nullable=false, length=19)
+    public Date getData() {
+        return this.data;
+    }
+    
+    public void setData(Date data) {
+        this.data = data;
     }
 
 

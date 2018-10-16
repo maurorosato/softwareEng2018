@@ -39,7 +39,7 @@ public class StrumentazioneService implements IStrumentazioneService {
 	}
 	
 	@Override
-	public List<Strumentazione> getValidateStrumentazioneOfSegnalazione(String descrizione, int idAula) throws StrumentazioneNotFoundException {
+	public int getValidateStrumentazioneOfSegnalazione(String descrizione, int idAula) throws StrumentazioneNotFoundException {
 		return strumentazioneRepository.getValidateStrumentazioneOfSegnalazione(descrizione,idAula);
 	}
 }
