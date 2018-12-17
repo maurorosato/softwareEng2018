@@ -6,6 +6,7 @@ import java.util.List;
 import it.unisalento.se.saw.domain.Aula;
 import it.unisalento.se.saw.domain.Docente;
 import it.unisalento.se.saw.domain.Prenotazione;
+import it.unisalento.se.saw.dto.AulaDto;
 import it.unisalento.se.saw.dto.PrenotazioneDto;
 
 public class PrenotazioneConverter {
@@ -18,18 +19,25 @@ public class PrenotazioneConverter {
 		while (docenteIterator.hasNext()){
 			Docente docente = docenteIterator.next();
 			if(prenotazione.getDocente().getIddocente() == docente.getIddocente()){
-				docenteSegnalante = docente.getUtente().getNome() + ' ' + docente.getUtente().getCognome();
 			}
 		}
-
-		java.util.Date sqlDate = prenotazione.getDataEvento();
-		prenotazioneDto.setData(sqlDate.toString());
-		
-		prenotazioneDto.setIdPrenotazione(prenotazione.getIdprenotazione());
-		prenotazioneDto.setDurata(prenotazione.getDurata());
 		prenotazioneDto.setDocente(docenteSegnalante);
 		
 		return prenotazioneDto;
+	}
+	
+	public static Prenotazione dtoToDomain(PrenotazioneDto prenotazioneDto) {
+		Prenotazione prenotazione = new Prenotazione();
+		
+		Docente doc = new Docente();
+		doc.setIddocente(1);
+		
+		prenotazione.setDataInizio(prenotazioneDto.getDataInizio());
+		prenotazione.setDataFine(prenotazioneDto.getDataFine());
+		prenotazione.setDocente(doc);
+		
+		return prenotazione;
+		
 	}
 
 }

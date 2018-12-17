@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 import it.unisalento.se.saw.Iservices.IPrenotazioneService;
 import it.unisalento.se.saw.domain.Prenotazione;
 import it.unisalento.se.saw.exceptions.PrenotazioneNotFoundException;
@@ -19,5 +19,10 @@ public class PrenotazioneService implements IPrenotazioneService {
 	@Override
 	public List<Prenotazione> getAll() throws PrenotazioneNotFoundException {
 		return prenotazioneRepository.findAll();
+	}
+	
+	@Transactional
+	public Prenotazione save(Prenotazione prenotazione) {
+		return prenotazioneRepository.save(prenotazione);
 	}
 }

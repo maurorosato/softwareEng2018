@@ -5,10 +5,23 @@ public class InsegnamentoDto {
 	private int idInsegnamento;
 	private String nome;
 	private int cfu;
-	private String settoreScientificoDisciplinare;
 	private String corsoDiStudio;
+	private String annoCorso;
 	private String docente;
+	private int idUserDocente;
 	
+	public int getIdUserDocente() {
+		return idUserDocente;
+	}
+	public void setIdUserDocente(int idUserDocente) {
+		this.idUserDocente = idUserDocente;
+	}
+	public String getAnnoCorso() {
+		return annoCorso;
+	}
+	public void setAnnoCorso(String annoCorso) {
+		this.annoCorso = annoCorso;
+	}
 	public int getCfu() {
 		return cfu;
 	}
@@ -28,12 +41,6 @@ public class InsegnamentoDto {
 		this.nome = nome;
 	}
 	
-	public String getSettoreScientificoDisciplinare() {
-		return settoreScientificoDisciplinare;
-	}
-	public void setSettoreScientificoDisciplinare(String settoreScientificoDisciplinare) {
-		this.settoreScientificoDisciplinare = settoreScientificoDisciplinare;
-	}
 	public String getCorsoDiStudio() {
 		return corsoDiStudio;
 	}

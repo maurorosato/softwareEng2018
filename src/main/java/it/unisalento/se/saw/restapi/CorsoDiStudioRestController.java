@@ -62,7 +62,7 @@ public class CorsoDiStudioRestController {
 		
 		return corsoDiStudioService.save(corsoSave);
 	}
-	
+
 	@GetMapping(value="/getById/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
 	public CorsoDiStudioDto getById(@PathVariable("id") int id) throws CorsoDiStudioNotFoundException {
 		CorsoDiStudio corso=new CorsoDiStudio();

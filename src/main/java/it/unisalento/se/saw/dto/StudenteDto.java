@@ -13,6 +13,7 @@ public class StudenteDto {
 	private String nazione;
 	private String codiceFiscale;
 	private String matricola;
+	private int idCorsoDiStudio;
 	private String corsoDiStudio;
 	private String numeroTelefono;
 	
@@ -89,6 +90,11 @@ public class StudenteDto {
 	public void setCorsoDiStudio(String corsoDiStudio) {
 		this.corsoDiStudio = corsoDiStudio;
 	}
-	
-	
+
+	public int getIdCorsoDiStudio() {
+		return idCorsoDiStudio;
+	}
+	public void setIdCorsoDiStudio(int idCorsoDiStudio) {
+		this.idCorsoDiStudio = idCorsoDiStudio;
+	}
 }

@@ -1,5 +1,5 @@
 package it.unisalento.se.saw.domain;
-// Generated 16-ott-2018 20.20.47 by Hibernate Tools 5.2.0.Final
+// Generated 13-dic-2018 12.27.28 by Hibernate Tools 5.2.0.Final
 
 
 import javax.persistence.Column;
@@ -25,15 +25,24 @@ public class MaterialeDidattico  implements java.io.Serializable {
      private Integer idmaterialeDidattico;
      private Docente docente;
      private Lezione lezione;
-     private String tipologia;
+     private String nome;
+     private String link;
+     private Float gradimento;
 
     public MaterialeDidattico() {
     }
 
-    public MaterialeDidattico(Docente docente, Lezione lezione, String tipologia) {
+	
+    public MaterialeDidattico(Docente docente, Lezione lezione) {
+        this.docente = docente;
+        this.lezione = lezione;
+    }
+    public MaterialeDidattico(Docente docente, Lezione lezione, String nome, String link, Float gradimento) {
        this.docente = docente;
        this.lezione = lezione;
-       this.tipologia = tipologia;
+       this.nome = nome;
+       this.link = link;
+       this.gradimento = gradimento;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -69,13 +78,33 @@ public class MaterialeDidattico  implements java.io.Serializable {
     }
 
     
-    @Column(name="tipologia", nullable=false, length=45)
-    public String getTipologia() {
-        return this.tipologia;
+    @Column(name="nome", length=45)
+    public String getNome() {
+        return this.nome;
     }
     
-    public void setTipologia(String tipologia) {
-        this.tipologia = tipologia;
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    
+    @Column(name="link")
+    public String getLink() {
+        return this.link;
+    }
+    
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    
+    @Column(name="gradimento", precision=12, scale=0)
+    public Float getGradimento() {
+        return this.gradimento;
+    }
+    
+    public void setGradimento(Float gradimento) {
+        this.gradimento = gradimento;
     }
 
 

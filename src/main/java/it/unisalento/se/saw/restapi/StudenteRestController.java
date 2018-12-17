@@ -21,9 +21,7 @@ import it.unisalento.se.saw.domain.CorsoDiStudio;
 import it.unisalento.se.saw.domain.NumeroTelefono;
 import it.unisalento.se.saw.domain.Studente;
 import it.unisalento.se.saw.domain.Utente;
-import it.unisalento.se.saw.dto.AulaDto;
 import it.unisalento.se.saw.dto.StudenteDto;
-import it.unisalento.se.saw.exceptions.AulaNotFoundException;
 import it.unisalento.se.saw.exceptions.CorsoDiStudioNotFoundException;
 import it.unisalento.se.saw.exceptions.NumeroTelefonoNotFoundException;
 import it.unisalento.se.saw.exceptions.StudenteNotFoundException;
@@ -95,6 +93,7 @@ public class StudenteRestController {
 			studenteDto.setIndirizzo(stud.getIndirizzo());
 			studenteDto.setNazione(stud.getNazione());
 			studenteDto.setNumeroTelefono(numTelefono);
+			studenteDto.setIdCorsoDiStudio(idCorso);
 			studenteDto.setCorsoDiStudio(nomeCorso);
 			numTelefono = "- ";
 
@@ -142,6 +141,12 @@ public class StudenteRestController {
 		stud.setUtente(user);
 		
 		return studenteService.save(stud);
+	}
+	
+	@PostMapping(value="/signingUpInsegnamento", consumes=MediaType.APPLICATION_JSON_VALUE)
+	public void post(@RequestBody int idStudente, int idInsegnamento ){
+		
+		//studenteService.signingUpStudenteInsegnamento(idStudente,idInsegnamento);
 	}
 	
 	@PatchMapping (value = "/aggiornaStudente",consumes = MediaType.APPLICATION_JSON_VALUE)

@@ -1,5 +1,5 @@
 package it.unisalento.se.saw.domain;
-// Generated 16-ott-2018 20.20.47 by Hibernate Tools 5.2.0.Final
+// Generated 13-dic-2018 12.27.28 by Hibernate Tools 5.2.0.Final
 
 
 import java.util.HashSet;
@@ -29,6 +29,8 @@ public class Aula  implements java.io.Serializable {
      private String stato;
      private int capienza;
      private byte wifi;
+     private Double latitudine;
+     private Double longitudine;
      private Set<Segnalazione> segnalaziones = new HashSet<Segnalazione>(0);
      private Set<Strumentazione> strumentaziones = new HashSet<Strumentazione>(0);
      private Set<Evento> eventos = new HashSet<Evento>(0);
@@ -44,12 +46,14 @@ public class Aula  implements java.io.Serializable {
         this.capienza = capienza;
         this.wifi = wifi;
     }
-    public Aula(String nome, String edificio, String stato, int capienza, byte wifi, Set<Segnalazione> segnalaziones, Set<Strumentazione> strumentaziones, Set<Evento> eventos) {
+    public Aula(String nome, String edificio, String stato, int capienza, byte wifi, Double latitudine, Double longitudine, Set<Segnalazione> segnalaziones, Set<Strumentazione> strumentaziones, Set<Evento> eventos) {
        this.nome = nome;
        this.edificio = edificio;
        this.stato = stato;
        this.capienza = capienza;
        this.wifi = wifi;
+       this.latitudine = latitudine;
+       this.longitudine = longitudine;
        this.segnalaziones = segnalaziones;
        this.strumentaziones = strumentaziones;
        this.eventos = eventos;
@@ -115,6 +119,26 @@ public class Aula  implements java.io.Serializable {
     
     public void setWifi(byte wifi) {
         this.wifi = wifi;
+    }
+
+    
+    @Column(name="latitudine", precision=22, scale=0)
+    public Double getLatitudine() {
+        return this.latitudine;
+    }
+    
+    public void setLatitudine(Double latitudine) {
+        this.latitudine = latitudine;
+    }
+
+    
+    @Column(name="longitudine", precision=22, scale=0)
+    public Double getLongitudine() {
+        return this.longitudine;
+    }
+    
+    public void setLongitudine(Double longitudine) {
+        this.longitudine = longitudine;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="aula")

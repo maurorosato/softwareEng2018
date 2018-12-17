@@ -7,7 +7,8 @@ import it.unisalento.se.saw.exceptions.StudenteNotFoundException;
 
 
 public interface IStudenteService {
-	public List<Studente> getAll() throws StudenteNotFoundException;
-	public void aggiornaStudente(StudenteDto studenteDto) throws StudenteNotFoundException;
 	public Studente save(Studente studente);
+	public List<Studente> getAll() throws StudenteNotFoundException;
+	//public void signingUpStudenteInsegnamento(int idStudente, int idInsegnamento);
+	public void aggiornaStudente(StudenteDto studenteDto) throws StudenteNotFoundException;
 }

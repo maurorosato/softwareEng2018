@@ -1,5 +1,5 @@
 package it.unisalento.se.saw.domain;
-// Generated 16-ott-2018 20.20.47 by Hibernate Tools 5.2.0.Final
+// Generated 13-dic-2018 12.27.28 by Hibernate Tools 5.2.0.Final
 
 
 import java.util.HashSet;
@@ -37,6 +37,7 @@ public class Studente  implements java.io.Serializable {
      private String matricola;
      private int corsoDiStudioIdcorsoDiStudio;
      private Set<StudenteValutaLezione> studenteValutaLeziones = new HashSet<StudenteValutaLezione>(0);
+     private Set<Insegnamento> insegnamentos = new HashSet<Insegnamento>(0);
      private Set<Evento> eventos = new HashSet<Evento>(0);
      private Set<StudenteValutaMaterialeDidattico> studenteValutaMaterialeDidatticos = new HashSet<StudenteValutaMaterialeDidattico>(0);
 
@@ -51,7 +52,7 @@ public class Studente  implements java.io.Serializable {
         this.codiceFiscale = codiceFiscale;
         this.corsoDiStudioIdcorsoDiStudio = corsoDiStudioIdcorsoDiStudio;
     }
-    public Studente(Utente utente, String indirizzo, String nazione, String codiceFiscale, String matricola, int corsoDiStudioIdcorsoDiStudio, Set<StudenteValutaLezione> studenteValutaLeziones, Set<Evento> eventos, Set<StudenteValutaMaterialeDidattico> studenteValutaMaterialeDidatticos) {
+    public Studente(Utente utente, String indirizzo, String nazione, String codiceFiscale, String matricola, int corsoDiStudioIdcorsoDiStudio, Set<StudenteValutaLezione> studenteValutaLeziones, Set<Insegnamento> insegnamentos, Set<Evento> eventos, Set<StudenteValutaMaterialeDidattico> studenteValutaMaterialeDidatticos) {
        this.utente = utente;
        this.indirizzo = indirizzo;
        this.nazione = nazione;
@@ -59,6 +60,7 @@ public class Studente  implements java.io.Serializable {
        this.matricola = matricola;
        this.corsoDiStudioIdcorsoDiStudio = corsoDiStudioIdcorsoDiStudio;
        this.studenteValutaLeziones = studenteValutaLeziones;
+       this.insegnamentos = insegnamentos;
        this.eventos = eventos;
        this.studenteValutaMaterialeDidatticos = studenteValutaMaterialeDidatticos;
     }
@@ -142,6 +144,18 @@ public class Studente  implements java.io.Serializable {
     
     public void setStudenteValutaLeziones(Set<StudenteValutaLezione> studenteValutaLeziones) {
         this.studenteValutaLeziones = studenteValutaLeziones;
+    }
+
+@ManyToMany(fetch=FetchType.LAZY)
+    @JoinTable(name="studente_iscritto_insegnamento", catalog="mydb", joinColumns = { 
+        @JoinColumn(name="studente_idstudente", nullable=false, updatable=false) }, inverseJoinColumns = { 
+        @JoinColumn(name="insegnamento_idinsegnamento", nullable=false, updatable=false) })
+    public Set<Insegnamento> getInsegnamentos() {
+        return this.insegnamentos;
+    }
+    
+    public void setInsegnamentos(Set<Insegnamento> insegnamentos) {
+        this.insegnamentos = insegnamentos;
     }
 
 @ManyToMany(fetch=FetchType.LAZY)

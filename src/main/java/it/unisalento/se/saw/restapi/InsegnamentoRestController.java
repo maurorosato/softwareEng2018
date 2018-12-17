@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import it.unisalento.se.saw.Iservices.ICorsoDiStudioService;
 import it.unisalento.se.saw.Iservices.IDocenteService;
 import it.unisalento.se.saw.Iservices.IInsegnamentoService;
+import it.unisalento.se.saw.converter.InsegnamentoConverter;
 import it.unisalento.se.saw.domain.CorsoDiStudio;
 import it.unisalento.se.saw.domain.Docente;
 import it.unisalento.se.saw.domain.Insegnamento;
@@ -48,65 +49,86 @@ public class InsegnamentoRestController {
 	@RequestMapping(value="/getAll", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<InsegnamentoDto> getAll() throws InsegnamentoNotFoundException, CorsoDiStudioNotFoundException, DocenteNotFoundException {
 		List<InsegnamentoDto> insegnamentiDto= new ArrayList<InsegnamentoDto>();
+		
 		List<Insegnamento> insegnamenti = (insegnamentoService.getAll());
 		List<CorsoDiStudio> corsi = (corsoDiStudioService.getAll());
 		List<Docente> docenti = (docenteService.getAll());
 
-		
 		for(int i=0; i < insegnamenti.size(); i++){
 			InsegnamentoDto insegnamentoDto = new InsegnamentoDto();
 			
 			insegnamentoDto.setIdInsegnamento(insegnamenti.get(i).getIdinsegnamento());
 			insegnamentoDto.setNome(insegnamenti.get(i).getNome());
 			insegnamentoDto.setCfu(insegnamenti.get(i).getCfu());
-			insegnamentoDto.setSettoreScientificoDisciplinare(insegnamenti.get(i).getSettoreScientificoDisciplinare());
 			
 			for (int j=0; j < corsi.size(); j++){
 				if(insegnamenti.get(i).getCorsoDiStudioIdcorsoDiStudio() == corsi.get(j).getIdcorsoDiStudio()){
 					insegnamentoDto.setCorsoDiStudio(corsi.get(j).getNomeCorso());
 				}
-			}
-			
+			}		
 			for (int t=0; t < docenti.size(); t++){
 				if(insegnamenti.get(i).getDocente().getIddocente() == docenti.get(t).getIddocente()){
 					insegnamentoDto.setDocente(docenti.get(t).getUtente().getNome() +" "+ docenti.get(t).getUtente().getCognome() );
 				}
 			}
 			
-			insegnamentiDto.add(i, insegnamentoDto);
-			
+			insegnamentiDto.add(i, insegnamentoDto);	
 		}
 		return insegnamentiDto;
 	}
 	
+	@RequestMapping(value="/getAllInsegnamentiCorso/{idCorso}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<InsegnamentoDto> getAllInsegnamentiCorso(@PathVariable("idCorso") int idCorso) throws InsegnamentoNotFoundException, CorsoDiStudioNotFoundException, DocenteNotFoundException {
+		List<InsegnamentoDto> insegnamentiDto= new ArrayList<InsegnamentoDto>();
+		List<CorsoDiStudio> corsi = corsoDiStudioService.getAll();
+		List<Docente> docenti = docenteService.getAll();
+		
+		List<Insegnamento> insegnamenti = insegnamentoService.getAllInsegnamentiCorso(idCorso);
+		for(int i=0; i < insegnamenti.size(); i++){
+			InsegnamentoDto insegnamentoDto = new InsegnamentoDto();
+			
+			switch (insegnamenti.get(i).getAnno()){
+			case 1:
+				insegnamentoDto.setAnnoCorso("Primo anno");
+				break;	
+			case 2:
+				insegnamentoDto.setAnnoCorso("Secondo anno");
+				break;
+			case 3:
+				insegnamentoDto.setAnnoCorso("Terzo anno");
+				break;
+			}
+				
+			insegnamentoDto.setIdInsegnamento(insegnamenti.get(i).getIdinsegnamento());
+			insegnamentoDto.setNome(insegnamenti.get(i).getNome());
+			insegnamentoDto.setCfu(insegnamenti.get(i).getCfu());
+			
+			for (int j=0; j < corsi.size(); j++){
+				if(insegnamenti.get(i).getCorsoDiStudioIdcorsoDiStudio() == corsi.get(j).getIdcorsoDiStudio()){
+					insegnamentoDto.setCorsoDiStudio(corsi.get(j).getNomeCorso());
+				}
+			}		
+			for (int t=0; t < docenti.size(); t++){
+				if(insegnamenti.get(i).getDocente().getIddocente() == docenti.get(t).getIddocente()){
+					insegnamentoDto.setDocente(docenti.get(t).getUtente().getNome() +" "+ docenti.get(t).getUtente().getCognome() );
+					insegnamentoDto.setIdUserDocente(docenti.get(t).getUtente().getIdutente());
+				}
+			}
+			
+			insegnamentiDto.add(i, insegnamentoDto);	
+		}
+		
+		return insegnamentiDto;
+	}
 	
 	@PostMapping(value="save", consumes=MediaType.APPLICATION_JSON_VALUE)
 	public void post(@RequestBody InsegnamentoDto insegnamentoDto) throws CorsoDiStudioNotFoundException, DocenteNotFoundException{
 		
 		List<CorsoDiStudio> corsi = (corsoDiStudioService.getAll());
 		List<Docente> docenti = (docenteService.getAll());
-		
 		Insegnamento insegnamento = new Insegnamento();
-		Docente docente = new Docente();
-		
-		insegnamento.setNome(insegnamentoDto.getNome());
-		insegnamento.setCfu(insegnamentoDto.getCfu());
-		insegnamento.setSettoreScientificoDisciplinare(insegnamentoDto.getSettoreScientificoDisciplinare());
 
-		for (int i=0; i < docenti.size(); i++){
-			if((docenti.get(i).getUtente().getNome()+" "+docenti.get(i).getUtente().getCognome()).equals(insegnamentoDto.getDocente())){
-				docente.setIddocente(docenti.get(i).getIddocente());
-			}
-		}
-		
-		for (int j=0; j < corsi.size(); j++){
-			if((corsi.get(j).getNomeCorso()).equals(insegnamentoDto.getCorsoDiStudio())){
-				insegnamento.setCorsoDiStudioIdcorsoDiStudio(corsi.get(j).getIdcorsoDiStudio());
-			}
-		}
-		insegnamento.setDocente(docente);
-		
-		
+		insegnamento = InsegnamentoConverter.dtoToDomain(insegnamentoDto, docenti, corsi);
 		insegnamentoService.save(insegnamento);
 	}
 	

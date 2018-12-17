@@ -14,5 +14,6 @@ public interface CorsoDiStudioRepository extends JpaRepository<CorsoDiStudio, In
 	@Transactional
 	@Query("DELETE from CorsoDiStudio WHERE idcorsoDiStudio = :idCorso")
 	void rimuoviCorsoDiStudio(@Param("idCorso") Integer id);
+
 }
 

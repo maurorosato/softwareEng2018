@@ -1,29 +1,59 @@
 package it.unisalento.se.saw.dto;
 
+import java.sql.Date;
+
 public class PrenotazioneDto {
 	
-	int idPrenotazione;
-	float durata;
-	String data;
-	String docente;
-	
-	public int getIdPrenotazione() {
-		return idPrenotazione;
+    int idprenotazione;
+	String esameOrLezione;
+    String tipologiaEsame;
+    String descrizioneEsame;
+    Date dataInizio;
+    Date dataFine;
+    String insegnamento;
+    String docente;
+    
+    public int getIdprenotazione() {
+		return idprenotazione;
 	}
-	public void setIdPrenotazione(int idPrenotazione) {
-		this.idPrenotazione = idPrenotazione;
+	public void setIdprenotazione(int idprenotazione) {
+		this.idprenotazione = idprenotazione;
 	}
-	public float getDurata() {
-		return durata;
+	public String getEsameOrLezione() {
+		return esameOrLezione;
 	}
-	public void setDurata(float durata) {
-		this.durata = durata;
+	public void setEsameOrLezione(String esameOrLezione) {
+		this.esameOrLezione = esameOrLezione;
 	}
-	public String getData() {
-		return data;
+	public String getTipologiaEsame() {
+		return tipologiaEsame;
 	}
-	public void setData(String data) {
-		this.data = data;
+	public void setTipologiaEsame(String tipologiaEsame) {
+		this.tipologiaEsame = tipologiaEsame;
+	}
+	public String getDescrizioneEsame() {
+		return descrizioneEsame;
+	}
+	public void setDescrizioneEsame(String descrizioneEsame) {
+		this.descrizioneEsame = descrizioneEsame;
+	}
+	public Date getDataInizio() {
+		return dataInizio;
+	}
+	public void setDataInizio(Date dataInizio) {
+		this.dataInizio = dataInizio;
+	}
+	public Date getDataFine() {
+		return dataFine;
+	}
+	public void setDataFine(Date dataFine) {
+		this.dataFine = dataFine;
+	}
+	public String getInsegnamento() {
+		return insegnamento;
+	}
+	public void setInsegnamento(String insegnamento) {
+		this.insegnamento = insegnamento;
 	}
 	public String getDocente() {
 		return docente;
@@ -31,6 +61,5 @@ public class PrenotazioneDto {
 	public void setDocente(String docente) {
 		this.docente = docente;
 	}
-
-
+    
 }

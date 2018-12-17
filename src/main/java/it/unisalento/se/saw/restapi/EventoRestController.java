@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.unisalento.se.saw.Iservices.IAppelloEsame;
+import it.unisalento.se.saw.Iservices.IAppelloEsameService;
 import it.unisalento.se.saw.Iservices.IAulaService;
 import it.unisalento.se.saw.Iservices.ICorsoDiStudioService;
 import it.unisalento.se.saw.Iservices.IDocenteService;
@@ -18,6 +20,7 @@ import it.unisalento.se.saw.Iservices.IInsegnamentoService;
 import it.unisalento.se.saw.Iservices.ILezioneService;
 import it.unisalento.se.saw.Iservices.IPrenotazioneService;
 import it.unisalento.se.saw.Iservices.IUtenteService;
+import it.unisalento.se.saw.converter.EventoConverter;
 import it.unisalento.se.saw.domain.AppelloEsame;
 import it.unisalento.se.saw.domain.Aula;
 import it.unisalento.se.saw.domain.CorsoDiStudio;
@@ -64,7 +67,7 @@ public class EventoRestController {
 	IUtenteService utenteService;
 	
 	@Autowired
-	IAppelloEsame appelloEsameService;
+	IAppelloEsameService appelloEsameService;
 	
 	@Autowired
 	IPrenotazioneService prenotazioneService;
@@ -95,14 +98,14 @@ public class EventoRestController {
 		List<Prenotazione> prenotazioni =prenotazioneService.getAll();
 		List<Insegnamento> insegnamenti = (insegnamentoService.getAll());
 		
-		java.util.Date sqlDate = null;
 		float numeroFloat = 0;
 		int idCorso = 0,idDocente = 0, idUtente = 0;
 		
 		while (eventoIterator.hasNext()){
 			Evento evento = eventoIterator.next();
-			EventoDto eventoDto = new EventoDto();
+			EventoDto eventoDto = EventoConverter.domainToDto(evento, aule, utenti, lezioni, docenti, appelli, corsi, prenotazioni, insegnamenti);
 			
+/*			
 			eventoDto.setIdEvento(evento.getIdevento());
 			eventoDto.setDescrizione(evento.getDescrizione());
 			eventoDto.setGradimento(numeroFloat);
@@ -138,9 +141,9 @@ public class EventoRestController {
 			Iterator<Prenotazione> prenotazioneIterator = prenotazioni.iterator();
 			while (prenotazioneIterator.hasNext()){
 				Prenotazione prenotazione = prenotazioneIterator.next();
-				if (prenotazione.getIdprenotazione() == evento.getPrenotazione().getIdprenotazione())
-					sqlDate = prenotazione.getDataEvento();
-					eventoDto.setData(sqlDate.toString());
+				if (prenotazione.getIdprenotazione() == evento.getPrenotazione().getIdprenotazione()){
+					
+				}
 			}
 			
 			Iterator<AppelloEsame> appelloIterator = appelli.iterator();
@@ -160,6 +163,7 @@ public class EventoRestController {
 			while (utenteIterator.hasNext()){
 				Utente utente = utenteIterator.next();
 				if (utente.getIdutente() == idUtente)
+					eventoDto.setIdUtente(idUtente);
 					eventoDto.setDocente(utente.getNome() + " " + utente.getCognome());
 			}
 			
@@ -167,58 +171,23 @@ public class EventoRestController {
 				eventoDto.setImage("examsIcon.png");
 			else
 				eventoDto.setImage("lessonsIcon.png");
-			
+*/			
 		 eventiDto.add(eventoDto);
 		}
 	return eventiDto;
 	}
-}
-		/*
-		for (int i=0; i < eventi.size(); i++){
-			EventoDto eventoDto = new EventoDto();
-			eventoDto.setIdEvento(eventi.get(i).getIdevento());
-			eventoDto.setDescrizione(eventi.get(i).getDescrizione());
-			eventoDto.setGradimento(numeroFloat);
-			eventoDto.setData(eventi.get(i).getData());
-
-			for (int j=0; j < aule.size(); j++){
-				if( aule.get(j).getIdaula() == eventi.get(i).getAula().getIdaula()){
-					eventoDto.setAula(aule.get(j).getNome());
-				}
-			}
-			for (int t=0; t < insegnamenti.size(); t++){
-				if( insegnamenti.get(t).getIdinsegnamento() == eventi.get(i).getInsegnamento().getIdinsegnamento()){
-					eventoDto.setInsegnamento(insegnamenti.get(t).getNome());
-					idCorso = insegnamenti.get(t).getCorsoDiStudioIdcorsoDiStudio();
-					idDocente= insegnamenti.get(t).getDocente().getIddocente();
-				}
-			}
-			for (int z=0; z < corsi.size(); z++){
-				if(corsi.get(z).getIdcorsoDiStudio() == idCorso){
-					eventoDto.setCorso(corsi.get(z).getNomeCorso());
-				}
-			}
-			for (int y=0; y < lezioni.size(); y++){
-				if (lezioni.get(y).getEvento().getIdevento() == eventoDto.getIdEvento()){
-					eventoDto.setGradimento(lezioni.get(y).getGradimento());
-				}
-			}
-			for (int r=0; r < docenti.size(); r++){
-				if (docenti.get(r).getIddocente() == idDocente){
-					idUtente = docenti.get(r).getUtente().getIdutente();
-				}
-			}
-			for (int s=0; s < utenti.size(); s++){
-				if(utenti.get(s).getIdutente() == idUtente){
-					eventoDto.setDocente(utenti.get(s).getNome()+ " "+ utenti.get(s).getCognome());
-				}
-			}
-		
-			if(eventoDto.getGradimento() == 0)
-				eventoDto.setImage("examsIcon.png");
-			else
-				eventoDto.setImage("lessonsIcon.png");
-			eventiDto.add(i, eventoDto);
+	
+	@PatchMapping (value = "/modificaEventoAulaDisponibile",consumes = MediaType.APPLICATION_JSON_VALUE)
+	public void modificaEventoAulaDisponibile(@RequestBody EventoDto eventoDto) throws AulaNotFoundException, LezioneNotFoundException, AppelloEsameNotFoundException, EventoNotFoundException {
+		switch(eventoDto.getLezioneOrEsame()){
+			case "lezione" :
+				Lezione lezione = lezioneService.getById(eventoDto.getIdEvento());
+				eventoService.modificaEventoAuladisponibile(lezione.getEvento().getIdevento(),eventoDto.getIdAula());
+				break;
+			case "esame" :
+				AppelloEsame appelloEsame = appelloEsameService.getById(eventoDto.getIdEvento());
+				eventoService.modificaEventoAuladisponibile(appelloEsame.getEvento().getIdevento(),eventoDto.getIdAula());
+				break;
 		}
-		*/
-
+	}
+}

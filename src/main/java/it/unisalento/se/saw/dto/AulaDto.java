@@ -7,9 +7,23 @@ public class AulaDto {
 	private String edificio;
 	private String nome;
 	private String stato;
-	private Integer capienza;
 	private boolean wifi;
+	private Integer capienza;
+	private Double latitudine;
+	private Double longitudine;
 	
+	public Double getLatitudine() {
+		return latitudine;
+	}
+	public void setLatitudine(Double latitudine) {
+		this.latitudine = latitudine;
+	}
+	public Double getLongitudine() {
+		return longitudine;
+	}
+	public void setLongitudine(Double longitudine) {
+		this.longitudine = longitudine;
+	}
 	public boolean isWifi() {
 		return wifi;
 	}

@@ -32,5 +32,8 @@ public class StudenteService implements IStudenteService {
 	public void aggiornaStudente(StudenteDto studenteDto) throws StudenteNotFoundException {
 		studenteRepository.aggiornaStudente(studenteDto.getIdStudente(),studenteDto.getIndirizzo());
 	}
+	//public void signingUpInsegnamento(int idStudente, int idInsegnamento){
+	//	studenteRepository.signingUpStudenteInsegnamento(idStudente,idInsegnamento);
+	//}
 
 }

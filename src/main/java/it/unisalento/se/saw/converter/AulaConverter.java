@@ -12,6 +12,8 @@ public class AulaConverter {
 		aulaDto.setNome(aula.getNome());
 		aulaDto.setCapienza(aula.getCapienza());
 		aulaDto.setStato(aula.getStato());
+		aulaDto.setLatitudine(aula.getLatitudine());
+		aulaDto.setLongitudine(aula.getLongitudine());
 		if(aula.getWifi()==0)
 			aulaDto.setWifi(false);
 		else

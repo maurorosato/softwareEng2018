@@ -23,6 +23,12 @@ public class InsegnamentoService implements IInsegnamentoService {
 	public List<Insegnamento> getAll() throws InsegnamentoNotFoundException {
 		return insegnamentoRepository.findAll();
 	}
+	
+	@Override
+	public List<Insegnamento> getAllInsegnamentiCorso(int idCorso) throws InsegnamentoNotFoundException {
+		return insegnamentoRepository.getAllInsegnamentiCorso(idCorso);
+	}
+	
 	@Transactional
 	public Insegnamento save(Insegnamento insegnamento) {
 		return insegnamentoRepository.save(insegnamento);

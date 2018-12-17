@@ -13,5 +13,5 @@ public interface StudenteRepository extends JpaRepository<Studente, Integer>{
 	@Transactional
 	@Query("UPDATE Studente SET indirizzo = :indirizzo  WHERE idStudente = :idStudente")
 	void aggiornaStudente(@Param("idStudente") Integer idStudente,@Param("indirizzo") String indirizzo );
-
+	
 }

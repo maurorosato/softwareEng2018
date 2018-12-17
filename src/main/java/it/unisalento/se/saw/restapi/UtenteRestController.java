@@ -44,7 +44,7 @@ public class UtenteRestController {
 	public List<UtenteDto> getAll() throws UtenteNotFoundException {
 		List<Utente> utenti = utenteService.getAll();
 		List<UtenteDto> utentiDto= new ArrayList<UtenteDto>();
-		//utenti = (utenteService.getAll());
+
 		Utente utente = new Utente();
 		for(int i=0;i<utenti.size();i++) {
 			UtenteDto utenteDto = new UtenteDto();
@@ -66,20 +66,4 @@ public class UtenteRestController {
 		utenteDto.setCognome(utente.getCognome());
 		return utenteDto;
 	}
-	
-	/*
-	@PostMapping(value="save", consumes=MediaType.APPLICATION_JSON_VALUE)
-	public Utente post(@RequestBody Utente utente) throws UtenteNotFoundException, ParseException {
-		Utente user = new Utente();
-		user.setNome("inserimento1");
-		user.setCognome("inserimento2");
-		user.setEmail("prova");
-		user.setIdOrigin(0);
-		user.setPassword("pass");
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
-		Date date = (Date) formatter.parse("2012-02-02");
-		user.setDataNascita(date);
-		return utenteService.save(user);
-	}
-	*/
 }

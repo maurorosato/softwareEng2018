@@ -58,10 +58,6 @@ public class SegnalazioneRestController {
 		List<Aula> aule = aulaService.getAll();
 		java.util.Date date = new java.util.Date();
 		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-		//Date data=new Date();
-		//data.setYear(2000);
-		//data.setMonth(05);
-		//data.setDate(05);
 
 		segnalazione = SegnalazioneConverter.dtoToDomain(segnalazioneDto, aule, sqlDate);
 		

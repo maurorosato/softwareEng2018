@@ -1,5 +1,5 @@
 package it.unisalento.se.saw.domain;
-// Generated 16-ott-2018 20.20.47 by Hibernate Tools 5.2.0.Final
+// Generated 13-dic-2018 12.27.28 by Hibernate Tools 5.2.0.Final
 
 
 import java.util.HashSet;
@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -29,28 +31,29 @@ public class Insegnamento  implements java.io.Serializable {
      private Docente docente;
      private String nome;
      private int cfu;
-     private String settoreScientificoDisciplinare;
+     private Integer anno;
      private int corsoDiStudioIdcorsoDiStudio;
      private Set<Evento> eventos = new HashSet<Evento>(0);
+     private Set<Studente> studentes = new HashSet<Studente>(0);
 
     public Insegnamento() {
     }
 
 	
-    public Insegnamento(Docente docente, String nome, int cfu, String settoreScientificoDisciplinare, int corsoDiStudioIdcorsoDiStudio) {
+    public Insegnamento(Docente docente, String nome, int cfu, int corsoDiStudioIdcorsoDiStudio) {
         this.docente = docente;
         this.nome = nome;
         this.cfu = cfu;
-        this.settoreScientificoDisciplinare = settoreScientificoDisciplinare;
         this.corsoDiStudioIdcorsoDiStudio = corsoDiStudioIdcorsoDiStudio;
     }
-    public Insegnamento(Docente docente, String nome, int cfu, String settoreScientificoDisciplinare, int corsoDiStudioIdcorsoDiStudio, Set<Evento> eventos) {
+    public Insegnamento(Docente docente, String nome, int cfu, Integer anno, int corsoDiStudioIdcorsoDiStudio, Set<Evento> eventos, Set<Studente> studentes) {
        this.docente = docente;
        this.nome = nome;
        this.cfu = cfu;
-       this.settoreScientificoDisciplinare = settoreScientificoDisciplinare;
+       this.anno = anno;
        this.corsoDiStudioIdcorsoDiStudio = corsoDiStudioIdcorsoDiStudio;
        this.eventos = eventos;
+       this.studentes = studentes;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -96,13 +99,13 @@ public class Insegnamento  implements java.io.Serializable {
     }
 
     
-    @Column(name="settoreScientificoDisciplinare", nullable=false, length=45)
-    public String getSettoreScientificoDisciplinare() {
-        return this.settoreScientificoDisciplinare;
+    @Column(name="anno")
+    public Integer getAnno() {
+        return this.anno;
     }
     
-    public void setSettoreScientificoDisciplinare(String settoreScientificoDisciplinare) {
-        this.settoreScientificoDisciplinare = settoreScientificoDisciplinare;
+    public void setAnno(Integer anno) {
+        this.anno = anno;
     }
 
     
@@ -122,6 +125,18 @@ public class Insegnamento  implements java.io.Serializable {
     
     public void setEventos(Set<Evento> eventos) {
         this.eventos = eventos;
+    }
+
+@ManyToMany(fetch=FetchType.LAZY)
+    @JoinTable(name="studente_iscritto_insegnamento", catalog="mydb", joinColumns = { 
+        @JoinColumn(name="insegnamento_idinsegnamento", nullable=false, updatable=false) }, inverseJoinColumns = { 
+        @JoinColumn(name="studente_idstudente", nullable=false, updatable=false) })
+    public Set<Studente> getStudentes() {
+        return this.studentes;
+    }
+    
+    public void setStudentes(Set<Studente> studentes) {
+        this.studentes = studentes;
     }
 
 

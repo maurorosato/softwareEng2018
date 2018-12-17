@@ -1,14 +1,17 @@
 package it.unisalento.se.saw.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import it.unisalento.se.saw.Iservices.IAulaService;
 import it.unisalento.se.saw.domain.Aula;
 import it.unisalento.se.saw.dto.AulaDto;
+import it.unisalento.se.saw.dto.EventoDto;
 import it.unisalento.se.saw.exceptions.AulaNotFoundException;
 import it.unisalento.se.saw.exceptions.StrumentazioneNotFoundException;
 import it.unisalento.se.saw.repositories.AulaRepository;
@@ -41,7 +44,18 @@ public class AulaService implements IAulaService {
 	}
 	
 	@Override
+	public void localizzaAula(AulaDto aulaDto) throws AulaNotFoundException {
+		aulaRepository.localizzaAula(aulaDto.getIdaula(),aulaDto.getLatitudine(),aulaDto.getLongitudine());
+	}
+	
+	@Override
 	public void rimuoviAula(int idAula) throws AulaNotFoundException {
 		aulaRepository.rimuoviAula(idAula);
 	}
+
+	@Override
+	public List<Aula> getAuleLibere(Date dataInizio, Date dataFine) throws AulaNotFoundException{
+		return aulaRepository.getAuleLibere(dataInizio, dataFine);
+	}
+
 }
