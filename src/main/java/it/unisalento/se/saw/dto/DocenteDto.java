@@ -5,11 +5,11 @@ public class DocenteDto {
 
 	private int idDocente;
 	private String nome;
+	private String email;
+	private String grado;
 	private String cognome;
 	private String password;
 	private float stipendio;
-	private String email;
-	private String grado;
 	private Date dataNascita;
 	private Integer idOrigin;
 	private String numeroTelefono;

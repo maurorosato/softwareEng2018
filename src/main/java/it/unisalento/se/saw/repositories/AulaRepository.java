@@ -19,6 +19,11 @@ public interface AulaRepository extends JpaRepository<Aula, Integer>{
 	
 	@Modifying
 	@Transactional
+	@Query("UPDATE Aula SET wifi = :wifi WHERE idaula = :idaula")
+	void aggiornaStatoAula(@Param("idaula") Integer id, @Param("wifi") byte wifi);
+	
+	@Modifying
+	@Transactional
 	@Query("UPDATE Aula SET latitudine = :latitudine, longitudine = :longitudine  WHERE idaula = :idaula")
 	void localizzaAula(@Param("idaula") Integer id, @Param("latitudine") double latitudine,@Param("longitudine") double longitudine);
 	

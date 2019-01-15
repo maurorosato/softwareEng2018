@@ -1,5 +1,5 @@
 package it.unisalento.se.saw.domain;
-// Generated 13-dic-2018 12.27.28 by Hibernate Tools 5.2.0.Final
+// Generated 10-gen-2019 15.32.49 by Hibernate Tools 5.2.0.Final
 
 
 import javax.persistence.Column;
@@ -27,7 +27,6 @@ public class MaterialeDidattico  implements java.io.Serializable {
      private Lezione lezione;
      private String nome;
      private String link;
-     private Float gradimento;
 
     public MaterialeDidattico() {
     }
@@ -37,12 +36,11 @@ public class MaterialeDidattico  implements java.io.Serializable {
         this.docente = docente;
         this.lezione = lezione;
     }
-    public MaterialeDidattico(Docente docente, Lezione lezione, String nome, String link, Float gradimento) {
+    public MaterialeDidattico(Docente docente, Lezione lezione, String nome, String link) {
        this.docente = docente;
        this.lezione = lezione;
        this.nome = nome;
        this.link = link;
-       this.gradimento = gradimento;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -95,16 +93,6 @@ public class MaterialeDidattico  implements java.io.Serializable {
     
     public void setLink(String link) {
         this.link = link;
-    }
-
-    
-    @Column(name="gradimento", precision=12, scale=0)
-    public Float getGradimento() {
-        return this.gradimento;
-    }
-    
-    public void setGradimento(Float gradimento) {
-        this.gradimento = gradimento;
     }
 
 

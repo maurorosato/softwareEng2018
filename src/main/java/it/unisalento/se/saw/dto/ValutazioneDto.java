@@ -1,15 +1,24 @@
 package it.unisalento.se.saw.dto;
 
 public class ValutazioneDto {
-	int id;
+	int idValutazione;
+	float valutazione;
 	int idStudente;
-	String oggettoInteressato;
+	int idLezione;
+	int idMaterialeDidattico;
+	String nota;
 	
-	public int getId() {
-		return id;
+	public int getIdValutazione() {
+		return idValutazione;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setIdValutazione(int idValutazione) {
+		this.idValutazione = idValutazione;
+	}
+	public float getValutazione() {
+		return valutazione;
+	}
+	public void setValutazione(float valutazione) {
+		this.valutazione = valutazione;
 	}
 	public int getIdStudente() {
 		return idStudente;
@@ -17,10 +26,24 @@ public class ValutazioneDto {
 	public void setIdStudente(int idStudente) {
 		this.idStudente = idStudente;
 	}
-	public String getOggettoInteressato() {
-		return oggettoInteressato;
+	public int getIdLezione() {
+		return idLezione;
 	}
-	public void setOggettoInteressato(String oggettoInteressato) {
-		this.oggettoInteressato = oggettoInteressato;
+	public void setIdLezione(int idLezione) {
+		this.idLezione = idLezione;
 	}
+	public int getIdMaterialeDidattico() {
+		return idMaterialeDidattico;
+	}
+	public void setIdMaterialeDidattico(int idMaterialeDidattico) {
+		this.idMaterialeDidattico = idMaterialeDidattico;
+	}
+	public String getNota() {
+		return nota;
+	}
+	public void setNota(String nota) {
+		this.nota = nota;
+	}
+	
+	
 }

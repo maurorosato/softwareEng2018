@@ -1,5 +1,5 @@
 package it.unisalento.se.saw.domain;
-// Generated 13-dic-2018 12.27.28 by Hibernate Tools 5.2.0.Final
+// Generated 10-gen-2019 15.32.49 by Hibernate Tools 5.2.0.Final
 
 
 import java.util.HashSet;
@@ -36,10 +36,9 @@ public class Studente  implements java.io.Serializable {
      private String codiceFiscale;
      private String matricola;
      private int corsoDiStudioIdcorsoDiStudio;
-     private Set<StudenteValutaLezione> studenteValutaLeziones = new HashSet<StudenteValutaLezione>(0);
-     private Set<Insegnamento> insegnamentos = new HashSet<Insegnamento>(0);
+     private Set<Iscrizione> iscriziones = new HashSet<Iscrizione>(0);
      private Set<Evento> eventos = new HashSet<Evento>(0);
-     private Set<StudenteValutaMaterialeDidattico> studenteValutaMaterialeDidatticos = new HashSet<StudenteValutaMaterialeDidattico>(0);
+     private Set<Valutazione> valutaziones = new HashSet<Valutazione>(0);
 
     public Studente() {
     }
@@ -52,17 +51,16 @@ public class Studente  implements java.io.Serializable {
         this.codiceFiscale = codiceFiscale;
         this.corsoDiStudioIdcorsoDiStudio = corsoDiStudioIdcorsoDiStudio;
     }
-    public Studente(Utente utente, String indirizzo, String nazione, String codiceFiscale, String matricola, int corsoDiStudioIdcorsoDiStudio, Set<StudenteValutaLezione> studenteValutaLeziones, Set<Insegnamento> insegnamentos, Set<Evento> eventos, Set<StudenteValutaMaterialeDidattico> studenteValutaMaterialeDidatticos) {
+    public Studente(Utente utente, String indirizzo, String nazione, String codiceFiscale, String matricola, int corsoDiStudioIdcorsoDiStudio, Set<Iscrizione> iscriziones, Set<Evento> eventos, Set<Valutazione> valutaziones) {
        this.utente = utente;
        this.indirizzo = indirizzo;
        this.nazione = nazione;
        this.codiceFiscale = codiceFiscale;
        this.matricola = matricola;
        this.corsoDiStudioIdcorsoDiStudio = corsoDiStudioIdcorsoDiStudio;
-       this.studenteValutaLeziones = studenteValutaLeziones;
-       this.insegnamentos = insegnamentos;
+       this.iscriziones = iscriziones;
        this.eventos = eventos;
-       this.studenteValutaMaterialeDidatticos = studenteValutaMaterialeDidatticos;
+       this.valutaziones = valutaziones;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -138,24 +136,12 @@ public class Studente  implements java.io.Serializable {
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="studente")
-    public Set<StudenteValutaLezione> getStudenteValutaLeziones() {
-        return this.studenteValutaLeziones;
+    public Set<Iscrizione> getIscriziones() {
+        return this.iscriziones;
     }
     
-    public void setStudenteValutaLeziones(Set<StudenteValutaLezione> studenteValutaLeziones) {
-        this.studenteValutaLeziones = studenteValutaLeziones;
-    }
-
-@ManyToMany(fetch=FetchType.LAZY)
-    @JoinTable(name="studente_iscritto_insegnamento", catalog="mydb", joinColumns = { 
-        @JoinColumn(name="studente_idstudente", nullable=false, updatable=false) }, inverseJoinColumns = { 
-        @JoinColumn(name="insegnamento_idinsegnamento", nullable=false, updatable=false) })
-    public Set<Insegnamento> getInsegnamentos() {
-        return this.insegnamentos;
-    }
-    
-    public void setInsegnamentos(Set<Insegnamento> insegnamentos) {
-        this.insegnamentos = insegnamentos;
+    public void setIscriziones(Set<Iscrizione> iscriziones) {
+        this.iscriziones = iscriziones;
     }
 
 @ManyToMany(fetch=FetchType.LAZY)
@@ -171,12 +157,12 @@ public class Studente  implements java.io.Serializable {
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="studente")
-    public Set<StudenteValutaMaterialeDidattico> getStudenteValutaMaterialeDidatticos() {
-        return this.studenteValutaMaterialeDidatticos;
+    public Set<Valutazione> getValutaziones() {
+        return this.valutaziones;
     }
     
-    public void setStudenteValutaMaterialeDidatticos(Set<StudenteValutaMaterialeDidattico> studenteValutaMaterialeDidatticos) {
-        this.studenteValutaMaterialeDidatticos = studenteValutaMaterialeDidatticos;
+    public void setValutaziones(Set<Valutazione> valutaziones) {
+        this.valutaziones = valutaziones;
     }
 
 

@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.unisalento.se.saw.domain.Docente;
 import it.unisalento.se.saw.domain.Insegnamento;
 import it.unisalento.se.saw.domain.Lezione;
 import it.unisalento.se.saw.domain.MaterialeDidattico;
@@ -16,6 +17,9 @@ public interface InsegnamentoRepository extends JpaRepository<Insegnamento, Inte
 
 	@Query("SELECT i FROM Insegnamento i WHERE i.corsoDiStudioIdcorsoDiStudio = :idCorso")
 	public List<Insegnamento> getAllInsegnamentiCorso(@Param("idCorso") int idCorso);
+	
+	@Query("SELECT i FROM Insegnamento i WHERE i.docente = :docente")
+	public List<Insegnamento> getAllInsegnamentiDocente(@Param("docente") Docente docente);
 	
 	@Modifying
 	@Transactional

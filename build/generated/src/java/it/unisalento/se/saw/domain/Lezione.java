@@ -1,5 +1,5 @@
 package it.unisalento.se.saw.domain;
-// Generated 13-dic-2018 12.27.28 by Hibernate Tools 5.2.0.Final
+// Generated 10-gen-2019 15.32.49 by Hibernate Tools 5.2.0.Final
 
 
 import java.util.HashSet;
@@ -27,23 +27,20 @@ public class Lezione  implements java.io.Serializable {
 
      private Integer idlezione;
      private Evento evento;
-     private float gradimento;
+     private Set<Valutazione> valutaziones = new HashSet<Valutazione>(0);
      private Set<MaterialeDidattico> materialeDidatticos = new HashSet<MaterialeDidattico>(0);
-     private Set<StudenteValutaLezione> studenteValutaLeziones = new HashSet<StudenteValutaLezione>(0);
 
     public Lezione() {
     }
 
 	
-    public Lezione(Evento evento, float gradimento) {
+    public Lezione(Evento evento) {
         this.evento = evento;
-        this.gradimento = gradimento;
     }
-    public Lezione(Evento evento, float gradimento, Set<MaterialeDidattico> materialeDidatticos, Set<StudenteValutaLezione> studenteValutaLeziones) {
+    public Lezione(Evento evento, Set<Valutazione> valutaziones, Set<MaterialeDidattico> materialeDidatticos) {
        this.evento = evento;
-       this.gradimento = gradimento;
+       this.valutaziones = valutaziones;
        this.materialeDidatticos = materialeDidatticos;
-       this.studenteValutaLeziones = studenteValutaLeziones;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -68,14 +65,13 @@ public class Lezione  implements java.io.Serializable {
         this.evento = evento;
     }
 
-    
-    @Column(name="gradimento", nullable=false, precision=12, scale=0)
-    public float getGradimento() {
-        return this.gradimento;
+@OneToMany(fetch=FetchType.LAZY, mappedBy="lezione")
+    public Set<Valutazione> getValutaziones() {
+        return this.valutaziones;
     }
     
-    public void setGradimento(float gradimento) {
-        this.gradimento = gradimento;
+    public void setValutaziones(Set<Valutazione> valutaziones) {
+        this.valutaziones = valutaziones;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="lezione")
@@ -85,15 +81,6 @@ public class Lezione  implements java.io.Serializable {
     
     public void setMaterialeDidatticos(Set<MaterialeDidattico> materialeDidatticos) {
         this.materialeDidatticos = materialeDidatticos;
-    }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="lezione")
-    public Set<StudenteValutaLezione> getStudenteValutaLeziones() {
-        return this.studenteValutaLeziones;
-    }
-    
-    public void setStudenteValutaLeziones(Set<StudenteValutaLezione> studenteValutaLeziones) {
-        this.studenteValutaLeziones = studenteValutaLeziones;
     }
 
 

@@ -2,11 +2,13 @@ package it.unisalento.se.saw.restapi;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,12 +19,18 @@ import it.unisalento.se.saw.Iservices.ICorsoDiStudioService;
 import it.unisalento.se.saw.Iservices.INumeroTelefonoService;
 import it.unisalento.se.saw.Iservices.IStudenteService;
 import it.unisalento.se.saw.Iservices.IUtenteService;
+import it.unisalento.se.saw.converter.StudenteConverter;
 import it.unisalento.se.saw.domain.CorsoDiStudio;
+import it.unisalento.se.saw.domain.Insegnamento;
 import it.unisalento.se.saw.domain.NumeroTelefono;
+import it.unisalento.se.saw.domain.Prenotazione;
 import it.unisalento.se.saw.domain.Studente;
+
 import it.unisalento.se.saw.domain.Utente;
+import it.unisalento.se.saw.dto.IscrizioneDto;
 import it.unisalento.se.saw.dto.StudenteDto;
 import it.unisalento.se.saw.exceptions.CorsoDiStudioNotFoundException;
+import it.unisalento.se.saw.exceptions.IscrizioneNotFoundException;
 import it.unisalento.se.saw.exceptions.NumeroTelefonoNotFoundException;
 import it.unisalento.se.saw.exceptions.StudenteNotFoundException;
 import it.unisalento.se.saw.exceptions.UtenteNotFoundException;
@@ -33,6 +41,7 @@ public class StudenteRestController {
 
 	@Autowired
 	IUtenteService utenteService;
+
 	
 	@Autowired
 	IStudenteService studenteService;
@@ -69,6 +78,7 @@ public class StudenteRestController {
 			Utente utente = new Utente();
 			utente = utenteService.getById(idUtente);	
 			Studente stud = studenti.get(i);
+			studenteDto.setIdUserStudente(studenti.get(i).getUtente().getIdutente());
 			studenteDto.setIdStudente(stud.getIdstudente());
 			studenteDto.setNome(utente.getNome());
 			studenteDto.setCodiceFiscale(stud.getCodiceFiscale());
@@ -142,16 +152,30 @@ public class StudenteRestController {
 		
 		return studenteService.save(stud);
 	}
-	
-	@PostMapping(value="/signingUpInsegnamento", consumes=MediaType.APPLICATION_JSON_VALUE)
-	public void post(@RequestBody int idStudente, int idInsegnamento ){
-		
-		//studenteService.signingUpStudenteInsegnamento(idStudente,idInsegnamento);
-	}
-	
+
 	@PatchMapping (value = "/aggiornaStudente",consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void aggiornaStudente(@RequestBody StudenteDto studenteDto) throws StudenteNotFoundException {
 		studenteService.aggiornaStudente(studenteDto);
+	}
+	
+	@RequestMapping(value="/getStudenteIscrittoInsegnamento/{idInsegnamento}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<StudenteDto> getStudenteIscrittoInsegnamento(@PathVariable("idInsegnamento") int idInsegnamento) throws StudenteNotFoundException, UtenteNotFoundException, CorsoDiStudioNotFoundException {
+		List<StudenteDto> studentiDto= new ArrayList<StudenteDto>();
+		Insegnamento insegnamento = new Insegnamento();
+		insegnamento.setIdinsegnamento(idInsegnamento);
+		List<Studente> studenti = studenteService.getStudenteIscrittoInsegnamento(insegnamento);
+		List<CorsoDiStudio> corsi = corsoDiStudioService.getAll();
+		List<Utente> utenti =utenteService.getAll();
+		Iterator<Studente> studenteIterator = studenti.iterator();
+		
+		while(studenteIterator.hasNext()){
+			StudenteDto studenteDto = new StudenteDto();
+			Studente studente = studenteIterator.next();
+			
+			studenteDto = StudenteConverter.domainToDto(studente, utenti, corsi);
+			studentiDto.add(studenteDto);
+		}
+		return studentiDto;
 	}
 }
 

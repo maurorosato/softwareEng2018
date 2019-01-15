@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import it.unisalento.se.saw.Iservices.IInsegnamentoService;
+import it.unisalento.se.saw.domain.Docente;
 import it.unisalento.se.saw.domain.Insegnamento;
 
 import it.unisalento.se.saw.dto.InsegnamentoDto;
@@ -27,6 +28,11 @@ public class InsegnamentoService implements IInsegnamentoService {
 	@Override
 	public List<Insegnamento> getAllInsegnamentiCorso(int idCorso) throws InsegnamentoNotFoundException {
 		return insegnamentoRepository.getAllInsegnamentiCorso(idCorso);
+	}
+	
+	@Override
+	public List<Insegnamento> getAllInsegnamentiDocente(Docente docente) throws InsegnamentoNotFoundException {
+		return insegnamentoRepository.getAllInsegnamentiDocente(docente);
 	}
 	
 	@Transactional

@@ -85,7 +85,6 @@ public class EventoConverter {
 		while (lezioneIterator.hasNext()){
 			Lezione lezione = lezioneIterator.next();
 			if (lezione.getEvento().getIdevento() == evento.getIdevento()){
-				eventoDto.setGradimento(lezione.getGradimento());
 				eventoDto.setImage("lessonsIcon.png");
 				eventoDto.setLezioneOrEsame("lezione");
 			}

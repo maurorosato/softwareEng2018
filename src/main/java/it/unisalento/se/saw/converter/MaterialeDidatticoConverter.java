@@ -35,7 +35,6 @@ public class MaterialeDidatticoConverter {
 		
 		materialeDidattico.setNome(materialeDidatticoDto.getNome());
 		materialeDidattico.setLink(materialeDidatticoDto.getLink());
-		materialeDidattico.setGradimento(materialeDidatticoDto.getGradimento());
 		materialeDidattico.setDocente(docente);
 		materialeDidattico.setLezione(lezione);
 		
@@ -63,7 +62,6 @@ public class MaterialeDidatticoConverter {
 
 		materialeDidatticoDto.setNome(materialeDidattico.getNome());
 		materialeDidatticoDto.setLink(materialeDidattico.getLink());
-		materialeDidatticoDto.setGradimento(materialeDidattico.getGradimento());
 		materialeDidatticoDto.setIdDocente(materialeDidattico.getDocente().getIddocente());
 		//materialeDidatticoDto.setIdUtente(materialeDidattico.getDocente().getIddocente());
 		materialeDidatticoDto.setIdMaterialeDidattico(materialeDidattico.getIdmaterialeDidattico());

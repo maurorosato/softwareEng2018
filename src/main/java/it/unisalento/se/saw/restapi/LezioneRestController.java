@@ -111,9 +111,7 @@ public class LezioneRestController {
 
 			lezioniDto.add(lezioneDto);
 		}
-		
 		return lezioniDto;
-
 	}
 	@RequestMapping(value="/getAllStudente/{idCorsoStudente}/{annoCorso}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<LezioneDto> getAllStudente(@PathVariable("idCorsoStudente") int idCorsoStudente,@PathVariable("annoCorso") String annoCorso) throws LezioneNotFoundException, AulaNotFoundException, InsegnamentoNotFoundException, PrenotazioneNotFoundException, EventoNotFoundException, DocenteNotFoundException {
@@ -167,7 +165,6 @@ public class LezioneRestController {
 		evento.setPrenotazione(prenotazione);
 		eventoService.save(evento);
 		
-		lezione.setGradimento(0);
 		lezione.setEvento(evento);
 		
 		return lezioneService.save(lezione);

@@ -10,6 +10,7 @@ import it.unisalento.se.saw.Iservices.IAppelloEsameService;
 import it.unisalento.se.saw.domain.AppelloEsame;
 import it.unisalento.se.saw.domain.Aula;
 import it.unisalento.se.saw.domain.Docente;
+import it.unisalento.se.saw.domain.Insegnamento;
 import it.unisalento.se.saw.domain.Lezione;
 import it.unisalento.se.saw.exceptions.AppelloEsameNotFoundException;
 import it.unisalento.se.saw.exceptions.DocenteNotFoundException;
@@ -41,5 +42,10 @@ public class AppelloEsameService implements IAppelloEsameService {
 	@Override
 	public List<AppelloEsame> getAllStudente(int idCorsoStudente, int annoCorso) throws AppelloEsameNotFoundException{
 		return appelloEsameRepository.getAllStudente(idCorsoStudente, annoCorso);
+	}
+	
+	@Override
+	public List<AppelloEsame> getAppelliEsameInsegnamento(Insegnamento insegnamento) throws AppelloEsameNotFoundException  {
+		return appelloEsameRepository.getAppelliEsameInsegnamento(insegnamento);
 	}
 }

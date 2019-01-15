@@ -35,7 +35,12 @@ public class UtenteService implements IUtenteService {
 
 	@Override
 	public void removeUserById(int id) throws UtenteNotFoundException {
-		// TODO Auto-generated method stub
-		
 	}
+	
+	@Override
+	public Utente autenticazione(String email,String password) throws UtenteNotFoundException{
+		//return utenteRepository.autenticazione(email,password);
+		return (utenteRepository.findByEmailAndPassword(email, password)).get(0);
+	}
+
 }

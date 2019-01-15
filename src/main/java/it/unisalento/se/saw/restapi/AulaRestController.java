@@ -66,6 +66,16 @@ public class AulaRestController {
 		aulaService.aggiornaAula(aulaDto);
 	}
 	
+	@PatchMapping (value = "/aggiornaStatoAula/{idAula}/{wifiB}",consumes = MediaType.APPLICATION_JSON_VALUE)
+	public void aggiornaStatoAula(@PathVariable("idAula") int idAula,@PathVariable("wifiB") boolean wifiB) throws AulaNotFoundException {
+		byte wifi;
+		if(wifiB == true)
+			wifi = 1;
+		else
+			wifi = 0;
+		aulaService.aggiornaStatoAula(idAula,wifi);
+	}
+	
 	@PatchMapping (value = "/localizzaAula",consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void localizzaAula(@RequestBody AulaDto aulaDto) throws AulaNotFoundException {
 		aulaService.localizzaAula(aulaDto);

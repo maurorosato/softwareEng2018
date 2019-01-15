@@ -44,6 +44,12 @@ public class AulaService implements IAulaService {
 	}
 	
 	@Override
+	public void aggiornaStatoAula(int idAula, byte wifi) throws AulaNotFoundException{
+		aulaRepository.aggiornaStatoAula(idAula,wifi);
+	}
+
+	
+	@Override
 	public void localizzaAula(AulaDto aulaDto) throws AulaNotFoundException {
 		aulaRepository.localizzaAula(aulaDto.getIdaula(),aulaDto.getLatitudine(),aulaDto.getLongitudine());
 	}

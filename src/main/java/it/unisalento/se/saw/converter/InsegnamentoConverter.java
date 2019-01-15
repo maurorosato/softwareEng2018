@@ -50,9 +50,40 @@ public class InsegnamentoConverter {
 		return insegnamento;
 	}
 	
-	public static InsegnamentoDto domainToDto(){
+	public static InsegnamentoDto domainToDto(Insegnamento insegnamento, List<CorsoDiStudio> corsi, List<Docente> docenti){
 		InsegnamentoDto insegnamentoDto = new InsegnamentoDto();
 		
+		insegnamentoDto.setCfu(insegnamento.getCfu());
+		insegnamentoDto.setNome(insegnamento.getNome());
+		insegnamentoDto.setIdInsegnamento(insegnamento.getIdinsegnamento());
+
+		Iterator<Docente> docenteIterator = docenti.iterator();
+		while(docenteIterator.hasNext()){
+			Docente docente = docenteIterator.next();
+			if (insegnamento.getDocente().getIddocente() ==docente.getIddocente()){
+				insegnamentoDto.setDocente(docente.getUtente().getNome() + ' ' + docente.getUtente().getCognome());
+				insegnamentoDto.setIdUserDocente(docente.getUtente().getIdutente());
+
+			}
+		}
+		Iterator<CorsoDiStudio> corsoIterator = corsi.iterator();
+		while(corsoIterator.hasNext()){
+			CorsoDiStudio corso = corsoIterator.next();
+			if (insegnamento.getCorsoDiStudioIdcorsoDiStudio() == corso.getIdcorsoDiStudio()){
+				insegnamentoDto.setCorsoDiStudio(corso.getNomeCorso());
+			}
+		}
+		switch (insegnamento.getAnno()){
+		case 1:
+			insegnamentoDto.setAnnoCorso("Primo Anno");
+			break;
+		case 2:
+			insegnamentoDto.setAnnoCorso("Secondo Anno");
+			break;
+		case 3:
+			insegnamentoDto.setAnnoCorso("Terzo Anno");
+			break;
+		}
 		return insegnamentoDto;
 	}
 }

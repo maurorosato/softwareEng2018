@@ -26,13 +26,13 @@ public class LezioneConverter {
 		int idInsegnamento = 0;
 		
 		lezioneDto.setIdLezione(lezione.getIdlezione());
-		lezioneDto.setGradimento(lezione.getGradimento());
 		lezioneDto.setIdEventoLezione(lezione.getEvento().getIdevento());
 		
 		while(eventoIterator.hasNext()){
 			Evento evento = eventoIterator.next();
 			if(lezioneDto.getIdEventoLezione() == evento.getIdevento() ){
 				lezioneDto.setIdPrenotazioneLezione(evento.getPrenotazione().getIdprenotazione());
+				lezioneDto.setDescrizione(evento.getDescrizione());
 				idAula = evento.getAula().getIdaula();
 				idInsegnamento = evento.getInsegnamento().getIdinsegnamento();
 			}
@@ -60,6 +60,7 @@ public class LezioneConverter {
 			Docente docente = docenteIterator.next();
 			if(idDocente == docente.getIddocente()){
 				lezioneDto.setDocente(docente.getUtente().getNome() + " " + docente.getUtente().getCognome());
+				lezioneDto.setIdUserDocente(docente.getUtente().getIdutente());
 			}
 		}
 		

@@ -1,6 +1,7 @@
 package it.unisalento.se.saw.restapi;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,16 @@ public class InsegnamentoRestController {
 		List<CorsoDiStudio> corsi = (corsoDiStudioService.getAll());
 		List<Docente> docenti = (docenteService.getAll());
 
+		Iterator<Insegnamento> insegnamentoIterator = insegnamenti.iterator();
+		
+		while(insegnamentoIterator.hasNext()){
+			Insegnamento insegnamento = insegnamentoIterator.next();
+			InsegnamentoDto insegnamentoDto = new InsegnamentoDto();
+			insegnamentoDto = InsegnamentoConverter.domainToDto(insegnamento,corsi,docenti);
+			
+			insegnamentiDto.add(insegnamentoDto);	
+		}
+/*
 		for(int i=0; i < insegnamenti.size(); i++){
 			InsegnamentoDto insegnamentoDto = new InsegnamentoDto();
 			
@@ -74,6 +85,7 @@ public class InsegnamentoRestController {
 			
 			insegnamentiDto.add(i, insegnamentoDto);	
 		}
+*/
 		return insegnamentiDto;
 	}
 	
@@ -84,6 +96,16 @@ public class InsegnamentoRestController {
 		List<Docente> docenti = docenteService.getAll();
 		
 		List<Insegnamento> insegnamenti = insegnamentoService.getAllInsegnamentiCorso(idCorso);
+		Iterator<Insegnamento> insegnamentoIterator = insegnamenti.iterator();
+		
+		while(insegnamentoIterator.hasNext()){
+			Insegnamento insegnamento = insegnamentoIterator.next();
+			InsegnamentoDto insegnamentoDto = new InsegnamentoDto();
+			insegnamentoDto = InsegnamentoConverter.domainToDto(insegnamento,corsi,docenti);
+			
+			insegnamentiDto.add(insegnamentoDto);	
+		}
+/*
 		for(int i=0; i < insegnamenti.size(); i++){
 			InsegnamentoDto insegnamentoDto = new InsegnamentoDto();
 			
@@ -117,10 +139,35 @@ public class InsegnamentoRestController {
 			
 			insegnamentiDto.add(i, insegnamentoDto);	
 		}
-		
+*/		
 		return insegnamentiDto;
 	}
-	
+	@RequestMapping(value="/getAllInsegnamentiDocente/{idUserDocente}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<InsegnamentoDto> getAllInsegnamentiDocente(@PathVariable("idUserDocente") int idUserDocente) throws InsegnamentoNotFoundException, CorsoDiStudioNotFoundException, DocenteNotFoundException {
+		
+		List<InsegnamentoDto> insegnamentiDto= new ArrayList<InsegnamentoDto>();
+		List<CorsoDiStudio> corsi = corsoDiStudioService.getAll();
+		List<Docente> docenti = docenteService.getAll();
+		Docente docente = new Docente();
+		
+		Iterator<Docente> docenteIterator = docenti.iterator();
+		while (docenteIterator.hasNext()){
+			Docente docenteI = docenteIterator.next();
+			if(docenteI.getUtente().getIdutente() == idUserDocente){
+				docente.setIddocente(docenteI.getIddocente());
+			}
+		}
+		List<Insegnamento> insegnamenti = insegnamentoService.getAllInsegnamentiDocente(docente);
+		Iterator<Insegnamento> insegnamentoIterator = insegnamenti.iterator();
+		while(insegnamentoIterator.hasNext()){
+			Insegnamento insegnamento = insegnamentoIterator.next();
+			InsegnamentoDto insegnamentoDto = new InsegnamentoDto();
+			insegnamentoDto = InsegnamentoConverter.domainToDto(insegnamento,corsi,docenti);
+			
+			insegnamentiDto.add(insegnamentoDto);	
+		}
+		return insegnamentiDto;
+	}
 	@PostMapping(value="save", consumes=MediaType.APPLICATION_JSON_VALUE)
 	public void post(@RequestBody InsegnamentoDto insegnamentoDto) throws CorsoDiStudioNotFoundException, DocenteNotFoundException{
 		

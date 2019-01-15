@@ -4,22 +4,35 @@ import java.util.Date;
 
 public class LezioneDto {
 	int idLezione;
-	int idEventoLezione;
-	int idPrenotazioneLezione;
 	Date dataInizio;
 	Date dataFine;
-	float gradimento;
 	String aula;
 	String docente;
 	double latitudine;
 	double longitudine;
+	String descrizione;
 	String insegnamento;
+	int idEventoLezione;
+	int idUserDocente;
+	int idPrenotazioneLezione;
 	
 	public int getIdLezione() {
 		return idLezione;
 	}
 	public void setIdLezione(int idLezione) {
 		this.idLezione = idLezione;
+	}
+	public int getIdUserDocente() {
+		return idUserDocente;
+	}
+	public void setIdUserDocente(int idUserDocente) {
+		this.idUserDocente = idUserDocente;
+	}
+	public String getDescrizione() {
+		return descrizione;
+	}
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
 	}
 	public double getLatitudine() {
 		return latitudine;
@@ -57,12 +70,7 @@ public class LezioneDto {
 	public void setDataFine(Date dataFine) {
 		this.dataFine = dataFine;
 	}
-	public float getGradimento() {
-		return gradimento;
-	}
-	public void setGradimento(float gradimento) {
-		this.gradimento = gradimento;
-	}
+
 	public String getAula() {
 		return aula;
 	}

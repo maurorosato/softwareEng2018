@@ -13,6 +13,7 @@ public interface IAulaService {
 	public Aula getById(int id) throws AulaNotFoundException;
 	public void rimuoviAula(int idAula) throws AulaNotFoundException;
 	public void aggiornaAula(AulaDto aulaDto) throws AulaNotFoundException;
+	public void aggiornaStatoAula(int idAula, byte wifi) throws AulaNotFoundException;
 	public void localizzaAula(AulaDto aulaDto) throws AulaNotFoundException;
 	public List<Aula> getAuleLibere(Date dataInizio, Date dataFine) throws AulaNotFoundException;
 }
