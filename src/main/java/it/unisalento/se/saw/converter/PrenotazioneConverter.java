@@ -30,7 +30,7 @@ public class PrenotazioneConverter {
 		Prenotazione prenotazione = new Prenotazione();
 		
 		Docente doc = new Docente();
-		doc.setIddocente(1);
+		doc.setIddocente(prenotazioneDto.getIdDocente());
 		
 		prenotazione.setDataInizio(prenotazioneDto.getDataInizio());
 		prenotazione.setDataFine(prenotazioneDto.getDataFine());

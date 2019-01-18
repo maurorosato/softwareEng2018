@@ -13,6 +13,14 @@ public class AppelloEsameDto {
 	Date dataInizio;
 	String descrizione;
 	String insegnamento;
+	int idInsegnamento;
+	
+	public int getIdInsegnamento() {
+		return idInsegnamento;
+	}
+	public void setIdInsegnamento(int idInsegnamento) {
+		this.idInsegnamento = idInsegnamento;
+	}
 	
 	public int getIdAppelloEsame() {
 		return idAppelloEsame;

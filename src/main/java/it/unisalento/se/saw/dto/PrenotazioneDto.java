@@ -12,8 +12,15 @@ public class PrenotazioneDto {
     Date dataFine;
     String insegnamento;
     String docente;
+    int idDocente;
     
-    public int getIdprenotazione() {
+    public int getIdDocente() {
+		return idDocente;
+	}
+	public void setIdDocente(int idDocente) {
+		this.idDocente = idDocente;
+	}
+	public int getIdprenotazione() {
 		return idprenotazione;
 	}
 	public void setIdprenotazione(int idprenotazione) {

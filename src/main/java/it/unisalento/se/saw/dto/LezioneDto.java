@@ -15,7 +15,14 @@ public class LezioneDto {
 	int idEventoLezione;
 	int idUserDocente;
 	int idPrenotazioneLezione;
+	int idInsegnamento;
 	
+	public int getIdInsegnamento() {
+		return idInsegnamento;
+	}
+	public void setIdInsegnamento(int idInsegnamento) {
+		this.idInsegnamento = idInsegnamento;
+	}
 	public int getIdLezione() {
 		return idLezione;
 	}
