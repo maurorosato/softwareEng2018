@@ -3,7 +3,6 @@ package it.unisalento.se.saw.dto;
 public class AulaDto {
 	
 	private Integer idaula;
-	
 	private String edificio;
 	private String nome;
 	private String stato;
