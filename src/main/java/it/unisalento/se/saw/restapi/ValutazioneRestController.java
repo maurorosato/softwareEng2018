@@ -81,8 +81,10 @@ public class ValutazioneRestController {
 				
 				while(valutazioneLezioneIterator.hasNext()){
 					Valutazione valutazioneL = valutazioneLezioneIterator.next();
-					ValutazioneDto valutazioneLDto = ValutazioneConverter.domainToDto(valutazioneL);
-					
+					ValutazioneDto valutazioneLDto = new ValutazioneDto();
+					if (valutazioneL.getNota() != "default"){
+						valutazioneLDto = ValutazioneConverter.domainToDto(valutazioneL);
+					}
 					valutazioneListaDto.add(valutazioneLDto);
 				}
 				break;

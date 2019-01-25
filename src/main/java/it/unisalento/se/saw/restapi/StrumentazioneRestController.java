@@ -51,11 +51,12 @@ public class StrumentazioneRestController {
 		Iterator<Strumentazione> strumentazioneIterator = strumenti.iterator();
 		
 		while (strumentazioneIterator.hasNext()){
-			StrumentazioneDto strumentazioneDto;
+			StrumentazioneDto strumentazioneDto = new StrumentazioneDto();
 			Strumentazione strumentazione = strumentazioneIterator.next();
-			
-			strumentazioneDto= StrumentazioneConverter.domainToDto(strumentazione);
-			strumentazioniDto.add(strumentazioneDto);	
+			if (strumentazione.getIdstrumentazione() != 1){
+				strumentazioneDto = StrumentazioneConverter.domainToDto(strumentazione);
+				strumentazioniDto.add(strumentazioneDto);	
+			}
 		}
 		return strumentazioniDto;
 	}	

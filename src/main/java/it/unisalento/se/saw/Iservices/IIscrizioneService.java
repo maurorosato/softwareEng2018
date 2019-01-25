@@ -8,8 +8,9 @@ import it.unisalento.se.saw.domain.Studente;
 import it.unisalento.se.saw.exceptions.IscrizioneNotFoundException;
 
 public interface IIscrizioneService {
-	public void save(Iscrizione iscrizione) throws IscrizioneNotFoundException;
 	public List<Iscrizione> getAll() throws IscrizioneNotFoundException;
+	public void save(Iscrizione iscrizione) throws IscrizioneNotFoundException;
+	public void rimuoviIscrizione(Iscrizione iscrizione) throws IscrizioneNotFoundException;
 	public List<Iscrizione> getIscrizione(Insegnamento insegnamento, Studente studente) throws IscrizioneNotFoundException;
-
+	
 }

@@ -103,76 +103,11 @@ public class EventoRestController {
 		
 		while (eventoIterator.hasNext()){
 			Evento evento = eventoIterator.next();
-			EventoDto eventoDto = EventoConverter.domainToDto(evento, aule, utenti, lezioni, docenti, appelli, corsi, prenotazioni, insegnamenti);
-			
-/*			
-			eventoDto.setIdEvento(evento.getIdevento());
-			eventoDto.setDescrizione(evento.getDescrizione());
-			eventoDto.setGradimento(numeroFloat);
-			
-			Iterator<Aula> aulaIterator = aule.iterator();
-			while (aulaIterator.hasNext()){
-				Aula aula = aulaIterator.next();
-				if (aula.getIdaula() == evento.getAula().getIdaula())
-					eventoDto.setAula(aula.getNome());
-			}
-			Iterator<Insegnamento> insegnamentoIterator = insegnamenti.iterator();
-			while (insegnamentoIterator.hasNext()){
-				Insegnamento insegnamento = insegnamentoIterator.next();
-				if (insegnamento.getIdinsegnamento() == evento.getInsegnamento().getIdinsegnamento()){
-					eventoDto.setInsegnamento(insegnamento.getNome());
-					idCorso = insegnamento.getCorsoDiStudioIdcorsoDiStudio();
-					idDocente = insegnamento.getDocente().getIddocente();
-				}
-			}
-			Iterator<CorsoDiStudio> corsoIterator = corsi.iterator();
-			while (corsoIterator.hasNext()){
-				CorsoDiStudio corso = corsoIterator.next();
-				if (corso.getIdcorsoDiStudio() == idCorso)
-					eventoDto.setCorso(corso.getNomeCorso());
-			}
-			Iterator<Lezione> lezioneIterator = lezioni.iterator();
-			while (lezioneIterator.hasNext()){
-				Lezione lezione = lezioneIterator.next();
-				if (lezione.getEvento().getIdevento() == evento.getIdevento())
-					eventoDto.setGradimento(lezione.getGradimento());
-			}
-			
-			Iterator<Prenotazione> prenotazioneIterator = prenotazioni.iterator();
-			while (prenotazioneIterator.hasNext()){
-				Prenotazione prenotazione = prenotazioneIterator.next();
-				if (prenotazione.getIdprenotazione() == evento.getPrenotazione().getIdprenotazione()){
-					
-				}
-			}
-			
-			Iterator<AppelloEsame> appelloIterator = appelli.iterator();
-			while (appelloIterator.hasNext()){
-				AppelloEsame appello = appelloIterator.next();
-				if (appello.getEvento().getIdevento() == evento.getIdevento())
-					eventoDto.setDescrizione("TIPOLOGIA: "+appello.getTipologia() + " DESCRIZIONE: "+ evento.getDescrizione());
-			}
-			
-			Iterator<Docente> docenteIterator = docenti.iterator();
-			while (docenteIterator.hasNext()){
-				Docente docente = docenteIterator.next();
-				if (docente.getIddocente() == idDocente)
-					idUtente = docente.getUtente().getIdutente();	
-			}
-			Iterator<Utente> utenteIterator = utenti.iterator();
-			while (utenteIterator.hasNext()){
-				Utente utente = utenteIterator.next();
-				if (utente.getIdutente() == idUtente)
-					eventoDto.setIdUtente(idUtente);
-					eventoDto.setDocente(utente.getNome() + " " + utente.getCognome());
-			}
-			
-			if(eventoDto.getGradimento() == 0)
-				eventoDto.setImage("examsIcon.png");
-			else
-				eventoDto.setImage("lessonsIcon.png");
-*/			
-		 eventiDto.add(eventoDto);
+			EventoDto eventoDto = new EventoDto();
+			if (evento.getIdevento() != 1){
+				eventoDto = EventoConverter.domainToDto(evento, aule, utenti, lezioni, docenti, appelli, corsi, prenotazioni, insegnamenti);
+				eventiDto.add(eventoDto);
+			}			
 		}
 	return eventiDto;
 	}

@@ -26,8 +26,8 @@ public class LezioneConverter {
 		int idInsegnamento = 0;
 		
 		lezioneDto.setIdLezione(lezione.getIdlezione());
+
 		lezioneDto.setIdEventoLezione(lezione.getEvento().getIdevento());
-		
 		while(eventoIterator.hasNext()){
 			Evento evento = eventoIterator.next();
 			if(lezioneDto.getIdEventoLezione() == evento.getIdevento() ){
@@ -35,6 +35,7 @@ public class LezioneConverter {
 				lezioneDto.setDescrizione(evento.getDescrizione());
 				idAula = evento.getAula().getIdaula();
 				idInsegnamento = evento.getInsegnamento().getIdinsegnamento();
+				lezioneDto.setIdInsegnamento(idInsegnamento);
 			}
 		}
 		

@@ -1,10 +1,10 @@
 package it.unisalento.se.saw.dto;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class SegnalazioneDto {
 	
-	private String data;
+	Date data;
 	private String image;
 	private String nomeAula;
 	private String descrizione;
@@ -13,7 +13,27 @@ public class SegnalazioneDto {
 	private String docenteSegnalante;
 	private String statoSegnalazione;
 	private String oggettoInteressato;
+	private int idDocenteSegnalante;
+	private int idUserDocenteSegnalante;
 	
+	public int getIdDocenteSegnalante() {
+		return idDocenteSegnalante;
+	}
+	public void setIdDocenteSegnalante(int idDocenteSegnalante) {
+		this.idDocenteSegnalante = idDocenteSegnalante;
+	}
+	public Date getData() {
+		return data;
+	}
+	public void setData(Date data) {
+		this.data = data;
+	}
+	public int getIdUserDocenteSegnalante() {
+		return idUserDocenteSegnalante;
+	}
+	public void setIdUserDocenteSegnalante(int idUserDocenteSegnalante) {
+		this.idUserDocenteSegnalante = idUserDocenteSegnalante;
+	}
 	public String getDocenteSegnalante() {
 		return docenteSegnalante;
 	}
@@ -33,12 +53,7 @@ public class SegnalazioneDto {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public String getData() {
-		return data;
-	}
-	public void setData(String data) {
-		this.data = data;
-	}
+
 	public String getNomeAula() {
 		return nomeAula;
 	}

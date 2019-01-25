@@ -2,6 +2,7 @@ package it.unisalento.se.saw.restapi;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 import it.unisalento.se.saw.Iservices.IDocenteService;
 import it.unisalento.se.saw.Iservices.INumeroTelefonoService;
 import it.unisalento.se.saw.Iservices.IUtenteService;
+import it.unisalento.se.saw.converter.DocenteConverter;
+import it.unisalento.se.saw.converter.UtenteConverter;
 import it.unisalento.se.saw.domain.Docente;
+import it.unisalento.se.saw.domain.Evento;
+import it.unisalento.se.saw.domain.Lezione;
 import it.unisalento.se.saw.domain.NumeroTelefono;
 import it.unisalento.se.saw.domain.Utente;
 import it.unisalento.se.saw.dto.DocenteDto;
@@ -37,7 +42,7 @@ public class DocenteRestController {
 	IUtenteService utenteService;
 	
 	@Autowired
-	INumeroTelefonoService numeroService;
+	INumeroTelefonoService numeroTelefonoService;
 	
 	public DocenteRestController() {
 		super();
@@ -57,33 +62,51 @@ public class DocenteRestController {
 	public List<DocenteDto> getAll() throws DocenteNotFoundException, UtenteNotFoundException, NumeroTelefonoNotFoundException {
 		List<DocenteDto> docentiDto= new ArrayList<DocenteDto>();
 		List<Docente> docenti = docenteService.getAll();
-		List<NumeroTelefono> numeriTelefono = numeroService.getAll();
-		int idUtente;
-		String numTelefono = "- ";
+		List<NumeroTelefono> numeriTelefono = numeroTelefonoService.getAll();
+		List<Utente> utenti = utenteService.getAll();
+		//List<NumeroTelefono> numeriTelefono = numeroService.getAll();
+		//int idUtente;
+		//String numTelefono = "- ";
+		
+		Iterator<Docente> docenteIterator = docenti.iterator();
+		while(docenteIterator.hasNext()){
+			Docente docente = docenteIterator.next();
+			DocenteDto docenteDto = new DocenteDto();
+
+			if (docente.getIddocente() != 1){
+				docenteDto = DocenteConverter.domainToDto(docente/*,utenti*/, numeriTelefono);
+				docentiDto.add(docenteDto);
+			}
+		}
+/*
 		for(int i=0;i<docenti.size();i++) {
 			DocenteDto docenteDto = new DocenteDto();
-			idUtente = docenti.get(i).getUtente().getIdutente();
-			
-			for (int j=0; j<numeriTelefono.size(); j++){
-				if (numeriTelefono.get(j).getUtente().getIdutente() == idUtente){
-					numTelefono = numTelefono + numeriTelefono.get(j).getNumeroTelefono() + " - ";
+			if ( docenti.get(i).getIddocente()!=1){
+				idUtente = docenti.get(i).getUtente().getIdutente();
+				
+				for (int j=0; j<numeriTelefono.size(); j++){
+					if (numeriTelefono.get(j).getUtente().getIdutente() == idUtente){
+						numTelefono = numTelefono + numeriTelefono.get(j).getNumeroTelefono() + " - ";
+					}
 				}
+				
+				Utente utente = new Utente();
+				utente = utenteService.getById(idUtente);
+				docenteDto.setIdDocente(docenti.get(i).getIddocente());
+				docenteDto.setNome(utente.getNome());
+				docenteDto.setCognome(utente.getCognome());
+				docenteDto.setEmail(utente.getEmail());
+				docenteDto.setGrado(docenti.get(i).getGrado());
+				docenteDto.setDataNascita(utente.getDataNascita());
+				docenteDto.setStipendio(docenti.get(i).getStipendio());
+				docenteDto.setNumeroTelefono(numTelefono);
+				numTelefono = "- ";
+				
+				docentiDto.add(i, docenteDto);
 			}
-			
-			Utente utente = new Utente();
-			utente = utenteService.getById(idUtente);
-			docenteDto.setIdDocente(docenti.get(i).getIddocente());
-			docenteDto.setNome(utente.getNome());
-			docenteDto.setCognome(utente.getCognome());
-			docenteDto.setEmail(utente.getEmail());
-			docenteDto.setGrado(docenti.get(i).getGrado());
-			docenteDto.setDataNascita(utente.getDataNascita());
-			docenteDto.setStipendio(docenti.get(i).getStipendio());
-			docenteDto.setNumeroTelefono(numTelefono);
-			numTelefono = "- ";
-			
-			docentiDto.add(i, docenteDto);			
+						
 		}
+*/
 		return docentiDto;
 	}	
 		
@@ -107,7 +130,7 @@ public class DocenteRestController {
 		Utente user = new Utente();
 		Docente doc = new Docente();
 		NumeroTelefono num = new NumeroTelefono();
-
+		
 		user.setNome(docenteDto.getNome());
 		user.setCognome(docenteDto.getCognome());
 		user.setEmail(docenteDto.getEmail());
@@ -118,7 +141,7 @@ public class DocenteRestController {
 		
 		num.setNumeroTelefono(docenteDto.getNumeroTelefono());
 		num.setUtente(user);
-		numeroService.save(num);
+		numeroTelefonoService.save(num);
 		
 		doc.setGrado(docenteDto.getGrado());
 		doc.setStipendio(docenteDto.getStipendio());

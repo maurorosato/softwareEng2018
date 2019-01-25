@@ -4,30 +4,31 @@ import java.util.Iterator;
 import java.util.List;
 
 import it.unisalento.se.saw.domain.CorsoDiStudio;
+import it.unisalento.se.saw.domain.NumeroTelefono;
 import it.unisalento.se.saw.domain.Studente;
 import it.unisalento.se.saw.domain.Utente;
 import it.unisalento.se.saw.dto.StudenteDto;
 
 public class StudenteConverter {
-	public static StudenteDto domainToDto(Studente studente, List<Utente> utenti, List<CorsoDiStudio> corsi){
+	public static StudenteDto domainToDto(Studente studente, List<Utente> utenti, List<CorsoDiStudio> corsi,List<NumeroTelefono> numeriTelefono){
 		StudenteDto studenteDto = new StudenteDto();
+		String numTelefono = "- ";
 		
 		Iterator<Utente> utenteIterator = utenti.iterator();
 		while (utenteIterator.hasNext()){
 			Utente utente = utenteIterator.next();
 			if(utente.getIdutente() == studente.getUtente().getIdutente() ){
-				
 				studenteDto.setNome(utente.getNome());
-				studenteDto.setCognome(utente.getCognome());
-				studenteDto.setIdUserStudente(utente.getIdutente());
-				studenteDto.setIdStudente(studente.getIdstudente());
-				studenteDto.setMatricola(studente.getMatricola());
 				studenteDto.setEmail(utente.getEmail());
-				studenteDto.setCodiceFiscale(studente.getCodiceFiscale());
+				studenteDto.setCognome(utente.getCognome());
 				studenteDto.setPassword(utente.getPassword());
 				studenteDto.setNazione(studente.getNazione());
+				studenteDto.setMatricola(studente.getMatricola());
 				studenteDto.setIndirizzo(studente.getIndirizzo());
 				studenteDto.setDataNascita(utente.getDataNascita());
+				studenteDto.setIdUserStudente(utente.getIdutente());
+				studenteDto.setIdStudente(studente.getIdstudente());
+				studenteDto.setCodiceFiscale(studente.getCodiceFiscale());
 				studenteDto.setIdCorsoDiStudio(studente.getCorsoDiStudioIdcorsoDiStudio());
 			}
 			
@@ -38,6 +39,17 @@ public class StudenteConverter {
 					studenteDto.setCorsoDiStudio(c.getNomeCorso());
 				}
 			}
+			
+			Iterator<NumeroTelefono> numeroIterator = numeriTelefono.iterator();
+			while (numeroIterator.hasNext()){
+				NumeroTelefono num = numeroIterator.next();
+				if(num.getUtente().getIdutente() == studenteDto.getIdUserStudente()){
+					numTelefono = numTelefono + num.getNumeroTelefono() + "- ";
+				}
+				studenteDto.setNumeroTelefono(numTelefono);
+			}	
+
+			
 		}
 		return studenteDto;
 	}

@@ -12,8 +12,15 @@ public class DocenteDto {
 	private float stipendio;
 	private Date dataNascita;
 	private Integer idOrigin;
+	private int idUserDocente;
 	private String numeroTelefono;
 
+	public int getIdUserDocente() {
+		return idUserDocente;
+	}
+	public void setIdUserDocente(int idUserDocente) {
+		this.idUserDocente = idUserDocente;
+	}
 	
 	public String getGrado() {
 		return grado;

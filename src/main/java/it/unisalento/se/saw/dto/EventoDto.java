@@ -17,7 +17,14 @@ public class EventoDto {
 	private int idUtente;
 	private String docente;
 	private String image;
+	private int idInsegnamento;
 	
+	public int getIdInsegnamento() {
+		return idInsegnamento;
+	}
+	public void setIdInsegnamento(int idInsegnamento) {
+		this.idInsegnamento = idInsegnamento;
+	}
 	public String getImage() {
 		return image;
 	}
