@@ -81,10 +81,11 @@ public class LezioneRestController {
 		Iterator<Lezione> lezioneIterator = lezioni.iterator();
 		while(lezioneIterator.hasNext()){
 			Lezione lezione = lezioneIterator.next();
-			LezioneDto lezioneDto;
-			lezioneDto = LezioneConverter.domainToDto(lezione,prenotazioni,eventi,insegnamenti,aule,docenti);
-
-			lezioniDto.add(lezioneDto);
+			LezioneDto lezioneDto = new LezioneDto();
+			if (lezione.getIdlezione() != 1){
+				lezioneDto = LezioneConverter.domainToDto(lezione,prenotazioni,eventi,insegnamenti,aule,docenti);
+				lezioniDto.add(lezioneDto);
+			}
 		}
 		return lezioniDto;
 	}

@@ -46,9 +46,11 @@ public class AulaRestController {
 		while (aulaIterator.hasNext()){
 			AulaDto aulaDto = new AulaDto();
 			Aula aula = aulaIterator.next();
-			
-			aulaDto = AulaConverter.domainToDto(aula);
-			auleDto.add(aulaDto);
+			if (aula.getIdaula()!=1){
+				aulaDto = AulaConverter.domainToDto(aula);
+				auleDto.add(aulaDto);
+			}
+
 		}
 		return auleDto;
 	}

@@ -7,7 +7,6 @@ import java.util.List;
 import it.unisalento.se.saw.domain.Aula;
 import it.unisalento.se.saw.domain.Docente;
 import it.unisalento.se.saw.domain.Segnalazione;
-import it.unisalento.se.saw.domain.Utente;
 import it.unisalento.se.saw.dto.SegnalazioneDto;
 
 public class SegnalazioneConverter {
@@ -24,6 +23,7 @@ public class SegnalazioneConverter {
 			Docente docente = docenteIterator.next();
 			if(segnalazione.getDocente().getIddocente() == docente.getIddocente()){
 				docenteSegnalante = docente.getUtente().getNome() + ' ' + docente.getUtente().getCognome();
+				segnalazioneDto.setIdUserDocenteSegnalante(docente.getUtente().getIdutente());
 			}
 		}
 
@@ -40,10 +40,7 @@ public class SegnalazioneConverter {
 		segnalazioneDto.setNomeAula(nomeAula);
 		segnalazioneDto.setDescrizione(segnalazione.getDescrizione());
 		segnalazioneDto.setDocenteSegnalante(docenteSegnalante);
-		
-		java.util.Date sqlDate = segnalazione.getData();
-		segnalazioneDto.setData(sqlDate.toString());
-				
+		segnalazioneDto.setData(segnalazione.getData());
 		switch (segnalazioneDto.getOggettoInteressato()) {
 			case "proiettore":
 				segnalazioneDto.setImage("strumentazione.png");
@@ -83,7 +80,7 @@ public class SegnalazioneConverter {
 			}
 		}
 		Docente docente = new Docente();
-		docente.setIddocente(1);
+		docente.setIddocente(segnalazioneDto.getIdDocenteSegnalante());
 		
 		segnalazione.setData(data);
 		segnalazione.setDocente(docente);

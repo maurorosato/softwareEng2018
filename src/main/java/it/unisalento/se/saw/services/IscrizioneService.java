@@ -36,4 +36,9 @@ public class IscrizioneService implements IIscrizioneService{
 
 		return iscrizioneRepository.getIscrizione(insegnamento,studente);
 	}
+	@Override
+	public void rimuoviIscrizione(Iscrizione iscrizione) throws IscrizioneNotFoundException{
+		iscrizioneRepository.delete(iscrizione);
+	}
+
 }

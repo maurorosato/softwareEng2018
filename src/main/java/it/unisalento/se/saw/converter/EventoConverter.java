@@ -71,6 +71,7 @@ public class EventoConverter {
 			Insegnamento insegnamento = insegnamentoIterator.next();
 			if (insegnamento.getIdinsegnamento() == evento.getInsegnamento().getIdinsegnamento()){
 				eventoDto.setInsegnamento(insegnamento.getNome());
+				eventoDto.setIdInsegnamento(evento.getInsegnamento().getIdinsegnamento());
 				idCorso = insegnamento.getCorsoDiStudioIdcorsoDiStudio();
 				idDocente = insegnamento.getDocente().getIddocente();
 			}

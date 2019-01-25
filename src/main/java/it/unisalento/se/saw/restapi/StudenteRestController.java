@@ -19,14 +19,17 @@ import it.unisalento.se.saw.Iservices.ICorsoDiStudioService;
 import it.unisalento.se.saw.Iservices.INumeroTelefonoService;
 import it.unisalento.se.saw.Iservices.IStudenteService;
 import it.unisalento.se.saw.Iservices.IUtenteService;
+import it.unisalento.se.saw.converter.DocenteConverter;
 import it.unisalento.se.saw.converter.StudenteConverter;
 import it.unisalento.se.saw.domain.CorsoDiStudio;
+import it.unisalento.se.saw.domain.Docente;
 import it.unisalento.se.saw.domain.Insegnamento;
 import it.unisalento.se.saw.domain.NumeroTelefono;
 import it.unisalento.se.saw.domain.Prenotazione;
 import it.unisalento.se.saw.domain.Studente;
 
 import it.unisalento.se.saw.domain.Utente;
+import it.unisalento.se.saw.dto.DocenteDto;
 import it.unisalento.se.saw.dto.IscrizioneDto;
 import it.unisalento.se.saw.dto.StudenteDto;
 import it.unisalento.se.saw.exceptions.CorsoDiStudioNotFoundException;
@@ -63,6 +66,7 @@ public class StudenteRestController {
 	@RequestMapping(value="/getAll", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<StudenteDto> getAll() throws StudenteNotFoundException, UtenteNotFoundException, CorsoDiStudioNotFoundException, NumeroTelefonoNotFoundException {
 		List<StudenteDto> studentiDto= new ArrayList<StudenteDto>();
+		List<Utente> utenti = utenteService.getAll();
 		List<Studente> studenti = studenteService.getAll();
 		List<CorsoDiStudio> corsi = corsoDiStudioService.getAll();
 		List<NumeroTelefono> numeriTelefono = numeroService.getAll();
@@ -72,43 +76,55 @@ public class StudenteRestController {
 		String nomeCorso = null;
 		String numTelefono = "- ";
 		
+		Iterator<Studente> studenteIterator = studenti.iterator();
+		while(studenteIterator.hasNext()){
+			Studente studente = studenteIterator.next();
+			StudenteDto studenteDto = new StudenteDto();
+			if(studente.getIdstudente() != 1){
+				studenteDto = StudenteConverter.domainToDto(studente, utenti, corsi,numeriTelefono);
+				studentiDto.add(studenteDto);
+			}
+		}
+/*
 		for(int i=0;i<studenti.size();i++) {
 			StudenteDto studenteDto = new StudenteDto();
-			idUtente = studenti.get(i).getUtente().getIdutente();
-			Utente utente = new Utente();
-			utente = utenteService.getById(idUtente);	
 			Studente stud = studenti.get(i);
-			studenteDto.setIdUserStudente(studenti.get(i).getUtente().getIdutente());
-			studenteDto.setIdStudente(stud.getIdstudente());
-			studenteDto.setNome(utente.getNome());
-			studenteDto.setCodiceFiscale(stud.getCodiceFiscale());
-			studenteDto.setCognome(utente.getCognome());
-			studenteDto.setDataNascita(utente.getDataNascita());
-			studenteDto.setEmail(utente.getEmail());
-			
-			for (int j=0; j<numeriTelefono.size(); j++){
-				if (numeriTelefono.get(j).getUtente().getIdutente() == idUtente){
-					numTelefono = numTelefono + numeriTelefono.get(j).getNumeroTelefono() + " - ";
+			if (stud.getIdstudente()!= 1){
+				idUtente = studenti.get(i).getUtente().getIdutente();
+				Utente utente = new Utente();
+				utente = utenteService.getById(idUtente);	
+				studenteDto.setIdUserStudente(studenti.get(i).getUtente().getIdutente());
+				studenteDto.setIdStudente(stud.getIdstudente());
+				studenteDto.setNome(utente.getNome());
+				studenteDto.setCodiceFiscale(stud.getCodiceFiscale());
+				studenteDto.setCognome(utente.getCognome());
+				studenteDto.setDataNascita(utente.getDataNascita());
+				studenteDto.setEmail(utente.getEmail());
+				
+				for (int j=0; j<numeriTelefono.size(); j++){
+					if (numeriTelefono.get(j).getUtente().getIdutente() == idUtente){
+						numTelefono = numTelefono + numeriTelefono.get(j).getNumeroTelefono() + " - ";
+					}
 				}
-			}
-			
-			idCorso = studenti.get(i).getCorsoDiStudioIdcorsoDiStudio();
-			for(int j=0; j< corsi.size(); j++ ){
-				if(idCorso == corsi.get(j).getIdcorsoDiStudio()){
-					nomeCorso = corsi.get(j).getNomeCorso();
+				
+				idCorso = studenti.get(i).getCorsoDiStudioIdcorsoDiStudio();
+				for(int j=0; j< corsi.size(); j++ ){
+					if(idCorso == corsi.get(j).getIdcorsoDiStudio()){
+						nomeCorso = corsi.get(j).getNomeCorso();
+					}
 				}
+				
+				studenteDto.setMatricola(stud.getMatricola());
+				studenteDto.setIndirizzo(stud.getIndirizzo());
+				studenteDto.setNazione(stud.getNazione());
+				studenteDto.setNumeroTelefono(numTelefono);
+				studenteDto.setIdCorsoDiStudio(idCorso);
+				studenteDto.setCorsoDiStudio(nomeCorso);
+				numTelefono = "- ";
 			}
-			
-			studenteDto.setMatricola(stud.getMatricola());
-			studenteDto.setIndirizzo(stud.getIndirizzo());
-			studenteDto.setNazione(stud.getNazione());
-			studenteDto.setNumeroTelefono(numTelefono);
-			studenteDto.setIdCorsoDiStudio(idCorso);
-			studenteDto.setCorsoDiStudio(nomeCorso);
-			numTelefono = "- ";
-
 			studentiDto.add(i, studenteDto);			
 		}
+*/
 		return studentiDto;	
 	}
 	
@@ -159,8 +175,10 @@ public class StudenteRestController {
 	}
 	
 	@RequestMapping(value="/getStudenteIscrittoInsegnamento/{idInsegnamento}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<StudenteDto> getStudenteIscrittoInsegnamento(@PathVariable("idInsegnamento") int idInsegnamento) throws StudenteNotFoundException, UtenteNotFoundException, CorsoDiStudioNotFoundException {
+	public List<StudenteDto> getStudenteIscrittoInsegnamento(@PathVariable("idInsegnamento") int idInsegnamento) throws StudenteNotFoundException, UtenteNotFoundException, CorsoDiStudioNotFoundException, NumeroTelefonoNotFoundException {
 		List<StudenteDto> studentiDto= new ArrayList<StudenteDto>();
+		List<NumeroTelefono> numeriTelefono = numeroService.getAll();
+
 		Insegnamento insegnamento = new Insegnamento();
 		insegnamento.setIdinsegnamento(idInsegnamento);
 		List<Studente> studenti = studenteService.getStudenteIscrittoInsegnamento(insegnamento);
@@ -172,7 +190,7 @@ public class StudenteRestController {
 			StudenteDto studenteDto = new StudenteDto();
 			Studente studente = studenteIterator.next();
 			
-			studenteDto = StudenteConverter.domainToDto(studente, utenti, corsi);
+			studenteDto = StudenteConverter.domainToDto(studente, utenti, corsi,numeriTelefono);
 			studentiDto.add(studenteDto);
 		}
 		return studentiDto;

@@ -14,18 +14,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import it.unisalento.se.saw.Iservices.ICorsoDiStudioService;
 import it.unisalento.se.saw.Iservices.IDocenteService;
+import it.unisalento.se.saw.Iservices.INumeroTelefonoService;
 import it.unisalento.se.saw.Iservices.IStudenteService;
 import it.unisalento.se.saw.Iservices.IUtenteService;
 import it.unisalento.se.saw.converter.UtenteConverter;
 import it.unisalento.se.saw.converter.UtenteLoggatoConverter;
 import it.unisalento.se.saw.domain.CorsoDiStudio;
 import it.unisalento.se.saw.domain.Docente;
+import it.unisalento.se.saw.domain.NumeroTelefono;
 import it.unisalento.se.saw.domain.Studente;
 import it.unisalento.se.saw.domain.Utente;
 import it.unisalento.se.saw.dto.UtenteDto;
-import it.unisalento.se.saw.dto.UtenteLoggatoDto;
+import it.unisalento.se.saw.dto.UtenteLoggatoDto;import it.unisalento.se.saw.dto.ValutazioneDto;
 import it.unisalento.se.saw.exceptions.CorsoDiStudioNotFoundException;
 import it.unisalento.se.saw.exceptions.DocenteNotFoundException;
+import it.unisalento.se.saw.exceptions.NumeroTelefonoNotFoundException;
 import it.unisalento.se.saw.exceptions.StudenteNotFoundException;
 import it.unisalento.se.saw.exceptions.UtenteNotFoundException;
 
@@ -41,6 +44,8 @@ public class UtenteRestController {
 	IStudenteService studenteService;
 	@Autowired
 	ICorsoDiStudioService corsoDiStudioService;
+	@Autowired
+	INumeroTelefonoService numeroTelefonoService;
 
 	public UtenteRestController() {
 		super();
@@ -49,32 +54,9 @@ public class UtenteRestController {
 	public UtenteRestController(IUtenteService utenteService) {
 		this.utenteService = utenteService;
 	}
-	
-/*	
-	@PostMapping(value="save", consumes=MediaType.APPLICATION_JSON_VALUE)
-	public Utente post(@RequestBody Utente utente) throws ParseException, UtenteNotFoundException {
-		return utenteService.save(utente);
-	}
-*/
-	
-/*
-	@RequestMapping(value="/login/{email}/{password}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-	public UtenteDto login(@PathVariable("email") String email,@PathVariable("password") String password) throws UtenteNotFoundException, DocenteNotFoundException, StudenteNotFoundException {
-		
-		Utente u = utenteService.autenticazione(email,password);
-		UtenteDto uDto = new UtenteDto();
-
-		uDto = UtenteConverter.domainToDto(u);
-
-		System.out.println(uDto.getNome() + " " + uDto.getCognome());
-		System.out.println("---------------");
-
-		return uDto;
-	}
-*/
 
 	@RequestMapping(value="/login/{email}/{password}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-	public UtenteLoggatoDto login(@PathVariable("email") String email,@PathVariable("password") String password) throws UtenteNotFoundException, DocenteNotFoundException, StudenteNotFoundException, CorsoDiStudioNotFoundException {
+	public UtenteLoggatoDto login(@PathVariable("email") String email,@PathVariable("password") String password) throws UtenteNotFoundException, DocenteNotFoundException, StudenteNotFoundException, CorsoDiStudioNotFoundException, NumeroTelefonoNotFoundException {
 		
 		Utente u = utenteService.autenticazione(email,password);
 		UtenteDto uDto = UtenteConverter.domainToDto(u);
@@ -83,8 +65,9 @@ public class UtenteRestController {
 		List<Docente> docenti = docenteService.getAll();
 		List<Studente> studenti = studenteService.getAll();
 		List<CorsoDiStudio> corsi = corsoDiStudioService.getAll();
+		List<NumeroTelefono> numeriTelefono = numeroTelefonoService.getAll();
 
-		UtenteLoggatoDto uLoggatoDto = UtenteLoggatoConverter.domainToDto(uDto,utenti,studenti,docenti,corsi);
+		UtenteLoggatoDto uLoggatoDto = UtenteLoggatoConverter.domainToDto(uDto,utenti,studenti,docenti,corsi,numeriTelefono);
 		
 		return uLoggatoDto;
 	}
@@ -98,11 +81,12 @@ public class UtenteRestController {
 		for(int i=0;i<utenti.size();i++) {
 			UtenteDto utenteDto = new UtenteDto();
 			utente= utenti.get(i);
-			
-			utenteDto.setIdutente(utente.getIdutente());
-			utenteDto.setNome(utente.getNome());
-			utenteDto.setCognome(utente.getCognome());
-			utentiDto.add(i, utenteDto);
+			if(utente.getNome() != "default"){
+				utenteDto.setIdutente(utente.getIdutente());
+				utenteDto.setNome(utente.getNome());
+				utenteDto.setCognome(utente.getCognome());
+				utentiDto.add(i, utenteDto);
+			}
 		}
 		return utentiDto;
 	}
