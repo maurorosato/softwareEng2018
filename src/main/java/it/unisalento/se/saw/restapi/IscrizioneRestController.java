@@ -70,7 +70,7 @@ public class IscrizioneRestController {
 		Iterator<Iscrizione> iscrizioneIterator = iscrizioni.iterator();
 		while(iscrizioneIterator.hasNext()){
 			Iscrizione iscr = iscrizioneIterator.next();
-			IscrizioneDto iscrDto = IscrizioneConverter.DomainToDto(iscr, studenti);
+			IscrizioneDto iscrDto = IscrizioneConverter.DomainToDto(iscr/*, studenti*/);
 					
 			iscrizioniDto.add(iscrDto);
 		}

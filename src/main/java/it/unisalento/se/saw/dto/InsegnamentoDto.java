@@ -2,13 +2,13 @@ package it.unisalento.se.saw.dto;
 
 public class InsegnamentoDto {
 	
-	private int idInsegnamento;
-	private String nome;
 	private int cfu;
-	private String corsoDiStudio;
-	private String annoCorso;
+	private String nome;
 	private String docente;
+	private String annoCorso;
 	private int idUserDocente;
+	private int idInsegnamento;
+	private String corsoDiStudio;
 	
 	public int getIdUserDocente() {
 		return idUserDocente;

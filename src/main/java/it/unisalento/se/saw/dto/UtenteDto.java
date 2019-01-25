@@ -2,11 +2,12 @@ package it.unisalento.se.saw.dto;
 
 public class UtenteDto {
 	
-	private int idutente;
 	private String nome;
-	private String cognome;
 	private String email;
-	
+	private int idutente;
+	private String cognome;
+	private String password;
+
 	public String getEmail() {
 		return email;
 	}
@@ -19,7 +20,6 @@ public class UtenteDto {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	private String password;
 	
 	public int getIdutente() {
 		return idutente;

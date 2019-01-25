@@ -36,7 +36,7 @@ public class UtenteLoggatoConverter {
 		while(studenteIterator.hasNext()){
 			Studente studente = studenteIterator.next();
 			if (studente.getUtente().getIdutente() == uDto.getIdutente()){
-				studenteDto = StudenteConverter.domainToDto(studente, utenti,corsi,numeriTelefono);
+				studenteDto = StudenteConverter.domainToDto(studente, /*utenti,*/corsi,numeriTelefono);
 				uLoggatoDto.setStudenteDto(studenteDto);
 				uLoggatoDto.setTypeUtente("studente");
 			}

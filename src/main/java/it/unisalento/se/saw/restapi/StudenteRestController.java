@@ -81,7 +81,7 @@ public class StudenteRestController {
 			Studente studente = studenteIterator.next();
 			StudenteDto studenteDto = new StudenteDto();
 			if(studente.getIdstudente() != 1){
-				studenteDto = StudenteConverter.domainToDto(studente, utenti, corsi,numeriTelefono);
+				studenteDto = StudenteConverter.domainToDto(studente, /*utenti,*/ corsi,numeriTelefono);
 				studentiDto.add(studenteDto);
 			}
 		}
@@ -190,7 +190,7 @@ public class StudenteRestController {
 			StudenteDto studenteDto = new StudenteDto();
 			Studente studente = studenteIterator.next();
 			
-			studenteDto = StudenteConverter.domainToDto(studente, utenti, corsi,numeriTelefono);
+			studenteDto = StudenteConverter.domainToDto(studente,/* utenti,*/ corsi,numeriTelefono);
 			studentiDto.add(studenteDto);
 		}
 		return studentiDto;

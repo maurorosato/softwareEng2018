@@ -61,7 +61,7 @@ public class InsegnamentoRestController {
 			Insegnamento insegnamento = insegnamentoIterator.next();
 			InsegnamentoDto insegnamentoDto = new InsegnamentoDto();
 			if (insegnamento.getIdinsegnamento()!=1){
-				insegnamentoDto = InsegnamentoConverter.domainToDto(insegnamento,corsi,docenti);
+				insegnamentoDto = InsegnamentoConverter.domainToDto(insegnamento,corsi/*,docenti*/);
 				insegnamentiDto.add(insegnamentoDto);
 			}
 	
@@ -82,7 +82,7 @@ public class InsegnamentoRestController {
 		while(insegnamentoIterator.hasNext()){
 			Insegnamento insegnamento = insegnamentoIterator.next();
 			InsegnamentoDto insegnamentoDto = new InsegnamentoDto();
-			insegnamentoDto = InsegnamentoConverter.domainToDto(insegnamento,corsi,docenti);
+			insegnamentoDto = InsegnamentoConverter.domainToDto(insegnamento,corsi/*,docenti*/);
 			
 			insegnamentiDto.add(insegnamentoDto);	
 		}
@@ -143,7 +143,7 @@ public class InsegnamentoRestController {
 		while(insegnamentoIterator.hasNext()){
 			Insegnamento insegnamento = insegnamentoIterator.next();
 			InsegnamentoDto insegnamentoDto = new InsegnamentoDto();
-			insegnamentoDto = InsegnamentoConverter.domainToDto(insegnamento,corsi,docenti);
+			insegnamentoDto = InsegnamentoConverter.domainToDto(insegnamento,corsi/*,docenti*/);
 			
 			insegnamentiDto.add(insegnamentoDto);	
 		}

@@ -6,7 +6,6 @@ public class EventoDto {
 	
 	private int idEvento;
 	private String descrizione;
-	private Float gradimento;
 	private int idAula;
 	private String aula;
 	private Date dataInizio;
@@ -70,12 +69,7 @@ public class EventoDto {
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
-	public Float getGradimento() {
-		return gradimento;
-	}
-	public void setGradimento(Float gradimento) {
-		this.gradimento = gradimento;
-	}
+
 	public String getAula() {
 		return aula;
 	}

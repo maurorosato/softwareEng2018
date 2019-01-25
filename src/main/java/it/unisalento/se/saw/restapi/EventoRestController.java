@@ -89,14 +89,14 @@ public class EventoRestController {
 		List<Evento> eventi = eventoService.getAll();
 		Iterator<Evento> eventoIterator = eventi.iterator();
 
-		List<Aula> aule = aulaService.getAll();
-		List<Utente> utenti = utenteService.getAll();
+//		List<Aula> aule = aulaService.getAll();
+//		List<Utente> utenti = utenteService.getAll();
 		List<Lezione> lezioni = lezioneService.getAll();
-		List<Docente> docenti = (docenteService.getAll());
+//		List<Docente> docenti = (docenteService.getAll());
 		List<AppelloEsame> appelli = appelloEsameService.getAll();
 		List<CorsoDiStudio> corsi = (corsoDiStudioService.getAll());
-		List<Prenotazione> prenotazioni =prenotazioneService.getAll();
-		List<Insegnamento> insegnamenti = (insegnamentoService.getAll());
+//		List<Prenotazione> prenotazioni =prenotazioneService.getAll();
+//		List<Insegnamento> insegnamenti = (insegnamentoService.getAll());
 		
 		float numeroFloat = 0;
 		int idCorso = 0,idDocente = 0, idUtente = 0;
@@ -105,7 +105,7 @@ public class EventoRestController {
 			Evento evento = eventoIterator.next();
 			EventoDto eventoDto = new EventoDto();
 			if (evento.getIdevento() != 1){
-				eventoDto = EventoConverter.domainToDto(evento, aule, utenti, lezioni, docenti, appelli, corsi, prenotazioni, insegnamenti);
+				eventoDto = EventoConverter.domainToDto(evento, lezioni, appelli, corsi /*prenotazioni, insegnamenti,aule, utenti, docenti*/);
 				eventiDto.add(eventoDto);
 			}			
 		}

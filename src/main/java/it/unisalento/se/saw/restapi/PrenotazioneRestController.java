@@ -83,7 +83,7 @@ public class PrenotazioneRestController {
 			//System.out.println(prenotazione.getIdprenotazione());
 			//if(prenotazione.getIdprenotazione()!=1){
 			//	System.out.println("sono dentro");
-			PrenotazioneDto prenotazioneDto = PrenotazioneConverter.domainToDto(prenotazione,docenti);
+			PrenotazioneDto prenotazioneDto = PrenotazioneConverter.domainToDto(prenotazione/*,docenti*/);
 			//}
 			prenotazioniDto.add(prenotazioneDto);
 		}
