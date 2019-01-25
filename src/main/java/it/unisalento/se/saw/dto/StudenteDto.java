@@ -3,18 +3,19 @@ package it.unisalento.se.saw.dto;
 import java.util.Date;
 
 public class StudenteDto {
-	private int idUserStudente;
-	private int idStudente;
+	
 	private String nome;
-	private String cognome;
 	private String email;
+	private String cognome;
+	private String nazione;
+	private int idStudente;
 	private String password;
+	private String matricola;
 	private Date dataNascita;
 	private String indirizzo;
-	private String nazione;
-	private String codiceFiscale;
-	private String matricola;
+	private int idUserStudente;
 	private int idCorsoDiStudio;
+	private String codiceFiscale;
 	private String corsoDiStudio;
 	private String numeroTelefono;
 	

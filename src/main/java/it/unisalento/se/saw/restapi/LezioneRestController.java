@@ -71,19 +71,21 @@ public class LezioneRestController {
 	@RequestMapping(value="/getAll", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<LezioneDto> getAll() throws LezioneNotFoundException, AulaNotFoundException, InsegnamentoNotFoundException, PrenotazioneNotFoundException, EventoNotFoundException, DocenteNotFoundException {
 		List<LezioneDto> lezioniDto= new ArrayList<LezioneDto>();
-		List<Aula> aule = aulaService.getAll();
-		List<Insegnamento> insegnamenti = insegnamentoService.getAll();
 		List<Lezione> lezioni = lezioneService.getAll();
-		List<Prenotazione> prenotazioni = prenotazioneService.getAll();
-		List<Evento> eventi = eventoService.getAll();
-		List<Docente> docenti = docenteService.getAll();
+
+//		List<Aula> aule = aulaService.getAll();
+//		List<Insegnamento> insegnamenti = insegnamentoService.getAll();
+//		List<Lezione> lezioni = lezioneService.getAll();
+//		List<Prenotazione> prenotazioni = prenotazioneService.getAll();
+//		List<Evento> eventi = eventoService.getAll();
+//		List<Docente> docenti = docenteService.getAll();
 		
 		Iterator<Lezione> lezioneIterator = lezioni.iterator();
 		while(lezioneIterator.hasNext()){
 			Lezione lezione = lezioneIterator.next();
 			LezioneDto lezioneDto = new LezioneDto();
 			if (lezione.getIdlezione() != 1){
-				lezioneDto = LezioneConverter.domainToDto(lezione,prenotazioni,eventi,insegnamenti,aule,docenti);
+				lezioneDto = LezioneConverter.domainToDto(lezione/*,prenotazioni,eventi,insegnamenti,aule,docenti*/);
 				lezioniDto.add(lezioneDto);
 			}
 		}
@@ -94,11 +96,11 @@ public class LezioneRestController {
 	public List<LezioneDto> getLezioniInsegnamento(@PathVariable("idInsegnamento") int idInsegnamento) throws LezioneNotFoundException, AulaNotFoundException, InsegnamentoNotFoundException, PrenotazioneNotFoundException, EventoNotFoundException, DocenteNotFoundException {
 		List<LezioneDto> lezioniDto= new ArrayList<LezioneDto>();
 		
-		List<Aula> aule = aulaService.getAll();
-		List<Evento> eventi = eventoService.getAll();
-		List<Docente> docenti = docenteService.getAll();
-		List<Insegnamento> insegnamenti = insegnamentoService.getAll();
-		List<Prenotazione> prenotazioni = prenotazioneService.getAll();
+//		List<Aula> aule = aulaService.getAll();
+//		List<Evento> eventi = eventoService.getAll();
+//		List<Docente> docenti = docenteService.getAll();
+//		List<Insegnamento> insegnamenti = insegnamentoService.getAll();
+//		List<Prenotazione> prenotazioni = prenotazioneService.getAll();
 		
 		Insegnamento insegnamento = new Insegnamento();
 		insegnamento.setIdinsegnamento(idInsegnamento);
@@ -108,7 +110,7 @@ public class LezioneRestController {
 		while(lezioneIterator.hasNext()){
 			Lezione lezione = lezioneIterator.next();
 			LezioneDto lezioneDto;
-			lezioneDto = LezioneConverter.domainToDto(lezione,prenotazioni,eventi,insegnamenti,aule,docenti);
+			lezioneDto = LezioneConverter.domainToDto(lezione/*,prenotazioni,eventi,insegnamenti,aule,docenti*/);
 
 			lezioniDto.add(lezioneDto);
 		}
@@ -143,7 +145,7 @@ public class LezioneRestController {
 
 		while(lezioneIterator.hasNext()){
 			Lezione lezione = lezioneIterator.next();
-			LezioneDto lezioneDto = LezioneConverter.domainToDto(lezione,prenotazioni,eventi,insegnamenti,aule,docenti);
+			LezioneDto lezioneDto = LezioneConverter.domainToDto(lezione/*,prenotazioni,eventi,insegnamenti,aule,docenti*/);
 
 			lezioniDto.add(lezioneDto);
 		}

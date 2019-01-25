@@ -41,30 +41,32 @@ public class MaterialeDidatticoConverter {
 		return materialeDidattico;
 	}
 	
-	public static MaterialeDidatticoDto domainToDto(MaterialeDidattico materialeDidattico, List<Lezione> lezioni,List<Docente> docenti){
+	public static MaterialeDidatticoDto domainToDto(MaterialeDidattico materialeDidattico/*, List<Lezione> lezioni,List<Docente> docenti*/){
 		MaterialeDidatticoDto materialeDidatticoDto = new MaterialeDidatticoDto();
 		
-		Iterator<Lezione> lezioneIterator = lezioni.iterator();
-		while (lezioneIterator.hasNext()){
-			Lezione lez = lezioneIterator.next();
-			if (lez.getIdlezione() == materialeDidattico.getLezione().getIdlezione()){
-				materialeDidatticoDto.setIdEvento(lez.getEvento().getIdevento());
-			}
-		}
-		
-		Iterator<Docente> docenteIterator = docenti.iterator();
-		while (docenteIterator.hasNext()){
-			Docente doc = docenteIterator.next();
-			if (doc.getIddocente() == materialeDidattico.getDocente().getIddocente()){
-				materialeDidatticoDto.setIdUtente(doc.getUtente().getIdutente());
-			}
-		}
+//		Iterator<Lezione> lezioneIterator = lezioni.iterator();
+//		while (lezioneIterator.hasNext()){
+//			Lezione lez = lezioneIterator.next();
+//			if (lez.getIdlezione() == materialeDidattico.getLezione().getIdlezione()){
+//				materialeDidatticoDto.setIdEvento(lez.getEvento().getIdevento());
+//			}
+//		}
+//		
+//		Iterator<Docente> docenteIterator = docenti.iterator();
+//		while (docenteIterator.hasNext()){
+//			Docente doc = docenteIterator.next();
+//			if (doc.getIddocente() == materialeDidattico.getDocente().getIddocente()){
+//				materialeDidatticoDto.setIdUtente(doc.getUtente().getIdutente());
+//			}
+//		}
 
 		materialeDidatticoDto.setNome(materialeDidattico.getNome());
 		materialeDidatticoDto.setLink(materialeDidattico.getLink());
 		materialeDidatticoDto.setIdDocente(materialeDidattico.getDocente().getIddocente());
-		//materialeDidatticoDto.setIdUtente(materialeDidattico.getDocente().getIddocente());
 		materialeDidatticoDto.setIdMaterialeDidattico(materialeDidattico.getIdmaterialeDidattico());
+		materialeDidatticoDto.setIdEvento(materialeDidattico.getLezione().getEvento().getIdevento());
+		materialeDidatticoDto.setIdUtente(materialeDidattico.getDocente().getUtente().getIdutente());
+
 		
 		return materialeDidatticoDto;
 	}

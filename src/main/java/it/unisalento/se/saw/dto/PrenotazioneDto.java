@@ -1,19 +1,18 @@
 package it.unisalento.se.saw.dto;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class PrenotazioneDto {
-	
+	int idDocente;
+	Date dataFine;
+	String docente;
+	Date dataInizio;
     int idprenotazione;
+    String insegnamento;
 	String esameOrLezione;
     String tipologiaEsame;
     String descrizioneEsame;
-    Date dataInizio;
-    Date dataFine;
-    String insegnamento;
-    String docente;
-    int idDocente;
-    
+
     public int getIdDocente() {
 		return idDocente;
 	}

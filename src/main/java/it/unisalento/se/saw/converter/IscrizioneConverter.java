@@ -32,20 +32,25 @@ public class IscrizioneConverter {
 		return iscrizione;
 	}
 	
-	public static IscrizioneDto DomainToDto(Iscrizione iscrizione, List<Studente> studenti){
+	public static IscrizioneDto DomainToDto(Iscrizione iscrizione/*, List<Studente> studenti*/){
 		IscrizioneDto iscrizioneDto = new IscrizioneDto();
-		Studente studente = new Studente();
-		
-		Iterator<Studente> studenteIterator = studenti.iterator();
-		while(studenteIterator.hasNext()){
-			studente = studenteIterator.next();
-			if(studente.getIdstudente() == iscrizione.getStudente().getIdstudente()){
-				iscrizioneDto.setIdUserStudente(studente.getUtente().getIdutente());
-			}
 		iscrizioneDto.setIdIscrizione(iscrizione.getIdiscrizione());
-		iscrizioneDto.setIdInsegnamento(iscrizione.getInsegnamento().getIdinsegnamento());
 		iscrizioneDto.setStato(iscrizione.getStato());
-		}
+		iscrizioneDto.setIdUserStudente(iscrizione.getStudente().getUtente().getIdutente());
+		iscrizioneDto.setIdInsegnamento(iscrizione.getInsegnamento().getIdinsegnamento());
+//		Studente studente = new Studente();
+//		
+//		Iterator<Studente> studenteIterator = studenti.iterator();
+//		while(studenteIterator.hasNext()){
+//			studente = studenteIterator.next();
+//			if(studente.getIdstudente() == iscrizione.getStudente().getIdstudente()){
+//				iscrizioneDto.setIdUserStudente(studente.getUtente().getIdutente());
+//			}
+//		
+//		iscrizioneDto.setIdIscrizione(iscrizione.getIdiscrizione());
+//		iscrizioneDto.setIdInsegnamento(iscrizione.getInsegnamento().getIdinsegnamento());
+//		iscrizioneDto.setStato(iscrizione.getStato());
+//		}
 		return iscrizioneDto;
 	}
 }

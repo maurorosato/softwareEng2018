@@ -9,10 +9,10 @@ public class StrumentazioneConverter {
 	public static StrumentazioneDto domainToDto(Strumentazione strumentazione){
 		StrumentazioneDto strumentazioneDto = new StrumentazioneDto();
 		
-		strumentazioneDto.setIdStrumentazione(strumentazione.getIdstrumentazione());
-		strumentazioneDto.setDescrizione(strumentazione.getDescrizione());
 		strumentazioneDto.setStato(strumentazione.getStato());
+		strumentazioneDto.setDescrizione(strumentazione.getDescrizione());
 		strumentazioneDto.setAulaRiferimento(strumentazione.getAula().getNome());
+		strumentazioneDto.setIdStrumentazione(strumentazione.getIdstrumentazione());
 		
 		return strumentazioneDto;
 	}

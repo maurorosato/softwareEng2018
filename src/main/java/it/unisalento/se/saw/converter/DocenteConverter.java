@@ -15,7 +15,7 @@ public class DocenteConverter {
 		
 		dDto.setGrado(docente.getGrado());
 		dDto.setStipendio(docente.getStipendio());
-		dDto.setStipendio(docente.getIddocente());
+		dDto.setIdDocente(docente.getIddocente());
 		dDto.setNome(docente.getUtente().getNome());
 		dDto.setEmail(docente.getUtente().getEmail());
 		dDto.setCognome(docente.getUtente().getCognome());

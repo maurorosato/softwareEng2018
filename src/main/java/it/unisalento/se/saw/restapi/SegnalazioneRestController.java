@@ -77,7 +77,7 @@ public class SegnalazioneRestController {
 			SegnalazioneDto segnalazioneDto = new SegnalazioneDto();
 			Segnalazione segnalazione = segnalazioneIterator.next();
 			if(segnalazione.getIdsegnalazione() != 1){
-				segnalazioneDto = SegnalazioneConverter.domainToDto(segnalazione, aule, docenti);
+				segnalazioneDto = SegnalazioneConverter.domainToDto(segnalazione/*, aule, docenti*/);
 				segnalazioniDto.add(segnalazioneDto);
 			}
 		}
@@ -91,7 +91,7 @@ public class SegnalazioneRestController {
 		List<Aula> aule = (aulaService.getAll());
 		List<Docente> docenti = docenteService.getAll();
 		Segnalazione segnalazione = segnalazioneService.getById(id);
-		SegnalazioneDto segnalazioneDto = SegnalazioneConverter.domainToDto(segnalazione, aule, docenti);
+		SegnalazioneDto segnalazioneDto = SegnalazioneConverter.domainToDto(segnalazione/*,aule, docenti*/);
 		
 		return segnalazioneDto;
 	}

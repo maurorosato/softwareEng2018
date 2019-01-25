@@ -10,10 +10,10 @@ public class SegnalazioneDto {
 	private String descrizione;
 	private String motivazione;
 	private int idSegnalazione;
+	private int idDocenteSegnalante;
 	private String docenteSegnalante;
 	private String statoSegnalazione;
 	private String oggettoInteressato;
-	private int idDocenteSegnalante;
 	private int idUserDocenteSegnalante;
 	
 	public int getIdDocenteSegnalante() {

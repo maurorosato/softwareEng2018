@@ -12,10 +12,14 @@ public class InsegnamentoConverter {
 
 	public static Insegnamento dtoToDomain(InsegnamentoDto insegnamentoDto,List<Docente> docenti, List<CorsoDiStudio> corsi){
 		Insegnamento insegnamento = new Insegnamento();
-		Iterator<Docente> docenteIterator = docenti.iterator();
 		Iterator<CorsoDiStudio> corsoIterator = corsi.iterator();
-		Docente docente = new Docente();
 		int anno = 0;
+
+		insegnamento.setCfu(insegnamentoDto.getCfu());
+		insegnamento.setNome(insegnamentoDto.getNome());
+
+		Iterator<Docente> docenteIterator = docenti.iterator();
+		Docente docente = new Docente();
 
 		while (docenteIterator.hasNext()){
 			Docente docenteI = docenteIterator.next();
@@ -32,9 +36,6 @@ public class InsegnamentoConverter {
 			}
 		}
 		
-		insegnamento.setNome(insegnamentoDto.getNome());
-		insegnamento.setCfu(insegnamentoDto.getCfu());
-
 		switch (insegnamentoDto.getAnnoCorso()){
 			case "Primo anno":
 				anno = 1 ;
@@ -50,22 +51,26 @@ public class InsegnamentoConverter {
 		return insegnamento;
 	}
 	
-	public static InsegnamentoDto domainToDto(Insegnamento insegnamento, List<CorsoDiStudio> corsi, List<Docente> docenti){
+	public static InsegnamentoDto domainToDto(Insegnamento insegnamento, List<CorsoDiStudio> corsi/*, List<Docente> docenti*/){
 		InsegnamentoDto insegnamentoDto = new InsegnamentoDto();
 		
 		insegnamentoDto.setCfu(insegnamento.getCfu());
 		insegnamentoDto.setNome(insegnamento.getNome());
 		insegnamentoDto.setIdInsegnamento(insegnamento.getIdinsegnamento());
+		insegnamentoDto.setIdUserDocente(insegnamento.getDocente().getUtente().getIdutente());
+		insegnamentoDto.setDocente(insegnamento.getDocente().getUtente().getNome() + ' ' + insegnamento.getDocente().getUtente().getCognome());
 
-		Iterator<Docente> docenteIterator = docenti.iterator();
-		while(docenteIterator.hasNext()){
-			Docente docente = docenteIterator.next();
-			if (insegnamento.getDocente().getIddocente() ==docente.getIddocente()){
-				insegnamentoDto.setDocente(docente.getUtente().getNome() + ' ' + docente.getUtente().getCognome());
-				insegnamentoDto.setIdUserDocente(docente.getUtente().getIdutente());
-
-			}
-		}
+//
+//		Iterator<Docente> docenteIterator = docenti.iterator();
+//		while(docenteIterator.hasNext()){
+//			Docente docente = docenteIterator.next();
+//			if (insegnamento.getDocente().getIddocente() ==docente.getIddocente()){
+//				insegnamentoDto.setDocente(docente.getUtente().getNome() + ' ' + docente.getUtente().getCognome());
+//				insegnamentoDto.setIdUserDocente(docente.getUtente().getIdutente());
+//
+//			}
+//		}
+//		
 		Iterator<CorsoDiStudio> corsoIterator = corsi.iterator();
 		while(corsoIterator.hasNext()){
 			CorsoDiStudio corso = corsoIterator.next();
