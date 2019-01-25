@@ -46,9 +46,11 @@ public class CorsoDiStudioRestController {
 		while (corsoIterator.hasNext()){
 			CorsoDiStudioDto corsoDto = new CorsoDiStudioDto();
 			CorsoDiStudio corso = corsoIterator.next();
+			if (corso.getIdcorsoDiStudio()!=1){
+				corsoDto = CorsoDiStudioConverter.domainToDto(corso);
+				corsiDto.add(corsoDto);
+			}
 
-			corsoDto = CorsoDiStudioConverter.domainToDto(corso);
-			corsiDto.add(corsoDto);
 		}
 	
 		return corsiDto;

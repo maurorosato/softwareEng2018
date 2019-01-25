@@ -42,8 +42,8 @@ public class IscrizioneConverter {
 			if(studente.getIdstudente() == iscrizione.getStudente().getIdstudente()){
 				iscrizioneDto.setIdUserStudente(studente.getUtente().getIdutente());
 			}
-		
-		iscrizioneDto.setIdInsegnamento(iscrizione.getIdiscrizione());
+		iscrizioneDto.setIdIscrizione(iscrizione.getIdiscrizione());
+		iscrizioneDto.setIdInsegnamento(iscrizione.getInsegnamento().getIdinsegnamento());
 		iscrizioneDto.setStato(iscrizione.getStato());
 		}
 		return iscrizioneDto;

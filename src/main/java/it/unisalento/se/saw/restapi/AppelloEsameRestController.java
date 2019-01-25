@@ -107,11 +107,12 @@ public class AppelloEsameRestController {
 		Iterator<AppelloEsame> appelloEsameIterator = appelli.iterator();
 		while(appelloEsameIterator.hasNext()){
 			AppelloEsame appelloEsame = appelloEsameIterator.next();
-			
 			AppelloEsameDto appelloEsameDto = new AppelloEsameDto();
-			appelloEsameDto = AppelloEsameConverter.domainToDto(appelloEsame,prenotazioni,eventi,insegnamenti,aule,docenti);
-
-			appelliEsameDto.add(appelloEsameDto);
+			
+			if(appelloEsame.getIdappelloEsame() != 1){
+				appelloEsameDto = AppelloEsameConverter.domainToDto(appelloEsame/*,prenotazioni,eventi,insegnamenti,aule,docenti*/);
+				appelliEsameDto.add(appelloEsameDto);
+			}
 		}
 
 		return appelliEsameDto;		
@@ -146,7 +147,7 @@ public class AppelloEsameRestController {
 			AppelloEsame appelloEsame = appelloEsameIterator.next();
 			
 			AppelloEsameDto appelloEsameDto = new AppelloEsameDto();
-			appelloEsameDto = AppelloEsameConverter.domainToDto(appelloEsame,prenotazioni,eventi,insegnamenti,aule,docenti);
+			appelloEsameDto = AppelloEsameConverter.domainToDto(appelloEsame /*,prenotazioni,eventi,insegnamenti,aule,docenti*/);
 
 			appelliEsameDto.add(appelloEsameDto);
 		}
@@ -171,7 +172,7 @@ public class AppelloEsameRestController {
 		while(appelloIterator.hasNext()){
 			AppelloEsame appelloEsame = appelloIterator.next();
 			AppelloEsameDto appelloEsameDto;
-			appelloEsameDto = AppelloEsameConverter.domainToDto(appelloEsame,prenotazioni,eventi,insegnamenti,aule,docenti);
+			appelloEsameDto = AppelloEsameConverter.domainToDto(appelloEsame/*,prenotazioni,eventi,insegnamenti,aule,docenti*/);
 
 			appelliEsameDto.add(appelloEsameDto);
 		}

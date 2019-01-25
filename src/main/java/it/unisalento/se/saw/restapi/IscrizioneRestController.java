@@ -20,6 +20,7 @@ import it.unisalento.se.saw.domain.Iscrizione;
 import it.unisalento.se.saw.domain.Studente;
 import it.unisalento.se.saw.dto.IscrizioneDto;
 import it.unisalento.se.saw.exceptions.IscrizioneNotFoundException;
+import it.unisalento.se.saw.exceptions.StrumentazioneNotFoundException;
 import it.unisalento.se.saw.exceptions.StudenteNotFoundException;
 
 @RestController()
@@ -75,5 +76,14 @@ public class IscrizioneRestController {
 		}
 	
 		return iscrizioniDto;
+	}
+	
+	@RequestMapping (value = "/rimuoviIscrizione/{idIscrizione}", method = RequestMethod.GET)
+	public void rimuoviIscrizione(@PathVariable("idIscrizione") int idIscrizione) throws IscrizioneNotFoundException {
+		Iscrizione iscrizione = new Iscrizione();
+		iscrizione.setIdiscrizione(idIscrizione);
+		System.out.println(idIscrizione);
+		
+		iscrizioneService.rimuoviIscrizione(iscrizione);
 	}
 }

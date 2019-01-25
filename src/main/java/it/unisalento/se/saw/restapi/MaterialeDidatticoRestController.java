@@ -62,9 +62,11 @@ public class MaterialeDidatticoRestController {
 		Iterator<MaterialeDidattico> matDidatticoIterator = materialeDidattico.iterator();
 		while(matDidatticoIterator.hasNext()){
 			MaterialeDidattico matDidattico = matDidatticoIterator.next();
-			MaterialeDidatticoDto materialeDidatticoDto = MaterialeDidatticoConverter.domainToDto(matDidattico,lezioni,docenti);
-			
-			materialeDidatticoListaDto.add(materialeDidatticoDto);
+			MaterialeDidatticoDto materialeDidatticoDto = new MaterialeDidatticoDto();
+			if(matDidattico.getIdmaterialeDidattico() != 1){
+				 materialeDidatticoDto = MaterialeDidatticoConverter.domainToDto(matDidattico,lezioni,docenti);
+				 materialeDidatticoListaDto.add(materialeDidatticoDto);
+			}
 		}	
 		return materialeDidatticoListaDto;
 	}

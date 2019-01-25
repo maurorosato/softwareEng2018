@@ -79,9 +79,12 @@ public class PrenotazioneRestController {
 		
 		while(prenotazioneIterator.hasNext()){
 			Prenotazione prenotazione = prenotazioneIterator.next();
-			PrenotazioneDto prenotazioneDto = new PrenotazioneDto();
-			prenotazioneDto = PrenotazioneConverter.domainToDto(prenotazione,docenti);
-
+			//PrenotazioneDto prenotazioneDto = null;
+			//System.out.println(prenotazione.getIdprenotazione());
+			//if(prenotazione.getIdprenotazione()!=1){
+			//	System.out.println("sono dentro");
+			PrenotazioneDto prenotazioneDto = PrenotazioneConverter.domainToDto(prenotazione,docenti);
+			//}
 			prenotazioniDto.add(prenotazioneDto);
 		}
 		return prenotazioniDto;

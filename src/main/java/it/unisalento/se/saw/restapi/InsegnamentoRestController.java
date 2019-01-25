@@ -60,32 +60,13 @@ public class InsegnamentoRestController {
 		while(insegnamentoIterator.hasNext()){
 			Insegnamento insegnamento = insegnamentoIterator.next();
 			InsegnamentoDto insegnamentoDto = new InsegnamentoDto();
-			insegnamentoDto = InsegnamentoConverter.domainToDto(insegnamento,corsi,docenti);
-			
-			insegnamentiDto.add(insegnamentoDto);	
-		}
-/*
-		for(int i=0; i < insegnamenti.size(); i++){
-			InsegnamentoDto insegnamentoDto = new InsegnamentoDto();
-			
-			insegnamentoDto.setIdInsegnamento(insegnamenti.get(i).getIdinsegnamento());
-			insegnamentoDto.setNome(insegnamenti.get(i).getNome());
-			insegnamentoDto.setCfu(insegnamenti.get(i).getCfu());
-			
-			for (int j=0; j < corsi.size(); j++){
-				if(insegnamenti.get(i).getCorsoDiStudioIdcorsoDiStudio() == corsi.get(j).getIdcorsoDiStudio()){
-					insegnamentoDto.setCorsoDiStudio(corsi.get(j).getNomeCorso());
-				}
-			}		
-			for (int t=0; t < docenti.size(); t++){
-				if(insegnamenti.get(i).getDocente().getIddocente() == docenti.get(t).getIddocente()){
-					insegnamentoDto.setDocente(docenti.get(t).getUtente().getNome() +" "+ docenti.get(t).getUtente().getCognome() );
-				}
+			if (insegnamento.getIdinsegnamento()!=1){
+				insegnamentoDto = InsegnamentoConverter.domainToDto(insegnamento,corsi,docenti);
+				insegnamentiDto.add(insegnamentoDto);
 			}
-			
-			insegnamentiDto.add(i, insegnamentoDto);	
+	
 		}
-*/
+
 		return insegnamentiDto;
 	}
 	

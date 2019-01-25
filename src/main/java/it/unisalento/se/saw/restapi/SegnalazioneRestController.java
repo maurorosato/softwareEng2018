@@ -2,7 +2,6 @@ package it.unisalento.se.saw.restapi;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -60,15 +59,7 @@ public class SegnalazioneRestController {
 		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 
 		segnalazione = SegnalazioneConverter.dtoToDomain(segnalazioneDto, aule, sqlDate);
-		
-		
-		System.out.println("data: "+segnalazione.getData());
-		System.out.println("descrizione "+segnalazione.getDescrizione());
-		System.out.println("idAULA: "+segnalazione.getAula().getIdaula());
-		System.out.println("statoSegnalazione: "+segnalazione.getStatoSegnalazione());
-		System.out.println("oggettoInteressato:" +segnalazione.getOggettoInteressato());
-		System.out.println("motivazione: "+segnalazione.getMotivazione());
-		
+
 		return segnalazioneService.save(segnalazione);
 
 	}
@@ -85,9 +76,10 @@ public class SegnalazioneRestController {
 		while(segnalazioneIterator.hasNext()){
 			SegnalazioneDto segnalazioneDto = new SegnalazioneDto();
 			Segnalazione segnalazione = segnalazioneIterator.next();
-			
-			segnalazioneDto = SegnalazioneConverter.domainToDto(segnalazione, aule, docenti);	
-			segnalazioniDto.add(segnalazioneDto);
+			if(segnalazione.getIdsegnalazione() != 1){
+				segnalazioneDto = SegnalazioneConverter.domainToDto(segnalazione, aule, docenti);
+				segnalazioniDto.add(segnalazioneDto);
+			}
 		}
 	
 		return segnalazioniDto;
