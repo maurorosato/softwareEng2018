@@ -3,19 +3,19 @@ package it.unisalento.se.saw.dto;
 import java.util.Date;
 
 public class LezioneDto {
-	int idLezione;
-	Date dataInizio;
-	Date dataFine;
 	String aula;
+	Date dataFine;
+	int idLezione;
 	String docente;
+	Date dataInizio;
+	int idUserDocente;
 	double latitudine;
+	int idInsegnamento;
 	double longitudine;
 	String descrizione;
 	String insegnamento;
 	int idEventoLezione;
-	int idUserDocente;
 	int idPrenotazioneLezione;
-	int idInsegnamento;
 	
 	public int getIdInsegnamento() {
 		return idInsegnamento;
