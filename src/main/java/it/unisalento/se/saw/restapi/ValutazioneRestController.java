@@ -10,6 +10,7 @@ import it.unisalento.se.saw.domain.Valutazione;
 import it.unisalento.se.saw.dto.IscrizioneDto;
 import it.unisalento.se.saw.dto.MaterialeDidatticoDto;
 import it.unisalento.se.saw.dto.ValutazioneDto;
+import it.unisalento.se.saw.Iservices.IPrenotazioneService;
 import it.unisalento.se.saw.Iservices.IStudenteService;
 import it.unisalento.se.saw.Iservices.IValutazioneService;
 import it.unisalento.se.saw.converter.MaterialeDidatticoConverter;
@@ -44,6 +45,11 @@ public class ValutazioneRestController {
 	
 	@Autowired
 	IStudenteService studenteService;
+	
+	public ValutazioneRestController(IValutazioneService valutazioneService, IStudenteService studenteService) {
+		this.valutazioneService = valutazioneService;
+		this.studenteService = studenteService;
+	}
 	
 	public ValutazioneRestController() {
 		super();

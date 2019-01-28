@@ -45,8 +45,10 @@ public class SegnalazioneRestController {
 		super();
 	}
 	
-	public SegnalazioneRestController(ISegnalazioneService segnalazioneService) {
+	public SegnalazioneRestController(ISegnalazioneService segnalazioneService, IAulaService aulaService, IDocenteService docenteService) {
 		this.segnalazioneService= segnalazioneService;
+		this.docenteService = docenteService;
+		this.aulaService = aulaService;
 	}
 	
 	

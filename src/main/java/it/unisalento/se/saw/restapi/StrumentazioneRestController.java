@@ -39,8 +39,9 @@ public class StrumentazioneRestController {
 		super();
 	}
 	
-	public StrumentazioneRestController(IStrumentazioneService strumentazioneService) {
+	public StrumentazioneRestController(IStrumentazioneService strumentazioneService, IAulaService aulaService) {
 		this.strumentazioneService= strumentazioneService;
+		this.aulaService = aulaService;
 	}
 
 	@RequestMapping(value="/getAll", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)

@@ -68,8 +68,13 @@ public class AppelloEsameRestController {
 		super(); 
 	}
 	
-	public AppelloEsameRestController(IAppelloEsameService appelloEsameService) {
+	public AppelloEsameRestController(IAppelloEsameService appelloEsameService, IAulaService aulaService, IEventoService eventoService, IInsegnamentoService insegnamentoService, IPrenotazioneService prenotazioneService, IDocenteService docenteService) {
 		this.appelloEsameService = appelloEsameService;
+		this.aulaService = aulaService;
+		this.eventoService = eventoService;
+		this.insegnamentoService = insegnamentoService;
+		this.prenotazioneService = prenotazioneService;
+		this.docenteService = docenteService;
 	}
 	
 	@PostMapping(value="save", consumes=MediaType.APPLICATION_JSON_VALUE)

@@ -43,17 +43,20 @@ public class InsegnamentoRestController {
 		super();
 	}
 	
-	public InsegnamentoRestController(IInsegnamentoService insegnamentoService) {
+	public InsegnamentoRestController(IInsegnamentoService insegnamentoService,ICorsoDiStudioService corsoDiStudioService,IDocenteService docenteService) {
 		this.insegnamentoService= insegnamentoService;
+		this.corsoDiStudioService=corsoDiStudioService;
+		this.docenteService=docenteService;
 	}
 
 	@RequestMapping(value="/getAll", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<InsegnamentoDto> getAll() throws InsegnamentoNotFoundException, CorsoDiStudioNotFoundException, DocenteNotFoundException {
+		
 		List<InsegnamentoDto> insegnamentiDto= new ArrayList<InsegnamentoDto>();
 		
 		List<Insegnamento> insegnamenti = (insegnamentoService.getAll());
-		List<CorsoDiStudio> corsi = (corsoDiStudioService.getAll());
 		List<Docente> docenti = (docenteService.getAll());
+		List<CorsoDiStudio> corsi = (corsoDiStudioService.getAll());
 
 		Iterator<Insegnamento> insegnamentoIterator = insegnamenti.iterator();
 		
