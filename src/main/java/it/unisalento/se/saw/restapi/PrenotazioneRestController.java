@@ -26,22 +26,7 @@ public class PrenotazioneRestController {
 	
 	@Autowired
 	IPrenotazioneService prenotazioneService;
-//	
-//	@Autowired
-//	IAulaService aulaService;
-//	
-//	@Autowired
-//	IDocenteService docenteService;
-////	
-//	@Autowired
-//	IAppelloEsameService appelloEsameService;
-//	
-//	@Autowired
-//	IEventoService eventoService;
-//	
-//	@Autowired
-//	IInsegnamentoService insegnamentoService;
-//	
+	
 	public PrenotazioneRestController() {
 		super(); 
 	}
@@ -53,9 +38,7 @@ public class PrenotazioneRestController {
 	@PostMapping(value="save", consumes=MediaType.APPLICATION_JSON_VALUE)
 	public Prenotazione post(@RequestBody PrenotazioneDto prenotazioneDto) throws PrenotazioneNotFoundException, ParseException, AppelloEsameNotFoundException, InsegnamentoNotFoundException {
 		Prenotazione prenotazioneSave = new Prenotazione();	
-		System.out.println("rest: "+prenotazioneDto.getDataFine());
 		prenotazioneSave = PrenotazioneConverter.dtoToDomain(prenotazioneDto);
-		System.out.println("rest2: " +prenotazioneSave.getDataFine());
 		return prenotazioneService.save(prenotazioneSave);	
 	}
 
@@ -63,7 +46,6 @@ public class PrenotazioneRestController {
 	public List<PrenotazioneDto> getAll() throws PrenotazioneNotFoundException, DocenteNotFoundException {
 		
 		List<PrenotazioneDto> prenotazioniDto = new ArrayList<PrenotazioneDto>();
-		//List<Docente> docenti = docenteService.getAll();
 		List<Prenotazione> prenotazioni = (prenotazioneService.getAll());
 		Iterator<Prenotazione> prenotazioneIterator = prenotazioni.iterator();
 		

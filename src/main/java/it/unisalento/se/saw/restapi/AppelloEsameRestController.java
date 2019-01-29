@@ -1,6 +1,7 @@
 package it.unisalento.se.saw.restapi;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -83,6 +84,12 @@ public class AppelloEsameRestController {
 		Prenotazione prenotazione = new Prenotazione();
 		Evento evento = new Evento();
 		
+		int hour = prenotazioneDto.getDataFine().getHours()-1;	
+		prenotazioneDto.getDataFine().setHours(hour);
+		
+		int hour2 = prenotazioneDto.getDataInizio().getHours()-1;	
+		prenotazioneDto.getDataInizio().setHours(hour2);
+
 		List<Insegnamento> insegnamenti = insegnamentoService.getAll();
 		
 		prenotazione = PrenotazioneConverter.dtoToDomain(prenotazioneDto);
