@@ -51,8 +51,12 @@ public class UtenteRestController {
 		super();
 	}
 
-	public UtenteRestController(IUtenteService utenteService) {
+	public UtenteRestController(IUtenteService utenteService, IDocenteService docenteService, IStudenteService studenteService, ICorsoDiStudioService corsoDiStudioService, INumeroTelefonoService numeroTelefonoService ) {
 		this.utenteService = utenteService;
+		this.docenteService = docenteService;
+		this.studenteService = studenteService;
+		this.corsoDiStudioService = corsoDiStudioService;
+		this.numeroTelefonoService = numeroTelefonoService;
 	}
 
 	@RequestMapping(value="/login/{email}/{password}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)

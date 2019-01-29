@@ -64,21 +64,19 @@ public class LezioneRestController {
 		super();
 	}
 	
-	public LezioneRestController(ILezioneService lezioneService) {
+	public LezioneRestController(ILezioneService lezioneService, IAulaService aulaService, IEventoService eventoService, IInsegnamentoService insegnamentoService, IPrenotazioneService prenotazioneService, IDocenteService docenteService) {
 		this.lezioneService = lezioneService;
+		this.aulaService = aulaService;
+		this.eventoService = eventoService;
+		this.insegnamentoService = insegnamentoService;
+		this.lezioneService = lezioneService;
+		this.prenotazioneService = prenotazioneService;
 	}
 	
 	@RequestMapping(value="/getAll", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<LezioneDto> getAll() throws LezioneNotFoundException, AulaNotFoundException, InsegnamentoNotFoundException, PrenotazioneNotFoundException, EventoNotFoundException, DocenteNotFoundException {
 		List<LezioneDto> lezioniDto= new ArrayList<LezioneDto>();
 		List<Lezione> lezioni = lezioneService.getAll();
-
-//		List<Aula> aule = aulaService.getAll();
-//		List<Insegnamento> insegnamenti = insegnamentoService.getAll();
-//		List<Lezione> lezioni = lezioneService.getAll();
-//		List<Prenotazione> prenotazioni = prenotazioneService.getAll();
-//		List<Evento> eventi = eventoService.getAll();
-//		List<Docente> docenti = docenteService.getAll();
 		
 		Iterator<Lezione> lezioneIterator = lezioni.iterator();
 		while(lezioneIterator.hasNext()){
@@ -95,12 +93,6 @@ public class LezioneRestController {
 	@RequestMapping(value="/getLezioniInsegnamento/{idInsegnamento}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<LezioneDto> getLezioniInsegnamento(@PathVariable("idInsegnamento") int idInsegnamento) throws LezioneNotFoundException, AulaNotFoundException, InsegnamentoNotFoundException, PrenotazioneNotFoundException, EventoNotFoundException, DocenteNotFoundException {
 		List<LezioneDto> lezioniDto= new ArrayList<LezioneDto>();
-		
-//		List<Aula> aule = aulaService.getAll();
-//		List<Evento> eventi = eventoService.getAll();
-//		List<Docente> docenti = docenteService.getAll();
-//		List<Insegnamento> insegnamenti = insegnamentoService.getAll();
-//		List<Prenotazione> prenotazioni = prenotazioneService.getAll();
 		
 		Insegnamento insegnamento = new Insegnamento();
 		insegnamento.setIdinsegnamento(idInsegnamento);
@@ -119,12 +111,6 @@ public class LezioneRestController {
 	@RequestMapping(value="/getAllStudente/{idCorsoStudente}/{annoCorso}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<LezioneDto> getAllStudente(@PathVariable("idCorsoStudente") int idCorsoStudente,@PathVariable("annoCorso") String annoCorso) throws LezioneNotFoundException, AulaNotFoundException, InsegnamentoNotFoundException, PrenotazioneNotFoundException, EventoNotFoundException, DocenteNotFoundException {
 		List<LezioneDto> lezioniDto= new ArrayList<LezioneDto>();
-		
-		List<Aula> aule = aulaService.getAll();
-		List<Evento> eventi = eventoService.getAll();
-		List<Docente> docenti = docenteService.getAll();
-		List<Insegnamento> insegnamenti = insegnamentoService.getAll();
-		List<Prenotazione> prenotazioni = prenotazioneService.getAll();
 
 		int anno = 0;
 		
@@ -157,6 +143,12 @@ public class LezioneRestController {
 		Evento evento = new Evento();
 		Lezione lezione = new Lezione();
 		Prenotazione prenotazione = new Prenotazione();
+		
+		int hour = prenotazioneDto.getDataFine().getHours()-1;	
+		prenotazioneDto.getDataFine().setHours(hour);
+		
+		int hour2 = prenotazioneDto.getDataInizio().getHours()-1;	
+		prenotazioneDto.getDataInizio().setHours(hour2);
 		
 		List<Insegnamento> insegnamenti = insegnamentoService.getAll();
 		

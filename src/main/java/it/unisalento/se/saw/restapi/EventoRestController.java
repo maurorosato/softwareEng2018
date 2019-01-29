@@ -49,7 +49,7 @@ public class EventoRestController {
 	IEventoService eventoService;
 	
 	@Autowired
-	IAulaService aulaService;
+	IAppelloEsameService appelloEsameService;
 	
 	@Autowired
 	ICorsoDiStudioService corsoDiStudioService;
@@ -57,28 +57,16 @@ public class EventoRestController {
 	@Autowired
 	ILezioneService lezioneService;
 	
-	@Autowired
-	IDocenteService docenteService;
-	
-	@Autowired
-	IInsegnamentoService insegnamentoService;
-	
-	@Autowired
-	IUtenteService utenteService;
-	
-	@Autowired
-	IAppelloEsameService appelloEsameService;
-	
-	@Autowired
-	IPrenotazioneService prenotazioneService;
-	
 	public EventoRestController() {
 		// TODO Auto-generated constructor stub
 		super();
 	}
 	
-	public EventoRestController(IEventoService eventoService) {
+	public EventoRestController(IEventoService eventoService, IAppelloEsameService appelloEsameService, ICorsoDiStudioService corsoDiStudioService, ILezioneService lezioneService ) {
 		this.eventoService = eventoService;
+		this.appelloEsameService= appelloEsameService;
+		this.corsoDiStudioService = corsoDiStudioService;
+		this.lezioneService = lezioneService;
 	}
 	
 	@RequestMapping(value="/getAll", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
@@ -98,8 +86,8 @@ public class EventoRestController {
 //		List<Prenotazione> prenotazioni =prenotazioneService.getAll();
 //		List<Insegnamento> insegnamenti = (insegnamentoService.getAll());
 		
-		float numeroFloat = 0;
-		int idCorso = 0,idDocente = 0, idUtente = 0;
+//		float numeroFloat = 0;
+//		int idCorso = 0,idDocente = 0, idUtente = 0;
 		
 		while (eventoIterator.hasNext()){
 			Evento evento = eventoIterator.next();
