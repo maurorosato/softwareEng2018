@@ -1,6 +1,7 @@
 package it.unisalento.se.saw.restapi;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -68,8 +69,13 @@ public class AppelloEsameRestController {
 		super(); 
 	}
 	
-	public AppelloEsameRestController(IAppelloEsameService appelloEsameService) {
+	public AppelloEsameRestController(IAppelloEsameService appelloEsameService, IAulaService aulaService, IEventoService eventoService, IInsegnamentoService insegnamentoService, IPrenotazioneService prenotazioneService, IDocenteService docenteService) {
 		this.appelloEsameService = appelloEsameService;
+		this.aulaService = aulaService;
+		this.eventoService = eventoService;
+		this.insegnamentoService = insegnamentoService;
+		this.prenotazioneService = prenotazioneService;
+		this.docenteService = docenteService;
 	}
 	
 	@PostMapping(value="save", consumes=MediaType.APPLICATION_JSON_VALUE)
@@ -78,6 +84,12 @@ public class AppelloEsameRestController {
 		Prenotazione prenotazione = new Prenotazione();
 		Evento evento = new Evento();
 		
+		int hour = prenotazioneDto.getDataFine().getHours()-1;	
+		prenotazioneDto.getDataFine().setHours(hour);
+		
+		int hour2 = prenotazioneDto.getDataInizio().getHours()-1;	
+		prenotazioneDto.getDataInizio().setHours(hour2);
+
 		List<Insegnamento> insegnamenti = insegnamentoService.getAll();
 		
 		prenotazione = PrenotazioneConverter.dtoToDomain(prenotazioneDto);

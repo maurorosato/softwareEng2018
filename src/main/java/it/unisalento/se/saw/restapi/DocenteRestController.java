@@ -48,8 +48,10 @@ public class DocenteRestController {
 		super();
 	}
 	
-	public DocenteRestController(IDocenteService docenteService) {
+	public DocenteRestController(IDocenteService docenteService, IUtenteService utenteService, INumeroTelefonoService numeroTelefonoService) {
 		this.docenteService= docenteService;
+		this.numeroTelefonoService = numeroTelefonoService;
+		this.utenteService = utenteService;
 	}
 	/*
 	@PostMapping(value="save", consumes=MediaType.APPLICATION_JSON_VALUE)

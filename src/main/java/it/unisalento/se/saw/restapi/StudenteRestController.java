@@ -45,7 +45,6 @@ public class StudenteRestController {
 	@Autowired
 	IUtenteService utenteService;
 
-	
 	@Autowired
 	IStudenteService studenteService;
 	
@@ -59,8 +58,11 @@ public class StudenteRestController {
 		super();
 	}
 	
-	public StudenteRestController(IStudenteService studenteService) {
+	public StudenteRestController(IStudenteService studenteService, IUtenteService utenteService, ICorsoDiStudioService corsoDiStudioService, INumeroTelefonoService numService) {
 		this.studenteService = studenteService;
+		this.corsoDiStudioService = corsoDiStudioService;
+		this.numeroService = numService;
+		this.utenteService = utenteService;
 	}
 	
 	@RequestMapping(value="/getAll", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
