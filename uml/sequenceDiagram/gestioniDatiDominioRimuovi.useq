@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.2.2" icons="true" generate-combined-fragments="true">  
+  <object id="1" language="java" name="it.unisalento.se.saw.restapi.AulaRestController" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/restapi/AulaRestController.java" binary="false" 
+    label="aulaRestController" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="178" y="0"/>    
+    <execution id="2">      
+      <position height="191" width="153" x="5" y="120"/>    
+    </execution>    
+    <execution id="5">      
+      <position height="21" width="7" x="78" y="206"/>    
+    </execution>  
+  </object>  
+  <object id="6" language="java" name="it.unisalento.se.saw.services.AulaService" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/AulaService.java" binary="false" 
+    label="aulaService" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="287" y="0"/>    
+    <execution id="4">      
+      <position height="149" width="138" x="162" y="141"/>    
+    </execution>    
+    <execution id="9">      
+      <position height="65" width="7" x="228" y="183"/>    
+    </execution>  
+  </object>  
+  <object id="11" language="java" name="it.unisalento.se.saw.repositories.AulaRepository" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/repositories/AulaRepository.java" binary="false" 
+    label="aulaRepository" type="interface" autoSize="true">    
+    <position height="-1" width="-1" x="395" y="0"/>    
+    <execution id="8">      
+      <position height="107" width="154" x="304" y="162"/>    
+    </execution>  
+  </object>  
+  <message id="3" operation="rimuoviAula(int):void" asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="7" operation="rimuoviAula(java.lang.Integer):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="8"/>  
+  </message>  
+  <message id="10" asynchronous="false">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="5"/>  
+  </message>  
+  <message id="12" asynchronous="false">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="9"/>  
+  </message>
+</sequence-diagram>

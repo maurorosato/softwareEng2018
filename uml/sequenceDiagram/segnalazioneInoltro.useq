@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.2.2" icons="true" generate-combined-fragments="true">  
+  <object id="1" language="java" name="it.unisalento.se.saw.restapi.SegnalazioneRestController" 
+    project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/restapi/SegnalazioneRestController.java" binary="false" 
+    label="segnalazioneRestController" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="98" y="0"/>    
+    <execution id="2">      
+      <position height="316" width="214" x="5" y="99"/>    
+    </execution>    
+    <execution id="5">      
+      <position height="232" width="7" x="109" y="141"/>    
+    </execution>    
+    <execution id="8">      
+      <position height="21" width="7" x="112" y="247"/>    
+    </execution>  
+  </object>  
+  <object id="9" language="java" name="it.unisalento.se.saw.converter.SegnalazioneConverter" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/converter/SegnalazioneConverter.java" binary="false" 
+    label="segnalazioneConverter" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="229" y="0"/>    
+    <execution id="4">      
+      <position height="274" width="182" x="223" y="120"/>    
+    </execution>    
+    <execution id="11">      
+      <position height="63" width="7" x="311" y="226"/>    
+    </execution>  
+  </object>  
+  <object id="13" language="java" name="it.unisalento.se.saw.services.SegnalazioneService" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/SegnalazioneService.java" binary="false" 
+    label="segnalazioneService" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="316" y="0"/>    
+    <execution id="7">      
+      <position height="190" width="165" x="409" y="162"/>    
+    </execution>    
+    <execution id="16">      
+      <position height="105" width="7" x="488" y="205"/>    
+    </execution>  
+  </object>  
+  <object id="18" language="java" name="it.unisalento.se.saw.repositories.SegnalazioneRepository" 
+    project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/repositories/SegnalazioneRepository.java" binary="false" 
+    label="segnalazioneRepository" type="interface" autoSize="true">    
+    <position height="-1" width="-1" x="697" y="0"/>    
+    <execution id="15">      
+      <position height="148" width="190" x="578" y="183"/>    
+    </execution>  
+  </object>  
+  <message id="3" 
+    operation="dtoToDomain(it.unisalento.se.saw.dto.SegnalazioneDto,java.util.List&lt;it.unisalento.se.saw.domain.Aula&gt;,java.util.Date):it.unisalento.se.saw.domain.Segnalazione" 
+    asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="6" operation="save(it.unisalento.se.saw.domain.Segnalazione):it.unisalento.se.saw.domain.Segnalazione" 
+    asynchronous="false">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="7"/>  
+  </message>  
+  <message id="10" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="5"/>  
+  </message>  
+  <message id="12" asynchronous="false">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="8"/>  
+  </message>  
+  <message id="14" operation="save(S):S" asynchronous="false">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="15"/>  
+  </message>  
+  <message id="17" asynchronous="false">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="11"/>  
+  </message>  
+  <message id="19" asynchronous="false">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="16"/>  
+  </message>
+</sequence-diagram>
