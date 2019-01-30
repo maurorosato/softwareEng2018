@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.2.2" icons="true" generate-combined-fragments="true">  
+  <object id="1" language="java" name="it.unisalento.se.saw.restapi.UtenteRestController" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/restapi/UtenteRestController.java" binary="false" 
+    label="utenteRestController" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="160" y="0"/>    
+    <execution id="2">      
+      <position height="322" width="167" x="5" y="120"/>    
+    </execution>    
+    <execution id="5">      
+      <position height="154" width="7" x="85" y="204"/>    
+    </execution>    
+    <execution id="10">      
+      <position height="21" width="7" x="88" y="246"/>    
+    </execution>    
+    <execution id="11">      
+      <position height="21" width="7" x="88" y="295"/>    
+    </execution>  
+  </object>  
+  <object id="12" language="java" name="it.unisalento.se.saw.converter.UtenteLoggatoConverter" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/converter/UtenteLoggatoConverter.java" binary="false" 
+    label="utenteLoggatoConverter" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="321" y="0"/>    
+    <execution id="9">      
+      <position height="63" width="193" x="324" y="274"/>    
+    </execution>  
+  </object>  
+  <object id="14" language="java" name="it.unisalento.se.saw.converter.UtenteConverter" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/converter/UtenteConverter.java" binary="false" 
+    label="utenteConverter" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="329" y="0"/>    
+    <execution id="7">      
+      <position height="63" width="144" x="450" y="225"/>    
+    </execution>  
+  </object>  
+  <object id="16" language="java" name="it.unisalento.se.saw.services.UtenteService" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/UtenteService.java" binary="false" 
+    label="utenteService" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="405" y="0"/>    
+    <execution id="4">      
+      <position height="280" width="138" x="321" y="141"/>    
+    </execution>    
+    <execution id="19">      
+      <position height="196" width="7" x="809" y="183"/>    
+    </execution>  
+  </object>  
+  <object id="21" language="java" name="it.unisalento.se.saw.repositories.UtenteRepository" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/repositories/UtenteRepository.java" binary="false" 
+    label="utenteRepository" type="interface" autoSize="true">    
+    <position height="-1" width="-1" x="938" y="0"/>    
+    <execution id="18">      
+      <position height="238" width="154" x="885" y="162"/>    
+    </execution>  
+  </object>  
+  <message id="3" operation="autenticazione(java.lang.String,java.lang.String):it.unisalento.se.saw.domain.Utente" 
+    asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="6" operation="domainToDto(it.unisalento.se.saw.domain.Utente):it.unisalento.se.saw.dto.UtenteDto" 
+    asynchronous="false">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="7"/>  
+  </message>  
+  <message id="8" asynchronous="false">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="9"/>  
+  </message>  
+  <message id="13" asynchronous="false">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="11"/>  
+  </message>  
+  <message id="15" asynchronous="false">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="10"/>  
+  </message>  
+  <message id="17" operation="findByEmailAndPassword(java.lang.String,java.lang.String):java.util.List&lt;Utente&gt;" 
+    asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="18"/>  
+  </message>  
+  <message id="20" asynchronous="false">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="5"/>  
+  </message>  
+  <message id="22" asynchronous="false">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="19"/>  
+  </message>
+</sequence-diagram>

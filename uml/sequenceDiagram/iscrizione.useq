@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.2.2" icons="true" generate-combined-fragments="true">  
+  <object id="1" language="java" name="it.unisalento.se.saw.restapi.IscrizioneRestController" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/restapi/IscrizioneRestController.java" binary="false" 
+    label="iscrizioneRestController" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="253" y="0"/>    
+    <execution id="2">      
+      <position height="304" width="188" x="5" y="117"/>    
+    </execution>    
+    <execution id="5">      
+      <position height="220" width="7" x="96" y="159"/>    
+    </execution>    
+    <execution id="8">      
+      <position height="21" width="7" x="99" y="274"/>    
+    </execution>  
+  </object>  
+  <object id="9" language="java" name="it.unisalento.se.saw.converter.IscrizioneConverter" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/converter/IscrizioneConverter.java" binary="false" 
+    label="iscrizioneConverter" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="256" y="0"/>    
+    <execution id="4">      
+      <position height="262" width="156" x="197" y="138"/>    
+    </execution>  
+  </object>  
+  <object id="11" language="java" name="it.unisalento.se.saw.services.IscrizioneService" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/IscrizioneService.java" binary="false" 
+    label="iscrizioneService" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="462" y="0"/>    
+    <execution id="7">      
+      <position height="147" width="139" x="357" y="211"/>    
+    </execution>    
+    <execution id="14">      
+      <position height="63" width="7" x="423" y="253"/>    
+    </execution>  
+  </object>  
+  <object id="16" language="java" name="it.unisalento.se.saw.repositories.IscrizioneRepository" 
+    project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/repositories/IscrizioneRepository.java" binary="false" 
+    label="iscrizioneRepository" type="interface" autoSize="true">    
+    <position height="-1" width="-1" x="558" y="0"/>    
+    <execution id="13">      
+      <position height="105" width="164" x="500" y="232"/>    
+    </execution>  
+  </object>  
+  <message id="3" 
+    operation="DtoToDomain(it.unisalento.se.saw.dto.IscrizioneDto,java.util.List&lt;it.unisalento.se.saw.domain.Studente&gt;):it.unisalento.se.saw.domain.Iscrizione" 
+    asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="6" operation="save(it.unisalento.se.saw.domain.Iscrizione):void" asynchronous="false">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="7"/>  
+  </message>  
+  <message id="10" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="5"/>  
+  </message>  
+  <message id="12" operation="save(S):S" asynchronous="false">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="13"/>  
+  </message>  
+  <message id="15" asynchronous="false">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="8"/>  
+  </message>  
+  <message id="17" asynchronous="false">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="14"/>  
+  </message>
+</sequence-diagram>
