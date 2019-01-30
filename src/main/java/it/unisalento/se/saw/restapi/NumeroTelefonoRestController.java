@@ -22,6 +22,10 @@ public class NumeroTelefonoRestController {
 	@Autowired
 	INumeroTelefonoService numeroTelefonoService;
 	
+	public NumeroTelefonoRestController(INumeroTelefonoService numeroTelefonoService) {
+		this.numeroTelefonoService = numeroTelefonoService;
+	}
+
 	@RequestMapping(value="/getAll", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<NumeroTelefonoDto> getAll() throws NumeroTelefonoNotFoundException{
 		List<NumeroTelefonoDto> numeriTelefonoDto= new ArrayList<NumeroTelefonoDto>();

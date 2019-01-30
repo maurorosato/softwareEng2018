@@ -1,6 +1,7 @@
 package it.unisalento.se.saw.rest;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -115,6 +116,19 @@ private MockMvc mockMvc;
 	    verify(docenteServiceMock, times(1)).getAll();
 	    verifyNoMoreInteractions(docenteServiceMock);
 
+	}
+	
+	@Test
+	public void getByIdDocenteTest() throws Exception {
+		
+
+		when(docenteServiceMock.getById(any(Integer.class))).thenThrow(new DocenteNotFoundException());
+		
+		mockMvc.perform(get("/docente/getById/{id}",2))
+		.andExpect(status().isBadRequest());
+		
+	    verify(docenteServiceMock, times(1)).getById(2);
+	    verifyNoMoreInteractions(docenteServiceMock);
 	}
 	
 	@Test

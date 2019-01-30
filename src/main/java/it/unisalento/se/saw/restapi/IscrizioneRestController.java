@@ -35,8 +35,9 @@ public class IscrizioneRestController {
 		super(); 
 	}
 	
-	public IscrizioneRestController(IIscrizioneService iscrizioneService) {
+	public IscrizioneRestController(IIscrizioneService iscrizioneService, IStudenteService studenteService) {
 		this.iscrizioneService = iscrizioneService;
+		this.studenteService = studenteService;
 	}
 	
 	@PostMapping(value="save", consumes=MediaType.APPLICATION_JSON_VALUE)

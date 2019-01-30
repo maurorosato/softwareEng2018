@@ -47,8 +47,11 @@ public class MaterialeDidatticoRestController {
 		super();
 	}
 	
-	public MaterialeDidatticoRestController(IMaterialeDidatticoService materialeDidatticoService) {
+	public MaterialeDidatticoRestController(IMaterialeDidatticoService materialeDidatticoService, IEventoService eventoService, ILezioneService lezioneService, IDocenteService docenteService) {
 		this.materialeDidatticoService = materialeDidatticoService;
+		this.eventoService = eventoService;
+		this.lezioneService = lezioneService;
+		this.docenteService = docenteService;
 	}
 	
 	@RequestMapping(value="/getAll", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
@@ -56,8 +59,8 @@ public class MaterialeDidatticoRestController {
 		
 		List<MaterialeDidatticoDto> materialeDidatticoListaDto = new ArrayList<MaterialeDidatticoDto>();
 		List<MaterialeDidattico> materialeDidattico = materialeDidatticoService.getAll();
-		List<Lezione> lezioni = lezioneService.getAll();
-		List<Docente> docenti = docenteService.getAll();
+		//List<Lezione> lezioni = lezioneService.getAll();
+		//List<Docente> docenti = docenteService.getAll();
 
 		Iterator<MaterialeDidattico> matDidatticoIterator = materialeDidattico.iterator();
 		while(matDidatticoIterator.hasNext()){
