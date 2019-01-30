@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.2.2" icons="true" generate-combined-fragments="true">  
+  <object id="1" language="java" name="it.unisalento.se.saw.restapi.ValutazioneRestController" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/restapi/ValutazioneRestController.java" binary="false" 
+    label="valutazioneRestController" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="103" y="0"/>    
+    <execution id="2">      
+      <position height="189" width="202" x="5" y="116"/>    
+    </execution>    
+    <execution id="5">      
+      <position height="21" width="7" x="103" y="200"/>    
+    </execution>  
+  </object>  
+  <object id="6" language="java" name="it.unisalento.se.saw.services.ValutazioneService" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/ValutazioneService.java" binary="false" 
+    label="valutazioneService" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="274" y="0"/>    
+    <execution id="4">      
+      <position height="147" width="153" x="211" y="137"/>    
+    </execution>    
+    <execution id="9">      
+      <position height="63" width="7" x="284" y="179"/>    
+    </execution>  
+  </object>  
+  <object id="11" language="java" name="it.unisalento.se.saw.repositories.ValutazioneRepository" 
+    project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/repositories/ValutazioneRepository.java" binary="false" 
+    label="valutazioneRepository" type="interface" autoSize="true">    
+    <position height="-1" width="-1" x="426" y="0"/>    
+    <execution id="8">      
+      <position height="105" width="178" x="368" y="158"/>    
+    </execution>  
+  </object>  
+  <message id="3" operation="save(it.unisalento.se.saw.domain.Valutazione):void" asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="7" operation="save(S):S" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="8"/>  
+  </message>  
+  <message id="10" asynchronous="false">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="5"/>  
+  </message>  
+  <message id="12" asynchronous="false">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="9"/>  
+  </message>
+</sequence-diagram>

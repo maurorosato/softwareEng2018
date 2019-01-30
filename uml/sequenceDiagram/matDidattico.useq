@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.2.2" icons="true" generate-combined-fragments="true">  
+  <object id="1" language="java" name="it.unisalento.se.saw.restapi.MaterialeDidatticoRestController" 
+    project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/restapi/MaterialeDidatticoRestController.java" 
+    binary="false" label="materialeDidatticoRestController" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="240" y="0"/>    
+    <execution id="2">      
+      <position height="300" width="246" x="5" y="105"/>    
+    </execution>    
+    <execution id="5">      
+      <position height="216" width="7" x="125" y="147"/>    
+    </execution>    
+    <execution id="8">      
+      <position height="21" width="7" x="128" y="258"/>    
+    </execution>  
+  </object>  
+  <object id="9" language="java" name="it.unisalento.se.saw.converter.MaterialeDidatticoConverter" 
+    project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/converter/MaterialeDidatticoConverter.java" binary="false" 
+    label="materialeDidatticoConverter" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="324" y="0"/>    
+    <execution id="4">      
+      <position height="258" width="214" x="255" y="126"/>    
+    </execution>  
+  </object>  
+  <object id="11" language="java" name="it.unisalento.se.saw.services.MaterialeDidatticoService" 
+    project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/MaterialeDidatticoService.java" binary="false" 
+    label="materialeDidatticoService" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="567" y="0"/>    
+    <execution id="7">      
+      <position height="147" width="197" x="473" y="195"/>    
+    </execution>    
+    <execution id="14">      
+      <position height="63" width="7" x="568" y="237"/>    
+    </execution>  
+  </object>  
+  <object id="16" language="java" name="it.unisalento.se.saw.repositories.MaterialeDidatticoRepository" 
+    project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/repositories/MaterialeDidatticoRepository.java" 
+    binary="false" label="materialeDidatticoRepository" type="interface" autoSize="true">    
+    <position height="-1" width="-1" x="753" y="0"/>    
+    <execution id="13">      
+      <position height="105" width="222" x="674" y="216"/>    
+    </execution>  
+  </object>  
+  <message id="3" 
+    operation="dtoToDomain(it.unisalento.se.saw.dto.MaterialeDidatticoDto,java.util.List&lt;it.unisalento.se.saw.domain.Lezione&gt;,java.util.List&lt;it.unisalento.se.saw.domain.Docente&gt;):it.unisalento.se.saw.domain.MaterialeDidattico" 
+    asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="6" 
+    operation="save(it.unisalento.se.saw.domain.MaterialeDidattico):it.unisalento.se.saw.domain.MaterialeDidattico" 
+    asynchronous="false">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="7"/>  
+  </message>  
+  <message id="10" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="5"/>  
+  </message>  
+  <message id="12" operation="save(S):S" asynchronous="false">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="13"/>  
+  </message>  
+  <message id="15" asynchronous="false">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="8"/>  
+  </message>  
+  <message id="17" asynchronous="false">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="14"/>  
+  </message>
+</sequence-diagram>

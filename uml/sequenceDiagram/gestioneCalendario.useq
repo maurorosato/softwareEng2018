@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.2.2" icons="true" generate-combined-fragments="true">  
+  <object id="1" language="java" name="it.unisalento.se.saw.restapi.LezioneRestController" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/restapi/LezioneRestController.java" binary="false" 
+    label="lezioneRestController" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="30" y="0"/>    
+    <execution id="2">      
+      <position height="147" width="176" x="5" y="135"/>    
+    </execution>    
+    <execution id="5">      
+      <position height="21" width="7" x="90" y="198"/>    
+    </execution>  
+  </object>  
+  <object id="6" language="java" name="it.unisalento.se.saw.restapi.AppelloEsameRestController" 
+    project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/restapi/AppelloEsameRestController.java" binary="false" 
+    label="appelloEsameRestController" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="9" y="0"/>    
+    <execution id="7">      
+      <position height="189" width="220" x="185" y="260"/>    
+    </execution>    
+    <execution id="10">      
+      <position height="21" width="7" x="292" y="344"/>    
+    </execution>  
+  </object>  
+  <object id="11" language="java" name="it.unisalento.se.saw.services.LezioneService" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/LezioneService.java" binary="false" 
+    label="lezioneService" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="17" y="0"/>    
+    <execution id="4">      
+      <position height="105" width="138" x="409" y="156"/>    
+    </execution>  
+  </object>  
+  <object id="14" language="java" name="it.unisalento.se.saw.services.AppelloEsameService" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/AppelloEsameService.java" binary="false" 
+    label="appelloEsameService" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="143" y="0"/>    
+    <execution id="9">      
+      <position height="147" width="171" x="551" y="281"/>    
+    </execution>    
+    <execution id="17">      
+      <position height="63" width="7" x="633" y="323"/>    
+    </execution>  
+  </object>  
+  <object id="19" language="java" name="it.unisalento.se.saw.repositories.LezioneRepository" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/repositories/LezioneRepository.java" binary="false" 
+    label="lezioneRepository" type="interface" autoSize="true">    
+    <position height="-1" width="-1" x="327" y="0"/>    
+    <execution id="13">      
+      <position height="63" width="154" x="726" y="177"/>    
+    </execution>  
+  </object>  
+  <object id="21" language="java" name="it.unisalento.se.saw.repositories.AppelloEsameRepository" 
+    project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/repositories/AppelloEsameRepository.java" binary="false" 
+    label="appelloEsameRepository" type="interface" autoSize="true">    
+    <position height="-1" width="-1" x="263" y="0"/>    
+    <execution id="16">      
+      <position height="105" width="196" x="884" y="302"/>    
+    </execution>  
+  </object>  
+  <message id="3" operation="getAll():java.util.List&lt;Lezione&gt;" asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="8" operation="getAll():java.util.List&lt;AppelloEsame&gt;" asynchronous="false">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="9"/>  
+  </message>  
+  <message id="12" operation="findAll():java.util.List&lt;T&gt;" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="13"/>  
+  </message>  
+  <message id="15" operation="findAll():java.util.List&lt;T&gt;" asynchronous="false">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="16"/>  
+  </message>  
+  <message id="18" asynchronous="false">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="10"/>  
+  </message>  
+  <message id="20" asynchronous="false">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="5"/>  
+  </message>  
+  <message id="22" asynchronous="false">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="17"/>  
+  </message>
+</sequence-diagram>
