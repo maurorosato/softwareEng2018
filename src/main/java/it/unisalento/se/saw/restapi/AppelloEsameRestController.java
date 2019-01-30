@@ -1,7 +1,6 @@
 package it.unisalento.se.saw.restapi;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -21,27 +20,21 @@ import it.unisalento.se.saw.Iservices.IInsegnamentoService;
 import it.unisalento.se.saw.Iservices.IPrenotazioneService;
 import it.unisalento.se.saw.converter.AppelloEsameConverter;
 import it.unisalento.se.saw.converter.EventoConverter;
-import it.unisalento.se.saw.converter.LezioneConverter;
 import it.unisalento.se.saw.converter.PrenotazioneConverter;
 import it.unisalento.se.saw.domain.AppelloEsame;
 import it.unisalento.se.saw.domain.Aula;
 import it.unisalento.se.saw.domain.Docente;
 import it.unisalento.se.saw.domain.Evento;
 import it.unisalento.se.saw.domain.Insegnamento;
-import it.unisalento.se.saw.domain.Lezione;
 import it.unisalento.se.saw.domain.Prenotazione;
 import it.unisalento.se.saw.dto.AppelloEsameDto;
-import it.unisalento.se.saw.dto.LezioneDto;
-import it.unisalento.se.saw.dto.NumeroTelefonoDto;
 import it.unisalento.se.saw.dto.PrenotazioneDto;
 import it.unisalento.se.saw.exceptions.AppelloEsameNotFoundException;
 import it.unisalento.se.saw.exceptions.AulaNotFoundException;
 import it.unisalento.se.saw.exceptions.DocenteNotFoundException;
 import it.unisalento.se.saw.exceptions.EventoNotFoundException;
 import it.unisalento.se.saw.exceptions.InsegnamentoNotFoundException;
-import it.unisalento.se.saw.exceptions.LezioneNotFoundException;
 import it.unisalento.se.saw.exceptions.PrenotazioneNotFoundException;
-import it.unisalento.se.saw.services.DocenteService;
 
 @RestController()
 @RequestMapping(value="/appelloEsame")

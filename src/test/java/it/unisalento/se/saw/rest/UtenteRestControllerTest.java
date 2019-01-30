@@ -5,6 +5,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
+//import static org.mockito.Matchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -30,12 +31,8 @@ import it.unisalento.se.saw.Iservices.IDocenteService;
 import it.unisalento.se.saw.Iservices.INumeroTelefonoService;
 import it.unisalento.se.saw.Iservices.IStudenteService;
 import it.unisalento.se.saw.Iservices.IUtenteService;
-import it.unisalento.se.saw.domain.Docente;
-import it.unisalento.se.saw.domain.NumeroTelefono;
 import it.unisalento.se.saw.domain.Utente;
-import it.unisalento.se.saw.exceptions.DocenteNotFoundException;
 import it.unisalento.se.saw.exceptions.UtenteNotFoundException;
-import it.unisalento.se.saw.restapi.DocenteRestController;
 import it.unisalento.se.saw.restapi.UtenteRestController;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -105,6 +102,29 @@ private MockMvc mockMvc;
 	    verify(utenteServiceMock, times(1)).getAll();
 	    verifyNoMoreInteractions(utenteServiceMock);
 
+	}
+	
+	
+	@Test
+	public void getByIdUtenteTest() throws Exception {
+		
+		Utente utente=new Utente();
+		utente.setNome("Mauro");
+		utente.setCognome("Rosato");
+		Date data = new Date(1992-03-16);
+		utente.setDataNascita(data);
+		utente.setEmail("mauro@rosato.it");
+		utente.setIdOrigin(0);
+		utente.setIdutente(6);
+		utente.setPassword("mauropass");
+
+		when(utenteServiceMock.getById(6)).thenReturn(utente);
+		
+		mockMvc.perform(get("/utente/getById/{id}", utente.getIdutente()))
+		.andExpect(status().isOk());
+		
+	    verify(utenteServiceMock, times(1)).getById(6);
+	    verifyNoMoreInteractions(utenteServiceMock);
 	}
 	
 	@Test

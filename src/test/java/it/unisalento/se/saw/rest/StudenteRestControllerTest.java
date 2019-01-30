@@ -1,6 +1,7 @@
 package it.unisalento.se.saw.rest;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -40,6 +41,7 @@ import it.unisalento.se.saw.dto.StudenteDto;
 import it.unisalento.se.saw.exceptions.AulaNotFoundException;
 import it.unisalento.se.saw.exceptions.StrumentazioneNotFoundException;
 import it.unisalento.se.saw.exceptions.StudenteNotFoundException;
+import it.unisalento.se.saw.exceptions.UtenteNotFoundException;
 import it.unisalento.se.saw.restapi.StudenteRestController;
 
 @RunWith(MockitoJUnitRunner.class)
