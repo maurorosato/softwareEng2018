@@ -58,7 +58,8 @@ public class AulaRestController {
 	@PostMapping(value="save", consumes=MediaType.APPLICATION_JSON_VALUE)
 	public Aula post(@RequestBody AulaDto aulaDto) throws AulaNotFoundException, ParseException {
 		Aula aulaSave = new Aula();
-		
+		aulaDto.setLatitudine(0.0);
+		aulaDto.setLongitudine(0.0);
 		aulaSave = AulaConverter.dtoToDomain(aulaDto);
 		return aulaService.save(aulaSave);	
 	}
@@ -93,6 +94,7 @@ public class AulaRestController {
 		List<AulaDto> auleDto= new ArrayList<AulaDto>();
 		List<Aula> aule = (aulaService.getAuleLibere(datainizio,datafine));
 		Iterator<Aula> aulaIterator = aule.iterator();
+
 		
 		while (aulaIterator.hasNext()){
 			AulaDto aulaDto = new AulaDto();

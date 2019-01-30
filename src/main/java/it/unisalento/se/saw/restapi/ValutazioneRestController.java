@@ -92,6 +92,8 @@ public class ValutazioneRestController {
 						valutazioneLDto = ValutazioneConverter.domainToDto(valutazioneL);
 					}
 					valutazioneListaDto.add(valutazioneLDto);
+					System.out.println("id lez: "+valutazioneListaDto.get(0).getIdLezione());
+
 				}
 				break;
 			case "matDidattico":

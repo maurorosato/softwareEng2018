@@ -3,6 +3,8 @@ package it.unisalento.se.saw.rest;
 import static org.mockito.Mockito.*;
 import static org.mockito.Matchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +13,16 @@ import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import it.unisalento.se.saw.Iservices.IAulaService;
 import it.unisalento.se.saw.domain.Aula;
@@ -38,6 +44,17 @@ public class AulaRestControllerTest {
 		mockMvc = MockMvcBuilders.standaloneSetup(new AulaRestController(aulaServiceMock)).build();
 	}
 	
+	
+	@Captor
+    private ArgumentCaptor<Aula> savedAula;
+	
+	public static String toJson(final Object obj) {
+        try {
+            return new ObjectMapper().writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 	
 //	@Test
 //	public void findAulaByIdTest() throws Exception {
@@ -123,6 +140,30 @@ public class AulaRestControllerTest {
 //	    verify(aulaServiceMock, times(1)).getById(2);
 //	    verifyNoMoreInteractions(aulaServiceMock);
 //	}
+	
+	@Test
+	public void saveAulaTest() throws Exception {
+		
+		Aula aula = new Aula();
+		aula.setIdaula(2);
+		aula.setNome("m1");
+		aula.setEdificio("stecca");
+		aula.setStato("disponibile");
+		aula.setCapienza(200);
+		aula.setWifi((byte) 0);
+		aula.setLatitudine(40.34339);
+		aula.setLongitudine(64.34339);
+
+
+		mockMvc.perform(post("/aula/save")
+				.contentType(MediaType.APPLICATION_JSON_UTF8)
+				.content(toJson(aula)))
+				.andExpect(status().isOk());
+
+	    verify(aulaServiceMock, times(1)).save(savedAula.capture());
+	    verifyNoMoreInteractions(aulaServiceMock);
+		
+	}
 	
 	@Test
 	public void notFoundAulaTest() throws Exception {

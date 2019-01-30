@@ -28,6 +28,8 @@ public class AulaConverter {
 		aula.setEdificio(aulaDto.getEdificio());
 		aula.setStato(aulaDto.getStato());
 		aula.setCapienza(aulaDto.getCapienza());
+		aula.setLatitudine(aulaDto.getLatitudine());
+		aula.setLongitudine(aulaDto.getLongitudine());
 		if(aulaDto.isWifi())
 			aula.setWifi((byte) 1);
 		else
