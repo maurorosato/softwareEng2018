@@ -3,10 +3,10 @@ package it.unisalento.se.saw.converter;
 import it.unisalento.se.saw.domain.Aula;
 import it.unisalento.se.saw.dto.AulaDto;
 
-public class AulaConverter {
-	
-	public static AulaDto domainToDto(Aula aula) {
+public class AulaConverter implements IConverter {
+	public <T> Object domainToDto(T domainObject) {
 		AulaDto aulaDto = new AulaDto();
+		Aula aula = (Aula) domainObject;
 		aulaDto.setIdaula(aula.getIdaula());
 		aulaDto.setEdificio(aula.getEdificio());
 		aulaDto.setNome(aula.getNome());
@@ -21,8 +21,8 @@ public class AulaConverter {
 		
 		return aulaDto;
 	}
-	
-	public static Aula dtoToDomain(AulaDto aulaDto) {
+	public <T> Object dtoToDomain(T dtoObject) {
+		AulaDto aulaDto = (AulaDto) dtoObject;
 		Aula aula = new Aula();
 		aula.setNome(aulaDto.getNome());
 		aula.setEdificio(aulaDto.getEdificio());

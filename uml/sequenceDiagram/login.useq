@@ -57,12 +57,11 @@
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="4"/>  
   </message>  
-  <message id="6" operation="domainToDto(it.unisalento.se.saw.domain.Utente):it.unisalento.se.saw.dto.UtenteDto" 
-    asynchronous="false">    
+  <message id="6" operation="domainToDto(T):java.lang.Object" asynchronous="false">    
     <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="7"/>  
   </message>  
-  <message id="8" asynchronous="false">    
+  <message id="8" operation="UtenteLoggatoConverter()" asynchronous="false">    
     <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="9"/>  
   </message>  

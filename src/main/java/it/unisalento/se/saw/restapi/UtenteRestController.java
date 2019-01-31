@@ -17,6 +17,7 @@ import it.unisalento.se.saw.Iservices.IDocenteService;
 import it.unisalento.se.saw.Iservices.INumeroTelefonoService;
 import it.unisalento.se.saw.Iservices.IStudenteService;
 import it.unisalento.se.saw.Iservices.IUtenteService;
+import it.unisalento.se.saw.converter.IConverter;
 import it.unisalento.se.saw.converter.UtenteConverter;
 import it.unisalento.se.saw.converter.UtenteLoggatoConverter;
 import it.unisalento.se.saw.domain.CorsoDiStudio;
@@ -47,6 +48,7 @@ public class UtenteRestController {
 	@Autowired
 	INumeroTelefonoService numeroTelefonoService;
 
+	IConverter utenteConverter = new UtenteConverter();
 	public UtenteRestController() {
 		super();
 	}
@@ -63,7 +65,8 @@ public class UtenteRestController {
 	public UtenteLoggatoDto login(@PathVariable("email") String email,@PathVariable("password") String password) throws UtenteNotFoundException, DocenteNotFoundException, StudenteNotFoundException, CorsoDiStudioNotFoundException, NumeroTelefonoNotFoundException {
 		
 		Utente u = utenteService.autenticazione(email,password);
-		UtenteDto uDto = UtenteConverter.domainToDto(u);
+		UtenteDto uDto = (UtenteDto) utenteConverter.domainToDto(u);
+		//UtenteDto uDto = UtenteConverter.domainToDto(u);
 		
 		List<Utente> utenti = utenteService.getAll();
 		List<Docente> docenti = docenteService.getAll();

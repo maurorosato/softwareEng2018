@@ -135,7 +135,6 @@ private MockMvc mockMvc;
 		studente.setNazione("ITA");
 		studente.setUtente(utente);
 		studenti.add(studente);
-		studenteDto = StudenteConverter.domainToDto(studente, corsi, numeri);
 		studentiDto.add(studenteDto);
 		
 		Studente studente2 = new Studente();
@@ -148,7 +147,6 @@ private MockMvc mockMvc;
 		studente2.setNazione("ITA");
 		studente2.setUtente(utente2);
 		studenti.add(studente2);
-		studenteDto2 = StudenteConverter.domainToDto(studente2, corsi, numeri);
 		studentiDto.add(studenteDto2);
 		
 		when(studenteServiceMock.getAll()).thenReturn(studenti);

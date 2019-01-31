@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import it.unisalento.se.saw.Iservices.IAulaService;
 import it.unisalento.se.saw.Iservices.IDocenteService;
 import it.unisalento.se.saw.Iservices.ISegnalazioneService;
+import it.unisalento.se.saw.converter.IConverter;
 import it.unisalento.se.saw.converter.SegnalazioneConverter;
 import it.unisalento.se.saw.domain.Aula;
 import it.unisalento.se.saw.domain.Docente;
@@ -41,6 +42,8 @@ public class SegnalazioneRestController {
 	@Autowired
 	IDocenteService docenteService;
 	
+	IConverter segnalazioneConverter = new SegnalazioneConverter();
+	
 	public SegnalazioneRestController() {
 		super();
 	}
@@ -55,12 +58,37 @@ public class SegnalazioneRestController {
 	@PostMapping(value="save", consumes=MediaType.APPLICATION_JSON_VALUE)
 	public Segnalazione post(@RequestBody SegnalazioneDto segnalazioneDto) throws ParseException, AulaNotFoundException, DocenteNotFoundException{
 		
-		Segnalazione segnalazione;
+		Segnalazione segnalazione = new Segnalazione();
+		
+		Aula aula = new Aula();
 		List<Aula> aule = aulaService.getAll();
 		java.util.Date date = new java.util.Date();
 		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 
-		segnalazione = SegnalazioneConverter.dtoToDomain(segnalazioneDto, aule, sqlDate);
+		//segnalazione = SegnalazioneConverter.dtoToDomain(segnalazioneDto, aule, sqlDate);
+		if(segnalazioneDto.getOggettoInteressato().equals("altro") && segnalazioneDto.getNomeAula().equals("altro")){
+			aula.setIdaula(1);
+			segnalazione.setAula(aula);
+		}
+		else {
+
+			Iterator<Aula> aulaIterator = aule.iterator();		
+			while(aulaIterator.hasNext()){
+				Aula aulaList = aulaIterator.next();
+				if ((aulaList.getNome()).equals(segnalazioneDto.getNomeAula())){
+					aula.setIdaula(aulaList.getIdaula());
+					segnalazione.setAula(aula);
+				}
+			}
+		}
+		Docente docente = new Docente();
+		
+		segnalazione.setData(sqlDate);
+		segnalazione.setDocente(docente);
+		segnalazione.setStatoSegnalazione("attivo");
+		segnalazione.setDescrizione("La segnalazione è stata presa in carico.");
+
+		segnalazione = (Segnalazione) segnalazioneConverter.dtoToDomain(segnalazioneDto);
 
 		return segnalazioneService.save(segnalazione);
 
@@ -79,7 +107,8 @@ public class SegnalazioneRestController {
 			SegnalazioneDto segnalazioneDto = new SegnalazioneDto();
 			Segnalazione segnalazione = segnalazioneIterator.next();
 			if(segnalazione.getIdsegnalazione() != 1){
-				segnalazioneDto = SegnalazioneConverter.domainToDto(segnalazione/*, aule, docenti*/);
+				segnalazioneDto = (SegnalazioneDto) segnalazioneConverter.domainToDto(segnalazione);
+				//segnalazioneDto = SegnalazioneConverter.domainToDto(segnalazione/*, aule, docenti*/);
 				segnalazioniDto.add(segnalazioneDto);
 			}
 		}
@@ -93,7 +122,8 @@ public class SegnalazioneRestController {
 		List<Aula> aule = (aulaService.getAll());
 		List<Docente> docenti = docenteService.getAll();
 		Segnalazione segnalazione = segnalazioneService.getById(id);
-		SegnalazioneDto segnalazioneDto = SegnalazioneConverter.domainToDto(segnalazione/*,aule, docenti*/);
+		SegnalazioneDto segnalazioneDto = (SegnalazioneDto) segnalazioneConverter.domainToDto(segnalazione);
+
 		
 		return segnalazioneDto;
 	}

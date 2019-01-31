@@ -20,7 +20,9 @@ import it.unisalento.se.saw.Iservices.IInsegnamentoService;
 import it.unisalento.se.saw.Iservices.ILezioneService;
 import it.unisalento.se.saw.Iservices.IPrenotazioneService;
 import it.unisalento.se.saw.Iservices.IUtenteService;
+import it.unisalento.se.saw.converter.DocenteConverter;
 import it.unisalento.se.saw.converter.EventoConverter;
+import it.unisalento.se.saw.converter.IConverter;
 import it.unisalento.se.saw.domain.AppelloEsame;
 import it.unisalento.se.saw.domain.Aula;
 import it.unisalento.se.saw.domain.CorsoDiStudio;
@@ -57,6 +59,8 @@ public class EventoRestController {
 	@Autowired
 	ILezioneService lezioneService;
 	
+	IConverter eventoConverter = (IConverter) new EventoConverter();
+
 	public EventoRestController() {
 		// TODO Auto-generated constructor stub
 		super();
@@ -75,25 +79,38 @@ public class EventoRestController {
 		List<EventoDto> eventiDto= new ArrayList<EventoDto>();
 		
 		List<Evento> eventi = eventoService.getAll();
-		Iterator<Evento> eventoIterator = eventi.iterator();
-
-//		List<Aula> aule = aulaService.getAll();
-//		List<Utente> utenti = utenteService.getAll();
 		List<Lezione> lezioni = lezioneService.getAll();
-//		List<Docente> docenti = (docenteService.getAll());
 		List<AppelloEsame> appelli = appelloEsameService.getAll();
 		List<CorsoDiStudio> corsi = (corsoDiStudioService.getAll());
-//		List<Prenotazione> prenotazioni =prenotazioneService.getAll();
-//		List<Insegnamento> insegnamenti = (insegnamentoService.getAll());
 		
-//		float numeroFloat = 0;
-//		int idCorso = 0,idDocente = 0, idUtente = 0;
-		
+		Iterator<Evento> eventoIterator = eventi.iterator();
+
 		while (eventoIterator.hasNext()){
 			Evento evento = eventoIterator.next();
 			EventoDto eventoDto = new EventoDto();
 			if (evento.getIdevento() != 1){
-				eventoDto = EventoConverter.domainToDto(evento, lezioni, appelli, corsi /*prenotazioni, insegnamenti,aule, utenti, docenti*/);
+				
+				Iterator<CorsoDiStudio> corsoIterator = corsi.iterator();
+				Iterator<AppelloEsame> appelloIterator = appelli.iterator();
+
+				eventoDto = (EventoDto) eventoConverter.domainToDto(evento);
+				eventoDto.setImage("lessonsIcon.png");
+				eventoDto.setLezioneOrEsame("lezione");
+				
+				while (corsoIterator.hasNext()){
+					CorsoDiStudio corso = corsoIterator.next();
+					if (corso.getIdcorsoDiStudio() == evento.getInsegnamento().getCorsoDiStudioIdcorsoDiStudio())
+						eventoDto.setCorso(corso.getNomeCorso());
+				}
+				
+				while (appelloIterator.hasNext()){
+					AppelloEsame appello = appelloIterator.next();
+					if (appello.getEvento().getIdevento() == evento.getIdevento()){
+						eventoDto.setDescrizione("TIPOLOGIA: "+appello.getTipologia() + " DESCRIZIONE: "+ evento.getDescrizione());
+						eventoDto.setLezioneOrEsame("esame");
+						eventoDto.setImage("examsIcon.png");
+					}
+				}
 				eventiDto.add(eventoDto);
 			}			
 		}

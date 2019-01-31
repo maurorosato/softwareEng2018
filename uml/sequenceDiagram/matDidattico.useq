@@ -45,9 +45,7 @@
       <position height="105" width="222" x="674" y="216"/>    
     </execution>  
   </object>  
-  <message id="3" 
-    operation="dtoToDomain(it.unisalento.se.saw.dto.MaterialeDidatticoDto,java.util.List&lt;it.unisalento.se.saw.domain.Lezione&gt;,java.util.List&lt;it.unisalento.se.saw.domain.Docente&gt;):it.unisalento.se.saw.domain.MaterialeDidattico" 
-    asynchronous="false">    
+  <message id="3" operation="dtoToDomain(T):java.lang.Object" asynchronous="false">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="4"/>  
   </message>  

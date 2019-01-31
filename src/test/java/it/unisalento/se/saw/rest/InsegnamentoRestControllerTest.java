@@ -168,15 +168,7 @@ private MockMvc mockMvc;
 		insegnamento.setCorsoDiStudioIdcorsoDiStudio(corso.getIdcorsoDiStudio());
 		insegnamento.setDocente(docente);
 		insegnamenti.add(insegnamento);
-		
-		insegnamentoDto.setCfu(12);
-		insegnamentoDto.setNome(insegnamento.getNome());
-		insegnamentoDto.setIdInsegnamento(insegnamento.getIdinsegnamento());
-		insegnamentoDto.setIdUserDocente(insegnamento.getDocente().getUtente().getIdutente());
-		insegnamentoDto.setDocente(insegnamento.getDocente().getUtente().getNome() + ' ' + insegnamento.getDocente().getUtente().getCognome());
 
-		insegnamentoDto = InsegnamentoConverter.domainToDto(insegnamento, corsi);
-		insegnamentiDto.add(insegnamentoDto);
 		
 		
 		Insegnamento insegnamento2=new Insegnamento();
@@ -188,17 +180,7 @@ private MockMvc mockMvc;
 		insegnamento2.setCorsoDiStudioIdcorsoDiStudio(corso.getIdcorsoDiStudio());
 		insegnamento2.setDocente(docente);
 		insegnamenti.add(insegnamento2);
-		
-		insegnamentoDto2.setCfu(insegnamento2.getCfu());
-		insegnamentoDto2.setNome(insegnamento2.getNome());
-		insegnamentoDto2.setIdInsegnamento(insegnamento2.getIdinsegnamento());
-		insegnamentoDto2.setIdUserDocente(insegnamento2.getDocente().getUtente().getIdutente());
-		insegnamentoDto2.setDocente(insegnamento2.getDocente().getUtente().getNome() + ' ' + insegnamento2.getDocente().getUtente().getCognome());
-
-		
-		insegnamentoDto2 = InsegnamentoConverter.domainToDto(insegnamento2, corsi);
-		insegnamentiDto.add(insegnamentoDto2);
-		
+	
 		
 		when(insegnamentoServiceMock.getAll()).thenReturn(insegnamenti);
 		when(docenteServiceMock.getAll()).thenReturn(docenti);

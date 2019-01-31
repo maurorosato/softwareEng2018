@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import it.unisalento.se.saw.Iservices.ICorsoDiStudioService;
 import it.unisalento.se.saw.Iservices.IDocenteService;
 import it.unisalento.se.saw.Iservices.IInsegnamentoService;
+import it.unisalento.se.saw.converter.IConverter;
 import it.unisalento.se.saw.converter.InsegnamentoConverter;
 import it.unisalento.se.saw.domain.CorsoDiStudio;
 import it.unisalento.se.saw.domain.Docente;
@@ -39,6 +40,9 @@ public class InsegnamentoRestController {
 	@Autowired
 	IDocenteService docenteService;
 	
+	IConverter insegnamentoConverter = (IConverter) new InsegnamentoConverter();
+
+	
 	public InsegnamentoRestController() {
 		super();
 	}
@@ -59,17 +63,43 @@ public class InsegnamentoRestController {
 		List<CorsoDiStudio> corsi = (corsoDiStudioService.getAll());
 
 		Iterator<Insegnamento> insegnamentoIterator = insegnamenti.iterator();
-		
 		while(insegnamentoIterator.hasNext()){
 			Insegnamento insegnamento = insegnamentoIterator.next();
 			InsegnamentoDto insegnamentoDto = new InsegnamentoDto();
 			if (insegnamento.getIdinsegnamento()!=1){
-				insegnamentoDto = InsegnamentoConverter.domainToDto(insegnamento,corsi/*,docenti*/);
+				insegnamentoDto = (InsegnamentoDto) insegnamentoConverter.domainToDto(insegnamento);
+				
+				Iterator<Docente> docenteIterator = docenti.iterator();
+				while(docenteIterator.hasNext()){
+					Docente docente = docenteIterator.next();
+					if (insegnamento.getDocente().getIddocente() ==docente.getIddocente()){
+						insegnamentoDto.setDocente(docente.getUtente().getNome() + ' ' + docente.getUtente().getCognome());
+						insegnamentoDto.setIdUserDocente(docente.getUtente().getIdutente());
+		
+					}
+				}				
+				Iterator<CorsoDiStudio> corsoIterator = corsi.iterator();
+				while(corsoIterator.hasNext()){
+					CorsoDiStudio corso = corsoIterator.next();
+					if (insegnamento.getCorsoDiStudioIdcorsoDiStudio() == corso.getIdcorsoDiStudio()){
+						insegnamentoDto.setCorsoDiStudio(corso.getNomeCorso());
+					}
+				}
+				switch (insegnamento.getAnno()){
+				case 1:
+					insegnamentoDto.setAnnoCorso("Primo Anno");
+					break;
+				case 2:
+					insegnamentoDto.setAnnoCorso("Secondo Anno");
+					break;
+				case 3:
+					insegnamentoDto.setAnnoCorso("Terzo Anno");
+					break;
+				}
+				//insegnamentoDto = InsegnamentoConverter.domainToDto(insegnamento,corsi/*,docenti*/);
 				insegnamentiDto.add(insegnamentoDto);
 			}
-	
 		}
-
 		return insegnamentiDto;
 	}
 	
@@ -85,47 +115,43 @@ public class InsegnamentoRestController {
 		while(insegnamentoIterator.hasNext()){
 			Insegnamento insegnamento = insegnamentoIterator.next();
 			InsegnamentoDto insegnamentoDto = new InsegnamentoDto();
-			insegnamentoDto = InsegnamentoConverter.domainToDto(insegnamento,corsi/*,docenti*/);
-			
-			insegnamentiDto.add(insegnamentoDto);	
-		}
-/*
-		for(int i=0; i < insegnamenti.size(); i++){
-			InsegnamentoDto insegnamentoDto = new InsegnamentoDto();
-			
-			switch (insegnamenti.get(i).getAnno()){
-			case 1:
-				insegnamentoDto.setAnnoCorso("Primo anno");
-				break;	
-			case 2:
-				insegnamentoDto.setAnnoCorso("Secondo anno");
-				break;
-			case 3:
-				insegnamentoDto.setAnnoCorso("Terzo anno");
-				break;
-			}
+			if (insegnamento.getIdinsegnamento()!=1){
+				insegnamentoDto = (InsegnamentoDto) insegnamentoConverter.domainToDto(insegnamento);
 				
-			insegnamentoDto.setIdInsegnamento(insegnamenti.get(i).getIdinsegnamento());
-			insegnamentoDto.setNome(insegnamenti.get(i).getNome());
-			insegnamentoDto.setCfu(insegnamenti.get(i).getCfu());
-			
-			for (int j=0; j < corsi.size(); j++){
-				if(insegnamenti.get(i).getCorsoDiStudioIdcorsoDiStudio() == corsi.get(j).getIdcorsoDiStudio()){
-					insegnamentoDto.setCorsoDiStudio(corsi.get(j).getNomeCorso());
+				Iterator<Docente> docenteIterator = docenti.iterator();
+				while(docenteIterator.hasNext()){
+					Docente docente = docenteIterator.next();
+					if (insegnamento.getDocente().getIddocente() ==docente.getIddocente()){
+						insegnamentoDto.setDocente(docente.getUtente().getNome() + ' ' + docente.getUtente().getCognome());
+						insegnamentoDto.setIdUserDocente(docente.getUtente().getIdutente());
+		
+					}
+				}				
+				Iterator<CorsoDiStudio> corsoIterator = corsi.iterator();
+				while(corsoIterator.hasNext()){
+					CorsoDiStudio corso = corsoIterator.next();
+					if (insegnamento.getCorsoDiStudioIdcorsoDiStudio() == corso.getIdcorsoDiStudio()){
+						insegnamentoDto.setCorsoDiStudio(corso.getNomeCorso());
+					}
 				}
-			}		
-			for (int t=0; t < docenti.size(); t++){
-				if(insegnamenti.get(i).getDocente().getIddocente() == docenti.get(t).getIddocente()){
-					insegnamentoDto.setDocente(docenti.get(t).getUtente().getNome() +" "+ docenti.get(t).getUtente().getCognome() );
-					insegnamentoDto.setIdUserDocente(docenti.get(t).getUtente().getIdutente());
+				switch (insegnamento.getAnno()){
+				case 1:
+					insegnamentoDto.setAnnoCorso("Primo Anno");
+					break;
+				case 2:
+					insegnamentoDto.setAnnoCorso("Secondo Anno");
+					break;
+				case 3:
+					insegnamentoDto.setAnnoCorso("Terzo Anno");
+					break;
 				}
+				//insegnamentoDto = InsegnamentoConverter.domainToDto(insegnamento,corsi/*,docenti*/);
+				insegnamentiDto.add(insegnamentoDto);
 			}
-			
-			insegnamentiDto.add(i, insegnamentoDto);	
-		}
-*/		
+		}	
 		return insegnamentiDto;
 	}
+	
 	@RequestMapping(value="/getAllInsegnamentiDocente/{idUserDocente}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<InsegnamentoDto> getAllInsegnamentiDocente(@PathVariable("idUserDocente") int idUserDocente) throws InsegnamentoNotFoundException, CorsoDiStudioNotFoundException, DocenteNotFoundException {
 		
@@ -143,12 +169,44 @@ public class InsegnamentoRestController {
 		}
 		List<Insegnamento> insegnamenti = insegnamentoService.getAllInsegnamentiDocente(docente);
 		Iterator<Insegnamento> insegnamentoIterator = insegnamenti.iterator();
+		
 		while(insegnamentoIterator.hasNext()){
 			Insegnamento insegnamento = insegnamentoIterator.next();
 			InsegnamentoDto insegnamentoDto = new InsegnamentoDto();
-			insegnamentoDto = InsegnamentoConverter.domainToDto(insegnamento,corsi/*,docenti*/);
 			
-			insegnamentiDto.add(insegnamentoDto);	
+			if (insegnamento.getIdinsegnamento()!=1){
+				insegnamentoDto = (InsegnamentoDto) insegnamentoConverter.domainToDto(insegnamento);
+				
+				Iterator<Docente> docIterator = docenti.iterator();
+				while(docenteIterator.hasNext()){
+					Docente doc = docIterator.next();
+					if (insegnamento.getDocente().getIddocente() ==doc.getIddocente()){
+						insegnamentoDto.setDocente(doc.getUtente().getNome() + ' ' + doc.getUtente().getCognome());
+						insegnamentoDto.setIdUserDocente(doc.getUtente().getIdutente());
+		
+					}
+				}				
+				Iterator<CorsoDiStudio> corsoIterator = corsi.iterator();
+				while(corsoIterator.hasNext()){
+					CorsoDiStudio corso = corsoIterator.next();
+					if (insegnamento.getCorsoDiStudioIdcorsoDiStudio() == corso.getIdcorsoDiStudio()){
+						insegnamentoDto.setCorsoDiStudio(corso.getNomeCorso());
+					}
+				}
+				switch (insegnamento.getAnno()){
+				case 1:
+					insegnamentoDto.setAnnoCorso("Primo Anno");
+					break;
+				case 2:
+					insegnamentoDto.setAnnoCorso("Secondo Anno");
+					break;
+				case 3:
+					insegnamentoDto.setAnnoCorso("Terzo Anno");
+					break;
+				}
+				//insegnamentoDto = InsegnamentoConverter.domainToDto(insegnamento,corsi/*,docenti*/);
+				insegnamentiDto.add(insegnamentoDto);
+			}
 		}
 		return insegnamentiDto;
 	}
@@ -158,8 +216,41 @@ public class InsegnamentoRestController {
 		List<CorsoDiStudio> corsi = (corsoDiStudioService.getAll());
 		List<Docente> docenti = (docenteService.getAll());
 		Insegnamento insegnamento = new Insegnamento();
+		int anno = 0;
 
-		insegnamento = InsegnamentoConverter.dtoToDomain(insegnamentoDto, docenti, corsi);
+		insegnamento = (Insegnamento) insegnamentoConverter.dtoToDomain(insegnamentoDto);
+		Iterator<Docente> docenteIterator = docenti.iterator();
+		Docente docente = new Docente();
+
+		while (docenteIterator.hasNext()){
+			Docente docenteI = docenteIterator.next();
+			if((docenteI.getUtente().getNome()+" "+docenteI.getUtente().getCognome()).equals(insegnamentoDto.getDocente())){
+				docente.setIddocente(docenteI.getIddocente());
+				insegnamento.setDocente(docente);
+			}
+		}
+		
+		Iterator<CorsoDiStudio> corsoIterator = corsi.iterator();
+		while (corsoIterator.hasNext()){
+			CorsoDiStudio corsoI = corsoIterator.next();
+			if(corsoI.getNomeCorso().equals(insegnamentoDto.getCorsoDiStudio())){
+				insegnamento.setCorsoDiStudioIdcorsoDiStudio(corsoI.getIdcorsoDiStudio());	
+			}
+		}
+		
+		switch (insegnamentoDto.getAnnoCorso()){
+			case "Primo anno":
+				anno = 1 ;
+				break;	
+			case "Secondo anno":
+				anno = 2 ;
+				break;
+			case "Terzo anno":
+				anno = 3 ;
+				break;
+		}
+		insegnamento.setAnno(anno);
+		
 		insegnamentoService.save(insegnamento);
 	}
 	

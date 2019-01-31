@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import it.unisalento.se.saw.Iservices.IAulaService;
+import it.unisalento.se.saw.converter.AppelloEsameConverter;
 import it.unisalento.se.saw.converter.AulaConverter;
+import it.unisalento.se.saw.converter.IConverter;
 import it.unisalento.se.saw.domain.Aula;
 import it.unisalento.se.saw.dto.AulaDto;
 import it.unisalento.se.saw.exceptions.AulaNotFoundException;
@@ -27,6 +29,9 @@ public class AulaRestController {
 
 	@Autowired
 	IAulaService aulaService;
+
+	IConverter aulaConverter = new AulaConverter();
+
 	
 	public AulaRestController() {
 		super(); 
@@ -47,10 +52,10 @@ public class AulaRestController {
 			AulaDto aulaDto = new AulaDto();
 			Aula aula = aulaIterator.next();
 			if (aula.getIdaula()!=1){
-				aulaDto = AulaConverter.domainToDto(aula);
+				//aulaDto = AulaConverter.domainToDto(aula);
+				aulaDto = (AulaDto) aulaConverter.domainToDto(aula);
 				auleDto.add(aulaDto);
 			}
-
 		}
 		return auleDto;
 	}
@@ -60,7 +65,8 @@ public class AulaRestController {
 		Aula aulaSave = new Aula();
 		aulaDto.setLatitudine(0.0);
 		aulaDto.setLongitudine(0.0);
-		aulaSave = AulaConverter.dtoToDomain(aulaDto);
+		aulaSave = (Aula) aulaConverter.dtoToDomain(aulaDto);
+		//aulaSave = AulaConverter.dtoToDomain(aulaDto);
 		return aulaService.save(aulaSave);	
 	}
 	
@@ -99,8 +105,9 @@ public class AulaRestController {
 		while (aulaIterator.hasNext()){
 			AulaDto aulaDto = new AulaDto();
 			Aula aula = aulaIterator.next();
-			
-			aulaDto = AulaConverter.domainToDto(aula);
+			aulaDto = (AulaDto) aulaConverter.domainToDto(aula);
+
+			//aulaDto = AulaConverter.domainToDto(aula);
 			auleDto.add(aulaDto);
 		}
 		return auleDto;

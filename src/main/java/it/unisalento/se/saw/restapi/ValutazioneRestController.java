@@ -13,6 +13,7 @@ import it.unisalento.se.saw.dto.ValutazioneDto;
 import it.unisalento.se.saw.Iservices.IPrenotazioneService;
 import it.unisalento.se.saw.Iservices.IStudenteService;
 import it.unisalento.se.saw.Iservices.IValutazioneService;
+import it.unisalento.se.saw.converter.IConverter;
 import it.unisalento.se.saw.converter.MaterialeDidatticoConverter;
 import it.unisalento.se.saw.converter.ValutazioneConverter;
 
@@ -46,6 +47,8 @@ public class ValutazioneRestController {
 	@Autowired
 	IStudenteService studenteService;
 	
+	IConverter valutazioneConverter = new ValutazioneConverter();
+	
 	public ValutazioneRestController(IValutazioneService valutazioneService, IStudenteService studenteService) {
 		this.valutazioneService = valutazioneService;
 		this.studenteService = studenteService;
@@ -59,8 +62,19 @@ public class ValutazioneRestController {
 	public void post(@RequestBody ValutazioneDto valutazioneDto) throws ValutazioneNotFoundException, StudenteNotFoundException {
 		List<Studente> studenti = studenteService.getAll();
 		Valutazione valutazione = new Valutazione();
-		valutazione = ValutazioneConverter.DtoToDomain(valutazioneDto,studenti);
+		Studente studente = new Studente();
+		valutazione = (Valutazione) valutazioneConverter.dtoToDomain(valutazioneDto);
+//		valutazione = ValutazioneConverter.DtoToDomain(valutazioneDto,studenti);
 		
+		Iterator<Studente> studenteIterator = studenti.iterator();
+		while(studenteIterator.hasNext()){
+			Studente student = studenteIterator.next();
+			if(student.getUtente().getIdutente() == valutazioneDto.getIdStudente()){
+				studente.setIdstudente(student.getIdstudente());
+			}
+		}
+		studente.setIdstudente(valutazioneDto.getIdStudente());
+		valutazione.setStudente(studente);
 		valutazioneService.save(valutazione);
 	}
 	
@@ -89,7 +103,8 @@ public class ValutazioneRestController {
 					Valutazione valutazioneL = valutazioneLezioneIterator.next();
 					ValutazioneDto valutazioneLDto = new ValutazioneDto();
 					if (valutazioneL.getNota() != "default"){
-						valutazioneLDto = ValutazioneConverter.domainToDto(valutazioneL);
+						valutazioneLDto = (ValutazioneDto) valutazioneConverter.domainToDto(valutazioneL);
+						//valutazioneLDto = ValutazioneConverter.domainToDto(valutazioneL);
 					}
 					valutazioneListaDto.add(valutazioneLDto);
 					System.out.println("id lez: "+valutazioneListaDto.get(0).getIdLezione());
@@ -102,7 +117,8 @@ public class ValutazioneRestController {
 				
 				while(valutazioneMatDidatticoIterator.hasNext()){
 					Valutazione valutazioneM = valutazioneMatDidatticoIterator.next();
-					ValutazioneDto valutazioneMDto = ValutazioneConverter.domainToDto(valutazioneM);
+					ValutazioneDto valutazioneMDto = (ValutazioneDto) valutazioneConverter.domainToDto(valutazioneM);
+					//ValutazioneDto valutazioneMDto = ValutazioneConverter.domainToDto(valutazioneM);
 					
 					valutazioneListaDto.add(valutazioneMDto);
 				}
@@ -125,7 +141,9 @@ public class ValutazioneRestController {
 			
 			while(valutazioneLezioneIterator.hasNext()){
 				Valutazione valutazioneL = valutazioneLezioneIterator.next();
-				ValutazioneDto valutazioneLDto = ValutazioneConverter.domainToDto(valutazioneL);
+				
+				ValutazioneDto valutazioneLDto = (ValutazioneDto) valutazioneConverter.domainToDto(valutazioneL);
+				//ValutazioneDto valutazioneLDto = ValutazioneConverter.domainToDto(valutazioneL);
 				
 				valutazioneListaDto.add(valutazioneLDto);
 			}
@@ -136,7 +154,9 @@ public class ValutazioneRestController {
 			
 			while(valutazioneMatDidatticoIterator.hasNext()){
 				Valutazione valutazioneM = valutazioneMatDidatticoIterator.next();
-				ValutazioneDto valutazioneMDto = ValutazioneConverter.domainToDto(valutazioneM);
+				ValutazioneDto valutazioneMDto = (ValutazioneDto) valutazioneConverter.domainToDto(valutazioneM);
+
+				//ValutazioneDto valutazioneMDto = ValutazioneConverter.domainToDto(valutazioneM);
 				
 				valutazioneListaDto.add(valutazioneMDto);
 			}
