@@ -20,6 +20,7 @@ import it.unisalento.se.saw.Iservices.IInsegnamentoService;
 import it.unisalento.se.saw.Iservices.ILezioneService;
 import it.unisalento.se.saw.Iservices.IPrenotazioneService;
 import it.unisalento.se.saw.converter.EventoConverter;
+import it.unisalento.se.saw.converter.IConverter;
 import it.unisalento.se.saw.converter.LezioneConverter;
 import it.unisalento.se.saw.converter.PrenotazioneConverter;
 import it.unisalento.se.saw.domain.Aula;
@@ -60,6 +61,10 @@ public class LezioneRestController {
 	@Autowired
 	IDocenteService docenteService;
 	
+	IConverter lezioneConverter = new LezioneConverter();
+	IConverter prenotazioneConverter = new PrenotazioneConverter();
+
+	
 	public LezioneRestController() {
 		super();
 	}
@@ -83,7 +88,7 @@ public class LezioneRestController {
 			Lezione lezione = lezioneIterator.next();
 			LezioneDto lezioneDto = new LezioneDto();
 			if (lezione.getIdlezione() != 1){
-				lezioneDto = LezioneConverter.domainToDto(lezione/*,prenotazioni,eventi,insegnamenti,aule,docenti*/);
+//				lezioneDto = LezioneConverter.domainToDto(lezione/*,prenotazioni,eventi,insegnamenti,aule,docenti*/);
 				lezioniDto.add(lezioneDto);
 			}
 		}
@@ -102,7 +107,7 @@ public class LezioneRestController {
 		while(lezioneIterator.hasNext()){
 			Lezione lezione = lezioneIterator.next();
 			LezioneDto lezioneDto;
-			lezioneDto = LezioneConverter.domainToDto(lezione/*,prenotazioni,eventi,insegnamenti,aule,docenti*/);
+			lezioneDto = (LezioneDto) lezioneConverter.domainToDto(lezione);
 
 			lezioniDto.add(lezioneDto);
 		}
@@ -131,7 +136,9 @@ public class LezioneRestController {
 
 		while(lezioneIterator.hasNext()){
 			Lezione lezione = lezioneIterator.next();
-			LezioneDto lezioneDto = LezioneConverter.domainToDto(lezione/*,prenotazioni,eventi,insegnamenti,aule,docenti*/);
+			LezioneDto lezioneDto = (LezioneDto) lezioneConverter.domainToDto(lezione);
+
+			//LezioneDto lezioneDto = LezioneConverter.domainToDto(lezione/*,prenotazioni,eventi,insegnamenti,aule,docenti*/);
 
 			lezioniDto.add(lezioneDto);
 		}
@@ -152,7 +159,8 @@ public class LezioneRestController {
 		
 		List<Insegnamento> insegnamenti = insegnamentoService.getAll();
 		
-		prenotazione = PrenotazioneConverter.dtoToDomain(prenotazioneDto);
+		prenotazione = (Prenotazione) prenotazioneConverter.dtoToDomain(prenotazioneDto);
+		//prenotazione = PrenotazioneConverter.dtoToDomain(prenotazioneDto);
 		prenotazioneService.save(prenotazione);
 		
 		evento = EventoConverter.dtoToDomain(prenotazioneDto, insegnamenti);

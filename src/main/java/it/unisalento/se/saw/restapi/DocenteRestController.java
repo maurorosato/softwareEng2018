@@ -20,10 +20,8 @@ import it.unisalento.se.saw.Iservices.IDocenteService;
 import it.unisalento.se.saw.Iservices.INumeroTelefonoService;
 import it.unisalento.se.saw.Iservices.IUtenteService;
 import it.unisalento.se.saw.converter.DocenteConverter;
-import it.unisalento.se.saw.converter.UtenteConverter;
+import it.unisalento.se.saw.converter.IConverter;
 import it.unisalento.se.saw.domain.Docente;
-import it.unisalento.se.saw.domain.Evento;
-import it.unisalento.se.saw.domain.Lezione;
 import it.unisalento.se.saw.domain.NumeroTelefono;
 import it.unisalento.se.saw.domain.Utente;
 import it.unisalento.se.saw.dto.DocenteDto;
@@ -43,6 +41,9 @@ public class DocenteRestController {
 	
 	@Autowired
 	INumeroTelefonoService numeroTelefonoService;
+	
+	IConverter docenteConverter = new DocenteConverter();
+
 	
 	public DocenteRestController() {
 		super();
@@ -66,9 +67,7 @@ public class DocenteRestController {
 		List<Docente> docenti = docenteService.getAll();
 		List<NumeroTelefono> numeriTelefono = numeroTelefonoService.getAll();
 		List<Utente> utenti = utenteService.getAll();
-		//List<NumeroTelefono> numeriTelefono = numeroService.getAll();
-		//int idUtente;
-		//String numTelefono = "- ";
+		String numTelefono = "- ";
 		
 		Iterator<Docente> docenteIterator = docenti.iterator();
 		while(docenteIterator.hasNext()){
@@ -76,39 +75,20 @@ public class DocenteRestController {
 			DocenteDto docenteDto = new DocenteDto();
 
 			if (docente.getIddocente() != 1){
-				docenteDto = DocenteConverter.domainToDto(docente/*,utenti*/, numeriTelefono);
+				docenteDto = (DocenteDto) docenteConverter.domainToDto(docente);
+				
+				Iterator<NumeroTelefono> numeroIterator = numeriTelefono.iterator();
+				while (numeroIterator.hasNext()){
+					NumeroTelefono num = numeroIterator.next();
+					if(num.getUtente().getIdutente() == docenteDto.getIdUserDocente()){
+						numTelefono = numTelefono + num.getNumeroTelefono();
+					}
+					docenteDto.setNumeroTelefono(numTelefono);
+				}
 				docentiDto.add(docenteDto);
 			}
 		}
-/*
-		for(int i=0;i<docenti.size();i++) {
-			DocenteDto docenteDto = new DocenteDto();
-			if ( docenti.get(i).getIddocente()!=1){
-				idUtente = docenti.get(i).getUtente().getIdutente();
-				
-				for (int j=0; j<numeriTelefono.size(); j++){
-					if (numeriTelefono.get(j).getUtente().getIdutente() == idUtente){
-						numTelefono = numTelefono + numeriTelefono.get(j).getNumeroTelefono() + " - ";
-					}
-				}
-				
-				Utente utente = new Utente();
-				utente = utenteService.getById(idUtente);
-				docenteDto.setIdDocente(docenti.get(i).getIddocente());
-				docenteDto.setNome(utente.getNome());
-				docenteDto.setCognome(utente.getCognome());
-				docenteDto.setEmail(utente.getEmail());
-				docenteDto.setGrado(docenti.get(i).getGrado());
-				docenteDto.setDataNascita(utente.getDataNascita());
-				docenteDto.setStipendio(docenti.get(i).getStipendio());
-				docenteDto.setNumeroTelefono(numTelefono);
-				numTelefono = "- ";
-				
-				docentiDto.add(i, docenteDto);
-			}
-						
-		}
-*/
+
 		return docentiDto;
 	}	
 		

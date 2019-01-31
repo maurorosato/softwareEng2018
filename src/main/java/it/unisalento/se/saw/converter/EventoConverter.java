@@ -10,13 +10,10 @@ import it.unisalento.se.saw.domain.Docente;
 import it.unisalento.se.saw.domain.Evento;
 import it.unisalento.se.saw.domain.Insegnamento;
 import it.unisalento.se.saw.domain.Lezione;
-import it.unisalento.se.saw.domain.Prenotazione;
-import it.unisalento.se.saw.domain.Utente;
 import it.unisalento.se.saw.dto.EventoDto;
 import it.unisalento.se.saw.dto.PrenotazioneDto;
 
-public class EventoConverter {
-	
+public class EventoConverter implements IConverter {
 	public static Evento dtoToDomain(PrenotazioneDto prenotazioneDto, List<Insegnamento> insegnamenti){
 		Evento evento = new Evento();
 		Aula aula = new Aula();
@@ -36,13 +33,15 @@ public class EventoConverter {
 		
 		return evento;
 	}
+	public <T> Object domainToDto(T domainObject) {
+		Evento evento = (Evento) domainObject;
 
-	public static EventoDto domainToDto(Evento evento, List<Lezione> lezioni,List<AppelloEsame> appelli,List<CorsoDiStudio> corsi/*,List<Docente> docenti, List<Aula> aule, List<Utente> utenti,List<Lezione> lezioni,List<Docente> docenti,List<AppelloEsame> appelli,List<Prenotazione> prenotazioni,List<Insegnamento> insegnamenti*/){
+	//public static EventoDto domainToDto(Evento evento, List<Lezione> lezioni,List<AppelloEsame> appelli,List<CorsoDiStudio> corsi/*,List<Docente> docenti, List<Aula> aule, List<Utente> utenti,List<Lezione> lezioni,List<Docente> docenti,List<AppelloEsame> appelli,List<Prenotazione> prenotazioni,List<Insegnamento> insegnamenti*/){
 		EventoDto eventoDto = new EventoDto();
-		Iterator<Lezione> lezioneIterator = lezioni.iterator();			
-
-		Iterator<CorsoDiStudio> corsoIterator = corsi.iterator();
-		Iterator<AppelloEsame> appelloIterator = appelli.iterator();
+//		Iterator<Lezione> lezioneIterator = lezioni.iterator();			
+//
+//		Iterator<CorsoDiStudio> corsoIterator = corsi.iterator();
+//		Iterator<AppelloEsame> appelloIterator = appelli.iterator();
 		
 		eventoDto.setIdEvento(evento.getIdevento());
 		eventoDto.setAula(evento.getAula().getNome());
@@ -57,28 +56,28 @@ public class EventoConverter {
 		eventoDto.setDocente(evento.getPrenotazione().getDocente().getUtente().getNome() + ' ' +evento.getPrenotazione().getDocente().getUtente().getCognome());
 
 		
-		while (corsoIterator.hasNext()){
-			CorsoDiStudio corso = corsoIterator.next();
-			if (corso.getIdcorsoDiStudio() == evento.getInsegnamento().getCorsoDiStudioIdcorsoDiStudio())
-				eventoDto.setCorso(corso.getNomeCorso());
-		}
-		while (lezioneIterator.hasNext()){
-			Lezione lezione = lezioneIterator.next();
-			if (lezione.getEvento().getIdevento() == evento.getIdevento()){
-				eventoDto.setImage("lessonsIcon.png");
-				eventoDto.setLezioneOrEsame("lezione");
-			}
-		}
-		while (appelloIterator.hasNext()){
-			AppelloEsame appello = appelloIterator.next();
-			if (appello.getEvento().getIdevento() == evento.getIdevento()){
-				eventoDto.setDescrizione("TIPOLOGIA: "+appello.getTipologia() + " DESCRIZIONE: "+ evento.getDescrizione());
-				eventoDto.setLezioneOrEsame("esame");
-				eventoDto.setImage("examsIcon.png");
-			}
-		}
+//		while (corsoIterator.hasNext()){
+//			CorsoDiStudio corso = corsoIterator.next();
+//			if (corso.getIdcorsoDiStudio() == evento.getInsegnamento().getCorsoDiStudioIdcorsoDiStudio())
+//				eventoDto.setCorso(corso.getNomeCorso());
+//		}
+//		while (lezioneIterator.hasNext()){
+//			Lezione lezione = lezioneIterator.next();
+//			if (lezione.getEvento().getIdevento() == evento.getIdevento()){
+//				eventoDto.setImage("lessonsIcon.png");
+//				eventoDto.setLezioneOrEsame("lezione");
+//			}
+//		}
+//		while (appelloIterator.hasNext()){
+//			AppelloEsame appello = appelloIterator.next();
+//			if (appello.getEvento().getIdevento() == evento.getIdevento()){
+//				eventoDto.setDescrizione("TIPOLOGIA: "+appello.getTipologia() + " DESCRIZIONE: "+ evento.getDescrizione());
+//				eventoDto.setLezioneOrEsame("esame");
+//				eventoDto.setImage("examsIcon.png");
+//			}
+//		}
 
-
+// ******************************************************************************
 /*
 		float numeroFloat = 0;
 		int idCorso = 0,idDocente = 0, idUtente = 0;
@@ -143,5 +142,9 @@ public class EventoConverter {
 		}
 */
 		return eventoDto;
+	}
+	@Override
+	public <T> Object dtoToDomain(T dtoObject) {
+		return dtoObject;
 	}
 }

@@ -17,6 +17,8 @@ import it.unisalento.se.saw.Iservices.IDocenteService;
 import it.unisalento.se.saw.Iservices.IEventoService;
 import it.unisalento.se.saw.Iservices.ILezioneService;
 import it.unisalento.se.saw.Iservices.IMaterialeDidatticoService;
+import it.unisalento.se.saw.converter.IConverter;
+import it.unisalento.se.saw.converter.IscrizioneConverter;
 import it.unisalento.se.saw.converter.MaterialeDidatticoConverter;
 import it.unisalento.se.saw.domain.Docente;
 import it.unisalento.se.saw.domain.Lezione;
@@ -43,6 +45,8 @@ public class MaterialeDidatticoRestController {
 	@Autowired
 	IMaterialeDidatticoService materialeDidatticoService;
 	
+	IConverter matDidatticoConverter = new MaterialeDidatticoConverter();
+
 	public MaterialeDidatticoRestController() {
 		super();
 	}
@@ -67,7 +71,7 @@ public class MaterialeDidatticoRestController {
 			MaterialeDidattico matDidattico = matDidatticoIterator.next();
 			MaterialeDidatticoDto materialeDidatticoDto = new MaterialeDidatticoDto();
 			if(matDidattico.getIdmaterialeDidattico() != 1){
-				 materialeDidatticoDto = MaterialeDidatticoConverter.domainToDto(matDidattico/*,lezioni,docenti*/);
+				 materialeDidatticoDto = (MaterialeDidatticoDto) matDidatticoConverter.domainToDto(matDidattico);
 				 materialeDidatticoListaDto.add(materialeDidatticoDto);
 			}
 		}	
@@ -94,7 +98,7 @@ public class MaterialeDidatticoRestController {
 		Iterator<MaterialeDidattico> matDidatticoIterator = materialeDidattico.iterator();
 		while(matDidatticoIterator.hasNext()){
 			MaterialeDidattico matDidattico = matDidatticoIterator.next();
-			MaterialeDidatticoDto materialeDidatticoDto = MaterialeDidatticoConverter.domainToDto(matDidattico/*,lezioni,docenti*/);
+			MaterialeDidatticoDto materialeDidatticoDto = (MaterialeDidatticoDto) matDidatticoConverter.domainToDto(matDidattico);
 			
 			materialeDidatticoListaDto.add(materialeDidatticoDto);
 		}
@@ -106,8 +110,31 @@ public class MaterialeDidatticoRestController {
 
 		List<Lezione> lezioni = lezioneService.getAll();
 		List<Docente> docenti = docenteService.getAll();
+		Docente docente = new Docente();
+		Lezione lezione = new Lezione();
+		
 		MaterialeDidattico materialeDidattico = new MaterialeDidattico();
-		materialeDidattico = MaterialeDidatticoConverter.dtoToDomain(materialeDidatticoDto,lezioni,docenti);
+//		materialeDidattico = MaterialeDidatticoConverter.dtoToDomain(materialeDidatticoDto,lezioni,docenti);
+		materialeDidattico = (MaterialeDidattico) matDidatticoConverter.dtoToDomain(materialeDidatticoDto);
+			
+		Iterator<Lezione> lezioneIterator = lezioni.iterator();
+		while (lezioneIterator.hasNext()){
+			Lezione lez = lezioneIterator.next();
+			if (lez.getEvento().getIdevento() == materialeDidatticoDto.getIdEvento()){
+				lezione.setIdlezione(lez.getIdlezione());
+			}
+		}
+	
+		Iterator<Docente> docenteIterator = docenti.iterator();
+		while (docenteIterator.hasNext()){
+			Docente doc = docenteIterator.next();
+			if (materialeDidatticoDto.getIdUtente() == doc.getUtente().getIdutente()){
+				docente.setIddocente(doc.getIddocente());
+			}
+		}
+		
+		materialeDidattico.setDocente(docente);
+		materialeDidattico.setLezione(lezione);
 		
 		return materialeDidatticoService.save(materialeDidattico);
 	}

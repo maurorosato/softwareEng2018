@@ -148,20 +148,14 @@ private MockMvc mockMvc;
 		evento.setPrenotazione(prenotazione);
 		
 		Lezione lezione = new Lezione();
-		LezioneDto lezioneDto = new LezioneDto(); 
 		lezione.setEvento(evento);
 		lezione.setIdlezione(4);
-		lezioneDto = LezioneConverter.domainToDto(lezione);
 		lezioni.add(lezione);
-		lezioniDto.add(lezioneDto);
 		
 		Lezione lezione2 = new Lezione();
-		LezioneDto lezioneDto2 = new LezioneDto(); 
 		lezione2.setEvento(evento);
 		lezione2.setIdlezione(5);
-		lezioneDto2 = LezioneConverter.domainToDto(lezione2);
 		lezioni.add(lezione2);
-		lezioniDto.add(lezioneDto2);
 		
 		when(lezioneServiceMock.getAll()).thenReturn(lezioni);
 		

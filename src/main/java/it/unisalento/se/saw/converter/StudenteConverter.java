@@ -6,13 +6,15 @@ import java.util.List;
 import it.unisalento.se.saw.domain.CorsoDiStudio;
 import it.unisalento.se.saw.domain.NumeroTelefono;
 import it.unisalento.se.saw.domain.Studente;
-import it.unisalento.se.saw.domain.Utente;
 import it.unisalento.se.saw.dto.StudenteDto;
 
-public class StudenteConverter {
-	public static StudenteDto domainToDto(Studente studente,/* List<Utente> utenti,*/ List<CorsoDiStudio> corsi,List<NumeroTelefono> numeriTelefono){
+public class StudenteConverter implements IConverter {
+	
+	public <T> Object domainToDto(T domainObject) {
+	//public static StudenteDto domainToDto(Studente studente,/* List<Utente> utenti,*/ List<CorsoDiStudio> corsi,List<NumeroTelefono> numeriTelefono){
+		Studente studente = (Studente) domainObject;
 		StudenteDto studenteDto = new StudenteDto();
-		String numTelefono = "- ";
+//		String numTelefono = "- ";
 		
 		studenteDto.setNazione(studente.getNazione());
 		studenteDto.setIndirizzo(studente.getIndirizzo());
@@ -27,14 +29,14 @@ public class StudenteConverter {
 		studenteDto.setDataNascita(studente.getUtente().getDataNascita());
 		studenteDto.setIdCorsoDiStudio(studente.getCorsoDiStudioIdcorsoDiStudio());
 		
-		Iterator<NumeroTelefono> numeroIterator = numeriTelefono.iterator();
-		while (numeroIterator.hasNext()){
-			NumeroTelefono num = numeroIterator.next();
-			if(num.getUtente().getIdutente() == studenteDto.getIdUserStudente()){
-				numTelefono = numTelefono + num.getNumeroTelefono() + "- ";
-			}
-			studenteDto.setNumeroTelefono(numTelefono);
-		}	
+//		Iterator<NumeroTelefono> numeroIterator = numeriTelefono.iterator();
+//		while (numeroIterator.hasNext()){
+//			NumeroTelefono num = numeroIterator.next();
+//			if(num.getUtente().getIdutente() == studenteDto.getIdUserStudente()){
+//				numTelefono = numTelefono + num.getNumeroTelefono() + "- ";
+//			}
+//			studenteDto.setNumeroTelefono(numTelefono);
+//		}	
 
 //		Iterator<Utente> utenteIterator = utenti.iterator();
 //		while (utenteIterator.hasNext()){
@@ -63,5 +65,11 @@ public class StudenteConverter {
 //			}
 //			
 		return studenteDto;
+	}
+
+	@Override
+	public <T> Object dtoToDomain(T dtoObject) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

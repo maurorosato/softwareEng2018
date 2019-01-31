@@ -14,26 +14,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import it.unisalento.se.saw.Iservices.ICorsoDiStudioService;
 import it.unisalento.se.saw.Iservices.INumeroTelefonoService;
 import it.unisalento.se.saw.Iservices.IStudenteService;
 import it.unisalento.se.saw.Iservices.IUtenteService;
-import it.unisalento.se.saw.converter.DocenteConverter;
+import it.unisalento.se.saw.converter.IConverter;
 import it.unisalento.se.saw.converter.StudenteConverter;
 import it.unisalento.se.saw.domain.CorsoDiStudio;
-import it.unisalento.se.saw.domain.Docente;
 import it.unisalento.se.saw.domain.Insegnamento;
 import it.unisalento.se.saw.domain.NumeroTelefono;
-import it.unisalento.se.saw.domain.Prenotazione;
 import it.unisalento.se.saw.domain.Studente;
-
 import it.unisalento.se.saw.domain.Utente;
-import it.unisalento.se.saw.dto.DocenteDto;
-import it.unisalento.se.saw.dto.IscrizioneDto;
 import it.unisalento.se.saw.dto.StudenteDto;
 import it.unisalento.se.saw.exceptions.CorsoDiStudioNotFoundException;
-import it.unisalento.se.saw.exceptions.IscrizioneNotFoundException;
 import it.unisalento.se.saw.exceptions.NumeroTelefonoNotFoundException;
 import it.unisalento.se.saw.exceptions.StudenteNotFoundException;
 import it.unisalento.se.saw.exceptions.UtenteNotFoundException;
@@ -53,6 +46,8 @@ public class StudenteRestController {
 	
 	@Autowired
 	INumeroTelefonoService numeroService;
+	
+	IConverter studenteConverter = new StudenteConverter();
 	
 	public StudenteRestController() {
 		super();
@@ -83,7 +78,26 @@ public class StudenteRestController {
 			Studente studente = studenteIterator.next();
 			StudenteDto studenteDto = new StudenteDto();
 			if(studente.getIdstudente() != 1){
-				studenteDto = StudenteConverter.domainToDto(studente, /*utenti,*/ corsi,numeriTelefono);
+				studenteDto = (StudenteDto) studenteConverter.domainToDto(studente);
+				
+				Iterator<NumeroTelefono> numeroIterator = numeriTelefono.iterator();
+				while (numeroIterator.hasNext()){
+					NumeroTelefono num = numeroIterator.next();
+					if(num.getUtente().getIdutente() == studenteDto.getIdUserStudente()){
+						numTelefono = numTelefono + num.getNumeroTelefono() + "- ";
+					}
+					studenteDto.setNumeroTelefono(numTelefono);
+				}	
+				
+				Iterator<CorsoDiStudio> corsoIterator = corsi.iterator();
+				while (corsoIterator.hasNext()){
+					CorsoDiStudio c = corsoIterator.next();
+					if(c.getIdcorsoDiStudio() == studente.getCorsoDiStudioIdcorsoDiStudio()){
+						studenteDto.setCorsoDiStudio(c.getNomeCorso());
+					}
+				}
+				
+				//studenteDto = StudenteConverter.domainToDto(studente, /*utenti,*/ corsi,numeriTelefono);
 				studentiDto.add(studenteDto);
 			}
 		}
@@ -180,6 +194,7 @@ public class StudenteRestController {
 	public List<StudenteDto> getStudenteIscrittoInsegnamento(@PathVariable("idInsegnamento") int idInsegnamento) throws StudenteNotFoundException, UtenteNotFoundException, CorsoDiStudioNotFoundException, NumeroTelefonoNotFoundException {
 		List<StudenteDto> studentiDto= new ArrayList<StudenteDto>();
 		List<NumeroTelefono> numeriTelefono = numeroService.getAll();
+		String numTelefono = "- ";
 
 		Insegnamento insegnamento = new Insegnamento();
 		insegnamento.setIdinsegnamento(idInsegnamento);
@@ -191,8 +206,25 @@ public class StudenteRestController {
 		while(studenteIterator.hasNext()){
 			StudenteDto studenteDto = new StudenteDto();
 			Studente studente = studenteIterator.next();
+			studenteDto = (StudenteDto) studenteConverter.domainToDto(studente);
 			
-			studenteDto = StudenteConverter.domainToDto(studente,/* utenti,*/ corsi,numeriTelefono);
+			Iterator<NumeroTelefono> numeroIterator = numeriTelefono.iterator();
+			while (numeroIterator.hasNext()){
+				NumeroTelefono num = numeroIterator.next();
+				if(num.getUtente().getIdutente() == studenteDto.getIdUserStudente()){
+					numTelefono = numTelefono + num.getNumeroTelefono() + "- ";
+				}
+				studenteDto.setNumeroTelefono(numTelefono);
+			}	
+			
+			Iterator<CorsoDiStudio> corsoIterator = corsi.iterator();
+			while (corsoIterator.hasNext()){
+				CorsoDiStudio c = corsoIterator.next();
+				if(c.getIdcorsoDiStudio() == studente.getCorsoDiStudioIdcorsoDiStudio()){
+					studenteDto.setCorsoDiStudio(c.getNomeCorso());
+				}
+			}
+			//studenteDto = StudenteConverter.domainToDto(studente,/* utenti,*/ corsi,numeriTelefono);
 			studentiDto.add(studenteDto);
 		}
 		return studentiDto;

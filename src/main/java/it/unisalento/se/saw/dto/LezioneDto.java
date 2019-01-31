@@ -8,6 +8,7 @@ public class LezioneDto {
 	int idLezione;
 	String docente;
 	Date dataInizio;
+	String statoWifi;
 	int idUserDocente;
 	double latitudine;
 	int idInsegnamento;
@@ -19,6 +20,12 @@ public class LezioneDto {
 	
 	public int getIdInsegnamento() {
 		return idInsegnamento;
+	}
+	public String getStatoWifi() {
+		return statoWifi;
+	}
+	public void setStatoWifi(String statoWifi) {
+		this.statoWifi = statoWifi;
 	}
 	public void setIdInsegnamento(int idInsegnamento) {
 		this.idInsegnamento = idInsegnamento;
