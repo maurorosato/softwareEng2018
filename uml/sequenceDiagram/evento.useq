@@ -97,9 +97,7 @@
       <position height="105" width="154" x="1318" y="535"/>    
     </execution>  
   </object>  
-  <message id="3" 
-    operation="dtoToDomain(it.unisalento.se.saw.dto.PrenotazioneDto):it.unisalento.se.saw.domain.Prenotazione" 
-    asynchronous="false">    
+  <message id="3" operation="dtoToDomain(T):java.lang.Object" asynchronous="false">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="4"/>  
   </message>  

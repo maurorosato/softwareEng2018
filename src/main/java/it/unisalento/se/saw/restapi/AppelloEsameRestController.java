@@ -20,10 +20,9 @@ import it.unisalento.se.saw.Iservices.IInsegnamentoService;
 import it.unisalento.se.saw.Iservices.IPrenotazioneService;
 import it.unisalento.se.saw.converter.AppelloEsameConverter;
 import it.unisalento.se.saw.converter.EventoConverter;
+import it.unisalento.se.saw.converter.IConverter;
 import it.unisalento.se.saw.converter.PrenotazioneConverter;
 import it.unisalento.se.saw.domain.AppelloEsame;
-import it.unisalento.se.saw.domain.Aula;
-import it.unisalento.se.saw.domain.Docente;
 import it.unisalento.se.saw.domain.Evento;
 import it.unisalento.se.saw.domain.Insegnamento;
 import it.unisalento.se.saw.domain.Prenotazione;
@@ -58,6 +57,10 @@ public class AppelloEsameRestController {
 	@Autowired
 	IDocenteService docenteService;
 	
+	IConverter appelloEsameConverter = new AppelloEsameConverter();
+	IConverter prenotazioneConverter = new PrenotazioneConverter();
+
+	
 	public AppelloEsameRestController() {
 		super(); 
 	}
@@ -85,7 +88,8 @@ public class AppelloEsameRestController {
 
 		List<Insegnamento> insegnamenti = insegnamentoService.getAll();
 		
-		prenotazione = PrenotazioneConverter.dtoToDomain(prenotazioneDto);
+		prenotazione = (Prenotazione) prenotazioneConverter.dtoToDomain(prenotazioneDto);
+		//prenotazione = PrenotazioneConverter.dtoToDomain(prenotazioneDto);
 		prenotazioneService.save(prenotazione);
 		
 		evento = EventoConverter.dtoToDomain(prenotazioneDto, insegnamenti);
@@ -93,7 +97,7 @@ public class AppelloEsameRestController {
 		evento.setPrenotazione(prenotazione);
 		eventoService.save(evento);
 		
-		appelloEsame = AppelloEsameConverter.dtoToDomain(prenotazioneDto);
+		appelloEsame = (AppelloEsame) appelloEsameConverter.dtoToDomain(prenotazioneDto);
 		appelloEsame.setEvento(evento);
 		
 		return appelloEsameService.save(appelloEsame);
@@ -102,12 +106,7 @@ public class AppelloEsameRestController {
 	@RequestMapping(value="/getAll", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<AppelloEsameDto> getAll() throws AppelloEsameNotFoundException, PrenotazioneNotFoundException, EventoNotFoundException, AulaNotFoundException, InsegnamentoNotFoundException, DocenteNotFoundException{
 		List<AppelloEsameDto> appelliEsameDto= new ArrayList<AppelloEsameDto>();
-		List<Aula> aule = aulaService.getAll();
-		List<Insegnamento> insegnamenti = insegnamentoService.getAll();
 		List<AppelloEsame> appelli = appelloEsameService.getAll();
-		List<Prenotazione> prenotazioni = prenotazioneService.getAll();
-		List<Evento> eventi = eventoService.getAll();
-		List<Docente> docenti = docenteService.getAll();
 		
 		Iterator<AppelloEsame> appelloEsameIterator = appelli.iterator();
 		while(appelloEsameIterator.hasNext()){
@@ -115,7 +114,7 @@ public class AppelloEsameRestController {
 			AppelloEsameDto appelloEsameDto = new AppelloEsameDto();
 			
 			if(appelloEsame.getIdappelloEsame() != 1){
-				appelloEsameDto = AppelloEsameConverter.domainToDto(appelloEsame/*,prenotazioni,eventi,insegnamenti,aule,docenti*/);
+				appelloEsameDto = (AppelloEsameDto) appelloEsameConverter.domainToDto(appelloEsame/*,prenotazioni,eventi,insegnamenti,aule,docenti*/);
 				appelliEsameDto.add(appelloEsameDto);
 			}
 		}
@@ -139,12 +138,8 @@ public class AppelloEsameRestController {
 				break;
 		}
 		
-		List<Aula> aule = aulaService.getAll();
-		List<Evento> eventi = eventoService.getAll();
-		List<Docente> docenti = docenteService.getAll();
+		
 		List<AppelloEsame> appelli = appelloEsameService.getAllStudente(idCorsoStudente,anno);
-		List<Prenotazione> prenotazioni = prenotazioneService.getAll();
-		List<Insegnamento> insegnamenti = insegnamentoService.getAll();
 		List<AppelloEsameDto> appelliEsameDto= new ArrayList<AppelloEsameDto>();
 		Iterator<AppelloEsame> appelloEsameIterator = appelli.iterator();
 
@@ -152,7 +147,7 @@ public class AppelloEsameRestController {
 			AppelloEsame appelloEsame = appelloEsameIterator.next();
 			
 			AppelloEsameDto appelloEsameDto = new AppelloEsameDto();
-			appelloEsameDto = AppelloEsameConverter.domainToDto(appelloEsame /*,prenotazioni,eventi,insegnamenti,aule,docenti*/);
+			appelloEsameDto = (AppelloEsameDto) appelloEsameConverter.domainToDto(appelloEsame /*,prenotazioni,eventi,insegnamenti,aule,docenti*/);
 
 			appelliEsameDto.add(appelloEsameDto);
 		}
@@ -163,12 +158,6 @@ public class AppelloEsameRestController {
 	public List<AppelloEsameDto> getAppelliEsameInsegnamento(@PathVariable("idInsegnamento") int idInsegnamento) throws AulaNotFoundException, EventoNotFoundException, DocenteNotFoundException, InsegnamentoNotFoundException, PrenotazioneNotFoundException, AppelloEsameNotFoundException {
 		List<AppelloEsameDto> appelliEsameDto= new ArrayList<AppelloEsameDto>();
 		
-		List<Aula> aule = aulaService.getAll();
-		List<Evento> eventi = eventoService.getAll();
-		List<Docente> docenti = docenteService.getAll();
-		List<Insegnamento> insegnamenti = insegnamentoService.getAll();
-		List<Prenotazione> prenotazioni = prenotazioneService.getAll();
-		
 		Insegnamento insegnamento = new Insegnamento();
 		insegnamento.setIdinsegnamento(idInsegnamento);
 		List<AppelloEsame> appelliInsegnamento = appelloEsameService.getAppelliEsameInsegnamento(insegnamento);
@@ -177,7 +166,7 @@ public class AppelloEsameRestController {
 		while(appelloIterator.hasNext()){
 			AppelloEsame appelloEsame = appelloIterator.next();
 			AppelloEsameDto appelloEsameDto;
-			appelloEsameDto = AppelloEsameConverter.domainToDto(appelloEsame/*,prenotazioni,eventi,insegnamenti,aule,docenti*/);
+			appelloEsameDto = (AppelloEsameDto) appelloEsameConverter.domainToDto(appelloEsame/*,prenotazioni,eventi,insegnamenti,aule,docenti*/);
 
 			appelliEsameDto.add(appelloEsameDto);
 		}

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import it.unisalento.se.saw.Iservices.IIscrizioneService;
 import it.unisalento.se.saw.Iservices.IStudenteService;
+import it.unisalento.se.saw.converter.IConverter;
 import it.unisalento.se.saw.converter.IscrizioneConverter;
 import it.unisalento.se.saw.domain.Insegnamento;
 import it.unisalento.se.saw.domain.Iscrizione;
@@ -31,6 +32,8 @@ public class IscrizioneRestController {
 	@Autowired
 	IStudenteService studenteService;
 	
+	IConverter iscrizioneConverter = new IscrizioneConverter();
+	
 	public IscrizioneRestController() {
 		super(); 
 	}
@@ -44,8 +47,19 @@ public class IscrizioneRestController {
 	public void post(@RequestBody IscrizioneDto iscrizioneDto) throws IscrizioneNotFoundException, StudenteNotFoundException {
 		
 		List<Studente> studenti = studenteService.getAll();
+		Studente studente = new Studente();
+		Studente s = new Studente();
 		Iscrizione iscrizione = new Iscrizione();
-		iscrizione = IscrizioneConverter.DtoToDomain(iscrizioneDto,studenti);
+		iscrizione = (Iscrizione) iscrizioneConverter.dtoToDomain(iscrizioneDto);
+		
+		Iterator<Studente> studenteIterator = studenti.iterator();
+		while(studenteIterator.hasNext()){
+			s = studenteIterator.next();
+			if(s.getUtente().getIdutente() == iscrizioneDto.getIdUserStudente()){
+				studente.setIdstudente(s.getIdstudente());
+			}
+		}
+		iscrizione.setStudente(studente);
 		
 		iscrizioneService.save(iscrizione);	
 	}
@@ -71,7 +85,8 @@ public class IscrizioneRestController {
 		Iterator<Iscrizione> iscrizioneIterator = iscrizioni.iterator();
 		while(iscrizioneIterator.hasNext()){
 			Iscrizione iscr = iscrizioneIterator.next();
-			IscrizioneDto iscrDto = IscrizioneConverter.DomainToDto(iscr/*, studenti*/);
+			//IscrizioneDto iscrDto = IscrizioneConverter.DomainToDto(iscr/*, studenti*/);
+			IscrizioneDto iscrDto = (IscrizioneDto) iscrizioneConverter.domainToDto(iscr);
 					
 			iscrizioniDto.add(iscrDto);
 		}

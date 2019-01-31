@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import it.unisalento.se.saw.Iservices.ICorsoDiStudioService;
+import it.unisalento.se.saw.converter.AppelloEsameConverter;
 import it.unisalento.se.saw.converter.CorsoDiStudioConverter;
+import it.unisalento.se.saw.converter.IConverter;
 import it.unisalento.se.saw.domain.CorsoDiStudio;
 
 import it.unisalento.se.saw.dto.CorsoDiStudioDto;
@@ -29,6 +31,8 @@ public class CorsoDiStudioRestController {
 	@Autowired
 	ICorsoDiStudioService corsoDiStudioService;
 	
+	IConverter corsoDiStudioConverter = new CorsoDiStudioConverter();
+
 	public CorsoDiStudioRestController() {
 		super();
 	}
@@ -47,7 +51,7 @@ public class CorsoDiStudioRestController {
 			CorsoDiStudioDto corsoDto = new CorsoDiStudioDto();
 			CorsoDiStudio corso = corsoIterator.next();
 			if (corso.getIdcorsoDiStudio()!=1){
-				corsoDto = CorsoDiStudioConverter.domainToDto(corso);
+				corsoDto = (CorsoDiStudioDto) corsoDiStudioConverter.domainToDto(corso);
 				corsiDto.add(corsoDto);
 			}
 
@@ -60,7 +64,8 @@ public class CorsoDiStudioRestController {
 	public CorsoDiStudio post(@RequestBody CorsoDiStudioDto corsoDto) throws CorsoDiStudioNotFoundException{	
 	
 		CorsoDiStudio corsoSave = new CorsoDiStudio();
-		corsoSave = CorsoDiStudioConverter.dtoToDomain(corsoDto);
+		
+		corsoSave = (CorsoDiStudio) corsoDiStudioConverter.dtoToDomain(corsoDto);
 		
 		return corsoDiStudioService.save(corsoSave);
 	}
@@ -70,7 +75,7 @@ public class CorsoDiStudioRestController {
 		CorsoDiStudio corso=new CorsoDiStudio();
 		corso=corsoDiStudioService.getById(id);
 		CorsoDiStudioDto corsoDto = new CorsoDiStudioDto();
-		corsoDto = CorsoDiStudioConverter.domainToDto(corso);
+		corsoDto = (CorsoDiStudioDto) corsoDiStudioConverter.domainToDto(corso);
 		
 		return corsoDto;
 	}

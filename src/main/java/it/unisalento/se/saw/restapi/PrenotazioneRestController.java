@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.unisalento.se.saw.Iservices.IPrenotazioneService;
+import it.unisalento.se.saw.converter.IConverter;
 import it.unisalento.se.saw.converter.PrenotazioneConverter;
 import it.unisalento.se.saw.domain.Prenotazione;
 import it.unisalento.se.saw.dto.PrenotazioneDto;
@@ -27,6 +28,8 @@ public class PrenotazioneRestController {
 	@Autowired
 	IPrenotazioneService prenotazioneService;
 	
+	IConverter prenotazioneConverter = new PrenotazioneConverter();
+
 	public PrenotazioneRestController() {
 		super(); 
 	}
@@ -38,7 +41,8 @@ public class PrenotazioneRestController {
 	@PostMapping(value="save", consumes=MediaType.APPLICATION_JSON_VALUE)
 	public Prenotazione post(@RequestBody PrenotazioneDto prenotazioneDto) throws PrenotazioneNotFoundException, ParseException, AppelloEsameNotFoundException, InsegnamentoNotFoundException {
 		Prenotazione prenotazioneSave = new Prenotazione();	
-		prenotazioneSave = PrenotazioneConverter.dtoToDomain(prenotazioneDto);
+		prenotazioneSave = (Prenotazione) prenotazioneConverter.dtoToDomain(prenotazioneDto);
+		//prenotazioneSave = PrenotazioneConverter.dtoToDomain(prenotazioneDto);
 		return prenotazioneService.save(prenotazioneSave);	
 	}
 
@@ -51,7 +55,8 @@ public class PrenotazioneRestController {
 		
 		while(prenotazioneIterator.hasNext()){
 			Prenotazione prenotazione = prenotazioneIterator.next();
-			PrenotazioneDto prenotazioneDto = PrenotazioneConverter.domainToDto(prenotazione/*,docenti*/);
+			PrenotazioneDto prenotazioneDto = (PrenotazioneDto) prenotazioneConverter.domainToDto(prenotazione);
+			//PrenotazioneDto prenotazioneDto = PrenotazioneConverter.domainToDto(prenotazione/*,docenti*/);
 			prenotazioniDto.add(prenotazioneDto);
 		}
 		return prenotazioniDto;

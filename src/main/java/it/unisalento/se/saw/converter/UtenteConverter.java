@@ -5,9 +5,11 @@ import it.unisalento.se.saw.domain.Utente;
 import it.unisalento.se.saw.dto.UtenteDto;
 
 
-public class UtenteConverter {
-	public static UtenteDto domainToDto(Utente utente){
-		
+public class UtenteConverter implements IConverter {
+	
+	//public static UtenteDto domainToDto(Utente utente){
+	public <T> Object domainToDto(T domainObject) {
+		Utente utente = (Utente) domainObject;
 		UtenteDto uDto = new UtenteDto();
 		
 		uDto.setIdutente(utente.getIdutente());
@@ -17,5 +19,10 @@ public class UtenteConverter {
 		uDto.setPassword(utente.getPassword());
 		
 		return uDto;
+	}
+
+	@Override
+	public <T> Object dtoToDomain(T dtoObject) {
+		return dtoObject;
 	}
 }

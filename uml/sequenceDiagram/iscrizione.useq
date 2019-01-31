@@ -42,9 +42,7 @@
       <position height="105" width="164" x="500" y="232"/>    
     </execution>  
   </object>  
-  <message id="3" 
-    operation="DtoToDomain(it.unisalento.se.saw.dto.IscrizioneDto,java.util.List&lt;it.unisalento.se.saw.domain.Studente&gt;):it.unisalento.se.saw.domain.Iscrizione" 
-    asynchronous="false">    
+  <message id="3" operation="dtoToDomain(T):java.lang.Object" asynchronous="false">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="4"/>  
   </message>  

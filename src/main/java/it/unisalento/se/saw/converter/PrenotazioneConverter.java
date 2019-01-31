@@ -7,9 +7,11 @@ import it.unisalento.se.saw.domain.Docente;
 import it.unisalento.se.saw.domain.Prenotazione;
 import it.unisalento.se.saw.dto.PrenotazioneDto;
 
-public class PrenotazioneConverter {
-	
-	public static PrenotazioneDto domainToDto (Prenotazione prenotazione /*,List<Docente> docenti*/){
+public class PrenotazioneConverter implements IConverter {
+	public <T> Object domainToDto(T domainObject) {
+//	public static PrenotazioneDto domainToDto (Prenotazione prenotazione){
+		Prenotazione prenotazione = (Prenotazione) domainObject;
+		
 		PrenotazioneDto prenotazioneDto = new PrenotazioneDto();
 		prenotazioneDto.setDataFine(prenotazione.getDataFine());
 		prenotazioneDto.setDataInizio(prenotazione.getDataInizio());
@@ -19,8 +21,9 @@ public class PrenotazioneConverter {
 
 		return prenotazioneDto;
 	}
-	
-	public static Prenotazione dtoToDomain(PrenotazioneDto prenotazioneDto) {
+	public <T> Object dtoToDomain(T dtoObject) {
+		PrenotazioneDto prenotazioneDto = (PrenotazioneDto) dtoObject;
+//	public static Prenotazione dtoToDomain(PrenotazioneDto prenotazioneDto) {
 		Prenotazione prenotazione = new Prenotazione();
 		
 		Docente doc = new Docente();
