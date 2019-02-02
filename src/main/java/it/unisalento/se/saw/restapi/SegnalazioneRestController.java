@@ -65,7 +65,6 @@ public class SegnalazioneRestController {
 		java.util.Date date = new java.util.Date();
 		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 
-		//segnalazione = SegnalazioneConverter.dtoToDomain(segnalazioneDto, aule, sqlDate);
 		if(segnalazioneDto.getOggettoInteressato().equals("altro") && segnalazioneDto.getNomeAula().equals("altro")){
 			aula.setIdaula(1);
 			segnalazione.setAula(aula);
@@ -99,8 +98,6 @@ public class SegnalazioneRestController {
 		
 		List<SegnalazioneDto> segnalazioniDto= new ArrayList<SegnalazioneDto>();
 		List<Segnalazione> segnalazioni = (segnalazioneService.getAll());
-		List<Aula> aule = (aulaService.getAll());
-		List<Docente> docenti = docenteService.getAll();
 		Iterator<Segnalazione> segnalazioneIterator = segnalazioni.iterator();
 				
 		while(segnalazioneIterator.hasNext()){
@@ -119,8 +116,6 @@ public class SegnalazioneRestController {
 	@GetMapping (value="/getById/{id}",produces=MediaType.APPLICATION_JSON_VALUE)
 	public SegnalazioneDto getById(@PathVariable("id") int id) throws SegnalazioneNotFoundException, AulaNotFoundException, DocenteNotFoundException {
 		
-		List<Aula> aule = (aulaService.getAll());
-		List<Docente> docenti = docenteService.getAll();
 		Segnalazione segnalazione = segnalazioneService.getById(id);
 		SegnalazioneDto segnalazioneDto = (SegnalazioneDto) segnalazioneConverter.domainToDto(segnalazione);
 

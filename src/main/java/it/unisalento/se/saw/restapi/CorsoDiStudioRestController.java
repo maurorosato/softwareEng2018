@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import it.unisalento.se.saw.Iservices.ICorsoDiStudioService;
-import it.unisalento.se.saw.converter.AppelloEsameConverter;
 import it.unisalento.se.saw.converter.CorsoDiStudioConverter;
 import it.unisalento.se.saw.converter.IConverter;
 import it.unisalento.se.saw.domain.CorsoDiStudio;
@@ -21,7 +20,6 @@ import it.unisalento.se.saw.domain.CorsoDiStudio;
 import it.unisalento.se.saw.dto.CorsoDiStudioDto;
 
 import it.unisalento.se.saw.exceptions.CorsoDiStudioNotFoundException;
-import it.unisalento.se.saw.exceptions.InsegnamentoNotFoundException;
 
 
 @RestController()

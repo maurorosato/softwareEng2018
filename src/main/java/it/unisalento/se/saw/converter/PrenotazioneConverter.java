@@ -1,15 +1,11 @@
 package it.unisalento.se.saw.converter;
 
-import java.util.Iterator;
-
-
 import it.unisalento.se.saw.domain.Docente;
 import it.unisalento.se.saw.domain.Prenotazione;
 import it.unisalento.se.saw.dto.PrenotazioneDto;
 
 public class PrenotazioneConverter implements IConverter {
 	public <T> Object domainToDto(T domainObject) {
-//	public static PrenotazioneDto domainToDto (Prenotazione prenotazione){
 		Prenotazione prenotazione = (Prenotazione) domainObject;
 		
 		PrenotazioneDto prenotazioneDto = new PrenotazioneDto();
@@ -23,7 +19,6 @@ public class PrenotazioneConverter implements IConverter {
 	}
 	public <T> Object dtoToDomain(T dtoObject) {
 		PrenotazioneDto prenotazioneDto = (PrenotazioneDto) dtoObject;
-//	public static Prenotazione dtoToDomain(PrenotazioneDto prenotazioneDto) {
 		Prenotazione prenotazione = new Prenotazione();
 		
 		Docente doc = new Docente();

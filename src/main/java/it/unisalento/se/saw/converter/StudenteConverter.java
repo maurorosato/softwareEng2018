@@ -22,7 +22,7 @@ public class StudenteConverter implements IConverter {
 		studenteDto.setIdStudente(studente.getIdstudente());
 		studenteDto.setNome(studente.getUtente().getNome());
 		studenteDto.setEmail(studente.getUtente().getEmail());
-		studenteDto.setCognome(studente.getUtente().getNome());
+		studenteDto.setCognome(studente.getUtente().getCognome());
 		studenteDto.setCodiceFiscale(studente.getCodiceFiscale());
 		studenteDto.setPassword(studente.getUtente().getPassword());
 		studenteDto.setIdUserStudente(studente.getUtente().getIdutente());

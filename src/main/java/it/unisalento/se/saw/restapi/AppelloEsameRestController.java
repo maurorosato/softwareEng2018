@@ -89,7 +89,6 @@ public class AppelloEsameRestController {
 		List<Insegnamento> insegnamenti = insegnamentoService.getAll();
 		
 		prenotazione = (Prenotazione) prenotazioneConverter.dtoToDomain(prenotazioneDto);
-		//prenotazione = PrenotazioneConverter.dtoToDomain(prenotazioneDto);
 		prenotazioneService.save(prenotazione);
 		
 		evento = EventoConverter.dtoToDomain(prenotazioneDto, insegnamenti);
@@ -137,8 +136,7 @@ public class AppelloEsameRestController {
 				anno = 3 ;
 				break;
 		}
-		
-		
+			
 		List<AppelloEsame> appelli = appelloEsameService.getAllStudente(idCorsoStudente,anno);
 		List<AppelloEsameDto> appelliEsameDto= new ArrayList<AppelloEsameDto>();
 		Iterator<AppelloEsame> appelloEsameIterator = appelli.iterator();

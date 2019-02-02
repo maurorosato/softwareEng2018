@@ -12,26 +12,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.unisalento.se.saw.Iservices.IAppelloEsameService;
-import it.unisalento.se.saw.Iservices.IAulaService;
 import it.unisalento.se.saw.Iservices.ICorsoDiStudioService;
-import it.unisalento.se.saw.Iservices.IDocenteService;
 import it.unisalento.se.saw.Iservices.IEventoService;
-import it.unisalento.se.saw.Iservices.IInsegnamentoService;
 import it.unisalento.se.saw.Iservices.ILezioneService;
-import it.unisalento.se.saw.Iservices.IPrenotazioneService;
-import it.unisalento.se.saw.Iservices.IUtenteService;
-import it.unisalento.se.saw.converter.DocenteConverter;
 import it.unisalento.se.saw.converter.EventoConverter;
 import it.unisalento.se.saw.converter.IConverter;
 import it.unisalento.se.saw.domain.AppelloEsame;
-import it.unisalento.se.saw.domain.Aula;
 import it.unisalento.se.saw.domain.CorsoDiStudio;
-import it.unisalento.se.saw.domain.Docente;
 import it.unisalento.se.saw.domain.Evento;
-import it.unisalento.se.saw.domain.Insegnamento;
 import it.unisalento.se.saw.domain.Lezione;
-import it.unisalento.se.saw.domain.Prenotazione;
-import it.unisalento.se.saw.domain.Utente;
 import it.unisalento.se.saw.dto.EventoDto;
 import it.unisalento.se.saw.exceptions.AppelloEsameNotFoundException;
 import it.unisalento.se.saw.exceptions.AulaNotFoundException;
@@ -79,7 +68,6 @@ public class EventoRestController {
 		List<EventoDto> eventiDto= new ArrayList<EventoDto>();
 		
 		List<Evento> eventi = eventoService.getAll();
-		List<Lezione> lezioni = lezioneService.getAll();
 		List<AppelloEsame> appelli = appelloEsameService.getAll();
 		List<CorsoDiStudio> corsi = (corsoDiStudioService.getAll());
 		

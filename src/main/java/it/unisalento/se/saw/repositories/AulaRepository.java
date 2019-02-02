@@ -31,8 +31,11 @@ public interface AulaRepository extends JpaRepository<Aula, Integer>{
 	@Transactional
 	@Query("DELETE from Aula WHERE idaula = :idAula")
 	void rimuoviAula(@Param("idAula") Integer id);
-
-	@Query("SELECT a FROM Aula a WHERE a.nome NOT IN ('magazzino','default') AND a.idaula NOT IN (SELECT e.aula FROM Evento e, Prenotazione p WHERE p.idprenotazione = e.prenotazione AND (p.dataInizio >= :dataInizio AND p.dataFine <= :dataFine) OR (p.dataInizio < :dataInizio AND p.dataFine > :dataInizio) OR (p.dataInizio < :dataFine AND p.dataFine > :dataFine) OR (p.dataInizio <= :dataInizio AND p.dataFine >= :dataFine))")
+	
+	//@Query("SELECT a FROM Aula a WHERE a.nome NOT IN ('magazzino','default') AND a.idaula IN (SELECT e.aula FROM Evento e, Prenotazione p WHERE p.idprenotazione = e.prenotazione AND (p.dataInizio > :dataFine AND p.dataFine > :dataFine) OR (p.dataInizio < :dataInizio AND p.dataFine < :dataInizio))")
+	//@Query("SELECT a FROM Aula a WHERE a.nome NOT IN ('magazzino','default') AND a.idaula NOT IN (SELECT e.aula FROM Evento e, Prenotazione p WHERE p.idprenotazione = e.prenotazione AND (p.dataInizio >= :dataInizio AND p.dataFine <= :dataFine) OR (p.dataInizio <= :dataInizio AND p.dataFine >= :dataFine) OR (p.dataInizio <= :dataInizio AND dataFine <= :dataFine))")
+	//@Query("SELECT a FROM Aula a WHERE a.nome NOT IN ('magazzino','default') AND a.idaula IN (SELECT e.aula FROM Evento e, Prenotazione p WHERE p.idprenotazione = e.prenotazione )")
+	@Query("SELECT a FROM Aula a WHERE a.nome NOT IN ('magazzino','default') AND a.idaula NOT IN (SELECT e.aula FROM Evento e WHERE (e.prenotazione.dataInizio <= :dataInizio AND e.prenotazione.dataFine >= :dataFine) OR (e.prenotazione.dataInizio <= :dataFine AND e.prenotazione.dataFine >= :dataFine) OR (e.prenotazione.dataInizio <= :dataInizio AND e.prenotazione.dataFine >= :dataFine) OR (e.prenotazione.dataInizio >= :dataInizio AND e.prenotazione.dataFine <= :dataFine))")
 	public List<Aula> getAuleLibere(@Param("dataInizio") Date dataInizio, @Param("dataFine") Date dataFine);
 
 }

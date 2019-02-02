@@ -3,13 +3,9 @@ package it.unisalento.se.saw.converter;
 import java.util.Iterator;
 import java.util.List;
 
-import it.unisalento.se.saw.domain.AppelloEsame;
 import it.unisalento.se.saw.domain.Aula;
-import it.unisalento.se.saw.domain.CorsoDiStudio;
-import it.unisalento.se.saw.domain.Docente;
 import it.unisalento.se.saw.domain.Evento;
 import it.unisalento.se.saw.domain.Insegnamento;
-import it.unisalento.se.saw.domain.Lezione;
 import it.unisalento.se.saw.dto.EventoDto;
 import it.unisalento.se.saw.dto.PrenotazioneDto;
 
@@ -36,12 +32,7 @@ public class EventoConverter implements IConverter {
 	public <T> Object domainToDto(T domainObject) {
 		Evento evento = (Evento) domainObject;
 
-	//public static EventoDto domainToDto(Evento evento, List<Lezione> lezioni,List<AppelloEsame> appelli,List<CorsoDiStudio> corsi/*,List<Docente> docenti, List<Aula> aule, List<Utente> utenti,List<Lezione> lezioni,List<Docente> docenti,List<AppelloEsame> appelli,List<Prenotazione> prenotazioni,List<Insegnamento> insegnamenti*/){
 		EventoDto eventoDto = new EventoDto();
-//		Iterator<Lezione> lezioneIterator = lezioni.iterator();			
-//
-//		Iterator<CorsoDiStudio> corsoIterator = corsi.iterator();
-//		Iterator<AppelloEsame> appelloIterator = appelli.iterator();
 		
 		eventoDto.setIdEvento(evento.getIdevento());
 		eventoDto.setAula(evento.getAula().getNome());

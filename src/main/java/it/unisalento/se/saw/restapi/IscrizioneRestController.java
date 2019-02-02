@@ -21,7 +21,6 @@ import it.unisalento.se.saw.domain.Iscrizione;
 import it.unisalento.se.saw.domain.Studente;
 import it.unisalento.se.saw.dto.IscrizioneDto;
 import it.unisalento.se.saw.exceptions.IscrizioneNotFoundException;
-import it.unisalento.se.saw.exceptions.StrumentazioneNotFoundException;
 import it.unisalento.se.saw.exceptions.StudenteNotFoundException;
 
 @RestController()
@@ -85,7 +84,6 @@ public class IscrizioneRestController {
 		Iterator<Iscrizione> iscrizioneIterator = iscrizioni.iterator();
 		while(iscrizioneIterator.hasNext()){
 			Iscrizione iscr = iscrizioneIterator.next();
-			//IscrizioneDto iscrDto = IscrizioneConverter.DomainToDto(iscr/*, studenti*/);
 			IscrizioneDto iscrDto = (IscrizioneDto) iscrizioneConverter.domainToDto(iscr);
 					
 			iscrizioniDto.add(iscrDto);

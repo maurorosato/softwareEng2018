@@ -54,23 +54,17 @@ public class DocenteRestController {
 		this.numeroTelefonoService = numeroTelefonoService;
 		this.utenteService = utenteService;
 	}
-	/*
-	@PostMapping(value="save", consumes=MediaType.APPLICATION_JSON_VALUE)
-	public Docente post(@RequestBody Docente docente) throws ParseException, DocenteNotFoundException {
-		return docenteService.save(docente);
-	}
-	*/
 	
 	@RequestMapping(value="/getAll", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<DocenteDto> getAll() throws DocenteNotFoundException, UtenteNotFoundException, NumeroTelefonoNotFoundException {
 		List<DocenteDto> docentiDto= new ArrayList<DocenteDto>();
 		List<Docente> docenti = docenteService.getAll();
 		List<NumeroTelefono> numeriTelefono = numeroTelefonoService.getAll();
-		List<Utente> utenti = utenteService.getAll();
-		String numTelefono = "- ";
 		
 		Iterator<Docente> docenteIterator = docenti.iterator();
 		while(docenteIterator.hasNext()){
+			String numTelefono = "- ";
+
 			Docente docente = docenteIterator.next();
 			DocenteDto docenteDto = new DocenteDto();
 
@@ -100,9 +94,9 @@ public class DocenteRestController {
 		int idUtente = docente.getUtente().getIdutente();
 		utente = utenteService.getById(idUtente);
 		DocenteDto docenteDto = new DocenteDto();
-		docenteDto.setNome(utente.getNome());
 		docenteDto.setCognome(utente.getCognome());
-		docenteDto.setStipendio(docente.getStipendio());		
+		docenteDto.setStipendio(docente.getStipendio());
+		docenteDto.setNome(utente.getNome());
 		return docenteDto;
 	}
 	
