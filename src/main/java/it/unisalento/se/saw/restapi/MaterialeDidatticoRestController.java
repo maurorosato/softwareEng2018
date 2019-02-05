@@ -18,7 +18,6 @@ import it.unisalento.se.saw.Iservices.IEventoService;
 import it.unisalento.se.saw.Iservices.ILezioneService;
 import it.unisalento.se.saw.Iservices.IMaterialeDidatticoService;
 import it.unisalento.se.saw.converter.IConverter;
-import it.unisalento.se.saw.converter.IscrizioneConverter;
 import it.unisalento.se.saw.converter.MaterialeDidatticoConverter;
 import it.unisalento.se.saw.domain.Docente;
 import it.unisalento.se.saw.domain.Lezione;
@@ -63,8 +62,6 @@ public class MaterialeDidatticoRestController {
 		
 		List<MaterialeDidatticoDto> materialeDidatticoListaDto = new ArrayList<MaterialeDidatticoDto>();
 		List<MaterialeDidattico> materialeDidattico = materialeDidatticoService.getAll();
-		//List<Lezione> lezioni = lezioneService.getAll();
-		//List<Docente> docenti = docenteService.getAll();
 
 		Iterator<MaterialeDidattico> matDidatticoIterator = materialeDidattico.iterator();
 		while(matDidatticoIterator.hasNext()){
@@ -83,7 +80,6 @@ public class MaterialeDidatticoRestController {
 		
 		List<MaterialeDidatticoDto> materialeDidatticoListaDto = new ArrayList<MaterialeDidatticoDto>();
 		List<Lezione> lezioni = lezioneService.getAll();
-		List<Docente> docenti = docenteService.getAll();
 
 		Lezione lezione = new Lezione();
 		Iterator<Lezione> lezioneIterator = lezioni.iterator();

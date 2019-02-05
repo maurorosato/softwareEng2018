@@ -97,6 +97,8 @@ public class AulaRestController {
 
 	@GetMapping(value="/getAuleLibere/{datainizio}/{datafine}", produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<AulaDto> getAuleLibere(@PathVariable("datainizio") Date datainizio,@PathVariable("datafine") Date datafine) throws AulaNotFoundException,ParseException   {
+		
+		System.out.println(""+datainizio +datafine);
 		List<AulaDto> auleDto= new ArrayList<AulaDto>();
 		List<Aula> aule = (aulaService.getAuleLibere(datainizio,datafine));
 		Iterator<Aula> aulaIterator = aule.iterator();
@@ -107,7 +109,6 @@ public class AulaRestController {
 			Aula aula = aulaIterator.next();
 			aulaDto = (AulaDto) aulaConverter.domainToDto(aula);
 
-			//aulaDto = AulaConverter.domainToDto(aula);
 			auleDto.add(aulaDto);
 		}
 		return auleDto;

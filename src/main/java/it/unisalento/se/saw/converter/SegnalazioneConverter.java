@@ -43,39 +43,10 @@ public class SegnalazioneConverter implements IConverter {
 		default:
 			segnalazioneDto.setImage("default.png");
 			break;
-		}
-//		String nomeAula = null;
-//		String docenteSegnalante = null;
-//		Iterator<Aula> aulaIterator = aule.iterator();
-//		Iterator<Docente> docenteIterator = docenti.iterator();		
-//		while (docenteIterator.hasNext()){
-//			Docente docente = docenteIterator.next();
-//			if(segnalazione.getDocente().getIddocente() == docente.getIddocente()){
-//				docenteSegnalante = docente.getUtente().getNome() + ' ' + docente.getUtente().getCognome();
-//				segnalazioneDto.setIdUserDocenteSegnalante(docente.getUtente().getIdutente());
-//			}
-//		}
-//
-//		while (aulaIterator.hasNext()){
-//			Aula aula = aulaIterator.next();
-//			if (segnalazione.getAula().getIdaula() == aula.getIdaula()){
-//				nomeAula = aula.getNome();
-//			}
-//		}
-		
-//		segnalazioneDto.setIdSegnalazione(segnalazione.getIdsegnalazione());
-//		segnalazioneDto.setOggettoInteressato(segnalazione.getOggettoInteressato());
-//		segnalazioneDto.setMotivazione(segnalazione.getMotivazione());
-//		segnalazioneDto.setStatoSegnalazione(segnalazione.getStatoSegnalazione());
-//		segnalazioneDto.setNomeAula(nomeAula);
-//		segnalazioneDto.setDescrizione(segnalazione.getDescrizione());
-//		segnalazioneDto.setDocenteSegnalante(docenteSegnalante);
-//		segnalazioneDto.setData(segnalazione.getData());
-		
+		}		
 		return segnalazioneDto;
 	}
 	public <T> Object dtoToDomain(T dtoObject) {
-	//public static Segnalazione dtoToDomain(SegnalazioneDto segnalazioneDto, List<Aula> aule, Date data ) {
 		SegnalazioneDto segnalazioneDto = (SegnalazioneDto) dtoObject;
 		Segnalazione segnalazione = new Segnalazione();
 

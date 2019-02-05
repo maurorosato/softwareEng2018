@@ -1,20 +1,13 @@
 package it.unisalento.se.saw.restapi;
 
-
 import org.springframework.http.MediaType;
-
 import it.unisalento.se.saw.domain.Lezione;
-import it.unisalento.se.saw.domain.MaterialeDidattico;
 import it.unisalento.se.saw.domain.Studente;
 import it.unisalento.se.saw.domain.Valutazione;
-import it.unisalento.se.saw.dto.IscrizioneDto;
-import it.unisalento.se.saw.dto.MaterialeDidatticoDto;
 import it.unisalento.se.saw.dto.ValutazioneDto;
-import it.unisalento.se.saw.Iservices.IPrenotazioneService;
 import it.unisalento.se.saw.Iservices.IStudenteService;
 import it.unisalento.se.saw.Iservices.IValutazioneService;
 import it.unisalento.se.saw.converter.IConverter;
-import it.unisalento.se.saw.converter.MaterialeDidatticoConverter;
 import it.unisalento.se.saw.converter.ValutazioneConverter;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,10 +23,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.unisalento.se.saw.exceptions.DocenteNotFoundException;
-import it.unisalento.se.saw.exceptions.IscrizioneNotFoundException;
-import it.unisalento.se.saw.exceptions.LezioneNotFoundException;
-import it.unisalento.se.saw.exceptions.MaterialeDidatticoNotFoundException;
 import it.unisalento.se.saw.exceptions.StudenteNotFoundException;
 import it.unisalento.se.saw.exceptions.ValutazioneNotFoundException;
 
@@ -64,7 +53,6 @@ public class ValutazioneRestController {
 		Valutazione valutazione = new Valutazione();
 		Studente studente = new Studente();
 		valutazione = (Valutazione) valutazioneConverter.dtoToDomain(valutazioneDto);
-//		valutazione = ValutazioneConverter.DtoToDomain(valutazioneDto,studenti);
 		
 		Iterator<Studente> studenteIterator = studenti.iterator();
 		while(studenteIterator.hasNext()){
@@ -104,7 +92,6 @@ public class ValutazioneRestController {
 					ValutazioneDto valutazioneLDto = new ValutazioneDto();
 					if (valutazioneL.getNota() != "default"){
 						valutazioneLDto = (ValutazioneDto) valutazioneConverter.domainToDto(valutazioneL);
-						//valutazioneLDto = ValutazioneConverter.domainToDto(valutazioneL);
 					}
 					valutazioneListaDto.add(valutazioneLDto);
 					System.out.println("id lez: "+valutazioneListaDto.get(0).getIdLezione());
@@ -118,7 +105,6 @@ public class ValutazioneRestController {
 				while(valutazioneMatDidatticoIterator.hasNext()){
 					Valutazione valutazioneM = valutazioneMatDidatticoIterator.next();
 					ValutazioneDto valutazioneMDto = (ValutazioneDto) valutazioneConverter.domainToDto(valutazioneM);
-					//ValutazioneDto valutazioneMDto = ValutazioneConverter.domainToDto(valutazioneM);
 					
 					valutazioneListaDto.add(valutazioneMDto);
 				}
@@ -142,9 +128,7 @@ public class ValutazioneRestController {
 			while(valutazioneLezioneIterator.hasNext()){
 				Valutazione valutazioneL = valutazioneLezioneIterator.next();
 				
-				ValutazioneDto valutazioneLDto = (ValutazioneDto) valutazioneConverter.domainToDto(valutazioneL);
-				//ValutazioneDto valutazioneLDto = ValutazioneConverter.domainToDto(valutazioneL);
-				
+				ValutazioneDto valutazioneLDto = (ValutazioneDto) valutazioneConverter.domainToDto(valutazioneL);				
 				valutazioneListaDto.add(valutazioneLDto);
 			}
 			break;
@@ -155,9 +139,6 @@ public class ValutazioneRestController {
 			while(valutazioneMatDidatticoIterator.hasNext()){
 				Valutazione valutazioneM = valutazioneMatDidatticoIterator.next();
 				ValutazioneDto valutazioneMDto = (ValutazioneDto) valutazioneConverter.domainToDto(valutazioneM);
-
-				//ValutazioneDto valutazioneMDto = ValutazioneConverter.domainToDto(valutazioneM);
-				
 				valutazioneListaDto.add(valutazioneMDto);
 			}
 			break;

@@ -63,18 +63,14 @@ public class StudenteRestController {
 	@RequestMapping(value="/getAll", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<StudenteDto> getAll() throws StudenteNotFoundException, UtenteNotFoundException, CorsoDiStudioNotFoundException, NumeroTelefonoNotFoundException {
 		List<StudenteDto> studentiDto= new ArrayList<StudenteDto>();
-		List<Utente> utenti = utenteService.getAll();
 		List<Studente> studenti = studenteService.getAll();
 		List<CorsoDiStudio> corsi = corsoDiStudioService.getAll();
 		List<NumeroTelefono> numeriTelefono = numeroService.getAll();
-
-		int idUtente;
-		int idCorso;
-		String nomeCorso = null;
-		String numTelefono = "- ";
 		
 		Iterator<Studente> studenteIterator = studenti.iterator();
 		while(studenteIterator.hasNext()){
+			String numTelefono = "- ";
+
 			Studente studente = studenteIterator.next();
 			StudenteDto studenteDto = new StudenteDto();
 			if(studente.getIdstudente() != 1){
@@ -87,6 +83,7 @@ public class StudenteRestController {
 						numTelefono = numTelefono + num.getNumeroTelefono() + "- ";
 					}
 					studenteDto.setNumeroTelefono(numTelefono);
+					
 				}	
 				
 				Iterator<CorsoDiStudio> corsoIterator = corsi.iterator();
@@ -96,51 +93,10 @@ public class StudenteRestController {
 						studenteDto.setCorsoDiStudio(c.getNomeCorso());
 					}
 				}
-				
-				//studenteDto = StudenteConverter.domainToDto(studente, /*utenti,*/ corsi,numeriTelefono);
 				studentiDto.add(studenteDto);
 			}
 		}
-/*
-		for(int i=0;i<studenti.size();i++) {
-			StudenteDto studenteDto = new StudenteDto();
-			Studente stud = studenti.get(i);
-			if (stud.getIdstudente()!= 1){
-				idUtente = studenti.get(i).getUtente().getIdutente();
-				Utente utente = new Utente();
-				utente = utenteService.getById(idUtente);	
-				studenteDto.setIdUserStudente(studenti.get(i).getUtente().getIdutente());
-				studenteDto.setIdStudente(stud.getIdstudente());
-				studenteDto.setNome(utente.getNome());
-				studenteDto.setCodiceFiscale(stud.getCodiceFiscale());
-				studenteDto.setCognome(utente.getCognome());
-				studenteDto.setDataNascita(utente.getDataNascita());
-				studenteDto.setEmail(utente.getEmail());
-				
-				for (int j=0; j<numeriTelefono.size(); j++){
-					if (numeriTelefono.get(j).getUtente().getIdutente() == idUtente){
-						numTelefono = numTelefono + numeriTelefono.get(j).getNumeroTelefono() + " - ";
-					}
-				}
-				
-				idCorso = studenti.get(i).getCorsoDiStudioIdcorsoDiStudio();
-				for(int j=0; j< corsi.size(); j++ ){
-					if(idCorso == corsi.get(j).getIdcorsoDiStudio()){
-						nomeCorso = corsi.get(j).getNomeCorso();
-					}
-				}
-				
-				studenteDto.setMatricola(stud.getMatricola());
-				studenteDto.setIndirizzo(stud.getIndirizzo());
-				studenteDto.setNazione(stud.getNazione());
-				studenteDto.setNumeroTelefono(numTelefono);
-				studenteDto.setIdCorsoDiStudio(idCorso);
-				studenteDto.setCorsoDiStudio(nomeCorso);
-				numTelefono = "- ";
-			}
-			studentiDto.add(i, studenteDto);			
-		}
-*/
+
 		return studentiDto;	
 	}
 	
@@ -224,7 +180,6 @@ public class StudenteRestController {
 					studenteDto.setCorsoDiStudio(c.getNomeCorso());
 				}
 			}
-			//studenteDto = StudenteConverter.domainToDto(studente,/* utenti,*/ corsi,numeriTelefono);
 			studentiDto.add(studenteDto);
 		}
 		return studentiDto;

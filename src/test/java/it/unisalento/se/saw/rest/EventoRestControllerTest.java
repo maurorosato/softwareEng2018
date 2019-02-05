@@ -138,9 +138,18 @@ private MockMvc mockMvc;
     	.andExpect(status().isOk())
 		.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
 		.andExpect(jsonPath("$[*]", hasSize(2)))
+		.andExpect(jsonPath("$[0].idEvento", Matchers.is(eventi.get(0).getIdevento())))
+		.andExpect(jsonPath("$[0].descrizione", Matchers.is(eventi.get(0).getDescrizione())))
+		.andExpect(jsonPath("$[0].idAula", Matchers.is(eventi.get(0).getAula().getIdaula())))
 		.andExpect(jsonPath("$[0].aula", Matchers.is(eventi.get(0).getAula().getNome())))
-		.andExpect(jsonPath("$[1].aula", Matchers.is(eventi.get(1).getAula().getNome())));
-
+		.andExpect(jsonPath("$[0].insegnamento", Matchers.is(eventi.get(0).getInsegnamento().getNome())))
+		.andExpect(jsonPath("$[0].idInsegnamento", Matchers.is(eventi.get(0).getInsegnamento().getIdinsegnamento())))
+		.andExpect(jsonPath("$[1].idEvento", Matchers.is(eventi.get(1).getIdevento())))
+		.andExpect(jsonPath("$[1].descrizione", Matchers.is(eventi.get(1).getDescrizione())))
+		.andExpect(jsonPath("$[1].idAula", Matchers.is(eventi.get(1).getAula().getIdaula())))
+		.andExpect(jsonPath("$[1].aula", Matchers.is(eventi.get(1).getAula().getNome())))
+		.andExpect(jsonPath("$[1].insegnamento", Matchers.is(eventi.get(1).getInsegnamento().getNome())))
+		.andExpect(jsonPath("$[1].idInsegnamento", Matchers.is(eventi.get(1).getInsegnamento().getIdinsegnamento())));
 		
 	    verify(eventoServiceMock, times(1)).getAll();
 	    verifyNoMoreInteractions(eventoServiceMock);

@@ -25,15 +25,6 @@ public class DocenteConverter implements IConverter {
 		dDto.setIdUserDocente(docente.getUtente().getIdutente());
 		dDto.setDataNascita(docente.getUtente().getDataNascita());	
 
-//		Iterator<NumeroTelefono> numeroIterator = numeriTelefono.iterator();
-//		while (numeroIterator.hasNext()){
-//			NumeroTelefono num = numeroIterator.next();
-//			if(num.getUtente().getIdutente() == dDto.getIdUserDocente()){
-//				numTelefono = numTelefono + num.getNumeroTelefono();
-//			}
-//			dDto.setNumeroTelefono(numTelefono);
-//		}	
-
 		return dDto;
 	}
 	
