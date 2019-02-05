@@ -7,6 +7,7 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 //import static org.mockito.Matchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -19,6 +20,8 @@ import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -26,11 +29,16 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import it.unisalento.se.saw.Iservices.ICorsoDiStudioService;
 import it.unisalento.se.saw.Iservices.IDocenteService;
 import it.unisalento.se.saw.Iservices.INumeroTelefonoService;
 import it.unisalento.se.saw.Iservices.IStudenteService;
 import it.unisalento.se.saw.Iservices.IUtenteService;
+import it.unisalento.se.saw.domain.Aula;
+import it.unisalento.se.saw.domain.Docente;
+import it.unisalento.se.saw.domain.NumeroTelefono;
 import it.unisalento.se.saw.domain.Utente;
 import it.unisalento.se.saw.exceptions.UtenteNotFoundException;
 import it.unisalento.se.saw.restapi.UtenteRestController;
@@ -60,6 +68,7 @@ private MockMvc mockMvc;
         MockitoAnnotations.initMocks(this);
 		mockMvc = MockMvcBuilders.standaloneSetup(new UtenteRestController(utenteServiceMock, docenteServiceMock, studenteServiceMock, corsoServiceMock, numeroServiceMock)).build();
 	}
+	
 	
 	@Test
 	public void getAllUtenteTest() throws Exception {
@@ -130,7 +139,6 @@ private MockMvc mockMvc;
 	@Test
 	public void notFoundUtenteTest() throws Exception {
 		
-
 		when(utenteServiceMock.getAll()).thenThrow(new UtenteNotFoundException());
 		
 		mockMvc.perform(get("/utente/getAll"))
@@ -140,8 +148,32 @@ private MockMvc mockMvc;
 	    verifyNoMoreInteractions(utenteServiceMock);
 	}
 
+	@Test
+	public void loginTest() throws Exception {
+		
+		List<Utente> utenti = new ArrayList<Utente>();
+		
+		Utente utente=new Utente();
+		utente.setNome("Mauro");
+		utente.setCognome("Rosato");
+		Date data = new Date(1992-03-16);
+		utente.setDataNascita(data);
+		String email = "mauro@rosato.it";
+		utente.setEmail(email);
+		utente.setIdOrigin(0);
+		utente.setIdutente(6);
+		String pass = "mauropass";
+		utente.setPassword(pass);
 
-
+		when(utenteServiceMock.autenticazione(email, pass)).thenReturn(utente);
+		
+		mockMvc.perform(get("/utente/login/{email}/{password}", "mauro@rosato.it", "mauropass"))
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("utenteDto.nome", Matchers.is(utente.getNome())))
+		.andExpect(jsonPath("utenteDto.nome", Matchers.is(utente.getNome())));
+		
+	}
+	
 }
 		
 		

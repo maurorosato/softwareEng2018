@@ -3,6 +3,7 @@ package it.unisalento.se.saw.rest;
 import static org.mockito.Mockito.*;
 import static org.mockito.Matchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import java.sql.Date;
@@ -13,12 +14,16 @@ import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import it.unisalento.se.saw.Iservices.IAulaService;
 import it.unisalento.se.saw.Iservices.IPrenotazioneService;
@@ -49,10 +54,10 @@ public class PrenotazioneRestControllerTest {
 		mockMvc = MockMvcBuilders.standaloneSetup(new PrenotazioneRestController(prenotazioneServiceMock)).build();
 	}
 	
+	
 	@Test
 	public void getAllPrenotazioneTest() throws Exception {
 
-//		Prenotazione prenotazione = new Prenotazione();
 		List<Prenotazione> prenotazioni = new ArrayList<Prenotazione>();
 
 		Aula aula = new Aula();
@@ -138,6 +143,6 @@ public class PrenotazioneRestControllerTest {
 	    verifyNoMoreInteractions(prenotazioneServiceMock);
 	}
 
-
+	
 }
 

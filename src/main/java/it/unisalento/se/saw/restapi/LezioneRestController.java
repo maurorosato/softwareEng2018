@@ -23,8 +23,6 @@ import it.unisalento.se.saw.converter.EventoConverter;
 import it.unisalento.se.saw.converter.IConverter;
 import it.unisalento.se.saw.converter.LezioneConverter;
 import it.unisalento.se.saw.converter.PrenotazioneConverter;
-import it.unisalento.se.saw.domain.Aula;
-import it.unisalento.se.saw.domain.Docente;
 import it.unisalento.se.saw.domain.Evento;
 import it.unisalento.se.saw.domain.Insegnamento;
 import it.unisalento.se.saw.domain.Lezione;
@@ -78,6 +76,7 @@ public class LezioneRestController {
 		this.prenotazioneService = prenotazioneService;
 	}
 	
+	
 	@RequestMapping(value="/getAll", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<LezioneDto> getAll() throws LezioneNotFoundException, AulaNotFoundException, InsegnamentoNotFoundException, PrenotazioneNotFoundException, EventoNotFoundException, DocenteNotFoundException {
 		List<LezioneDto> lezioniDto= new ArrayList<LezioneDto>();
@@ -88,7 +87,7 @@ public class LezioneRestController {
 			Lezione lezione = lezioneIterator.next();
 			LezioneDto lezioneDto = new LezioneDto();
 			if (lezione.getIdlezione() != 1){
-//				lezioneDto = LezioneConverter.domainToDto(lezione/*,prenotazioni,eventi,insegnamenti,aule,docenti*/);
+				lezioneDto = (LezioneDto) lezioneConverter.domainToDto(lezione);
 				lezioniDto.add(lezioneDto);
 			}
 		}
@@ -113,6 +112,7 @@ public class LezioneRestController {
 		}
 		return lezioniDto;
 	}
+	
 	@RequestMapping(value="/getAllStudente/{idCorsoStudente}/{annoCorso}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<LezioneDto> getAllStudente(@PathVariable("idCorsoStudente") int idCorsoStudente,@PathVariable("annoCorso") String annoCorso) throws LezioneNotFoundException, AulaNotFoundException, InsegnamentoNotFoundException, PrenotazioneNotFoundException, EventoNotFoundException, DocenteNotFoundException {
 		List<LezioneDto> lezioniDto= new ArrayList<LezioneDto>();
@@ -137,9 +137,6 @@ public class LezioneRestController {
 		while(lezioneIterator.hasNext()){
 			Lezione lezione = lezioneIterator.next();
 			LezioneDto lezioneDto = (LezioneDto) lezioneConverter.domainToDto(lezione);
-
-			//LezioneDto lezioneDto = LezioneConverter.domainToDto(lezione/*,prenotazioni,eventi,insegnamenti,aule,docenti*/);
-
 			lezioniDto.add(lezioneDto);
 		}
 		return lezioniDto;
@@ -160,7 +157,6 @@ public class LezioneRestController {
 		List<Insegnamento> insegnamenti = insegnamentoService.getAll();
 		
 		prenotazione = (Prenotazione) prenotazioneConverter.dtoToDomain(prenotazioneDto);
-		//prenotazione = PrenotazioneConverter.dtoToDomain(prenotazioneDto);
 		prenotazioneService.save(prenotazione);
 		
 		evento = EventoConverter.dtoToDomain(prenotazioneDto, insegnamenti);

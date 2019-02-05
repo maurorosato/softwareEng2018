@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import it.unisalento.se.saw.Iservices.IAulaService;
 import it.unisalento.se.saw.Iservices.IStrumentazioneService;
 import it.unisalento.se.saw.converter.IConverter;
-import it.unisalento.se.saw.converter.SegnalazioneConverter;
 import it.unisalento.se.saw.converter.StrumentazioneConverter;
 import it.unisalento.se.saw.domain.Aula;
 import it.unisalento.se.saw.domain.Strumentazione;
@@ -60,7 +59,6 @@ public class StrumentazioneRestController {
 			Strumentazione strumentazione = strumentazioneIterator.next();
 			if (strumentazione.getIdstrumentazione() != 1){
 				strumentazioneDto = (StrumentazioneDto) strumentazioneConverter.domainToDto(strumentazione);
-				//strumentazioneDto = StrumentazioneConverter.domainToDto(strumentazione);
 				strumentazioniDto.add(strumentazioneDto);	
 			}
 		}
@@ -85,8 +83,6 @@ public class StrumentazioneRestController {
 		
 		str = (Strumentazione) strumentazioneConverter.dtoToDomain(strumentazioneDto);
 		str.setAula(aula);
-		//str = StrumentazioneConverter.dtoToDomain(strumentazioneDto, aula);
-		
 		strumentazioneService.save(str);
 	}
 	

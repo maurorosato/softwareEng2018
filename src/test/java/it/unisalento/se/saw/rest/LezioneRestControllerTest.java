@@ -5,6 +5,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -17,6 +18,8 @@ import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -79,19 +82,10 @@ private MockMvc mockMvc;
 		mockMvc = MockMvcBuilders.standaloneSetup(new LezioneRestController(lezioneServiceMock, aulaServiceMock, eventoServiceMock, insegnamentoServiceMock, prenotazioneServiceMock, docenteServiceMock)).build();
 	}
 	
-//	public static String toJson(final Object obj) {
-//        try {
-//            return new ObjectMapper().writeValueAsString(obj);
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
-	
 	@Test
 	public void getAllLezioneTest() throws Exception {
 		
 		List<Lezione> lezioni = new ArrayList<Lezione>();
-		List<LezioneDto> lezioniDto = new ArrayList<LezioneDto>();
 		
 		Aula aula = new Aula();
 		aula.setIdaula(2);
@@ -164,8 +158,21 @@ private MockMvc mockMvc;
 		.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
 		.andExpect(jsonPath("$[*]", hasSize(2)))
 		.andExpect(jsonPath("$[0].idLezione", Matchers.is(lezioni.get(0).getIdlezione())))
-		.andExpect(jsonPath("$[1].idLezione", Matchers.is(lezioni.get(1).getIdlezione())));
-
+		.andExpect(jsonPath("$[0].aula", Matchers.is(lezioni.get(0).getEvento().getAula().getNome())))
+		.andExpect(jsonPath("$[0].idUserDocente", Matchers.is(lezioni.get(0).getEvento().getPrenotazione().getDocente().getUtente().getIdutente())))
+		.andExpect(jsonPath("$[0].latitudine", Matchers.is(lezioni.get(0).getEvento().getAula().getLatitudine())))
+		.andExpect(jsonPath("$[0].longitudine", Matchers.is(lezioni.get(0).getEvento().getAula().getLongitudine())))
+		.andExpect(jsonPath("$[0].idInsegnamento", Matchers.is(lezioni.get(0).getEvento().getInsegnamento().getIdinsegnamento())))
+		.andExpect(jsonPath("$[0].descrizione", Matchers.is(lezioni.get(0).getEvento().getDescrizione())))
+		.andExpect(jsonPath("$[0].insegnamento", Matchers.is(lezioni.get(0).getEvento().getInsegnamento().getNome())))
+		.andExpect(jsonPath("$[1].idLezione", Matchers.is(lezioni.get(1).getIdlezione())))
+		.andExpect(jsonPath("$[1].aula", Matchers.is(lezioni.get(1).getEvento().getAula().getNome())))
+		.andExpect(jsonPath("$[1].idUserDocente", Matchers.is(lezioni.get(1).getEvento().getPrenotazione().getDocente().getUtente().getIdutente())))
+		.andExpect(jsonPath("$[1].latitudine", Matchers.is(lezioni.get(1).getEvento().getAula().getLatitudine())))
+		.andExpect(jsonPath("$[1].longitudine", Matchers.is(lezioni.get(1).getEvento().getAula().getLongitudine())))
+		.andExpect(jsonPath("$[1].idInsegnamento", Matchers.is(lezioni.get(1).getEvento().getInsegnamento().getIdinsegnamento())))
+		.andExpect(jsonPath("$[1].descrizione", Matchers.is(lezioni.get(1).getEvento().getDescrizione())))
+		.andExpect(jsonPath("$[1].insegnamento", Matchers.is(lezioni.get(1).getEvento().getInsegnamento().getNome())));
 		
 	    verify(lezioneServiceMock, times(1)).getAll();
 	    verifyNoMoreInteractions(lezioneServiceMock);
@@ -183,8 +190,6 @@ private MockMvc mockMvc;
 	    verify(lezioneServiceMock, times(1)).getAll();
 	    verifyNoMoreInteractions(lezioneServiceMock);
 	}
-
-
 	
 }
 

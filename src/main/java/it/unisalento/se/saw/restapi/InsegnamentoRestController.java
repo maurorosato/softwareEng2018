@@ -108,10 +108,11 @@ public class InsegnamentoRestController {
 		List<InsegnamentoDto> insegnamentiDto= new ArrayList<InsegnamentoDto>();
 		List<CorsoDiStudio> corsi = corsoDiStudioService.getAll();
 		List<Docente> docenti = docenteService.getAll();
-		
 		List<Insegnamento> insegnamenti = insegnamentoService.getAllInsegnamentiCorso(idCorso);
+		System.out.println("sd"+insegnamenti.get(0).getCfu());
+
 		Iterator<Insegnamento> insegnamentoIterator = insegnamenti.iterator();
-		
+
 		while(insegnamentoIterator.hasNext()){
 			Insegnamento insegnamento = insegnamentoIterator.next();
 			InsegnamentoDto insegnamentoDto = new InsegnamentoDto();
