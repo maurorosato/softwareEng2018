@@ -195,7 +195,6 @@ private MockMvc mockMvc;
 	
 	@Test
 	public void saveMaterialeTest() throws Exception {
-		List<MaterialeDidattico> materiali = new ArrayList<MaterialeDidattico>();
 
 		Aula aula = new Aula();
 		aula.setIdaula(2);

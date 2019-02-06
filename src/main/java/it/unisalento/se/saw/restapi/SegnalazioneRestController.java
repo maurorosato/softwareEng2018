@@ -70,24 +70,27 @@ public class SegnalazioneRestController {
 			segnalazione.setAula(aula);
 		}
 		else {
-
-			Iterator<Aula> aulaIterator = aule.iterator();		
+			Iterator<Aula> aulaIterator = aule.iterator();
 			while(aulaIterator.hasNext()){
 				Aula aulaList = aulaIterator.next();
 				if ((aulaList.getNome()).equals(segnalazioneDto.getNomeAula())){
 					aula.setIdaula(aulaList.getIdaula());
 					segnalazione.setAula(aula);
 				}
+
 			}
 		}
+
 		Docente docente = new Docente();
-		
-		segnalazione.setData(sqlDate);
+		docente.setIddocente(segnalazioneDto.getIdDocenteSegnalante());
 		segnalazione.setDocente(docente);
+		segnalazione.setData(sqlDate);
 		segnalazione.setStatoSegnalazione("attivo");
 		segnalazione.setDescrizione("La segnalazione è stata presa in carico.");
-
-		segnalazione = (Segnalazione) segnalazioneConverter.dtoToDomain(segnalazioneDto);
+		segnalazione.setMotivazione(segnalazioneDto.getMotivazione());
+		segnalazione.setOggettoInteressato(segnalazioneDto.getOggettoInteressato());
+		
+		//segnalazione = (Segnalazione) segnalazioneConverter.dtoToDomain(segnalazioneDto);
 
 		return segnalazioneService.save(segnalazione);
 

@@ -151,57 +151,41 @@ private MockMvc mockMvc;
 	public void getByIdDocenteTest() throws Exception {
 		
 		List<Docente> docenti = new ArrayList<Docente>();
-
+		List<Utente> utenti = new ArrayList<Utente>();
+		
 		Utente utente=new Utente();
-		utente.setNome("Mauro");
-		utente.setCognome("Rosato");
-		Date data = new Date(1992-03-16);
+		utente.setNome("Luca");
+		utente.setCognome("Signore");
+		Date data = new Date(1991-07-31);
 		utente.setDataNascita(data);
-		utente.setEmail("mauro@rosato.it");
+		utente.setEmail("luca@gmail.it");
 		utente.setIdOrigin(0);
 		utente.setIdutente(2);
-		utente.setPassword("mauropass");
+		utente.setPassword("lucapass");
+		utenti.add(utente);
 		
-		Utente utente2=new Utente();
-		utente2.setNome("Luca");
-		utente2.setCognome("Signore");
-		Date data2 = new Date(1991-07-31);
-		utente2.setDataNascita(data2);
-		utente2.setEmail("luca@gmail.it");
-		utente2.setIdOrigin(0);
-		utente2.setIdutente(2);
-		utente2.setPassword("lucapass");
-		
-		NumeroTelefono num = new NumeroTelefono();
-		num.setNumeroTelefono("54");
-		num.setUtente(utente);
-		
-		NumeroTelefono num2 = new NumeroTelefono();
-		num2.setNumeroTelefono("45");
-		num2.setUtente(utente2);
-		
-		Docente docente = new Docente();
+		Docente docente=new Docente();		
+		docente.setIddocente(8);
+		docente.setStipendio((float) 1000);
 		docente.setGrado("ordinario");
-		docente.setIddocente(3);
-		docente.setStipendio((float) 1000.2);
 		docente.setUtente(utente);
 		docenti.add(docente);
+	
+		when(utenteServiceMock.getAll()).thenReturn(utenti);
+		when(utenteServiceMock.getById(2)).thenReturn(utente);
+		when(docenteServiceMock.getById(8)).thenReturn(docente);
+				
+		mockMvc.perform(get("/docente/getById/{id}",8))
+    	.andExpect(status().isOk())
+		.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+		.andExpect(jsonPath("$[*]", hasSize(11)))
+		.andExpect(jsonPath("$.nome", Matchers.is(docente.getUtente().getNome())))
+		.andExpect(jsonPath("$.cognome", Matchers.is(docente.getUtente().getCognome())));
 		
-		Docente docente2 = new Docente();
-		docente2.setGrado("ordinario");
-		docente2.setIddocente(4);
-		docente2.setStipendio((float) 1000.2);
-		docente2.setUtente(utente2);
-		docenti.add(docente2);
-
-		when(docenteServiceMock.getById(2)).thenThrow(new DocenteNotFoundException());
-		
-		mockMvc.perform(get("/docente/getById/{id}",2))
-		.andExpect(status().isBadRequest());
-		
-	    verify(docenteServiceMock, times(1)).getById(2);
+	    verify(docenteServiceMock,times(1)).getById(8);
 	    verifyNoMoreInteractions(docenteServiceMock);
 	}
+	
 	
 	@Test
 	public void notFoundDocenteTest() throws Exception {
@@ -263,48 +247,63 @@ private MockMvc mockMvc;
 	    verifyNoMoreInteractions(docenteServiceMock);
 		
 	}
-
+	
 	@Test
 	public void getByIdSecondTest() throws Exception {
 		
-		List<Insegnamento> insegnamenti= new ArrayList<Insegnamento>();
-		List<InsegnamentoDto> insegnamentiDto = new ArrayList<InsegnamentoDto>();
-		List<CorsoDiStudio> corsi = new ArrayList<CorsoDiStudio>();
 		List<Docente> docenti = new ArrayList<Docente>();
-		List<Utente> utenti = new ArrayList<Utente>();
-		
+
 		Utente utente=new Utente();
-		utente.setNome("Luca");
-		utente.setCognome("Signore");
-		Date data = new Date(1991-07-31);
+		utente.setNome("Mauro");
+		utente.setCognome("Rosato");
+		Date data = new Date(1992-03-16);
 		utente.setDataNascita(data);
-		utente.setEmail("luca@gmail.it");
+		utente.setEmail("mauro@rosato.it");
 		utente.setIdOrigin(0);
 		utente.setIdutente(2);
-		utente.setPassword("lucapass");
-		utenti.add(utente);
+		utente.setPassword("mauropass");
 		
-		Docente docente=new Docente();		
-		docente.setIddocente(8);
-		docente.setStipendio((float) 1000);
+		Utente utente2=new Utente();
+		utente2.setNome("Luca");
+		utente2.setCognome("Signore");
+		Date data2 = new Date(1991-07-31);
+		utente2.setDataNascita(data2);
+		utente2.setEmail("luca@gmail.it");
+		utente2.setIdOrigin(0);
+		utente2.setIdutente(2);
+		utente2.setPassword("lucapass");
+		
+		NumeroTelefono num = new NumeroTelefono();
+		num.setNumeroTelefono("54");
+		num.setUtente(utente);
+		
+		NumeroTelefono num2 = new NumeroTelefono();
+		num2.setNumeroTelefono("45");
+		num2.setUtente(utente2);
+		
+		Docente docente = new Docente();
 		docente.setGrado("ordinario");
+		docente.setIddocente(3);
+		docente.setStipendio((float) 1000.2);
 		docente.setUtente(utente);
 		docenti.add(docente);
-	
-		when(utenteServiceMock.getAll()).thenReturn(utenti);
-		when(utenteServiceMock.getById(2)).thenReturn(utente);
-		when(docenteServiceMock.getById(8)).thenReturn(docente);
-				
-		mockMvc.perform(get("/docente/getById/{id}",8))
-    	.andExpect(status().isOk())
-		.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-		.andExpect(jsonPath("$[*]", hasSize(11)))
-		.andExpect(jsonPath("$.nome", Matchers.is(docente.getUtente().getNome())))
-		.andExpect(jsonPath("$.cognome", Matchers.is(docente.getUtente().getCognome())));
 		
-	    verify(docenteServiceMock,times(1)).getById(8);
+		Docente docente2 = new Docente();
+		docente2.setGrado("ordinario");
+		docente2.setIddocente(4);
+		docente2.setStipendio((float) 1000.2);
+		docente2.setUtente(utente2);
+		docenti.add(docente2);
+
+		when(docenteServiceMock.getById(2)).thenThrow(new DocenteNotFoundException());
+		
+		mockMvc.perform(get("/docente/getById/{id}",2))
+		.andExpect(status().isBadRequest());
+		
+	    verify(docenteServiceMock, times(1)).getById(2);
 	    verifyNoMoreInteractions(docenteServiceMock);
 	}
+
 
 }
 		

@@ -61,7 +61,7 @@ public class ValutazioneRestController {
 				studente.setIdstudente(student.getIdstudente());
 			}
 		}
-		studente.setIdstudente(valutazioneDto.getIdStudente());
+		//studente.setIdstudente(valutazioneDto.getIdStudente());
 		valutazione.setStudente(studente);
 		valutazioneService.save(valutazione);
 	}
