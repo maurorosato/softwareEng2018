@@ -1,11 +1,6 @@
 package it.unisalento.se.saw.converter;
 
-import java.util.Iterator;
-import java.util.List;
-
 import it.unisalento.se.saw.domain.Docente;
-import it.unisalento.se.saw.domain.NumeroTelefono;
-import it.unisalento.se.saw.domain.Utente;
 import it.unisalento.se.saw.dto.DocenteDto;
 
 public class DocenteConverter implements IConverter {
