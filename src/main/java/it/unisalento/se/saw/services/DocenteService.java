@@ -8,10 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import it.unisalento.se.saw.Iservices.IDocenteService;
 import it.unisalento.se.saw.domain.Docente;
+import it.unisalento.se.saw.domain.Utente;
 import it.unisalento.se.saw.dto.DocenteDto;
-import it.unisalento.se.saw.dto.StrumentazioneDto;
 import it.unisalento.se.saw.exceptions.DocenteNotFoundException;
-import it.unisalento.se.saw.exceptions.StrumentazioneNotFoundException;
 import it.unisalento.se.saw.repositories.DocenteRepository;
 
 @Service
@@ -43,5 +42,10 @@ public class DocenteService implements IDocenteService {
 	@Override
 	public void aggiornaDocente(DocenteDto docenteDto) throws DocenteNotFoundException {
 		docenteRepository.aggiornaDocente(docenteDto.getIdDocente(),docenteDto.getGrado(),docenteDto.getStipendio());
+	}
+	
+	@Override
+	public Docente findByUtente(Utente utente) throws DocenteNotFoundException {
+		return (docenteRepository.findByUtente(utente));
 	}
 }

@@ -21,6 +21,7 @@ import it.unisalento.se.saw.converter.InsegnamentoConverter;
 import it.unisalento.se.saw.domain.CorsoDiStudio;
 import it.unisalento.se.saw.domain.Docente;
 import it.unisalento.se.saw.domain.Insegnamento;
+import it.unisalento.se.saw.domain.Utente;
 import it.unisalento.se.saw.dto.InsegnamentoDto;
 import it.unisalento.se.saw.exceptions.AulaNotFoundException;
 import it.unisalento.se.saw.exceptions.CorsoDiStudioNotFoundException;
@@ -161,13 +162,18 @@ public class InsegnamentoRestController {
 		List<Docente> docenti = docenteService.getAll();
 		Docente docente = new Docente();
 		
-		Iterator<Docente> docenteIterator = docenti.iterator();
-		while (docenteIterator.hasNext()){
-			Docente docenteI = docenteIterator.next();
-			if(docenteI.getUtente().getIdutente() == idUserDocente){
-				docente.setIddocente(docenteI.getIddocente());
-			}
-		}
+		Utente u = new Utente();
+		u.setIdutente(idUserDocente);
+		Docente d = docenteService.findByUtente(u);
+				
+//		
+//		Iterator<Docente> docenteIterator = docenti.iterator();
+//		while (docenteIterator.hasNext()){
+//			Docente docenteI = docenteIterator.next();
+//			if(docenteI.getUtente().getIdutente() == idUserDocente){
+//				docente.setIddocente(docenteI.getIddocente());
+//			}
+//		}
 		List<Insegnamento> insegnamenti = insegnamentoService.getAllInsegnamentiDocente(docente);
 		Iterator<Insegnamento> insegnamentoIterator = insegnamenti.iterator();
 		
@@ -179,7 +185,7 @@ public class InsegnamentoRestController {
 				insegnamentoDto = (InsegnamentoDto) insegnamentoConverter.domainToDto(insegnamento);
 				
 				Iterator<Docente> docIterator = docenti.iterator();
-				while(docenteIterator.hasNext()){
+				while(docIterator.hasNext()){
 					Docente doc = docIterator.next();
 					if (insegnamento.getDocente().getIddocente() ==doc.getIddocente()){
 						insegnamentoDto.setDocente(doc.getUtente().getNome() + ' ' + doc.getUtente().getCognome());
