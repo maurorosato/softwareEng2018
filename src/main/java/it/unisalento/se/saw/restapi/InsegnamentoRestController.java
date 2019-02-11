@@ -21,6 +21,7 @@ import it.unisalento.se.saw.converter.InsegnamentoConverter;
 import it.unisalento.se.saw.domain.CorsoDiStudio;
 import it.unisalento.se.saw.domain.Docente;
 import it.unisalento.se.saw.domain.Insegnamento;
+import it.unisalento.se.saw.domain.Utente;
 import it.unisalento.se.saw.dto.InsegnamentoDto;
 import it.unisalento.se.saw.exceptions.AulaNotFoundException;
 import it.unisalento.se.saw.exceptions.CorsoDiStudioNotFoundException;
@@ -58,9 +59,9 @@ public class InsegnamentoRestController {
 		
 		List<InsegnamentoDto> insegnamentiDto= new ArrayList<InsegnamentoDto>();
 		
-		List<Insegnamento> insegnamenti = (insegnamentoService.getAll());
 		List<Docente> docenti = (docenteService.getAll());
 		List<CorsoDiStudio> corsi = (corsoDiStudioService.getAll());
+		List<Insegnamento> insegnamenti = (insegnamentoService.getAll());
 
 		Iterator<Insegnamento> insegnamentoIterator = insegnamenti.iterator();
 		while(insegnamentoIterator.hasNext()){
@@ -156,19 +157,16 @@ public class InsegnamentoRestController {
 	@RequestMapping(value="/getAllInsegnamentiDocente/{idUserDocente}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<InsegnamentoDto> getAllInsegnamentiDocente(@PathVariable("idUserDocente") int idUserDocente) throws InsegnamentoNotFoundException, CorsoDiStudioNotFoundException, DocenteNotFoundException {
 		
-		List<InsegnamentoDto> insegnamentiDto= new ArrayList<InsegnamentoDto>();
 		List<CorsoDiStudio> corsi = corsoDiStudioService.getAll();
-		List<Docente> docenti = docenteService.getAll();
-		Docente docente = new Docente();
+		List<InsegnamentoDto> insegnamentiDto= new ArrayList<InsegnamentoDto>();
 		
-		Iterator<Docente> docenteIterator = docenti.iterator();
-		while (docenteIterator.hasNext()){
-			Docente docenteI = docenteIterator.next();
-			if(docenteI.getUtente().getIdutente() == idUserDocente){
-				docente.setIddocente(docenteI.getIddocente());
-			}
-		}
-		List<Insegnamento> insegnamenti = insegnamentoService.getAllInsegnamentiDocente(docente);
+		Utente u = new Utente();
+		u.setIdutente(idUserDocente);
+		Docente d = docenteService.findByUtente(u);
+		
+		List<Docente> docenti = docenteService.getAll();
+		List<Insegnamento> insegnamenti = insegnamentoService.getAllInsegnamentiDocente(d);
+
 		Iterator<Insegnamento> insegnamentoIterator = insegnamenti.iterator();
 		
 		while(insegnamentoIterator.hasNext()){
@@ -179,7 +177,7 @@ public class InsegnamentoRestController {
 				insegnamentoDto = (InsegnamentoDto) insegnamentoConverter.domainToDto(insegnamento);
 				
 				Iterator<Docente> docIterator = docenti.iterator();
-				while(docenteIterator.hasNext()){
+				while(docIterator.hasNext()){
 					Docente doc = docIterator.next();
 					if (insegnamento.getDocente().getIddocente() ==doc.getIddocente()){
 						insegnamentoDto.setDocente(doc.getUtente().getNome() + ' ' + doc.getUtente().getCognome());

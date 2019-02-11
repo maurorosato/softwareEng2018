@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import it.unisalento.se.saw.Iservices.IDocenteService;
 import it.unisalento.se.saw.domain.Docente;
+import it.unisalento.se.saw.domain.Utente;
 import it.unisalento.se.saw.dto.DocenteDto;
 import it.unisalento.se.saw.dto.StrumentazioneDto;
 import it.unisalento.se.saw.exceptions.DocenteNotFoundException;
@@ -35,7 +36,12 @@ public class DocenteService implements IDocenteService {
 	public Docente getById(int id) throws DocenteNotFoundException {
 		return docenteRepository.getOne(id);
 	}
-
+	
+	@Override
+	public Docente findByUtente(Utente utente) throws DocenteNotFoundException {
+		return (docenteRepository.findByUtente(utente));
+	}
+	
 	@Override
 	public void remove(int id) throws DocenteNotFoundException {		
 	}

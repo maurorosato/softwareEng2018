@@ -81,6 +81,7 @@ public class SegnalazioneRestController {
 			}
 		}
 		Docente docente = new Docente();
+		docente.setIddocente(segnalazioneDto.getIdDocenteSegnalante());
 		
 		segnalazione.setData(sqlDate);
 		segnalazione.setDocente(docente);

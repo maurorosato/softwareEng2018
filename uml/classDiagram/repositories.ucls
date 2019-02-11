@@ -1,172 +1,188 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="it.unisalento.se.saw.restapi.AppelloEsameRestController" project="softwareEng2018" 
-    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/restapi/AppelloEsameRestController.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="301" width="814" x="683" y="17"/>    
-    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="2" language="java" name="it.unisalento.se.saw.restapi.AulaRestController" project="softwareEng2018" 
-    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/restapi/AulaRestController.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="259" width="290" x="370" y="16"/>    
-    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="3" language="java" name="it.unisalento.se.saw.restapi.CorsoDiStudioRestController" 
+  <interface id="1" language="java" name="it.unisalento.se.saw.repositories.AppelloEsameRepository" 
     project="softwareEng2018" 
-    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/restapi/CorsoDiStudioRestController.java" binary="false" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/repositories/AppelloEsameRepository.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="636" y="519"/>    
+    <position height="-1" width="-1" x="546" y="184"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
-  </class>  
-  <class id="4" language="java" name="it.unisalento.se.saw.restapi.DocenteRestController" project="softwareEng2018" 
-    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/restapi/DocenteRestController.java" binary="false" 
+  </interface>  
+  <interface id="2" language="java" name="it.unisalento.se.saw.repositories.AulaRepository" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/repositories/AulaRepository.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="216" y="421"/>    
+    <position height="-1" width="-1" x="899" y="137"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
-  </class>  
-  <class id="5" language="java" name="it.unisalento.se.saw.restapi.EventoRestController" project="softwareEng2018" 
-    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/restapi/EventoRestController.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1125" y="455"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="6" language="java" name="it.unisalento.se.saw.restapi.InsegnamentoRestController" project="softwareEng2018" 
-    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/restapi/InsegnamentoRestController.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1020" y="856"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="7" language="java" name="it.unisalento.se.saw.restapi.IscrizioneRestController" project="softwareEng2018" 
-    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/restapi/IscrizioneRestController.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="179" y="180"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="8" language="java" name="it.unisalento.se.saw.restapi.LezioneRestController" project="softwareEng2018" 
-    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/restapi/LezioneRestController.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="360" y="836"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="9" language="java" name="it.unisalento.se.saw.restapi.MaterialeDidatticoRestController" 
+  </interface>  
+  <interface id="3" language="java" name="it.unisalento.se.saw.repositories.CorsoDiStudioRepository" 
     project="softwareEng2018" 
-    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/restapi/MaterialeDidatticoRestController.java" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/repositories/CorsoDiStudioRepository.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1158" y="157"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="4" language="java" name="it.unisalento.se.saw.repositories.DocenteRepository" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/repositories/DocenteRepository.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1202" y="264"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="5" language="java" name="it.unisalento.se.saw.repositories.EventoRepository" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/repositories/EventoRepository.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1217" y="378"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="6" language="java" name="it.unisalento.se.saw.repositories.InsegnamentoRepository" 
+    project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/repositories/InsegnamentoRepository.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1216" y="498"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="7" language="java" name="it.unisalento.se.saw.repositories.IscrizioneRepository" 
+    project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/repositories/IscrizioneRepository.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1149" y="620"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="8" language="java" name="it.unisalento.se.saw.repositories.LezioneRepository" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/repositories/LezioneRepository.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1093" y="725"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="9" language="java" name="it.unisalento.se.saw.repositories.MaterialeDidatticoRepository" 
+    project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/repositories/MaterialeDidatticoRepository.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="626" y="1128"/>    
+    <position height="-1" width="-1" x="756" y="716"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
-  </class>  
-  <class id="10" language="java" name="it.unisalento.se.saw.restapi.NumeroTelefonoRestController" 
+  </interface>  
+  <interface id="10" language="java" name="it.unisalento.se.saw.repositories.NumeroTelefonoRepository" 
     project="softwareEng2018" 
-    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/restapi/NumeroTelefonoRestController.java" binary="false" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/repositories/NumeroTelefonoRepository.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1082" y="642"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="67" width="213" x="341" y="657"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
-  </class>  
-  <class id="11" language="java" name="it.unisalento.se.saw.restapi.PrenotazioneRestController" 
+  </interface>  
+  <interface id="11" language="java" name="it.unisalento.se.saw.repositories.PrenotazioneRepository" 
     project="softwareEng2018" 
-    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/restapi/PrenotazioneRestController.java" binary="false" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/repositories/PrenotazioneRepository.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1778" y="1090"/>    
+    <position height="-1" width="-1" x="561" y="602"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
-  </class>  
-  <class id="12" language="java" name="it.unisalento.se.saw.restapi.SegnalazioneRestController" 
+  </interface>  
+  <interface id="12" language="java" name="it.unisalento.se.saw.repositories.SegnalazioneRepository" 
     project="softwareEng2018" 
-    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/restapi/SegnalazioneRestController.java" binary="false" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/repositories/SegnalazioneRepository.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1694" y="518"/>    
+    <position height="-1" width="-1" x="243" y="589"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
-  </class>  
-  <class id="13" language="java" name="it.unisalento.se.saw.restapi.StrumentazioneRestController" 
+  </interface>  
+  <interface id="13" language="java" name="it.unisalento.se.saw.repositories.SegreteriaRepository" 
     project="softwareEng2018" 
-    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/restapi/StrumentazioneRestController.java" binary="false" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/repositories/SegreteriaRepository.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1722" y="246"/>    
+    <position height="-1" width="-1" x="818" y="627"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
-  </class>  
-  <class id="14" language="java" name="it.unisalento.se.saw.restapi.StudenteRestController" project="softwareEng2018" 
-    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/restapi/StudenteRestController.java" binary="false" 
+  </interface>  
+  <interface id="14" language="java" name="it.unisalento.se.saw.repositories.StrumentazioneRepository" 
+    project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/repositories/StrumentazioneRepository.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1632" y="842"/>    
+    <position height="-1" width="-1" x="774" y="491"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
-  </class>  
-  <class id="15" language="java" name="it.unisalento.se.saw.restapi.UtenteRestController" project="softwareEng2018" 
-    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/restapi/UtenteRestController.java" binary="false" 
+  </interface>  
+  <interface id="15" language="java" name="it.unisalento.se.saw.repositories.StudenteRepository" 
+    project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/repositories/StudenteRepository.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="245" width="684" x="836" y="1020"/>    
+    <position height="-1" width="-1" x="316" y="447"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
-  </class>  
-  <class id="16" language="java" name="it.unisalento.se.saw.restapi.ValutazioneRestController" project="softwareEng2018" 
-    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/restapi/ValutazioneRestController.java" binary="false" 
+  </interface>  
+  <interface id="16" language="java" name="it.unisalento.se.saw.repositories.UtenteRepository" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/repositories/UtenteRepository.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="222" y="1146"/>    
+    <position height="-1" width="-1" x="404" y="330"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
-  </class>  
+  </interface>  
+  <interface id="17" language="java" name="it.unisalento.se.saw.repositories.ValutazioneRepository" 
+    project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/repositories/ValutazioneRepository.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="799" y="334"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
