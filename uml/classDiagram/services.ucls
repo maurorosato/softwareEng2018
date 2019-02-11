@@ -1,396 +1,420 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="it.unisalento.se.saw.services.ValutazioneService" project="softwareEng2018" 
-    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/ValutazioneService.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="208" width="412" x="17" y="662"/>    
-    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="2" language="java" name="it.unisalento.se.saw.services.UtenteService" project="softwareEng2018" 
-    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/UtenteService.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="462" y="1025"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="3" language="java" name="it.unisalento.se.saw.services.StudenteService" project="softwareEng2018" 
-    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/StudenteService.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="608" y="570"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="4" language="java" name="it.unisalento.se.saw.services.StrumentazioneService" project="softwareEng2018" 
-    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/StrumentazioneService.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="697" y="373"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="5" language="java" name="it.unisalento.se.saw.services.SegnalazioneService" project="softwareEng2018" 
-    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/SegnalazioneService.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="768" y="992"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="6" language="java" name="it.unisalento.se.saw.services.PrenotazioneService" project="softwareEng2018" 
-    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/PrenotazioneService.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="983" y="809"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="7" language="java" name="it.unisalento.se.saw.services.NumeroTelefonoService" project="softwareEng2018" 
-    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/NumeroTelefonoService.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1149" y="1067"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="8" language="java" name="it.unisalento.se.saw.services.MaterialeDidatticoService" project="softwareEng2018" 
-    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/MaterialeDidatticoService.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="647" y="786"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="9" language="java" name="it.unisalento.se.saw.services.LezioneService" project="softwareEng2018" 
-    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/LezioneService.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="969" y="605"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="10" language="java" name="it.unisalento.se.saw.services.IscrizioneService" project="softwareEng2018" 
-    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/IscrizioneService.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1121" y="391"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="11" language="java" name="it.unisalento.se.saw.services.InsegnamentoService" project="softwareEng2018" 
-    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/InsegnamentoService.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1482" y="326"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="12" language="java" name="it.unisalento.se.saw.services.EventoService" project="softwareEng2018" 
-    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/EventoService.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1589" y="521"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="13" language="java" name="it.unisalento.se.saw.services.DocenteService" project="softwareEng2018" 
-    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/DocenteService.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1285" y="602"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="14" language="java" name="it.unisalento.se.saw.services.CorsoDiStudioService" project="softwareEng2018" 
-    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/CorsoDiStudioService.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1607" y="744"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="15" language="java" name="it.unisalento.se.saw.services.AulaService" project="softwareEng2018" 
-    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/AulaService.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1259" y="854"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="16" language="java" name="it.unisalento.se.saw.services.AppelloEsameService" project="softwareEng2018" 
+  <class id="1" language="java" name="it.unisalento.se.saw.services.AppelloEsameService" project="softwareEng2018" 
     file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/AppelloEsameService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1598" y="977"/>    
+    <position height="-1" width="-1" x="319" y="165"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="17" language="java" name="it.unisalento.se.saw.Iservices.IAppelloEsameService" 
+  <class id="2" language="java" name="it.unisalento.se.saw.services.AulaService" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/AulaService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="699" y="153"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="it.unisalento.se.saw.services.CorsoDiStudioService" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/CorsoDiStudioService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1096" y="126"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="it.unisalento.se.saw.services.DocenteService" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/DocenteService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1474" y="133"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="it.unisalento.se.saw.services.EventoService" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/EventoService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1795" y="109"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="it.unisalento.se.saw.services.InsegnamentoService" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/InsegnamentoService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1932" y="344"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="it.unisalento.se.saw.services.IscrizioneService" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/IscrizioneService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1946" y="999"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="it.unisalento.se.saw.services.LezioneService" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/LezioneService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="189" y="433"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="it.unisalento.se.saw.services.MaterialeDidatticoService" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/MaterialeDidatticoService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="226" y="1170"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="it.unisalento.se.saw.services.NumeroTelefonoService" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/NumeroTelefonoService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1411" y="1382"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="it.unisalento.se.saw.services.PrenotazioneService" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/PrenotazioneService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="173" y="617"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="it.unisalento.se.saw.services.SegnalazioneService" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/SegnalazioneService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="183" y="832"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="it.unisalento.se.saw.services.SegreteriaService" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/SegreteriaService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="568" y="1318"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="it.unisalento.se.saw.services.StrumentazioneService" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/StrumentazioneService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="952" y="1352"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="it.unisalento.se.saw.services.StudenteService" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/StudenteService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1907" y="1371"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="it.unisalento.se.saw.services.UtenteService" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/UtenteService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1998" y="788"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="it.unisalento.se.saw.services.ValutazioneService" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/services/ValutazioneService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1906" y="569"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="18" language="java" name="it.unisalento.se.saw.Iservices.IAppelloEsameService" 
     project="softwareEng2018" 
     file="/softwareEng2018/src/main/java/it/unisalento/se/saw/Iservices/IAppelloEsameService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1836" y="1214"/>    
+    <position height="-1" width="-1" x="606" y="426"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="18" language="java" name="it.unisalento.se.saw.Iservices.IAulaService" project="softwareEng2018" 
+  <interface id="19" language="java" name="it.unisalento.se.saw.Iservices.IAulaService" project="softwareEng2018" 
     file="/softwareEng2018/src/main/java/it/unisalento/se/saw/Iservices/IAulaService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1454" y="1194"/>    
+    <position height="-1" width="-1" x="932" y="584"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="19" language="java" name="it.unisalento.se.saw.Iservices.ICorsoDiStudioService" 
+  <interface id="20" language="java" name="it.unisalento.se.saw.Iservices.ICorsoDiStudioService" 
     project="softwareEng2018" 
     file="/softwareEng2018/src/main/java/it/unisalento/se/saw/Iservices/ICorsoDiStudioService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1922" y="914"/>    
+    <position height="-1" width="-1" x="971" y="317"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="20" language="java" name="it.unisalento.se.saw.Iservices.IDocenteService" project="softwareEng2018" 
+  <interface id="21" language="java" name="it.unisalento.se.saw.Iservices.IDocenteService" project="softwareEng2018" 
     file="/softwareEng2018/src/main/java/it/unisalento/se/saw/Iservices/IDocenteService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1918" y="634"/>    
+    <position height="-1" width="-1" x="1206" y="388"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="21" language="java" name="it.unisalento.se.saw.Iservices.IEventoService" project="softwareEng2018" 
+  <interface id="22" language="java" name="it.unisalento.se.saw.Iservices.IEventoService" project="softwareEng2018" 
     file="/softwareEng2018/src/main/java/it/unisalento/se/saw/Iservices/IEventoService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1898" y="418"/>    
+    <position height="-1" width="-1" x="1486" y="360"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="22" language="java" name="it.unisalento.se.saw.Iservices.IInsegnamentoService" 
+  <interface id="23" language="java" name="it.unisalento.se.saw.Iservices.IInsegnamentoService" 
     project="softwareEng2018" 
     file="/softwareEng2018/src/main/java/it/unisalento/se/saw/Iservices/IInsegnamentoService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1860" y="100"/>    
+    <position height="-1" width="-1" x="1286" y="572"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="23" language="java" name="it.unisalento.se.saw.Iservices.IIscrizioneService" project="softwareEng2018" 
+  <interface id="24" language="java" name="it.unisalento.se.saw.Iservices.IIscrizioneService" project="softwareEng2018" 
     file="/softwareEng2018/src/main/java/it/unisalento/se/saw/Iservices/IIscrizioneService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1296" y="82"/>    
+    <position height="-1" width="-1" x="1258" y="904"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="24" language="java" name="it.unisalento.se.saw.Iservices.ILezioneService" project="softwareEng2018" 
+  <interface id="25" language="java" name="it.unisalento.se.saw.Iservices.ILezioneService" project="softwareEng2018" 
     file="/softwareEng2018/src/main/java/it/unisalento/se/saw/Iservices/ILezioneService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="856" y="108"/>    
+    <position height="-1" width="-1" x="912" y="830"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="25" language="java" name="it.unisalento.se.saw.Iservices.IMaterialeDidatticoService" 
+  <interface id="26" language="java" name="it.unisalento.se.saw.Iservices.IMaterialeDidatticoService" 
     project="softwareEng2018" 
     file="/softwareEng2018/src/main/java/it/unisalento/se/saw/Iservices/IMaterialeDidatticoService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="148" y="994"/>    
+    <position height="-1" width="-1" x="914" y="1036"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="26" language="java" name="it.unisalento.se.saw.Iservices.INumeroTelefonoService" 
+  <interface id="27" language="java" name="it.unisalento.se.saw.Iservices.INumeroTelefonoService" 
     project="softwareEng2018" 
     file="/softwareEng2018/src/main/java/it/unisalento/se/saw/Iservices/INumeroTelefonoService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1186" y="1244"/>    
+    <position height="-1" width="-1" x="1328" y="1208"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="27" language="java" name="it.unisalento.se.saw.Iservices.IPrenotazioneService" 
+  <interface id="28" language="java" name="it.unisalento.se.saw.Iservices.IPrenotazioneService" 
     project="softwareEng2018" 
     file="/softwareEng2018/src/main/java/it/unisalento/se/saw/Iservices/IPrenotazioneService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="928" y="1250"/>    
+    <position height="-1" width="-1" x="616" y="808"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="28" language="java" name="it.unisalento.se.saw.Iservices.ISegnalazioneService" 
+  <interface id="29" language="java" name="it.unisalento.se.saw.Iservices.ISegnalazioneService" 
     project="softwareEng2018" 
     file="/softwareEng2018/src/main/java/it/unisalento/se/saw/Iservices/ISegnalazioneService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="510" y="1220"/>    
+    <position height="-1" width="-1" x="566" y="962"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="29" language="java" name="it.unisalento.se.saw.Iservices.IStrumentazioneService" 
+  <interface id="30" language="java" name="it.unisalento.se.saw.Iservices.ISegreteriaService" project="softwareEng2018" 
+    file="/softwareEng2018/src/main/java/it/unisalento/se/saw/Iservices/ISegreteriaService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="896" y="1156"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="31" language="java" name="it.unisalento.se.saw.Iservices.IStrumentazioneService" 
     project="softwareEng2018" 
     file="/softwareEng2018/src/main/java/it/unisalento/se/saw/Iservices/IStrumentazioneService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="464" y="106"/>    
+    <position height="-1" width="-1" x="1296" y="1068"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="30" language="java" name="it.unisalento.se.saw.Iservices.IStudenteService" project="softwareEng2018" 
+  <interface id="32" language="java" name="it.unisalento.se.saw.Iservices.IStudenteService" project="softwareEng2018" 
     file="/softwareEng2018/src/main/java/it/unisalento/se/saw/Iservices/IStudenteService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="282" y="264"/>    
+    <position height="-1" width="-1" x="1678" y="1162"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="31" language="java" name="it.unisalento.se.saw.Iservices.IUtenteService" project="softwareEng2018" 
+  <interface id="33" language="java" name="it.unisalento.se.saw.Iservices.IUtenteService" project="softwareEng2018" 
     file="/softwareEng2018/src/main/java/it/unisalento/se/saw/Iservices/IUtenteService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="150" y="1216"/>    
+    <position height="-1" width="-1" x="1670" y="832"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="32" language="java" name="it.unisalento.se.saw.Iservices.IValutazioneService" project="softwareEng2018" 
+  <interface id="34" language="java" name="it.unisalento.se.saw.Iservices.IValutazioneService" project="softwareEng2018" 
     file="/softwareEng2018/src/main/java/it/unisalento/se/saw/Iservices/IValutazioneService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="206" y="440"/>    
+    <position height="-1" width="-1" x="1336" y="746"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <realization id="33">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="31"/>  
-  </realization>  
-  <realization id="34">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="19"/>  
-  </realization>  
   <realization id="35">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="28"/>  
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="33"/>  
   </realization>  
   <realization id="36">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="30"/>  
-  </realization>  
-  <realization id="37">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="21"/>  
-  </realization>  
-  <realization id="38">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="25"/>  
-  </realization>  
-  <realization id="39">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="27"/>  
-  </realization>  
-  <realization id="40">    
-    <end type="SOURCE" refId="15"/>    
+    <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="18"/>  
   </realization>  
+  <realization id="37">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="28"/>  
+  </realization>  
+  <realization id="38">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="30"/>  
+  </realization>  
+  <realization id="39">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="24"/>  
+  </realization>  
+  <realization id="40">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="19"/>  
+  </realization>  
   <realization id="41">    
-    <end type="SOURCE" refId="16"/>    
-    <end type="TARGET" refId="17"/>  
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="23"/>  
   </realization>  
   <realization id="42">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="23"/>  
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="31"/>  
   </realization>  
   <realization id="43">    
     <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="29"/>  
+    <end type="TARGET" refId="21"/>  
   </realization>  
   <realization id="44">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="24"/>  
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="27"/>  
   </realization>  
   <realization id="45">    
-    <end type="SOURCE" refId="1"/>    
+    <end type="SOURCE" refId="15"/>    
     <end type="TARGET" refId="32"/>  
   </realization>  
   <realization id="46">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="22"/>  
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="34"/>  
   </realization>  
   <realization id="47">    
-    <end type="SOURCE" refId="7"/>    
+    <end type="SOURCE" refId="9"/>    
     <end type="TARGET" refId="26"/>  
   </realization>  
   <realization id="48">    
-    <end type="SOURCE" refId="13"/>    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="25"/>  
+  </realization>  
+  <realization id="49">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="29"/>  
+  </realization>  
+  <realization id="50">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="22"/>  
+  </realization>  
+  <realization id="51">    
+    <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="20"/>  
   </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

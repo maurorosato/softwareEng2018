@@ -12,7 +12,6 @@ import it.unisalento.se.saw.dto.SegnalazioneDto;
 public class SegnalazioneConverter implements IConverter {
 	
 	public <T> Object domainToDto(T domainObject) {
-	//public static SegnalazioneDto domainToDto(Segnalazione segnalazione) {
 		Segnalazione segnalazione = (Segnalazione) domainObject;
 		
 		SegnalazioneDto segnalazioneDto = new SegnalazioneDto();

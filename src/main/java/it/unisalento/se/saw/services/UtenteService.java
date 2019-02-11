@@ -24,7 +24,6 @@ public class UtenteService implements IUtenteService {
 
 	@Transactional
 	public Utente save(Utente user) {
-		// TODO Auto-generated method stub
 		return utenteRepository.save(user);
 	}
 
@@ -39,8 +38,6 @@ public class UtenteService implements IUtenteService {
 	
 	@Override
 	public Utente autenticazione(String email,String password) throws UtenteNotFoundException{
-		//return utenteRepository.autenticazione(email,password);
 		return (utenteRepository.findByEmailAndPassword(email, password)).get(0);
 	}
-
 }
