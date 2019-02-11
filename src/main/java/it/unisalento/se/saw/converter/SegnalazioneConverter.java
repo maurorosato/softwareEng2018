@@ -1,11 +1,5 @@
 package it.unisalento.se.saw.converter;
 
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-
-import it.unisalento.se.saw.domain.Aula;
-import it.unisalento.se.saw.domain.Docente;
 import it.unisalento.se.saw.domain.Segnalazione;
 import it.unisalento.se.saw.dto.SegnalazioneDto;
 
